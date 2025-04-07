@@ -1,9 +1,9 @@
 {
-    "name": "studio1902/statamic-peak",
+    "name": "avocadesign/statamic-peak-avoca",
     "extra": {
         "statamic": {
-            "name": "Statamic Peak",
-            "description": "Statamic Peak starter kit"
+            "name": "Statamic Peak Avoca",
+            "description": "Statamic Peak starter kit, customised for Avoca"
         }
     }
 }
