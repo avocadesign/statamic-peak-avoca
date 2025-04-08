@@ -1,27 +1,21 @@
-title: Button
+title: 'Component: Button'
 fields:
   -
     handle: label
     field:
-      input_type: text
       type: text
       localizable: true
       listable: false
       display: Label
       width: 66
       replicator_preview: false
-      instructions_position: above
-      antlers: false
   -
     handle: show_controls
     field:
       mode: toggle
       display: 'Show controls'
       type: revealer
-      icon: revealer
       width: 33
-      listable: hidden
-      instructions_position: above
   -
     handle: link_type
     field:
@@ -41,8 +35,6 @@ fields:
       width: 66
       if:
         show_controls: 'equals true'
-      instructions_position: above
-      visibility: visible
       always_save: false
   -
     handle: target_blank
@@ -59,7 +51,6 @@ fields:
     handle: entry
     field:
       max_items: 1
-      mode: default
       type: entries
       localizable: true
       width: 50
@@ -138,9 +129,9 @@ fields:
     handle: asset
     field: common.image
     config:
+      container: files
       localizable: true
       display: Asset
-      container: files
       width: 50
       validate:
         - 'required_if:{this}.link_type,asset'
@@ -165,7 +156,6 @@ fields:
     handle: attr_title
     field:
       placeholder: 'Learn more'
-      input_type: text
       type: text
       localizable: true
       listable: false
@@ -178,7 +168,6 @@ fields:
     handle: attr_aria
     field:
       placeholder: 'Download the PDF'
-      input_type: text
       type: text
       localizable: true
       listable: false
@@ -190,21 +179,17 @@ fields:
   -
     handle: tracker_event
     field:
-      input_type: text
       type: text
       localizable: true
       listable: false
       placeholder: my-custom-event
       display: 'Tracker event'
-      instructions: "Add the name of the event you want to be fired on click. These events only fire on a production environment. Allowed: `A-Z`, `a-z`, `0-9`, `-`, `_`."
+      instructions: 'Add the name of the event you want to be fired on click. These events only fire on a production environment. Allowed: `A-Z`, `a-z`, `0-9`, `-`, `_`.'
       validate:
         - 'regex:/[A-Za-z0-9_\-]+$/'
       instructions_position: below
       width: 50
       replicator_preview: false
-      visibility: visible
-      antlers: false
-      hide_display: false
       if:
         show_controls: 'equals true'
         label: 'custom tracker_events'

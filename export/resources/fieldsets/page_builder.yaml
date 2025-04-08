@@ -1,4 +1,4 @@
-title: 'Page builder'
+title: 'Block: Page builder'
 fields:
   -
     handle: page_builder
@@ -11,28 +11,9 @@ fields:
       display: 'Page builder'
       button_label: 'Add block'
       sets:
-        interactive:
-          display: Interactive
-          instructions: 'Interactive blocks.'
-          icon: programming-script-code
-          sets:
-            form:
-              display: Form
-              instructions: 'Select and render a form.'
-              icon: mail-chat-bubble-text
-              fields:
-                -
-                  import: form
-            cards:
-              display: Cards
-              instructions: 'Show linkable cards with text.'
-              icon: link
-              fields:
-                -
-                  import: cards
-        text:
-          display: Text
-          instructions: 'Text based blocks.'
+        Content:
+          display: Content
+          instructions: 'Content blocks'
           icon: text-formatting-initial-letter
           sets:
             article:
@@ -42,3 +23,29 @@ fields:
               fields:
                 -
                   import: article
+            columns:
+              display: Columns
+              instructions: 'Create content in one or more columns'
+              icon: layout-two-columns
+              fields:
+                -
+                  import: columns
+            divider:
+              display: Divider
+              instructions: 'A divider between sections'
+              icon: setting-menu-horizontal-dots
+              fields:
+                -
+                  import: divider
+        dynamic:
+          display: Dynamic
+          instructions: 'dynamic blocks'
+          icon: puzzle-piece
+          sets:
+            form:
+              display: Form
+              instructions: 'Select and render a form.'
+              icon: mail-chat-bubble-text
+              fields:
+                -
+                  import: form

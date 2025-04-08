@@ -1,30 +1,87 @@
-title: 'Common reusable fields'
+title: 'Component: reusable fields'
 fields:
   -
     handle: image
     field:
-      mode: list
       container: images
-      restrict: false
-      allow_uploads: true
       max_files: 1
       type: assets
       localizable: true
-      listable: hidden
       display: Image
-      instructions_position: above
-      visibility: visible
       always_save: false
-      show_filename: true
   -
     handle: entry
     field:
       max_items: 1
-      mode: default
       type: entries
       localizable: true
       listable: false
       display: Entry
+  -
+    handle: full_content
+    field:
+      buttons:
+        - h2
+        - h3
+        - h4
+        - bold
+        - italic
+        - unorderedlist
+        - orderedlist
+        - removeformat
+        - anchor
+        - alignleft
+        - aligncenter
+        - alignright
+      link_noopener: true
+      container: files
+      type: bard
+      localizable: true
+      display: 'Full Content'
+      always_save: false
+      remove_empty_nodes: trim
+      smart_typography: true
+      always_show_set_button: true
+      collapse: true
+      reading_time: true
+      word_count: true
+      sets:
+        content:
+          display: Content
+          instructions: 'Content sets'
+          icon: text-formatting-initial-letter
+          sets:
+            buttons:
+              display: Buttons
+              icon: link
+              fields:
+                -
+                  import: buttons
+        media:
+          display: Media
+          instructions: 'Media sets'
+          icon: media-image-camera
+          sets:
+            image:
+              display: Image
+              icon: media-image-picture-orientation
+              fields:
+                -
+                  import: image
+            new_set:
+              display: 'New Set'
+              fields: {  }
+        dynamic:
+          display: Dynamic
+          instructions: 'Display content from around the site'
+          icon: addon-boxes-stack
+          sets:
+            contact_details:
+              display: 'Contact Details'
+              icon: phone-telephone-call
+              fields:
+                -
+                  import: contact_details
   -
     handle: text_rich
     field:
@@ -37,32 +94,15 @@ fields:
         - orderedlist
         - removeformat
         - anchor
-      save_html: false
-      toolbar_mode: fixed
       link_noopener: true
-      link_noreferrer: false
       container: files
-      target_blank: false
-      reading_time: false
-      fullscreen: true
-      allow_source: true
       type: bard
       replicator_preview: false
       localizable: true
-      listable: hidden
       display: 'Text rich'
-      instructions_position: above
-      visibility: visible
       always_save: false
-      previews: true
-      enable_input_rules: true
-      enable_paste_rules: true
-      antlers: false
       remove_empty_nodes: trim
-      collapse: false
       smart_typography: true
-      inline: false
-      hide_display: false
   -
     handle: text_basic
     field:
@@ -73,52 +113,35 @@ fields:
         - orderedlist
         - removeformat
         - anchor
-      save_html: false
-      toolbar_mode: fixed
       link_noopener: true
-      link_noreferrer: false
       container: files
-      target_blank: false
-      reading_time: false
-      fullscreen: true
-      allow_source: true
       type: bard
       replicator_preview: false
       localizable: true
-      listable: hidden
       display: 'Text basic'
-      instructions_position: above
-      visibility: visible
       always_save: false
-      previews: true
-      enable_input_rules: true
-      enable_paste_rules: true
-      antlers: false
       remove_empty_nodes: trim
-      collapse: false
       smart_typography: true
-      inline: false
-      hide_display: false
   -
     handle: text_plain
     field:
       type: textarea
       localizable: true
-      listable: hidden
       display: 'Text plain'
-      instructions_position: above
-      visibility: visible
-      antlers: false
-      hide_display: false
   -
     handle: size
     field:
       options:
-        md: Normal
-        lg: LG
-        xl: XL
+        -
+          key: lg
+          value: Normal
+        -
+          key: xl
+          value: LG
+        -
+          key: 2xl
+          value: XL
       type: button_group
       localizable: true
       default: md
-      listable: hidden
       display: Size

@@ -18,11 +18,11 @@ Dump your .env values here with sensitive data removed.
 
 ```env
 Dump your .env values here with sensitive data removed. The following is a production example that uses full static caching:
-APP_NAME="Statamic Peak"
+APP_NAME="Avoca Peak Starter WIP"
 APP_ENV=production
-APP_KEY=
+APP_KEY="base64:IfLr40wqS5tN+Hs8+EK48KzXOoV1cYfPnnGAm+H/yEI="
 APP_DEBUG=false
-APP_TIMEZONE="UTC"
+APP_TIMEZONE="Pacific/Auckland"
 APP_URL=
 
 APP_LOCALE=en
@@ -97,7 +97,7 @@ STATAMIC_GIT_ENABLED=true
 STATAMIC_GIT_PUSH=true
 STATAMIC_GIT_DISPATCH_DELAY=5
 
-#IMAGE_MANIPULATION_DRIVER=imagick
+IMAGE_MANIPULATION_DRIVER=imagick
 
 #STATAMIC_CUSTOM_CMS_NAME=
 #STATAMIC_CUSTOM_LOGO_NAV_URL=
@@ -153,34 +153,4 @@ npm run build
 {SITE_PHP} artisan statamic:static:warm --queue
 
 echo "🚀 Application deployed!"
-```
-
-## Deploy script Forge
-
-```bash
-if [[ $FORGE_QUICK_DEPLOY == 1 ]]; then
-    if [[ $FORGE_DEPLOY_MESSAGE =~ "[BOT]" ]]; then
-        echo "Automatically committed on production. Nothing to deploy."
-        exit 0
-    fi
-fi
-
-cd $FORGE_SITE_PATH
-git pull origin $FORGE_SITE_BRANCH
-$FORGE_COMPOSER install --no-interaction --prefer-dist --optimize-autoloader --no-dev
-
-npm ci
-npm run build
-
-( flock -w 10 9 || exit 1
-    echo 'Restarting FPM...'; sudo -S service $FORGE_PHP_FPM reload ) 9>/tmp/fpmlock
-
-$FORGE_PHP artisan cache:clear
-$FORGE_PHP artisan config:cache
-$FORGE_PHP artisan route:cache
-$FORGE_PHP artisan statamic:stache:warm
-$FORGE_PHP artisan queue:restart
-$FORGE_PHP artisan statamic:search:update --all
-$FORGE_PHP artisan statamic:static:clear
-$FORGE_PHP artisan statamic:static:warm --queue
 ```

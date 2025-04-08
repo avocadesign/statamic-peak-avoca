@@ -1,0 +1,21 @@
+title: 'Set: Contact Details'
+fields:
+  -
+    handle: display_contacts
+    field:
+      options:
+        -
+          key: phone
+          value: Phone
+        -
+          key: mobile
+          value: Mobile
+        -
+          key: email
+          value: Email
+        -
+          key: address
+          value: Address
+      type: checkboxes
+      display: 'Display Contacts'
+      inline: true

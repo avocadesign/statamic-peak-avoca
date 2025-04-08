@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Statamic\Policies\UserPolicy;
 use Studio1902\PeakSeo\Handlers\ErrorPage;
+use Statamic\Statamic;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -34,7 +35,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Statamic::script('app', 'cp');
+        Statamic::vite('app', [ 
+            'resources/js/cp.js',
+            //'resources/css/cp.css'
+        ]); 
         // Statamic::style('app', 'cp');
 
         ErrorPage::handle404AsEntry();

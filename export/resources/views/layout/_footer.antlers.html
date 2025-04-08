@@ -4,7 +4,7 @@
 #}}
 
 <!-- /layout/_footer.antlers.html -->
-<footer class="fluid-grid py-4 mt-auto">
+<footer class="fluid-grid py-4 mt-auto bg-neutral-100">
     <div class="span-content flex flex-col gap-4 md:flex-row md:justify-between md:items-center">
         <div class="flex flex-col gap-4 md:flex-row text-xs font-bold">
             <span>
@@ -14,16 +14,17 @@
                     {{ /unless }}
                 {{ configuration:copyright_name ?? config:app:name }}
             </span>
+            <a href="{{ config:app:url }}/privacy-policy">Privacy Policy</a>
 
             {{# Let's users reset consent when you use the consent banner. #}}
             {{ yield:reset_consent }}
         </div>
 
-        {{ if social_media:social_media }}
+        {{ if site_details:social_media }}
             <div class="flex">
-                {{ social_media:social_media }}
+                {{ site_details:social_media }}
                     <a class="p-1 text-neutral" href="{{ prefix }}{{ handle }}" rel="noopener{{ type == 'mastodon' ?= ' me' }}" aria-label="{{ config:app:name }} {{ trans:strings.on }} {{ type | title }}" target="_blank">{{ svg :src="type" attr:class="w-4 h-4 overflow-visible fill-current" attr:alt="" attr:aria-hidden="true" }}</a>
-                {{ /social_media:social_media }}
+                {{ /site_details:social_media }}
             </div>
         {{ /if }}
     </div>

@@ -1,25 +1,62 @@
-title: 'Page Builder'
+hide: true
+title: 'Style Kit'
 tabs:
   main:
     display: Main
     sections:
       -
-        display: General
         fields:
           -
             handle: title
             field:
               type: text
               required: true
-              localizable: true
-              listable: true
-              display: Title
               validate:
                 - required
           -
             import: block_hero
       -
-        display: 'Page builder'
+        display: 'Style Kit'
+        fields:
+          -
+            handle: colours
+            field:
+              type: replicator
+              display: Colours
+              sets:
+                new_set_group:
+                  display: 'New Set Group'
+                  sets:
+                    colour_group:
+                      display: 'Colour Group'
+                      instructions: 'Enter the colours to display'
+                      fields:
+                        -
+                          handle: group_heading
+                          field:
+                            type: text
+                            display: 'Group Heading'
+                        -
+                          handle: colour_swatches
+                          field:
+                            type: grid
+                            display: 'Colour Swatches'
+                            fields:
+                              -
+                                handle: name
+                                field:
+                                  type: text
+                                  display: Name
+                                  width: 50
+                              -
+                                handle: css_class
+                                field:
+                                  type: text
+                                  display: 'CSS Class'
+                                  width: 50
+      -
+        display: 'Page Builder'
+        instructions: 'Add page builder blocks'
         fields:
           -
             import: page_builder
@@ -60,16 +97,13 @@ tabs:
     display: Sidebar
     sections:
       -
-        display: Meta
         fields:
           -
             handle: slug
             field:
               type: slug
               localizable: true
-              validate:
-                - required
-              display: Slug
+              validate: 'max:200'
           -
             handle: parent
             field:
@@ -79,4 +113,3 @@ tabs:
               max_items: 1
               listable: false
               localizable: true
-              display: Parent

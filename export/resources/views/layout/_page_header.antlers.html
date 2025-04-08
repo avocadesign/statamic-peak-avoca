@@ -1,0 +1,22 @@
+{{#
+	@name Page header
+	@desc The page header layout
+#}}
+
+<section class="fluid-grid bg-neutral-100/50 no-space-t py-8 md:py-10 lg:py-12 {{ class }}">
+    <div class="span-content flex flex-col items-center gap-3">
+        {{ if custom_page_title }}
+            {{ partial src="typography/h1" content="{page_heading}" }}
+        {{ else }}
+            {{ partial src="typography/h1" content="{ title }" }}
+        {{ /if }}
+        {{ if hero_type == "simple" && page_lede || hero_type == "hero" && page_lede }}
+            {{ partial:typography/prose }}
+                {{ page_lede }}
+            {{ /partial:typography/prose }}
+        {{ /if }}
+        {{ if hero_type == "hero" }}
+            {{ partial:components/buttons :buttons=buttons }}
+        {{ /if }}
+    </div>
+</section>

@@ -1,0 +1,24 @@
+title: 'Site Details'
+data:
+  phone: '123 4567'
+  mobile: '021 123 4567'
+  email: email@address.com
+  address:
+    -
+      type: paragraph
+      content:
+        -
+          type: text
+          text: '123 Somewhere st'
+        -
+          type: hardBreak
+        -
+          type: text
+          text: SomeCity
+  social_media:
+    -
+      id: m97vut9r
+      handle: website
+      prefix: 'https://www.facebook.com/'
+      type: facebook
+      enabled: true

@@ -1,28 +1,24 @@
-title: 'Page Builder'
+title: 'Simple Page'
 tabs:
   main:
     display: Main
     sections:
       -
-        display: General
         fields:
           -
             handle: title
             field:
               type: text
               required: true
-              localizable: true
-              listable: true
-              display: Title
               validate:
                 - required
           -
-            import: block_hero
-      -
-        display: 'Page builder'
-        fields:
-          -
-            import: page_builder
+            handle: article
+            field: common.full_content
+            config:
+              display: Content
+              validate:
+                - required
   seo:
     display: SEO
     sections:
@@ -60,16 +56,13 @@ tabs:
     display: Sidebar
     sections:
       -
-        display: Meta
         fields:
           -
             handle: slug
             field:
               type: slug
               localizable: true
-              validate:
-                - required
-              display: Slug
+              validate: 'max:200'
           -
             handle: parent
             field:
@@ -79,4 +72,3 @@ tabs:
               max_items: 1
               listable: false
               localizable: true
-              display: Parent

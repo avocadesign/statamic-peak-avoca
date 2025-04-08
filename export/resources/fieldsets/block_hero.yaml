@@ -1,0 +1,53 @@
+title: 'Block: Hero'
+fields:
+  -
+    handle: hero_type
+    field:
+      options:
+        -
+          key: heading
+          value: Heading
+        -
+          key: simple
+          value: 'Heading + lede'
+        -
+          key: hero
+          value: Hero
+        -
+          key: none
+          value: None
+      default: heading
+      type: button_group
+      display: 'Page header type'
+      width: 50
+  -
+    handle: custom_page_title
+    field:
+      type: toggle
+      display: 'Custom page title?'
+      width: 50
+      if:
+        hero_type: '!== none'
+  -
+    handle: page_heading
+    field:
+      type: text
+      display: 'Page Heading (h1)'
+      if:
+        custom_page_title: 'equals true'
+        hero_type: 'not none'
+  -
+    handle: page_lede
+    field: common.text_basic
+    config:
+      display: 'Page Lede'
+      always_save: true
+      if:
+        hero_type: 'contains_any simple,hero'
+  -
+    handle: buttons
+    field: buttons.buttons
+    config:
+      if:
+        hero_type: 'equals hero'
+      always_save: true

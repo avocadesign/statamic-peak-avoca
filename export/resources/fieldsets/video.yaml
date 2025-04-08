@@ -1,4 +1,4 @@
-title: Video
+title: 'Set: Video'
 fields:
   -
     handle: size
@@ -11,18 +11,11 @@ fields:
     field:
       type: video
       display: Video
-      icon: video
       instructions: 'YouTube or Vimeo URL.'
-      listable: hidden
       instructions_position: below
-      visibility: visible
-      replicator_preview: true
-      hide_display: false
   -
     handle: caption
     field:
-      input_type: text
       type: text
       localizable: true
-      listable: hidden
       display: Caption

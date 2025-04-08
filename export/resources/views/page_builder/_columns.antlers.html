@@ -1,0 +1,81 @@
+{{#
+    @name Columns
+    @desc The Columns page builder block.
+    @set page.page_builder.columns
+#}}
+
+<!-- /page_builder/_columns.antlers.html -->
+{{ partial:page_builder/block class="stack-12"}}
+    {{ if heading }}
+        <div class="span-content flex flex-col {{ heading_alignment }}">
+            <div class="flex flex-col {{ heading_alignment }} max-w-lg">
+                {{ partial src="typography/h2" content="{heading}" class=""}}
+            </div>
+        </div>
+    {{ /if}}
+    <div class="span-content grid {{ align_content }} md:grid-cols-12 gap-fluid-grid-gap">
+        {{ columns }}
+            {{# One column layouts #}}
+            {{ if total_results == 1 }}
+                {{ if layout_one_col == "narrow" }}
+                    {{ layout_span = "md:col-span-6" }}
+                    {{ if align_content_one_col == "items-center"}}
+                        {{ layout_start = "md:col-start-4" }}
+                    {{ /if }}
+                    {{ layout_styles = layout_span + " " + layout_start }}
+                {{ elseif layout_one_col == "wide" }}
+                    {{ layout_span = "md:col-span-8" }}
+                    {{ if align_content_one_col == "items-center"}}
+                        {{ layout_start = "md:col-start-3" }}
+                    {{ /if }}
+                    {{ layout_styles = layout_span + " " + layout_start }}
+                {{ elseif layout_one_col == "full" }}
+                    {{ layout_styles = "md:col-span-12" }}
+                {{ /if}}
+
+
+            {{# Two column layouts #}}
+            {{ elseif total_results == 2 }}
+                {{ if layout_two_col == "even" }}
+                    {{ layout_styles = "md:col-span-6" }}
+                {{ elseif layout_two_col == "third-left"}}
+                    {{ layout_styles = '{switch between="md:col-span-4 | md:col-span-8"}' }}
+                {{ elseif layout_two_col == "third-right"}}
+                    {{ layout_styles = '{switch between="md:col-span-8 | md:col-span-4"}' }}
+                {{ elseif layout_two_col == "fifths-left"}}
+                    {{ layout_styles = '{switch between="md:col-span-5 | md:col-span-7"}' }}
+                {{ elseif layout_two_col == "fifths-right"}}
+                    {{ layout_styles = '{switch between="md:col-span-7 | md:col-span-5"}' }}
+                {{ /if}}
+
+
+            {{ elseif total_results == 3 }}
+                {{ layout_styles = 'md:col-span-12 lg:col-span-4' }}
+            {{ /if}}
+
+            {{# set mobile order #}}
+            {{ if mobile_order == "order-first"}}
+                {{ order_value = "order-first" }}
+            {{ elseif mobile_order == "order-last"}}
+                {{ order_value = "order-last" }}
+            {{ else }}
+                {{ order_value = "" }}
+            {{ /if }}
+
+            {{# Column layout t#}}
+            {{  partial:typography/prose
+                as="div"
+                class="stack-6 overflow-x-auto
+                { layout_styles } { order_value } md:order-none"
+            }}
+                {{# display column content from Bard #}}
+                {{ column_content }}
+                    {{ partial src="components/{type}" }}
+                {{ /column_content }}
+            {{ /partial:typography/prose }}
+        {{ /columns}}
+    </div>
+
+
+{{ /partial:page_builder/block }}
+<!-- End: /page_builder/_columns.antlers.html -->

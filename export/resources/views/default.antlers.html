@@ -4,7 +4,28 @@
 #}}
 
 <!-- /default.antlers.html -->
-<main class="py-12 md:py-16 lg:py-24 stack-12 md:stack-16 lg:stack-24" id="content">
+{{ if hero_type != "none" }}
+    <main class="pb-12 md:pb-16 lg:pb-24 stack-12 md:stack-16 lg:stack-18" id="content">
+{{ else }}
+    <main class="py-12 md:py-16 lg:py-24stack-12 md:stack-16 lg:stack-18" id="content">
+{{ /if }}
+    {{ if hero_type != "none" }}
+        {{ partial src="layout/page_header" }}
+    {{ /if }}
+    {{ if blueprint == "simple_page" }}
+        <!-- /page_builder/_article.antlers.html -->
+        {{ partial:page_builder/block }}
+            {{ partial:typography/prose as="article" class="contents stack-8" }}
+                {{ article }}
+                    {{ partial src="components/{type}" }}
+                {{ /article }}
+            {{ /partial:typography/prose }}
+        {{ /partial:page_builder/block }}
+        <!-- End: /page_builder/_article.antlers.html -->
+    {{ /if}}
+    {{ if blueprint == "style_kit" }}
+        {{ partial src="components/style_kit" }}
+    {{ /if }}
     {{ page_builder scope="block" }}
         {{ partial src="page_builder/{type}" }}
     {{ /page_builder }}
