@@ -100,9 +100,6 @@ fields:
                       -
                         key: order-last
                         value: Last
-                      -
-                        key: order-custom
-                        value: Custom
                     type: select
                     display: 'Mobile order'
                     width: 33

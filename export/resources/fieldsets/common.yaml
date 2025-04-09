@@ -33,6 +33,10 @@ fields:
         - alignleft
         - aligncenter
         - alignright
+        - lede
+        - brand
+        - bts_styles
+        - bts_hidden
       link_noopener: true
       container: files
       type: bard
@@ -41,10 +45,13 @@ fields:
       always_save: false
       remove_empty_nodes: trim
       smart_typography: true
-      always_show_set_button: true
       collapse: true
       reading_time: true
       word_count: true
+      bts_styles:
+        - lede
+        - brand
+        - bts_paragraph
       sets:
         content:
           display: Content

@@ -1,13 +1,13 @@
 export_paths:
   - .env.example
   - .gitignore
-  - app/Console/Commands/PostInstall/CollectAvailableLangLocales.php
   - app/Listeners/PreventDeletingMounts.php
   - app/Policies/CustomUserPolicy.php
   - app/Providers/AppServiceProvider.php
   - content
   - config/filesystems.php
   - config/statamic/assets.php
+  - config/statamic/bard_texstyle.php
   - config/statamic/cp.php
   - config/statamic/editions.php
   - config/statamic/forms.php
@@ -40,9 +40,12 @@ export_paths:
   - package.json
   - package-lock.json
   - vite.config.js
+  - vite-cp.config.js
 export_as:
   README.md: README.example.md
 dependencies:
+  eminos/statamic-tabs: ^1.2
+  jacksleight/statamic-bard-texstyle: ^3.5
   studio1902/statamic-peak-browser-appearance: ^3.4
   studio1902/statamic-peak-seo: ^8.0
   studio1902/statamic-peak-tools: ^7.0
