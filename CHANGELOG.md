@@ -1,5 +1,20 @@
 # Changelog
 
+## v20.10.3 (2025-04-23)
+
+### What's improved
+- Rename `marketeer` role to `marketer`. c5b3827f by @robdekort
+
+## v20.10.2 (2025-04-22)
+
+### What's improved
+- Sync statamic/statamic config into `config/live_preview.php`. b1fe33b7 by @robdekort
+
+## v20.10.1 (2025-04-01)
+
+### What's improved
+- Update Dutch and English consent banner strings. d00071c2 by @robdekort and @steveparks
+
 ## v20.10.0 (2025-04-01)
 
 ### What's new
