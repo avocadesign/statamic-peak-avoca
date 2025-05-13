@@ -5,15 +5,15 @@
 #}}
 
 <!-- /page_builder/_columns.antlers.html -->
-{{ partial:page_builder/block class="stack-12"}}
-    {{ if heading }}
+{{ partial:page_builder/block class="stack-8"}}
+    {{ if heading && !hide_col_heading }}
         <div class="span-content flex flex-col {{ heading_alignment }}">
             <div class="flex flex-col {{ heading_alignment }} max-w-lg">
                 {{ partial src="typography/h2" content="{heading}" class=""}}
             </div>
         </div>
     {{ /if}}
-    <div class="span-content grid {{ align_content }} md:grid-cols-12 gap-fluid-grid-gap">
+    <div class="span-content grid {{ vertical_align_content }} md:grid-cols-12 gap-fluid-grid-gap">
         {{ columns }}
             {{# One column layouts #}}
             {{ if total_results == 1 }}
@@ -65,13 +65,13 @@
             {{# Column layout t#}}
             {{  partial:typography/prose
                 as="div"
-                class="stack-6 overflow-x-auto
+                class="stack-8 overflow-x-auto
                 { layout_styles } { order_value } md:order-none"
             }}
                 {{# display column content from Bard #}}
-                {{ column_content }}
+                {{ cols_article }}
                     {{ partial src="components/{type}" }}
-                {{ /column_content }}
+                {{ /cols_article }}
             {{ /partial:typography/prose }}
         {{ /columns}}
     </div>

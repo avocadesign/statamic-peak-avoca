@@ -1,4 +1,6 @@
-data: {  }
+data:
+  alt: 'Placeholder image'
+  exempt_from_alt: false
 size: 39306
 last_modified: 1744061832
 width: 2070

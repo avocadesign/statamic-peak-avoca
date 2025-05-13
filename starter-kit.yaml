@@ -45,7 +45,6 @@ export_paths:
 export_as:
   README.md: README.example.md
 dependencies:
-  eminos/statamic-tabs: ^1.2
   jacksleight/statamic-bard-texstyle: ^3.5
   studio1902/statamic-peak-browser-appearance: ^3.4
   studio1902/statamic-peak-seo: ^8.0

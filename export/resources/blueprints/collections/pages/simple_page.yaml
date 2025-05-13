@@ -13,12 +13,7 @@ tabs:
               validate:
                 - required
           -
-            handle: article
-            field: common.full_content
-            config:
-              display: Content
-              validate:
-                - required
+            import: article
   seo:
     display: SEO
     sections:

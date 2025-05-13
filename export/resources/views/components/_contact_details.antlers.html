@@ -6,18 +6,27 @@
 <!-- /components/_contact_details.antlers.html -->
 <div class="flex flex-col items-start gap-1 span-lg">
     {{ display_contacts }}
+        
+    {{# Phone #}}
         {{ if value == "phone" && site_details:phone }}
             {{ partial:components/button as="a" button_type="inline" link_type="tel" label="{{ site_details:phone }}" tel="{{ site_details:phone }}" attr_aria="Call {{ configuration:copyright_name ?? config:app:name }}"  }}
         {{ /if }}
+        
+    {{# Mobile #}}  
         {{ if value == "mobile" && site_details:mobile }}
             {{ partial:components/button as="a" button_type="inline" link_type="tel" label="{{ site_details:mobile }}" tel="{{ site_details:mobile }}" attr_aria="Call {{ configuration:copyright_name ?? config:app:name }}'s mobile" }}
         {{ /if }}
+        
+    {{# Email #}}
         {{ if value == "email" && site_details:email }}
             {{ partial:components/button as="a" button_type="inline" link_type="email" label="{{ site_details:email }}" email="{{ site_details:email }}" attr_aria="Email {{ configuration:copyright_name ?? config:app:name }}" }}
         {{ /if }}
+        
+    {{# Address #}}
         {{ if value == "address" && site_details:address }}
             {{ site_details:address }}
         {{ /if }}
+        
     {{ /display_contacts }}
 </div>
 <!-- End: /components/_contact_details.antlers.html -->

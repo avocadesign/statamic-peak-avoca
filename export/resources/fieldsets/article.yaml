@@ -1,4 +1,4 @@
-title: 'Block: Article'
+title: 'Block: Bard Content'
 fields:
   -
     handle: article
@@ -12,21 +12,26 @@ fields:
         - unorderedlist
         - orderedlist
         - removeformat
+        - quote
         - anchor
         - alignleft
         - aligncenter
         - alignright
+        - bts_styles
+        - bts_hidden
       reading_time: true
       type: bard
       localizable: true
-      display: Article
-      replicator_preview: false
+      display: Content
       validate:
         - required
       container: files
       always_save: false
       remove_empty_nodes: trim
       smart_typography: true
+      bts_styles:
+        - lede
+        - brand
       sets:
         content:
           display: Content

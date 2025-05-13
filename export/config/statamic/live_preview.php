@@ -36,16 +36,4 @@ return [
         //
     ],
 
-    /*
-    |--------------------------------------------------------------------------
-    | Force Reload Javascript Modules
-    |--------------------------------------------------------------------------
-    |
-    | To force a reload, Live Preview appends a timestamp to the URL on
-    | script tags of type 'module'. You may disable this behavior here.
-    |
-    */
-
-    'force_reload_js_modules' => true,
-
 ];

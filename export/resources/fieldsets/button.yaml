@@ -53,7 +53,6 @@ fields:
       max_items: 1
       type: entries
       localizable: true
-      width: 50
       listable: false
       display: Entry
       replicator_preview: false
@@ -71,7 +70,6 @@ fields:
       localizable: true
       listable: false
       display: URL
-      width: 50
       validate:
         - 'required_if:{this}.link_type,url'
       if:
@@ -86,7 +84,6 @@ fields:
       localizable: true
       listable: false
       display: E-mail
-      width: 50
       replicator_preview: false
       validate:
         - 'required_if:{this}.link_type,email'
@@ -102,7 +99,6 @@ fields:
       localizable: true
       listable: false
       display: Telephone
-      width: 50
       replicator_preview: false
       validate:
         - 'required_if:{this}.link_type,tel'
@@ -118,7 +114,6 @@ fields:
       localizable: true
       listable: false
       display: Telephone
-      width: 50
       replicator_preview: false
       validate:
         - 'required_if:{this}.link_type,sms'
@@ -132,7 +127,7 @@ fields:
       container: files
       localizable: true
       display: Asset
-      width: 50
+      width: 100
       validate:
         - 'required_if:{this}.link_type,asset'
       if:
@@ -152,6 +147,47 @@ fields:
       replicator_preview: false
       if:
         show_controls: 'equals true'
+      width: 33
+  -
+    handle: button_colour
+    field:
+      options:
+        -
+          key: primary
+          value: Primary
+        -
+          key: light
+          value: Light
+      type: button_group
+      localizable: true
+      default: primary
+      listable: false
+      display: 'Button Colour'
+      replicator_preview: false
+      width: 33
+      if:
+        show_controls: 'equals true'
+        button_type: 'equals button'
+  -
+    handle: button_style
+    field:
+      options:
+        -
+          key: solid
+          value: Solid
+        -
+          key: outline
+          value: Outline
+      type: button_group
+      localizable: true
+      default: solid
+      listable: false
+      display: 'Button Style'
+      replicator_preview: false
+      width: 33
+      if:
+        show_controls: 'equals true'
+        button_type: 'equals button'
   -
     handle: attr_title
     field:

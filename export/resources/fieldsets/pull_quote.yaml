@@ -1,9 +1,6 @@
 title: 'Set: Pull quote'
 fields:
   -
-    handle: size
-    field: common.size
-  -
     handle: quote
     field:
       type: textarea
@@ -15,3 +12,6 @@ fields:
       type: text
       localizable: true
       display: Author
+  -
+    handle: size
+    field: common.size

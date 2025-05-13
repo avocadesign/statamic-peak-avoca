@@ -32,14 +32,8 @@
     "name": "lodash-es"
   },
   "resources/css/site.css": {
-    "file": "assets/site-oVeQm1VZ.css",
+    "file": "assets/site-CUldu9Pk.css",
     "src": "resources/css/site.css",
-    "isEntry": true
-  },
-  "resources/js/cp.js": {
-    "file": "assets/cp-CkUMFdBF.js",
-    "name": "cp",
-    "src": "resources/js/cp.js",
     "isEntry": true
   },
   "resources/js/site.js": {

@@ -140,6 +140,7 @@ git pull origin {BRANCH}
 
 npm ci
 npm run build
+npm run build-cp
 
 {RELOAD_PHP_FPM}
 
@@ -154,3 +155,5 @@ npm run build
 
 echo "🚀 Application deployed!"
 ```
+## Make starter kit
+php please starter-kit:export ~/Herd/Statamic-peak-avoca

@@ -1,16 +1,18 @@
 title: 'Block: Columns'
 fields:
   -
-    handle: content
-    field:
-      tab_icon: pencil
-      type: tab
-      display: Content
-  -
     handle: heading
     field:
       type: text
-      display: Heading
+      display: 'Section Heading'
+      width: 66
+  -
+    handle: hide_col_heading
+    field:
+      type: toggle
+      display: 'Hide col heading'
+      width: 33
+      replicator_preview: false
   -
     handle: columns
     field:
@@ -18,75 +20,19 @@ fields:
       button_label: 'Add column'
       type: replicator
       display: Columns
+      replicator_preview: false
+      sortable: false
       sets:
-        new_set_group:
-          display: 'New Set Group'
+        columns:
+          display: Columns
           sets:
             column:
               display: Column
               icon: programming-module-box-cube
               fields:
                 -
-                  handle: column_content
-                  field: common.full_content
-                  config:
-                    display: Content
-                    sets:
-                      content:
-                        display: Content
-                        instructions: 'Content sets'
-                        icon: text-formatting-initial-letter
-                        sets:
-                          buttons:
-                            display: Buttons
-                            instructions: null
-                            icon: link
-                            hide: null
-                            fields:
-                              -
-                                import: buttons
-                          table:
-                            display: Table
-                            instructions: null
-                            icon: layout-grid-dots
-                            hide: null
-                            fields:
-                              -
-                                import: table
-                      media:
-                        display: Media
-                        instructions: 'Media sets'
-                        icon: media-image-camera
-                        sets:
-                          image:
-                            display: Image
-                            instructions: null
-                            icon: media-image-picture-orientation
-                            hide: null
-                            fields:
-                              -
-                                import: image
-                          video:
-                            display: Video
-                            instructions: null
-                            icon: media-webcam-video
-                            hide: null
-                            fields:
-                              -
-                                import: video
-                      dynamic:
-                        display: Dynamic
-                        instructions: 'Display content from around the site'
-                        icon: addon-boxes-stack
-                        sets:
-                          contact_details:
-                            display: 'Contact Details'
-                            instructions: null
-                            icon: phone-telephone-call
-                            hide: null
-                            fields:
-                              -
-                                import: contact_details
+                  import: article
+                  prefix: cols_
                 -
                   handle: mobile_order
                   field:
@@ -102,15 +48,16 @@ fields:
                         value: Last
                     type: select
                     display: 'Mobile order'
-                    width: 33
+                    width: 75
                     always_save: true
                     default: auto
+                    instructions: 'Change display order on mobile devices. Only effects multiple columns.'
   -
-    handle: settings
+    handle: show_section_settings
     field:
-      tab_icon: settings-vertical
-      type: tab
-      display: Settings
+      type: toggle
+      display: 'Show section settings'
+      replicator_preview: false
   -
     handle: heading_alignment
     field:
@@ -126,6 +73,8 @@ fields:
       width: 66
       default: items-start
       replicator_preview: false
+      if:
+        show_section_settings: 'equals true'
   -
     handle: layout_one_col
     field:
@@ -188,7 +137,7 @@ fields:
       default: even
       replicator_preview: false
   -
-    handle: align_content
+    handle: vertical_align_content
     field:
       options:
         -
@@ -205,5 +154,6 @@ fields:
       width: 66
       default: items-start
       replicator_preview: false
-      if: hasMultipleColumns
       instructions: 'Align the content in tabs vertically'
+      if:
+        columns: 'custom hasMultipleColumns:true'

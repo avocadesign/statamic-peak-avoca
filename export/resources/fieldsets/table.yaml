@@ -1,9 +1,6 @@
 title: 'Set: Table'
 fields:
   -
-    handle: size
-    field: common.size
-  -
     handle: first_row_headers
     field:
       display: 'First row as header'
@@ -31,3 +28,6 @@ fields:
       type: text
       localizable: true
       display: Caption
+  -
+    handle: size
+    field: common.size

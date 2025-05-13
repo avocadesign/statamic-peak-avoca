@@ -8,7 +8,7 @@ seo_canonical_type: entry
 sitemap_change_frequency: weekly
 sitemap_priority: 0.5
 updated_by: b1493ffc-652b-408c-a2e0-3224ba2b1f3c
-updated_at: 1744079317
+updated_at: 1747168595
 page_builder:
   -
     id: m96knwgm
@@ -105,6 +105,135 @@ page_builder:
         type: column
         enabled: true
         mobile_order: auto
+        cols_article:
+          -
+            type: paragraph
+            attrs:
+              textAlign: left
+              class: null
+            content:
+              -
+                type: text
+                text: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. '
+          -
+            type: paragraph
+            attrs:
+              textAlign: left
+              class: null
+            content:
+              -
+                type: text
+                text: 'Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. '
+          -
+            type: paragraph
+            attrs:
+              textAlign: left
+              class: null
+            content:
+              -
+                type: text
+                marks:
+                  -
+                    type: link
+                    attrs:
+                      href: '#'
+                      rel: null
+                      target: null
+                      title: null
+                text: 'a text link'
+          -
+            type: blockquote
+            content:
+              -
+                type: paragraph
+                attrs:
+                  textAlign: left
+                  class: null
+                content:
+                  -
+                    type: text
+                    text: 'this is a block quote'
+          -
+            type: set
+            attrs:
+              id: m9kp9e08
+              values:
+                type: pull_quote
+                quote: 'This is a pull quote'
+                author: 'Someone said'
+                size: md
+          -
+            type: paragraph
+            attrs:
+              textAlign: left
+              class: null
+          -
+            type: paragraph
+            attrs:
+              textAlign: left
+              class: null
+            content:
+              -
+                type: text
+                text: 'Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.@'
+          -
+            type: set
+            attrs:
+              id: m9koyj79
+              values:
+                type: buttons
+                buttons:
+                  -
+                    id: m9koykj7
+                    label: Primary
+                    link_type: url
+                    target_blank: false
+                    url: '#'
+                    button_type: button
+                    button_colour: primary
+                    button_style: solid
+                  -
+                    id: m9kp1za7
+                    label: 'Primary outline (ext)'
+                    link_type: url
+                    target_blank: true
+                    url: '#'
+                    button_type: button
+                    button_colour: primary
+                    button_style: outline
+                  -
+                    id: m9kphktk
+                    label: Light
+                    link_type: url
+                    target_blank: false
+                    url: '#'
+                    button_type: button
+                    button_colour: light
+                    button_style: solid
+                  -
+                    id: m9kpmh6w
+                    label: 'Light (outline)'
+                    link_type: url
+                    target_blank: false
+                    url: '#'
+                    button_type: button
+                    button_colour: light
+                    button_style: outline
+                  -
+                    id: m9koyys0
+                    label: inline
+                    link_type: url
+                    target_blank: false
+                    url: '#'
+                    button_type: inline
+                  -
+                    id: m9kp1j55
+                    label: 'inline (external)'
+                    link_type: url
+                    target_blank: true
+                    url: '#'
+                    button_type: inline
+                button_alignment: start
       -
         id: m96koho8
         type: column
@@ -120,13 +249,32 @@ page_builder:
                 size: md
                 caption: 'This is the image caption'
         mobile_order: order-first
+        cols_article:
+          -
+            type: set
+            attrs:
+              id: m9kp2y4w
+              values:
+                type: image
+                image: placeholder-wepb-image.webp
+                caption: 'Image caption'
+                size: md
+          -
+            type: set
+            attrs:
+              id: m9kp38qc
+              values:
+                type: video
+                video_url: 'https://www.youtube.com/watch?v=dOty-jMnHbA'
+                caption: 'Video Caption, some "chunky" Irish traditional music'
+                size: md
     type: columns
     enabled: true
-    layout_two_col: even
     align_content: items-start
     heading: 'Columns Block'
     layout: false
-    heading_alignment: items-start
+    hide_col_heading: false
+    show_section_settings: false
   -
     id: m96komkd
     type: divider
@@ -205,11 +353,6 @@ colours:
         name: Primary
         css_variable: bg-primary
         css_class: bg-primary
-      -
-        id: m97t4sb7
-        name: Secondary
-        css_variable: bg-secondary
-        css_class: bg-secondary
     type: colour_group
     enabled: true
   -

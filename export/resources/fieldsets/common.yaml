@@ -18,78 +18,6 @@ fields:
       listable: false
       display: Entry
   -
-    handle: full_content
-    field:
-      buttons:
-        - h2
-        - h3
-        - h4
-        - bold
-        - italic
-        - unorderedlist
-        - orderedlist
-        - removeformat
-        - anchor
-        - alignleft
-        - aligncenter
-        - alignright
-        - lede
-        - brand
-        - bts_styles
-        - bts_hidden
-      link_noopener: true
-      container: files
-      type: bard
-      localizable: true
-      display: 'Full Content'
-      always_save: false
-      remove_empty_nodes: trim
-      smart_typography: true
-      collapse: true
-      reading_time: true
-      word_count: true
-      bts_styles:
-        - lede
-        - brand
-        - bts_paragraph
-      sets:
-        content:
-          display: Content
-          instructions: 'Content sets'
-          icon: text-formatting-initial-letter
-          sets:
-            buttons:
-              display: Buttons
-              icon: link
-              fields:
-                -
-                  import: buttons
-        media:
-          display: Media
-          instructions: 'Media sets'
-          icon: media-image-camera
-          sets:
-            image:
-              display: Image
-              icon: media-image-picture-orientation
-              fields:
-                -
-                  import: image
-            new_set:
-              display: 'New Set'
-              fields: {  }
-        dynamic:
-          display: Dynamic
-          instructions: 'Display content from around the site'
-          icon: addon-boxes-stack
-          sets:
-            contact_details:
-              display: 'Contact Details'
-              icon: phone-telephone-call
-              fields:
-                -
-                  import: contact_details
-  -
     handle: text_rich
     field:
       buttons:
@@ -152,3 +80,4 @@ fields:
       localizable: true
       default: md
       display: Size
+      instructions: 'Has no effect in the columns block'

@@ -1,12 +1,6 @@
 title: 'Set: Video'
 fields:
   -
-    handle: size
-    field: common.size
-    config:
-      localizable: true
-      width: 100
-  -
     handle: video_url
     field:
       type: video
@@ -19,3 +13,9 @@ fields:
       type: text
       localizable: true
       display: Caption
+  -
+    handle: size
+    field: common.size
+    config:
+      localizable: true
+      width: 100

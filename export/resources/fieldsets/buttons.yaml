@@ -13,3 +13,18 @@ fields:
       fields:
         -
           import: button
+  -
+    handle: button_alignment
+    field:
+      options:
+        -
+          key: start
+          value: Left
+        -
+          key: center
+          value: Centre
+        -
+          key: end
+          value: Right
+      type: button_group
+      display: 'Button Alignment'
