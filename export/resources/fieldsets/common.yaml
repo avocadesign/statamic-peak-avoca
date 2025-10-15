@@ -36,7 +36,12 @@ fields:
       localizable: true
       display: 'Text rich'
       always_save: false
+      previews: true
+      enable_input_rules: true
+      enable_paste_rules: true
+      antlers: false
       remove_empty_nodes: trim
+      collapse: false
       smart_typography: true
   -
     handle: text_basic
@@ -55,7 +60,12 @@ fields:
       localizable: true
       display: 'Text basic'
       always_save: false
+      previews: true
+      enable_input_rules: true
+      enable_paste_rules: true
+      antlers: false
       remove_empty_nodes: trim
+      collapse: false
       smart_typography: true
   -
     handle: text_plain

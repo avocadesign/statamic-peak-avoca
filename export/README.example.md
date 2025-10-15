@@ -155,5 +155,38 @@ npm run build-cp
 
 echo "🚀 Application deployed!"
 ```
+
+## Deploy script Forge
+
+```bash
+if [[ $FORGE_QUICK_DEPLOY == 1 ]]; then
+    if [[ $FORGE_DEPLOY_MESSAGE =~ "[BOT]" ]]; then
+        echo "Automatically committed on production. Nothing to deploy."
+        exit 0
+    fi
+fi
+
+cd $FORGE_SITE_PATH
+git pull origin $FORGE_SITE_BRANCH
+$FORGE_COMPOSER install --no-interaction --prefer-dist --optimize-autoloader --no-dev
+
+npm ci
+npm run build
+
+# Prevents multiple deployments from restarting PHP-FPM simultaneously
+touch /tmp/fpmlock 2>/dev/null || true
+( flock -w 10 9 || exit 1
+    echo 'Restarting FPM...'; sudo -S service $FORGE_PHP_FPM reload ) 9</tmp/fpmlock
+
+$FORGE_PHP artisan cache:clear
+$FORGE_PHP artisan config:cache
+$FORGE_PHP artisan route:cache
+$FORGE_PHP artisan statamic:stache:warm
+$FORGE_PHP artisan queue:restart
+$FORGE_PHP artisan statamic:search:update --all
+$FORGE_PHP artisan statamic:static:clear
+$FORGE_PHP artisan statamic:static:warm --queue
+```
+
 ## Make starter kit
 php please starter-kit:export ~/Herd/Statamic-peak-avoca

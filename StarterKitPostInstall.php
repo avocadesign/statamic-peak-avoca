@@ -216,12 +216,6 @@ class StarterKitPostInstall
         app('files')->exists(base_path('postcss.config.js')) && app('files')->delete(base_path('postcss.config.js'));
 
         $this->withSpinner(
-            fn () => $this->cleanUpComposerPackages(),
-            'Cleaning up composer packages...',
-            'Composer packages cleaned up.'
-        );
-
-        $this->withSpinner(
             fn () => $this->removePostInstallCommands(),
             'Removing post install commands...',
             'Post install commands removed.'
@@ -394,7 +388,6 @@ class StarterKitPostInstall
 
         if ($localMailer === 'log') {
             $this->replaceInEnv('MAIL_MAILER=smtp', 'MAIL_MAILER=log');
-            echo 'log';
         }
     }
 
@@ -605,17 +598,6 @@ class StarterKitPostInstall
 
         if ($successMessage) {
             info("[✓] $successMessage");
-        }
-    }
-
-    protected function cleanUpComposerPackages(): void
-    {
-        if ($packages = []) {
-            Composer::removeMultiple($packages);
-        }
-
-        if ($devPackages = ['laravel-lang/common']) {
-            Composer::removeMultipleDev($devPackages);
         }
     }
 

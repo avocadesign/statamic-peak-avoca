@@ -1,5 +1,83 @@
 # Changelog
 
+## v20.14.3 (2025-08-12)
+
+### What's improved
+- Fully remove composer cleanup logic from post install script. #440 by @marcorieser
+
+## v20.14.2 (2025-08-10)
+
+### What's fixed
+- Temporarily remove cleanUpComposerPackages from post install script to prevent an installation error. efc05069 by @robdekort
+
+## v20.14.1 (2025-08-05)
+
+### What's improved
+- Sync config changes with `statamic/statamic`. 12273590 by @robdekort
+
+## v20.14.0 (2025-07-29)
+
+### What's new
+- Add aria-live polite notifications to forms. 967ed463 by @robdekort
+
+## v20.13.0 (2025-07-17)
+
+### What's new
+- Recompile assets for Statamic Peak Tools v7.3.2. ab377695 by @robdekort
+
+## v20.12.0 (2025-07-14)
+
+### What's new
+- Vite 7. 8d748289 by @robdekort
+
+## v20.11.8 (2025-07-02)
+
+### What's improved
+- Remove empty nodes in Bards by default. 3b74ea23 by @robdekort
+- Remove echo in post install. 8815e6f9 by @robdekort
+
+## v20.11.7 (2025-06-24)
+
+### What's improved
+- Remove ampersand from article set group. 2f6056be by @robdekort
+
+## v20.11.6 (2025-05-30)
+
+### What's changed
+- Default to an image and text folder in the page builder. c1ced913 by @robdekort
+
+## v20.11.5 (2025-05-30)
+
+### What's improved
+- Use `ul` for cards block. b330ec11 by @robdekort
+
+## v20.11.4 (2025-05-29)
+
+### What's improved
+- Update path in IDE helper in default layout. #432 by @jelleroorda
+- Sync config changes from `statamic/statamic`. 5a02f2d1 by @robdekort
+
+## v20.11.3 (2025-05-29)
+
+### What's improved
+- Updated German translations. #431 by @eugene-karuna
+
+## v20.11.2 (2025-05-13)
+
+### What's improved
+- Use color-mix and custom property for form config in peak.css. 97d17aa2 by @robdekort
+- Update dependencies and recompile assets. 255aa39e by @robdekort
+
+## v20.11.1 (2025-05-09)
+
+### What's improved
+- Forge deploy script to prevent errors on deployment #430 by @klickreflex
+
+## v20.11.0 (2025-05-06)
+
+### What's new
+- Install v9 of the Commands Addon on new installations. 0c49cccc by @robdekort
+
 ## v20.10.3 (2025-04-23)
 
 ### What's improved
@@ -754,8 +832,6 @@ Update the Statamic CLI using `composer global update statamic/cli`.
 ### What's improved
 - Updated German translations. #334 by @ymarkus
 
-# Changelog
-
 ## v14.1 (2023-08-07)
 
 ### What's new
@@ -966,8 +1042,6 @@ Update the Statamic CLI using `composer global update statamic/cli`.
 ### What's improved
 - Use `fit` is `max` on default asset replacement configuration. daf3fa7a by @robdekort
 
-# Changelog
-
 ## v9.0 (2023-02-07)
 
 ### What's new
@@ -1029,8 +1103,6 @@ Update the Statamic CLI using `composer global update statamic/cli`.
 
 ### What's new
 - Use `font-smoothing: antialiased` by default. 43a8f04e by @robdekort
-
-# Changelog
 
 ## v8.9 (2023-01-11)
 
