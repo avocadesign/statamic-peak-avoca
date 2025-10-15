@@ -1,6 +1,5 @@
-# Project-Specific Information
-
-This file contains project-specific conventions and preferences for this Statamic Peak Avoca site. AI agents should follow these guidelines when working on this project.
+# Project context
+This is a Statamic CMS project (Laravel-based flat-file CMS) with Antlerstemplating, TailwindCSS, and AlpineJS.
 
 ## Project Structure
 - Navigation views are located in `resources/views/layout/navigation/`
@@ -8,19 +7,20 @@ This file contains project-specific conventions and preferences for this Statami
 - Reusable components are in `resources/views/components/`
 - Layout partials (header, footer, etc.) are in `resources/views/layout/`
 
-## Page Builder
-- Available block groups:
-  - **Content** — article, columns, divider
-  - **dynamic** — form
-- The "cards" block is NOT used in this project
+### Statamic Patterns
+- Reference existing fieldsets in `resources/fieldsets/`
+- Content files are in `content/collections/`
+- Always consider flat-file structure (no database)
+- Scope the field data where appropriate to prevent similarly named fields conflicting when mutliple collections are using the same partial or being displayed on the same template
 
 ## Component Conventions
-- Text component uses `span-lg` class for consistent spacing
 - Bard fields use `remove_empty_nodes: trim` setting
 
 ## Styling
 - Tailwind CSS v4 is used
+- Custom styles: Use `@apply` in component CSS files
 - Follow existing component patterns for consistency
+- Follow mobile-first responsive design
 - Check `resources/css/site.css` for custom styles
 
 ## Field Conventions
@@ -32,7 +32,29 @@ This file contains project-specific conventions and preferences for this Statami
 - After modifying fieldsets, run: `php please statamic:stache:warm`
 - For production, use static caching: `php please statamic:static:warm --queue`
 
+### JavaScript Guidelines
+- Use AlpineJS for interactivity
+- Keep `x-data` simple and focused
+- Place complex logic in separate JS files in `resources/js/`
+
 ## Development Workflow
 - See `agents.md` for comprehensive development guidelines
+- Use partials for reusable template fragments
 - Always check existing components before creating new ones
 - Match the style and structure of neighboring files
+- Prefer composition over inheritance
+- Follow PSR-12 for PHP
+
+### Code Quality
+- Follow PSR-12 for PHP
+- Keep Antlers templates minimal and readable
+- include Antlers comments for structural elements like sections or divs that are placed on a CSS grid `{{# comment #}}`
+  - use a descriptive term `{{# content wrapper #}}`
+- Use partials for reusable template fragments
+- Prefer composition over inheritance
+
+### When Uncertain
+- Check AGENTS.md for detailed context
+- Follow existing patterns in the codebase
+- Use Statamic CLI commands over manual file creation
+- Remember this is a marketing website (consider SEO)

@@ -5,7 +5,7 @@ Guidance for AI coding agents working in this repository. Follow these conventio
 **Scope:** This file applies to the entire repository.
 
 ## Project Overview
-- **Stack:** Laravel 11 (PHP 8.3+), Statamic 5 (flat-file CMS), Antlers templates, Tailwind CSS 4, Alpine.js, Vite
+- **Stack:** Laravel 12 (PHP 8.3+), Statamic 5 (flat-file CMS), Antlers templates, Tailwind CSS 4, Alpine.js, Vite
 - **Base:** Forked from [studio1902/statamic-peak](https://github.com/studio1902/statamic-peak) starter kit
 - **Content:** File-based under `content/`; no database by default
 - **Customizations:** See `claude.md` for project-specific preferences and structure
@@ -38,6 +38,7 @@ App runs at configured local domain. Statamic Control Panel is at `/cp`.
   - `layout/` — Layout partials (header, footer, navigation)
   - `page_builder/` — Page builder block templates
   - `snippets/` — Small reusable snippets
+  - `typography/` — Headings and prose partials
 - `resources/fieldsets/` — Field definitions (YAML)
   - `article.yaml` — Bard article content fields
   - `common.yaml` — Reusable shared fields
@@ -84,6 +85,14 @@ App runs at configured local domain. Statamic Control Panel is at `/cp`.
   - Use color opacity like `bg-black/50` (not `bg-opacity-50`)
 - **Dark mode:** Check if existing components support dark mode and maintain consistency
 
+### CSS Grid Best Practices
+- All sections unless otherwise specified should use `fluid-grid` this is a grid class from the Peak Starter kit that creates a 12 column grid
+  - there are classes that help span this grid automatically `span-*`
+  - `span-content` is the default and spans all 12 columns
+  - Docs are here https://peak.1902.studio/features/fluid-grid.html#placing-items-on-the-grid
+  - there is a subgrid class to pass in the grid to children https://peak.1902.studio/features/fluid-grid.html#subgrids
+
+
 ### Spacing Best Practices
 - Use `gap` utilities for spacing in flex/grid layouts (not margins)
   ```html
@@ -92,6 +101,8 @@ App runs at configured local domain. Statamic Control Panel is at `/cp`.
       <div>Item 2</div>
   </div>
   ```
+- Use peaks stack classes for page builders and bard blocks `stack-*`
+  - When using `stack-*`, use `no-space-t` to remove space above if asked and `no-space-b` to remove space below if asked. https://peak.1902.studio/features/stacks.html#collapse
 
 ## JavaScript & Interactivity
 - Use Alpine.js for interactivity
@@ -144,14 +155,6 @@ App runs at configured local domain. Statamic Control Panel is at `/cp`.
 - Production uses full static caching
 - Asset containers defined in `content/assets/` YAML files
 - Collections, taxonomies, navigation, and globals are all file-based
-
-## Upstream Sync
-- This repo is a fork of `studio1902/statamic-peak`
-- Upstream is configured as: `git remote add upstream https://github.com/studio1902/statamic-peak.git`
-- When merging upstream changes:
-  - Respect customizations documented in `claude.md`
-  - Preserve project-specific naming and structure
-  - Test thoroughly after merge
 
 ## Boundaries & Best Practices
 - **Reuse existing components** — Check for existing partials/components before creating new ones

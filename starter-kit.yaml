@@ -38,6 +38,8 @@ export_paths:
   - resources/svg
   - resources/users/roles.yaml
   - resources/views
+  - agents.md
+  - claude.md
   - package.json
   - package-lock.json
   - vite.config.js
