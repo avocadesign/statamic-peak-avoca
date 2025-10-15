@@ -1,0 +1,52 @@
+title: 'Common: Link'
+fields:
+  -
+    handle: link_type
+    field:
+      options:
+        -
+          key: none
+          value: None
+        -
+          key: entry
+          value: Entry
+        -
+          key: url
+          value: 'Website / URL'
+        -
+          key: file
+          value: File
+      type: select
+      display: 'Link type'
+      width: 33
+      default: none
+  -
+    handle: link_file
+    field:
+      max_files: 1
+      container: files
+      type: assets
+      display: 'Link File'
+      width: 66
+      if:
+        link_type: 'equals file'
+      always_save: false
+  -
+    handle: link_url
+    field:
+      type: text
+      display: URL
+      width: 66
+      validate:
+        - url
+      if:
+        link_type: 'equals url'
+  -
+    handle: link_entry
+    field:
+      max_items: 1
+      type: entries
+      display: 'Link Entry'
+      width: 66
+      if:
+        link_type: 'equals entry'

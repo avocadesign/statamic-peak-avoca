@@ -1,8 +1,6 @@
-data:
-  alt: 'Placeholder image'
-  exempt_from_alt: false
+data: {  }
 size: 39306
-last_modified: 1744061832
+last_modified: 1760492943
 width: 2070
 height: 1563
 mime_type: image/webp

@@ -32,6 +32,7 @@ fields:
       bts_styles:
         - lede
         - brand
+      collapse: true
       sets:
         content:
           display: Content
@@ -78,3 +79,10 @@ fields:
               fields:
                 -
                   import: video
+            two_images:
+              display: 'Two Images'
+              instructions: 'Two images, side by side'
+              icon: media-image-picture-gallery
+              fields:
+                -
+                  import: two_images

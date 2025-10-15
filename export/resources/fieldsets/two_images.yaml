@@ -1,0 +1,26 @@
+title: 'Set: Two Images'
+fields:
+  -
+    handle: left_image
+    field:
+      type: group
+      display: 'Left Image'
+      fields:
+        -
+          import: common_image
+  -
+    handle: right_image
+    field:
+      type: group
+      display: 'Right Image'
+      fields:
+        -
+          import: common_image
+        -
+          handle: text_field
+          field:
+            type: text
+            display: 'Text Field'
+  -
+    handle: size
+    field: common.size

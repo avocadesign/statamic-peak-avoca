@@ -1,4 +1,4 @@
-title: 'Component: reusable fields'
+title: 'Common: reusable fields'
 fields:
   -
     handle: image
@@ -36,12 +36,7 @@ fields:
       localizable: true
       display: 'Text rich'
       always_save: false
-      previews: true
-      enable_input_rules: true
-      enable_paste_rules: true
-      antlers: false
       remove_empty_nodes: trim
-      collapse: false
       smart_typography: true
   -
     handle: text_basic
@@ -60,12 +55,7 @@ fields:
       localizable: true
       display: 'Text basic'
       always_save: false
-      previews: true
-      enable_input_rules: true
-      enable_paste_rules: true
-      antlers: false
       remove_empty_nodes: trim
-      collapse: false
       smart_typography: true
   -
     handle: text_plain
@@ -91,3 +81,22 @@ fields:
       default: md
       display: Size
       instructions: 'Has no effect in the columns block'
+  -
+    handle: crop
+    field:
+      options:
+        -
+          key: none
+          value: 'No Crop'
+        -
+          key: landscape
+          value: 'Landscape (3:2)'
+        -
+          key: video
+          value: 'Video (16:9)'
+        -
+          key: square
+          value: 'Square (1:1)'
+      default: none
+      type: select
+      display: Crop

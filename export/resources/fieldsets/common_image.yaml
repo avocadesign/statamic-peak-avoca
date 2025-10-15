@@ -1,0 +1,25 @@
+title: 'Common: Image'
+fields:
+  -
+    handle: image
+    field:
+      container: images
+      max_files: 1
+      type: assets
+      localizable: true
+      display: Image
+      always_save: false
+  -
+    handle: caption
+    field:
+      type: text
+      localizable: true
+      display: Caption
+      width: 66
+  -
+    handle: crop
+    field: common.crop
+    config:
+      width: 33
+  -
+    import: common_link

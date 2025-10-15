@@ -1,18 +1,4 @@
 title: 'Set: Image'
 fields:
   -
-    handle: image
-    field: common.image
-    config:
-      width: 100
-  -
-    handle: caption
-    field:
-      type: text
-      localizable: true
-      display: Caption
-  -
-    handle: size
-    field: common.size
-    config:
-      width: 50
+    import: common_image

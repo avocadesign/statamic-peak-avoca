@@ -7,8 +7,8 @@ seo_nofollow: true
 seo_canonical_type: entry
 sitemap_change_frequency: weekly
 sitemap_priority: 0.5
-updated_by: b1493ffc-652b-408c-a2e0-3224ba2b1f3c
-updated_at: 1747168595
+updated_by: d115e71b-67fe-446e-9caa-a64983287b6e
+updated_at: 1760496820
 page_builder:
   -
     id: m96knwgm
@@ -259,6 +259,10 @@ page_builder:
                 image: placeholder-wepb-image.webp
                 caption: 'Image caption'
                 size: md
+                crop: none
+                link_type: entry
+                url: 'https://avoca.design'
+                link_entry: a3d989f5-eccf-4aa7-b346-a03819a54dfb
           -
             type: set
             attrs:
@@ -286,10 +290,43 @@ page_builder:
         type: paragraph
         attrs:
           textAlign: left
+          class: null
         content:
           -
             type: text
             text: 'This is an article block. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.'
+      -
+        type: set
+        attrs:
+          id: mgre7kga
+          values:
+            type: image
+            crop: none
+            link_type: none
+      -
+        type: set
+        attrs:
+          id: mgre7pk6
+          values:
+            type: two_images
+            left_image:
+              image: a-peak.jpg
+              caption: 'left image'
+              crop: landscape
+              link_type: entry
+              link_entry: a3d989f5-eccf-4aa7-b346-a03819a54dfb
+            right_image:
+              image: placeholder-wepb-image.webp
+              caption: 'right image'
+              crop: landscape
+              link_type: url
+              link_url: 'https://avoca.design'
+            size: 2xl
+      -
+        type: paragraph
+        attrs:
+          textAlign: left
+          class: null
       -
         type: set
         attrs:
@@ -299,6 +336,8 @@ page_builder:
             size: 2xl
             caption: 'Breakout image with caption'
             image: placeholder-wepb-image.webp
+            crop: none
+            link_type: none
       -
         type: set
         attrs:
