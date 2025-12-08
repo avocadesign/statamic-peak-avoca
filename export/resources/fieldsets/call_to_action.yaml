@@ -1,0 +1,31 @@
+title: 'Block: Call to action'
+fields:
+  -
+    handle: cta_style
+    field:
+      options:
+        -
+          key: vertical
+          value: Vertical
+        -
+          key: horizontal
+          value: Horizontal
+      default: vertical
+      type: button_group
+      display: 'Call to action style'
+  -
+    handle: title
+    field:
+      type: text
+      localizable: true
+      display: Title
+      validate:
+        - required
+  -
+    handle: text
+    field: common.text_plain
+    config:
+      validate:
+        - required
+  -
+    import: buttons

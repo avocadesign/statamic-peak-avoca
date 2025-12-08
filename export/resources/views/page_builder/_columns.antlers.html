@@ -5,75 +5,59 @@
 #}}
 
 <!-- /page_builder/_columns.antlers.html -->
-{{ partial:page_builder/block class="stack-8"}}
+{{# Set color scheme classes #}}
+{{ _block_class = { partial:components/utilities/colour_scheme type='all' :colour_scheme='colour_scheme' } }}
+{{ _text_color = { partial:components/utilities/colour_scheme type='text' :colour_scheme='colour_scheme' } }}
+{{ _prose_invert = { partial:components/utilities/colour_scheme type='prose' :colour_scheme='colour_scheme' } }}
+{{ _margins = { partial:components/utilities/colour_scheme type='margins' :block_margins='block_margins' } }}
+
+{{ partial:page_builder/block class="stack-8 {{ _block_class }} {{ _margins }}" }}
+
+{{# headings #}}
     {{ if heading && !hide_col_heading }}
-        <div class="span-content flex flex-col {{ heading_alignment }}">
-            <div class="flex flex-col {{ heading_alignment }} max-w-lg">
-                {{ partial src="typography/h2" content="{heading}" class=""}}
+        <div class="span-content grid grid-cols-subgrid">
+            <div class="flex flex-col gap-2 col-span-12 md:col-span-8 {{ if heading_alignment == "centre" }} md:col-start-3 items-center {{ /if }}">
+                {{ partial:typography/h2 :content="heading" :color="_text_color" }}
+                {{ if block:sub_heading }}
+                    {{ partial:typography/h3 :content="block:sub_heading" :color="_text_color" }}
+                {{ /if }}
             </div>
         </div>
     {{ /if}}
-    <div class="span-content grid {{ vertical_align_content }} md:grid-cols-12 gap-fluid-grid-gap">
-        {{ columns }}
-            {{# One column layouts #}}
-            {{ if total_results == 1 }}
-                {{ if layout_one_col == "narrow" }}
-                    {{ layout_span = "md:col-span-6" }}
-                    {{ if align_content_one_col == "items-center"}}
-                        {{ layout_start = "md:col-start-4" }}
-                    {{ /if }}
-                    {{ layout_styles = layout_span + " " + layout_start }}
-                {{ elseif layout_one_col == "wide" }}
-                    {{ layout_span = "md:col-span-8" }}
-                    {{ if align_content_one_col == "items-center"}}
-                        {{ layout_start = "md:col-start-3" }}
-                    {{ /if }}
-                    {{ layout_styles = layout_span + " " + layout_start }}
-                {{ elseif layout_one_col == "full" }}
-                    {{ layout_styles = "md:col-span-12" }}
-                {{ /if}}
-
-
-            {{# Two column layouts #}}
-            {{ elseif total_results == 2 }}
-                {{ if layout_two_col == "even" }}
-                    {{ layout_styles = "md:col-span-6" }}
-                {{ elseif layout_two_col == "third-left"}}
-                    {{ layout_styles = '{switch between="md:col-span-4 | md:col-span-8"}' }}
-                {{ elseif layout_two_col == "third-right"}}
-                    {{ layout_styles = '{switch between="md:col-span-8 | md:col-span-4"}' }}
-                {{ elseif layout_two_col == "fifths-left"}}
-                    {{ layout_styles = '{switch between="md:col-span-5 | md:col-span-7"}' }}
-                {{ elseif layout_two_col == "fifths-right"}}
-                    {{ layout_styles = '{switch between="md:col-span-7 | md:col-span-5"}' }}
-                {{ /if}}
-
-
-            {{ elseif total_results == 3 }}
-                {{ layout_styles = 'md:col-span-12 lg:col-span-4' }}
-            {{ /if}}
-
-            {{# set mobile order #}}
-            {{ if mobile_order == "order-first"}}
-                {{ order_value = "order-first" }}
-            {{ elseif mobile_order == "order-last"}}
-                {{ order_value = "order-last" }}
-            {{ else }}
-                {{ order_value = "" }}
-            {{ /if }}
-
-            {{# Column layout t#}}
-            {{  partial:typography/prose
-                as="div"
-                class="stack-8 overflow-x-auto
-                { layout_styles } { order_value } md:order-none"
-            }}
-                {{# display column content from Bard #}}
-                {{ cols_article }}
+    
+{{# columns #}}
+    <div class="span-content grid grid-cols-subgrid {{ vertical_align_content }} gap-y-8">
+        {{# left column #}}
+        {{ left_column }}
+            {{ partial:typography/prose as="article" class="stack-8 {{ _prose_invert }} {{ switch(
+                (column_width == 'narrow-left') => 'col-span-12 md:col-span-4',
+                (column_width == 'narrow-right') => 'col-span-12 md:col-span-8',
+                () => 'col-span-12 md:col-span-6'
+            )}} {{ switch(
+                (reverse_order_for_mobile) => 'order-last md:order-first',
+                () => ''
+            )}}" }}
+                {{ article }}
                     {{ partial src="components/{type}" }}
-                {{ /cols_article }}
+                {{ /article }}
             {{ /partial:typography/prose }}
-        {{ /columns}}
+        {{ /left_column }}
+
+        {{# right column #}}
+        {{ right_column }}
+            {{ partial:typography/prose as="article" class="stack-8 {{ _prose_invert }} {{ switch(
+                (column_width == 'narrow-left') => 'col-span-12 md:col-span-8',
+                (column_width == 'narrow-right') => 'col-span-12 md:col-span-4',
+                () => 'col-span-12 md:col-span-6'
+            )}} {{ switch(
+                (reverse_order_for_mobile) => 'order-first md:order-last',
+                () => ''
+            )}}" }}
+                {{ article }}
+                    {{ partial src="components/{type}" }}
+                {{ /article }}
+            {{ /partial:typography/prose }}
+        {{ /right_column }}
     </div>
 
 

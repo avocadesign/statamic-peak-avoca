@@ -20,7 +20,7 @@ Dump your .env values here with sensitive data removed.
 Dump your .env values here with sensitive data removed. The following is a production example that uses full static caching:
 APP_NAME="Avoca Peak Starter WIP"
 APP_ENV=production
-APP_KEY="base64:rqYUngZFjU1JqjMuSLC1ZIL4TcT04vYSYlNiRP/1b7o=""base64:IfLr40wqS5tN+Hs8+EK48KzXOoV1cYfPnnGAm+H/yEI="
+APP_KEY="base64:XujvQrIGBxQdfqCnGtcdI//CmRMNqoNNtbE5lhip9vU=""base64:rqYUngZFjU1JqjMuSLC1ZIL4TcT04vYSYlNiRP/1b7o=""base64:IfLr40wqS5tN+Hs8+EK48KzXOoV1cYfPnnGAm+H/yEI="
 APP_DEBUG=false
 APP_TIMEZONE="Pacific/Auckland"
 APP_URL=

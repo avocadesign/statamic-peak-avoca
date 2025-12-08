@@ -1,0 +1,134 @@
+title: 'Block: Media and text'
+fields:
+  -
+    handle: media_type
+    field:
+      options:
+        -
+          key: image
+          value: Image
+        -
+          key: video
+          value: Video
+      default: image
+      type: button_group
+      display: 'Media type'
+      width: 33
+  -
+    handle: image_group
+    field:
+      type: group
+      display: Image
+      if:
+        media_type: 'equals image'
+      replicator_preview: false
+      width: 66
+      fields:
+        -
+          import: common_image
+  -
+    handle: video_url
+    field:
+      type: video
+      display: 'Video URL'
+      if:
+        media_type: 'equals video'
+      always_save: true
+      replicator_preview: false
+      width: 66
+  -
+    handle: heading
+    field:
+      display: Heading
+      type: text
+      always_save: false
+      width: 66
+  -
+    handle: sub_heading
+    field:
+      type: text
+      display: 'Sub heading'
+      width: 66
+      replicator_preview: false
+  -
+    import: article
+  -
+    import: buttons
+  -
+    handle: display_settings
+    field:
+      show_header: true
+      show_toggle: true
+      toggle_controls_visibility: true
+      type: inline_group
+      display: 'Display settings'
+      instructions: 'Set media position, column layout, and text alignment'
+  -
+    handle: column_widths
+    field:
+      options:
+        -
+          key: even
+          value: Even
+        -
+          key: narrow-left
+          value: 'Left col narrow'
+        -
+          key: narrow-right
+          value: 'Right col narrow'
+        -
+          key: stacked
+          value: Stacked
+        -
+          key: no-gap
+          value: 'No gap'
+        -
+          key: edge-center
+          value: 'Edge to center'
+      default: even
+      type: select
+      display: 'Column layout'
+      width: 33
+      always_save: true
+  -
+    handle: media_position
+    field:
+      options:
+        -
+          key: left
+          value: Left
+        -
+          key: right
+          value: Right
+      default: right
+      display: 'Media position'
+      type: button_group
+      width: 33
+      always_save: true
+      if:
+        column_widths: 'not stacked'
+  -
+    handle: text_alignment
+    field:
+      options:
+        -
+          key: top
+          value: Top
+        -
+          key: centre
+          value: Centre
+        -
+          key: bottom
+          value: Bottom
+      type: select
+      display: 'Content vertical alignment'
+      width: 33
+      default: centre
+      replicator_preview: false
+      always_save: true
+      instructions: "Align the content vertically within it's column"
+      instructions_position: below
+      if:
+        column_widths: 'not stacked'
+  -
+    import: colour_scheme

@@ -20,6 +20,22 @@ fields:
     handle: crop
     field: common.crop
     config:
+      options:
+        -
+          key: none
+          value: 'No Crop'
+        -
+          key: landscape
+          value: 'Landscape (3:2)'
+        -
+          key: video
+          value: 'Video (16:9)'
+        -
+          key: square
+          value: 'Square (1:1)'
+        -
+          key: portrait
+          value: 'Portrait (2:3)'
       width: 33
   -
     import: common_link

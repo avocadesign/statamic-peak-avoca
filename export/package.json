@@ -4,9 +4,7 @@
         "dev": "vite",
         "watch": "vite",
         "build": "vite build",
-        "production": "vite build",
-        "dev-cp": "vite --config vite-cp.config.js",
-        "build-cp": "vite build --config vite-cp.config.js"
+        "production": "vite build"
     },
     "type": "module",
     "author": "Studio 1902",

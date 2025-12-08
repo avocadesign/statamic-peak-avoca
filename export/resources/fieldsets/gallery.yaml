@@ -1,0 +1,28 @@
+title: 'Block: Gallery'
+fields:
+  -
+    handle: gallery_images
+    field:
+      min_files: 2
+      container: images
+      type: assets
+      display: 'Gallery images'
+  -
+    handle: crop_thumbnails
+    field:
+      options:
+        -
+          key: no-crop
+          value: 'No Crop'
+        -
+          key: square
+          value: Square
+        -
+          key: landscape
+          value: Landscape
+        -
+          key: portrait
+          value: Portrait
+      default: no-crop
+      type: button_group
+      display: 'Crop thumbnails'

@@ -6,44 +6,91 @@
 
 <!-- /page_builder/_cards.antlers.html -->
 {{ partial:page_builder/block class="gap-y-8" }}
-    {{ if block:title }}
-        <header class="span-content grid md:grid-cols-12 gap-fluid-grid-gap">
-            {{ partial:typography/h2 :content="block:title" class="md:col-start-3 md:col-span-8 text-center" }}
+    {{ if block:cards_heading}}
+        <header class="span-content flex flex-col gap-1 {{ if block:heading_alignment == 'centre'}} items-center {{ /if }}">
+            {{ partial:typography/h2 :content="block:cards_heading" class="" }}
+        {{ if block:cards_subheading }}
+            {{ partial:typography/h3 :content="block:cards_subheading" :color="_text_color" }}
+        {{ /if }}
         </header>
     {{ /if }}
 
     <ul class="span-content grid md:grid-cols-12 gap-fluid-grid-gap">
+
         {{ block:cards }}
             <li
                 class="
-                    flex flex-col justify-between items-start p-6 border border-neutral/10 shadow-lg rounded
+                    relative group flex flex-col justify-between items-start  
                     {{ switch(
                         (total_results === 1) => 'md:col-span-8 md:col-start-3',
                         (total_results === 2) => 'md:col-span-6',
-                        (total_results > 2) => 'md:col-span-8 md:col-start-3 lg:col-span-4 lg:col-start-0',
+                        (total_results === 3) => 'md:col-span-4',
+                        (total_results === 4) => 'md:col-span-6',
+                        (total_results > 4) => 'md:col-span-4',
                         () => void
+                    )}}
+
+                    {{ switch(
+                        (card_type == 'text') => 'border border-neutral/10 p-6',
+                        (card_type == 'icon') => 'border border-neutral/10 p-6', 
                     )}}
                 "
             >
-                <div class="mb-4">
-                    {{ if button }}
-                        {{ button }}
-                            <a class="group " {{ partial:statamic-peak-tools::snippets/button_attributes }} aria-hidden="true" tabindex="-1">
-                                {{ partial:typography/h3 class="mb-2" color="group-hover:underline" :content="title" }}
-                            </a>
-                        {{ /button }}
-                        {{ partial:typography/h3 class="sr-only" :content="title" }}
-                    {{ else }}
-                        {{ partial:typography/h3 class="mb-2" :content="title" }}
-                    {{ /if }}
+                <div class="group stack-4">
+                    {{ if card_type == "image" && card_image }}
+                        {{
+                            partial:statamic-peak-tools::components/picture
+                            :image="card_image"
+                            class="w-full object-cover aspect-[3/2]"
+                            cover="false"
+                            lazy="true"
+                            :aspect_ratio="3/2"
+                            :sizes="sizes ?? '100vw'"
+                        }}
+                    {{ /if}}
 
-                    {{ if text }}
-                        {{ partial:typography/p class="mb-4" :content="text" }}
-                    {{ /if }}
+                    {{ if card_type == "icon" && card_image }}
+                        {{
+                            partial:statamic-peak-tools::components/picture
+                            :image="card_image"
+                            class="w-32 object-cover"
+                            cover="false"
+                            lazy="true"
+                            :sizes="sizes ?? '100vw'"
+                        }}
+                    {{ /if}}
+
+                    <div class="">
+                        {{ if buttons }}
+                            {{# Link-wrapped heading #}}
+                            {{ buttons limit="1" }}
+                                <a class="clickable-parent" {{ partial:statamic-peak-tools::snippets/button_attributes }} aria-hidden="true" tabindex="-1">
+                                    {{ partial:typography/h3 class="mb-0" color="" :content="card_title" }}
+                                </a>
+                            {{ /buttons }}
+                            {{# Accessible heading for screen readers #}}
+                            {{ partial:typography/h3 class="sr-only" :content="card_title" }}
+                        {{ else }}
+                            {{# Standard heading (no link) #}}
+                            {{ partial:typography/h3 class="mb-0" :content="card_title" }}
+                        {{ /if }}
+
+                        {{ if card_text }}
+                            {{ partial:typography/prose as="article" class="contents stack-8" }}
+                                {{ card_text}}
+                            {{ /partial:typography/prose }}
+                        {{ /if }}
+
+                        {{ if buttons }}
+                            <div class="mt-2 flex flex-wrap gap-3 justify-start">
+                                {{ buttons limit="1" }}
+                                    {{ partial:components/button :label="label" button_type="inline" }}
+                                {{ /buttons }}
+                            </div>
+                        {{ /if }}
+                    </div>
+                    
                 </div>
-                {{ button }}
-                    {{ partial:components/button }}
-                {{ /button }}
             </li>
         {{ /block:cards }}
     </ul>

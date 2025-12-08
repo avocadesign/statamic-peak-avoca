@@ -18,6 +18,10 @@
     --color-neutral-900: var(--color-slate-900);
     --color-neutral-950: var(--color-slate-950);
 
+    /* Semantic Colours */
+    --color-light: var(--color-neutral-100);
+    --color-dark: var(--color-neutral-900);
+
     /* --font-sans: Gaultier, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; */
     /* --font-serif: Lavigne, ui-serif, Georgia, Cambria, "Times New Roman", Times, serif; */
     /* --font-mono: Anonymous, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; */
@@ -42,4 +46,41 @@
         /* font-family: var(--font-serif); */
         /* font-family: var(--font-mono); */
     }
+
+    .lede {
+        @apply text-xl;
+    }
+
+    .brand-text {
+        @apply text-primary;
+    }
+}
+
+@layer components {
+    /* Clickable Parent
+    /* https://codepen.io/potatoDie/pen/abzvGxG */
+    a.clickable-parent {
+        @apply static
+    }
+
+    a.clickable-parent:after {
+        content: "";
+        cursor: pointer !important;
+        @apply flex absolute inset-0;
+    }
+
+    .clickable-parent:not(a) {
+        @apply static
+    }
+    .clickable-parent:not(a) a {
+        @apply static
+    }
+
+    .clickable-parent:not(a) > a:after {
+        content: "";
+        cursor: pointer !important;
+        @apply flex absolute inset-0;
+    }
+
+    
 }

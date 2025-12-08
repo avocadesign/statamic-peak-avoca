@@ -5,55 +5,26 @@
 #}}
 
 <!-- /components/_image.antlers.html -->
-<figure
-    class="
-        not-prose
-        {{ switch(
-            (size == 'lg') => 'span-lg',
-            (size == 'xl') => 'span-xl',
-            (size == '2xl') => 'span-content',
-            () => 'span-lg'
-        )}}
-    "
->
-    {{ if link_type && link_type != 'none' }}
-        <a
-            href="{{ switch(
-                (link_type == 'url') => link_url,
-                (link_type == 'entry') => { link_entry:url },
-                (link_type == 'file') => { link_file:url },
-                () => '#'
-            ) }}"
-            {{ if link_type == 'url' }}target="_blank" rel="noopener noreferrer"{{ /if }}
-        >
-    {{ /if }}
-
-    {{
-        partial:statamic-peak-tools::components/picture
-        :image="image"
-        class="w-full object-cover"
-        cover="false"
-        lazy="true"
-        :aspect_ratio="switch(
-            (crop == 'landscape') => '3/2',
-            (crop == 'video') => '16/9',
-            (crop == 'square') => '1/1',
-            () => ''
-        )"
-        sizes="
-            {{ switch(
-                (size == 'lg') => '(min-width: 1280px) 640px, (min-width: 768px) 50vw, 90vw',
-                (size == 'xl') => '(min-width: 1280px) 960px, (min-width: 768px) 75vw, 90vw',
-                (size == '2xl') => '(min-width: 1280px) 1150px, 90vw',
-                () => '100vw'
-            )}}
-        "
-    }}
-
-    {{ if link_type && link_type != 'none' }}
-        </a>
-    {{ /if }}
-
-    {{ partial:typography/caption as="figcaption" }}
-</figure>
+{{
+    partial:components/utilities/figure
+    :image="image"
+    :caption="caption"
+    :crop="crop"
+    :link_type="link_type"
+    :link_url="link_url"
+    :link_entry="link_entry"
+    :link_file="link_file"
+    class="not-prose {{ switch(
+        (size == 'lg') => 'span-lg',
+        (size == 'xl') => 'span-xl',
+        (size == '2xl') => 'span-content',
+        () => 'span-lg'
+    )}}"
+    sizes="{{ switch(
+        (size == 'lg') => '(min-width: 1280px) 640px, (min-width: 768px) 50vw, 90vw',
+        (size == 'xl') => '(min-width: 1280px) 960px, (min-width: 768px) 75vw, 90vw',
+        (size == '2xl') => '(min-width: 1280px) 1150px, 90vw',
+        () => '100vw'
+    )}}"
+}}
 <!-- End: /components/_image.antlers.html -->

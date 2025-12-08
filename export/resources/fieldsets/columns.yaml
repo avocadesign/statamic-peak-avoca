@@ -4,138 +4,97 @@ fields:
     handle: heading
     field:
       type: text
-      display: 'Section Heading'
+      display: Heading
+  -
+    handle: sub_heading
+    field:
+      type: text
+      display: 'Sub heading'
       width: 66
+      replicator_preview: false
   -
     handle: hide_col_heading
     field:
       type: toggle
-      display: 'Hide col heading'
+      display: 'Hide headings'
       width: 33
       replicator_preview: false
   -
-    handle: columns
+    handle: left_column
     field:
-      max_sets: 3
-      button_label: 'Add column'
-      type: replicator
-      display: Columns
-      replicator_preview: false
-      sortable: false
-      sets:
-        columns:
-          display: Columns
-          sets:
-            column:
-              display: Column
-              icon: programming-module-box-cube
-              fields:
-                -
-                  import: article
-                  prefix: cols_
-                -
-                  handle: mobile_order
-                  field:
-                    options:
-                      -
-                        key: auto
-                        value: Auto
-                      -
-                        key: order-first
-                        value: First
-                      -
-                        key: order-last
-                        value: Last
-                    type: select
-                    display: 'Mobile order'
-                    width: 75
-                    always_save: true
-                    default: auto
-                    instructions: 'Change display order on mobile devices. Only effects multiple columns.'
+      type: group
+      display: 'Left Column'
+      fields:
+        -
+          handle: article
+          field: article.article
+          config:
+            validate:
+              - required
   -
-    handle: show_section_settings
+    handle: right_column
     field:
-      type: toggle
-      display: 'Show section settings'
-      replicator_preview: false
+      type: group
+      display: 'Right Column'
+      fields:
+        -
+          handle: article
+          field: article.article
+          config:
+            validate:
+              - required
   -
-    handle: heading_alignment
+    handle: display_settings
     field:
-      options:
-        -
-          key: items-start
-          value: Left
-        -
-          key: items-center
-          value: Centre
-      type: select
-      display: 'Heading Alignment'
-      width: 66
-      default: items-start
-      replicator_preview: false
-      if:
-        show_section_settings: 'equals true'
+      show_header: true
+      show_toggle: true
+      toggle_controls_visibility: true
+      type: inline_group
+      display: 'Display settings'
+      instructions: 'Set column widths, alignment and mobile order'
   -
-    handle: layout_one_col
-    field:
-      options:
-        -
-          key: narrow
-          value: Narrow
-        -
-          key: wide
-          value: Wide
-        -
-          key: full
-          value: Full
-      type: button_group
-      display: 'Tab Width'
-      if:
-        columns: 'custom columnCount:1'
-      default: wide
-      replicator_preview: false
-  -
-    handle: align_content_one_col
-    field:
-      options:
-        -
-          key: items-start
-          value: Left
-        -
-          key: items-center
-          value: Centre
-      type: select
-      display: 'Horizontal Content Alignment'
-      default: items-start
-      if:
-        columns: 'custom columnCount:1'
-      replicator_preview: false
-      width: 66
-  -
-    handle: layout_two_col
+    handle: column_width
     field:
       options:
         -
           key: even
           value: Even
         -
-          key: third-left
-          value: '1:2'
+          key: narrow-left
+          value: 'Left col narrow'
         -
-          key: third-right
-          value: '2:1'
-        -
-          key: fifths-left
-          value: '2:3'
-        -
-          key: fifths-right
-          value: '3:2'
-      type: button_group
-      display: 'Tab Layout'
-      if:
-        columns: 'custom columnCount:2'
+          key: narrow-right
+          value: 'Right col narrow'
       default: even
+      type: select
+      display: 'Column Width'
+      width: 50
+      always_save: true
+  -
+    handle: reverse_order_for_mobile
+    field:
+      type: toggle
+      display: 'Reverse order on mobile'
       replicator_preview: false
+      width: 50
+  -
+    handle: heading_alignment
+    field:
+      options:
+        -
+          key: left
+          value: Left
+        -
+          key: centre
+          value: Centred
+      type: select
+      display: 'Heading Alignment'
+      width: 50
+      default: items-start
+      replicator_preview: false
+      always_save: true
+      instructions: 'Alignment of the headings'
+      instructions_position: below
   -
     handle: vertical_align_content
     field:
@@ -151,9 +110,11 @@ fields:
           value: Bottom
       type: select
       display: 'Vertical Align Content'
-      width: 66
+      width: 50
       default: items-start
       replicator_preview: false
-      instructions: 'Align the content in tabs vertically'
-      if:
-        columns: 'custom hasMultipleColumns:true'
+      instructions: 'Align the content vertically within the column'
+      always_save: true
+      instructions_position: below
+  -
+    import: colour_scheme

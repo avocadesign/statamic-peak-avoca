@@ -1,0 +1,126 @@
+{{#
+    @name Two Images
+    @desc The Two Images page builder block.
+    @set page.page_builder.two_images
+#}}
+
+<!-- /page_builder/_two_images.antlers.html -->
+{{# Set color scheme classes #}}
+{{ _block_class = { partial:components/utilities/colour_scheme type='all' :colour_scheme='colour_scheme' } }}
+{{ _text_color = { partial:components/utilities/colour_scheme type='text' :colour_scheme='colour_scheme' } }}
+{{ _prose_invert = { partial:components/utilities/colour_scheme type='prose' :colour_scheme='colour_scheme' } }}
+{{ _margins = { partial:components/utilities/colour_scheme type='margins' :block_margins='block_margins' } }}
+
+{{ partial:page_builder/block class="{{ _block_class }} {{ _margins }}" }}
+
+    {{# Layout classes #}}
+    {{ heading_classes = switch(
+        (display_style == 'sidebyside' && text_position == 'left') => 'md:col-span-4 justify-center md:order-first',
+        (display_style == 'sidebyside' && text_position == 'right') => 'md:col-span-4 justify-center md:order-last',
+        (display_style == 'sidebyside') => 'md:col-span-4 justify-center',
+        (display_style == 'stacked' && text_position == 'left') => 'md:col-span-6 justify-center md:order-first',
+        (display_style == 'stacked' && text_position == 'right') => 'md:col-span-6 justify-center md:order-last',
+        (display_style == 'stacked') => 'md:col-span-6 justify-center',
+        (display_style == 'offset' && text_position == 'left') => 'md:col-span-6 md:row-start-1 md:order-1',
+        (display_style == 'offset' && text_position == 'right') => 'md:col-span-6 md:row-start-1 md:order-2',
+        (display_style == 'offset') => 'md:col-span-6',
+        () => 'md:col-span-8'
+    ) }}
+
+    {{ image1_classes = switch(
+        (display_style == 'sidebyside') => 'md:col-span-4',
+        (display_style == 'offset' && text_position == 'left') => 'md:col-span-6 md:row-start-1 md:row-span-2 md:order-3',
+        (display_style == 'offset' && text_position == 'right') => 'md:col-span-6 md:row-start-1 md:row-span-2 md:order-1',
+        () => 'md:col-span-6'
+    ) }}
+
+    {{ image2_classes = switch(
+        (display_style == 'sidebyside') => 'md:col-span-4',
+        (display_style == 'offset' && text_position == 'left') => 'md:col-span-6 md:row-start-2 md:order-2 self-end',
+        (display_style == 'offset' && text_position == 'right') => 'md:col-span-6 md:row-start-2 md:order-3 self-end',
+        (display_style == 'offset') => 'md:col-span-6',
+        () => 'md:col-span-6'
+    ) }}
+
+    {{ grid_row_classes = switch(
+        (display_style == 'offset') => 'md:grid-rows-[auto_auto]',
+        () => ''
+    ) }}
+
+    {{ text_vertical_alignment_classes = switch(
+        (text_vertical_alignment == 'top') => 'justify-start',
+        (text_vertical_alignment == 'bottom') => 'justify-end',
+        () => 'justify-center'
+    ) }}
+
+    {{# Headings in standard output #}}
+    <div class="span-content grid grid-cols-subgrid gap-fluid-grid-gap gap-y-4 {{ grid_row_classes }}">
+        <header class="span-content flex flex-col gap-1 mb-4 {{ heading_classes }} {{ (display_style == 'sidebyside' || display_style == 'stacked') ? text_vertical_alignment_classes : '' }} {{ display_style == 'offset' ? 'self-start' : '' }}">
+            {{ partial:typography/h2 :content="block:heading" :color="_text_color" }}
+            {{ if block:sub_heading }}
+                {{ partial:typography/h3 :content="block:sub_heading" :color="_text_color" }}
+            {{ /if }}
+            {{ if article }}
+                {{ partial:typography/prose as="article" class="mt-4 stack-8 {{ _prose_invert }}" }}
+                    {{ article }}
+                        {{ partial src="components/{type}" }}
+                    {{ /article }}
+                {{ /partial:typography/prose }}
+            {{ /if}}
+        </header>
+
+        {{# Image #1 #}}
+        <div class="col-span-12 {{ image1_classes }} {{ display_style == 'offset' ? 'h-full' : 'flex flex-col gap-6' }}">
+            {{ block:image_1 }}
+                {{ partial:components/utilities/figure
+                    :image="image1_image"
+                    :caption="image1_caption"
+                    :crop="image1_crop"
+                    :link_type="image1_link_type"
+                    :link_file="image1_link_file"
+                    :link_url="image1_link_url"
+                    :link_entry="image1_link_entry"
+                    :caption_absolute="display_style == 'offset'"
+                    sizes="{{ display_style == 'sidebyside' ? '(min-width: 1280px) 426px, (min-width: 768px) 33vw, 90vw' : '(min-width: 1280px) 640px, (min-width: 768px) 50vw, 90vw' }}"
+                    class="{{ (display_style == 'offset' && (image1_crop == 'none' || !image1_crop)) ? 'h-full [&_img]:h-full [&_img]:object-cover' : 'not-prose' }}"
+                }}
+            {{ /block:image_1 }}
+
+            {{ if display_style == "stacked" }}
+                {{ block:image_2 }}
+                    {{ partial:components/utilities/figure
+                        :image="image2_image"
+                        :caption="image2_caption"
+                        :crop="image2_crop"
+                        :link_type="image2_link_type"
+                        :link_file="image2_link_file"
+                        :link_url="image2_link_url"
+                        :link_entry="image2_link_entry"
+                        :caption_absolute="display_style == 'offset'"
+                        sizes="{{ display_style == 'sidebyside' ? '(min-width: 1280px) 426px, (min-width: 768px) 33vw, 90vw' : '(min-width: 1280px) 640px, (min-width: 768px) 50vw, 90vw' }}"
+                    }}
+                {{ /block:image_2 }}
+            {{ /if }}
+        </div>
+
+        {{# Image #2 #}}
+        {{ unless display_style == "stacked"}}
+            <div class="col-span-12 {{ image2_classes }} {{ display_style == 'offset' ? 'self-end' : '' }}">
+                {{ block:image_2 }}
+                    {{ partial:components/utilities/figure
+                        :image="image2_image"
+                        :caption="image2_caption"
+                        :crop="image2_crop"
+                        :link_type="image2_link_type"
+                        :link_file="image2_link_file"
+                        :link_url="image2_link_url"
+                        :link_entry="image2_link_entry"
+                        :caption_absolute="display_style == 'offset'"
+                        sizes="{{ display_style == 'sidebyside' ? '(min-width: 1280px) 426px, (min-width: 768px) 33vw, 90vw' : '(min-width: 1280px) 640px, (min-width: 768px) 50vw, 90vw' }}"
+                    }}
+                {{ /block:image_2 }}
+            </div>
+        {{ /unless }}
+    </div>
+{{ /partial:page_builder/block }}
+<!-- End: /page_builder/_two_images.antlers.html -->

@@ -1,4 +1,4 @@
-title: 'Block: Hero'
+title: 'Common: Hero'
 fields:
   -
     handle: hero_type
@@ -36,6 +36,15 @@ fields:
       if:
         custom_page_title: 'equals true'
         hero_type: 'not none'
+  -
+    handle: hero_image
+    field:
+      max_files: 1
+      container: images
+      type: assets
+      display: 'Hero Image'
+      if:
+        hero_type: 'equals hero'
   -
     handle: page_lede
     field: common.text_basic

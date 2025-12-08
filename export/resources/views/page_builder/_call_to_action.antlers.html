@@ -1,0 +1,26 @@
+{{#
+	@name Call to action
+	@desc The call to action page builder block.
+    @set page.page_builder.call_to_action
+#}}
+
+<!-- /page_builder/_call_to_action.antlers.html -->
+{{ partial:page_builder/block }}
+    <div class="span-content flex bg-primary p-8 gap-6
+        {{ if cta_style == "vertical" }}
+            flex-col items-center
+        {{ elseif cta_style == "horizontal"}}
+            flex-col md:flex-row items-center md:justify-between
+        {{ /if }}
+    ">
+        <div class="flex flex-col gap-2
+            {{ if cta_style == "vertical" }} items-center {{ /if }}
+            {{ if cta_style == "horizontal" }} items-center md:items-start {{ /if }}
+        ">
+            {{ partial:typography/h2 class="" :content="block:title" color="text-white" }}
+            {{ partial:typography/p class="" :content="block:text" color="text-white" }}
+        </div>
+        {{ block:buttons ?= { partial:components/buttons } }}
+    </div>
+{{ /partial:page_builder/block }}
+<!-- End: /page_builder/_call_to_action.antlers.html -->

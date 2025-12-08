@@ -136,13 +136,22 @@ return [
 
     'attributes' => [
 
-        // 'heading_1' => [
-        //     'id' => [
-        //         'type' => 'text',
-        //         'display' => 'ID',
-        //         'default' => null,
-        //         'rendered' => true,
-        //     ],
+        'heading_2' => [
+            'id' => [
+                'type' => 'text',
+                'display' => 'ID',
+                'default' => null,
+                'rendered' => true,
+                ],
+            ],
+        'heading_3' => [
+            'id' => [
+                'type' => 'text',
+                'display' => 'ID',
+                'default' => null,
+                'rendered' => true,
+                ],
+            ],
         //     'hero' => [
         //         'type' => 'toggle',
         //         'display' => 'Hero',
@@ -167,7 +176,6 @@ return [
         //         'default' => null,
         //         'rendered' => true,
         //     ],
-        // ],
 
     ],
 

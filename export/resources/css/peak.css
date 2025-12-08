@@ -123,7 +123,7 @@
 @layer components {
     /* Fluid grid for horizontal layout. */
     .fluid-grid {
-        --col-gap: clamp(1rem, 3vw, 4rem);
+        --col-gap: clamp(1rem, 3vw, calc(var(--spacing) * 8));
         --spacing-fluid-grid-gap: var(--col-gap); /* redefining this here as CSS doesn't inherit CSS variables */
         --content-max-width: var(--breakpoint-xl);
         --col-width: calc((min(calc(100% - var(--padding-left) - var(--padding-right) - 2 * var(--col-gap)), var(--content-max-width)) - 11 * var(--col-gap)) / 12);

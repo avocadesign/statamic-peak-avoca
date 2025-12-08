@@ -1,0 +1,100 @@
+title: 'Block: Two Images'
+fields:
+  -
+    handle: heading
+    field:
+      type: text
+      display: Heading
+  -
+    handle: sub_heading
+    field:
+      type: text
+      display: 'Sub heading'
+  -
+    import: article
+  -
+    handle: image_1
+    field:
+      type: group
+      display: 'Image #1'
+      fields:
+        -
+          import: common_image
+          prefix: image1_
+  -
+    handle: image_2
+    field:
+      type: group
+      display: 'Image #2'
+      fields:
+        -
+          import: common_image
+          prefix: image2_
+  -
+    handle: display_options
+    field:
+      show_header: true
+      show_toggle: true
+      toggle_controls_visibility: true
+      type: inline_group
+      display: 'Display options'
+      instructions: 'Set display style and heading alignment'
+  -
+    handle: display_style
+    field:
+      options:
+        -
+          key: standard
+          value: Standard
+        -
+          key: sidebyside
+          value: 'Side by Side'
+        -
+          key: stacked
+          value: Stacked
+        -
+          key: offset
+          value: Offset
+      default: standard
+      type: select
+      display: 'Display Style'
+      width: 66
+  -
+    handle: text_position
+    field:
+      options:
+        -
+          key: left
+          value: Left
+        -
+          key: right
+          value: Right
+      default: right
+      type: button_group
+      display: 'Text Position'
+      width: 50
+      if:
+        display_style: 'not standard'
+      always_save: true
+  -
+    handle: text_vertical_alignment
+    field:
+      options:
+        -
+          key: top
+          value: Top
+        -
+          key: centred
+          value: 'Centred vertically'
+        -
+          key: bottom
+          value: Bottom
+      default: centred
+      type: select
+      display: 'Text vertical alignment'
+      width: 50
+      always_save: true
+      if_any:
+        display_style: 'contains_any sidebyside,stacked'
+  -
+    import: colour_scheme

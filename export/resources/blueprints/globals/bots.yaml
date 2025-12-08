@@ -1,0 +1,16 @@
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        fields:
+          -
+            handle: llms_content
+            field:
+              type: markdown
+              display: 'LLMS.text content'
+          -
+            handle: robots_txt_content
+            field:
+              type: textarea
+              display: 'Robots.txt content'

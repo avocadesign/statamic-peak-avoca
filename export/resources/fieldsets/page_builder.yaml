@@ -16,20 +16,54 @@ fields:
           instructions: 'Content blocks'
           icon: text-formatting-initial-letter
           sets:
-            article:
-              display: Article
-              instructions: 'Long form content, can be expanded with media like figures, video, quotes or tables.'
-              icon: text-formatting-image-bottom
+            text:
+              display: Text
+              instructions: 'Text block'
+              icon: form-text-field
               fields:
                 -
-                  import: article
+                  import: text
+            media_and_text:
+              display: 'Media and text'
+              instructions: 'Media and text side by side.'
+              icon: text-formatting-image-left
+              fields:
+                -
+                  import: media_and_text
             columns:
-              display: Columns
-              instructions: 'Create content in one or more columns'
+              display: 'Text Columns'
+              instructions: 'Create content in two columns'
               icon: layout-two-columns
               fields:
                 -
                   import: columns
+            cards:
+              display: Cards
+              icon: programming-module-box-cube
+              fields:
+                -
+                  import: cards
+            two_images:
+              display: 'Two Images'
+              instructions: 'Two images with optional text'
+              icon: media-image-picture-gallery
+              fields:
+                -
+                  import: two_images_block
+            gallery:
+              display: Gallery
+              instructions: 'A multi row image gallery.'
+              icon: layout-grid-dots
+              fields:
+                -
+                  import: gallery
+            call_to_action:
+              display: 'Call to action'
+              instructions: 'Show a call to action.'
+              icon: alert-alarm-bell
+              fields:
+                -
+                  import: call_to_action
             divider:
               display: Divider
               instructions: 'A divider between sections'
@@ -37,6 +71,13 @@ fields:
               fields:
                 -
                   import: divider
+            article:
+              display: 'Long form content'
+              instructions: 'Long form content, can be expanded with media like figures, video, quotes or tables.'
+              icon: text-formatting-image-bottom
+              fields:
+                -
+                  import: article
         dynamic:
           display: Dynamic
           instructions: 'dynamic blocks'

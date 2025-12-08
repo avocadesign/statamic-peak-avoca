@@ -1,8 +1,30 @@
 {{#
 	@name Page builder block
 	@desc The page builder block wrapper
+	@param data_attrs Optional data attributes to add to the section element
+	@param is_no_gap Boolean flag indicating this is a no-gap media and text block
 #}}
 
-<section class="fluid-grid {{ class }}">
+<section
+	{{ if is_no_gap }}
+		x-data="{
+			checkNoSpaceB() {
+				const nextSection = this.$el.nextElementSibling;
+				const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
+				if (nextSection && nextSection.getAttribute('data-block-type') === 'media-and-text-no-gap' && isDesktop) {
+					this.$el.classList.add('no-space-b');
+				} else {
+					this.$el.classList.remove('no-space-b');
+				}
+			}
+		}"
+		x-init="
+			checkNoSpaceB();
+			window.addEventListener('resize', () => checkNoSpaceB());
+		"
+	{{ /if }}
+	class="fluid-grid {{ class }}"
+	{{ data_attrs }}
+>
     {{ slot }}
 </section>

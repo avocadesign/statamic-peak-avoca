@@ -17,14 +17,15 @@ fields:
         - alignleft
         - aligncenter
         - alignright
+        - lede
+        - brand
         - bts_styles
+        - bts_attributes
         - bts_hidden
       reading_time: true
       type: bard
       localizable: true
       display: Content
-      validate:
-        - required
       container: files
       always_save: false
       remove_empty_nodes: trim

@@ -1,11 +1,49 @@
-title: Cards
+title: 'Block: Cards'
 fields:
   -
-    handle: title
+    handle: cards_heading
     field:
       type: text
       localizable: true
-      display: Title
+      display: Heading
+      width: 66
+  -
+    handle: card_type
+    field:
+      options:
+        -
+          key: text
+          value: Text
+        -
+          key: image
+          value: Image
+        -
+          key: icon
+          value: Icon
+      type: button_group
+      display: 'Card Type'
+      width: 33
+      default: text
+  -
+    handle: cards_subheading
+    field:
+      type: text
+      display: 'Sub heading'
+      width: 66
+  -
+    handle: heading_alignment
+    field:
+      options:
+        -
+          key: left
+          value: Left
+        -
+          key: centre
+          value: Centred
+      default: left
+      type: button_group
+      display: 'Heading alignment'
+      width: 33
   -
     handle: cards
     field:
@@ -25,20 +63,26 @@ fields:
               display: Card
               fields:
                 -
-                  handle: title
+                  handle: card_image
+                  field:
+                    max_files: 1
+                    container: images
+                    type: assets
+                    display: 'Card Image / Icon'
+                    if:
+                      $parent.card_type: 'contains_any image, icon'
+                    always_save: true
+                -
+                  handle: card_title
                   field:
                     type: text
                     localizable: true
                     validate: required
-                    display: Title
+                    display: 'Card Title'
                 -
-                  handle: text
-                  field: common.text_plain
+                  handle: card_text
+                  field: common.text_rich
                   config:
-                    display: Text
+                    display: 'Card Text'
                 -
-                  handle: button
-                  field: buttons.buttons
-                  config:
-                    display: Button
-                    max_rows: 1
+                  import: buttons

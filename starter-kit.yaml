@@ -17,7 +17,6 @@ export_paths:
   - config/statamic/search.php
   - config/statamic/static_caching.php
   - lang/
-  - public/robots.txt
   - public/build
   - public/images
   - public/favicons/.gitkeep
@@ -38,15 +37,16 @@ export_paths:
   - resources/svg
   - resources/users/roles.yaml
   - resources/views
+  - routes/web.php
   - agents.md
   - claude.md
   - package.json
   - package-lock.json
   - vite.config.js
-  - vite-cp.config.js
 export_as:
   README.md: README.example.md
 dependencies:
+  eminos/statamic-group: ^2.1
   jacksleight/statamic-bard-texstyle: ^3.5
   studio1902/statamic-peak-browser-appearance: ^3.4
   studio1902/statamic-peak-seo: ^8.0

@@ -6,7 +6,7 @@
 
 <!-- /components/_two_images.antlers.html -->
 <div class="
-    not-prose grid grid-cols-2 gap-4
+    not-prose grid md:grid-cols-2 gap-4
     {{ switch(
         (size == 'lg') => 'span-lg',
         (size == 'xl') => 'span-xl',
@@ -15,81 +15,31 @@
     )}}
 ">
     {{ left_image scope="left" }}
-        <figure class="not-prose">
-            {{ if left:link_type && left:link_type != 'none' }}
-                <a
-                    href="{{ switch(
-                        (left:link_type == 'url') => left:link_url,
-                        (left:link_type == 'entry') => { left:link_entry:url },
-                        (left:link_type == 'file') => { left:link_file:url },
-                        () => '#'
-                    ) }}"
-                    {{ if left:link_type == 'url' }}target="_blank" rel="noopener noreferrer"{{ /if }}
-                >
-            {{ /if }}
-
-            {{
-                partial:statamic-peak-tools::components/picture
-                :image="left:image"
-                class="w-full object-cover"
-                cover="false"
-                lazy="true"
-                :aspect_ratio="switch(
-                    (left:crop == 'landscape') => '3/2',
-                    (left:crop == 'video') => '16/9',
-                    (left:crop == 'square') => '1/1',
-                    () => ''
-                )"
-                sizes="(min-width: 1280px) 50vw, 90vw"
-            }}
-
-            {{ if left:link_type && left:link_type != 'none' }}
-                </a>
-            {{ /if }}
-
-            {{ if left:caption }}
-                {{ partial:typography/caption :content="left:caption" as="figcaption" }}
-            {{ /if }}
-        </figure>
+        {{
+            partial:components/utilities/figure
+            :image="left:image"
+            :caption="left:caption"
+            :crop="left:crop"
+            :link_type="left:link_type"
+            :link_url="left:link_url"
+            :link_entry="left:link_entry"
+            :link_file="left:link_file"
+            sizes="(min-width: 1280px) 50vw, 90vw"
+        }}
     {{ /left_image }}
 
     {{ right_image scope="right" }}
-        <figure class="not-prose">
-            {{ if right:link_type && right:link_type != 'none' }}
-                <a
-                    href="{{ switch(
-                        (right:link_type == 'url') => right:link_url,
-                        (right:link_type == 'entry') => { right:link_entry:url },
-                        (right:link_type == 'file') => { right:link_file:url },
-                        () => '#'
-                    ) }}"
-                    {{ if right:link_type == 'url' }}target="_blank" rel="noopener noreferrer"{{ /if }}
-                >
-            {{ /if }}
-
-            {{
-                partial:statamic-peak-tools::components/picture
-                :image="right:image"
-                class="w-full object-cover"
-                cover="false"
-                lazy="true"
-                :aspect_ratio="switch(
-                    (right:crop == 'landscape') => '3/2',
-                    (right:crop == 'video') => '16/9',
-                    (right:crop == 'square') => '1/1',
-                    () => ''
-                )"
-                sizes="(min-width: 1280px) 50vw, 90vw"
-            }}
-
-            {{ if right:link_type && right:link_type != 'none' }}
-                </a>
-            {{ /if }}
-
-            {{ if right:caption }}
-                {{ partial:typography/caption :content="right:caption" as="figcaption" }}
-            {{ /if }}
-        </figure>
+        {{
+            partial:components/utilities/figure
+            :image="right:image"
+            :caption="right:caption"
+            :crop="right:crop"
+            :link_type="right:link_type"
+            :link_url="right:link_url"
+            :link_entry="right:link_entry"
+            :link_file="right:link_file"
+            sizes="(min-width: 1280px) 50vw, 90vw"
+        }}
     {{ /right_image }}
 </div>
 <!-- End: /components/_two_images.antlers.html -->

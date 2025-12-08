@@ -1,0 +1,61 @@
+title: 'Block: Text'
+fields:
+  -
+    handle: heading
+    field:
+      type: text
+      display: Heading
+  -
+    handle: sub_heading
+    field:
+      type: text
+      display: 'Sub heading'
+  -
+    handle: article
+    field: article.article
+    config:
+      validate:
+        - required
+  -
+    handle: display_settings
+    field:
+      show_header: true
+      show_toggle: true
+      toggle_controls_visibility: true
+      type: inline_group
+      display: 'Display Settings'
+      instructions: 'Set text and heading alignment'
+  -
+    handle: align
+    field:
+      options:
+        -
+          key: left
+          value: Left
+        -
+          key: centre
+          value: Centre
+      type: button_group
+      display: 'Align block'
+      width: 50
+      default: left
+  -
+    handle: align_headings
+    field:
+      options:
+        -
+          key: left
+          value: Left
+        -
+          key: centre
+          value: 'Centre Headings'
+        -
+          key: centre-all
+          value: 'Centre all text'
+      type: button_group
+      display: 'Align Text'
+      width: 50
+      if:
+        align: 'equals centre'
+  -
+    import: colour_scheme

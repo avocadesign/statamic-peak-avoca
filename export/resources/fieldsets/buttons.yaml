@@ -28,3 +28,5 @@ fields:
           value: Right
       type: button_group
       display: 'Button Alignment'
+      if:
+        $parent.type: 'equals article'

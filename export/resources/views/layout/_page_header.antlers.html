@@ -3,20 +3,22 @@
 	@desc The page header layout
 #}}
 
-<section class="fluid-grid bg-neutral-100/50 no-space-t py-8 md:py-10 lg:py-12 {{ class }}">
+<section class="fluid-grid relative no-space-t py-8 md:py-10 lg:py-12 {{ class }}">
     <div class="span-content flex flex-col items-center gap-3">
         {{ if custom_page_title }}
-            {{ partial src="typography/h1" content="{page_heading}" }}
+            {{ partial src="typography/h1" content="{page_heading}" class="z-10"}}
         {{ else }}
-            {{ partial src="typography/h1" content="{ title }" }}
+            {{ partial src="typography/h1" content="{ title }" class="z-10"}}
         {{ /if }}
         {{ if hero_type == "simple" && page_lede || hero_type == "hero" && page_lede }}
-            {{ partial:typography/prose }}
+            {{ partial:typography/prose class="z-10"}}
                 {{ page_lede }}
             {{ /partial:typography/prose }}
         {{ /if }}
         {{ if hero_type == "hero" }}
-            {{ partial:components/buttons :buttons='buttons' }}
+            {{ partial:components/buttons :buttons='buttons' class="z-10" }}
+            <img src="{{ hero_image }}" class="absolute inset-0 w-full h-full object-cover z-0"/>
+            <div class="absolute inset-0 bg-white/70 mix-blend-plus-lighten"></div>
         {{ /if }}
     </div>
 </section>

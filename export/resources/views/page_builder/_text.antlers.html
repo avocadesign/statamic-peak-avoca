@@ -1,0 +1,40 @@
+{{#
+    @name Text
+    @desc The Text page builder block.
+    @set page.page_builder.text
+#}}
+
+<!-- /page_builder/_text.antlers.html -->
+{{# Set color scheme classes #}}
+{{ _block_class = { partial:components/utilities/colour_scheme type='all' :colour_scheme='colour_scheme' } }}
+{{ _text_color = { partial:components/utilities/colour_scheme type='text' :colour_scheme='colour_scheme' } }}
+{{ _prose_invert = { partial:components/utilities/colour_scheme type='prose' :colour_scheme='colour_scheme' } }}
+{{ _margins = { partial:components/utilities/colour_scheme type='margins' :block_margins='block_margins' } }}
+
+{{ partial:page_builder/block class="{{ _block_class }} {{ _margins }}" }}
+
+    <div class="span-content grid md:grid-cols-12 gap-fluid-grid-gap gap-y-6 ">
+        <div class="col-span-12 md:col-span-8 stack-2
+            {{ if align == "centre"  }} md:col-start-3 {{ /if }}
+            {{ if align_headings == "centre" || align_headings == "centre-all"  }} text-center {{ /if }}
+        ">
+            {{ if block:heading }}
+                {{ partial:typography/h2 :content="block:heading" :color="_text_color" }}
+            {{ /if }}
+            {{ if block:sub_heading }}
+                {{ partial:typography/h3 :content="block:sub_heading" :color="_text_color" }}
+            {{ /if }}
+        </div>
+        <div class="col-span-12 md:col-span-8
+            {{ if align == "centre" }} md:col-start-3  {{ /if }}
+            {{ if align_headings == "centre-all" }} text-center  {{ /if }}
+        ">
+            {{ partial:typography/prose as="article" class="contents stack-8 {{ _prose_invert }}" }}
+                {{ article }}
+                    {{ partial src="components/{type}" }}
+                {{ /article }}
+            {{ /partial:typography/prose }}
+        </div>
+    </div>
+{{ /partial:page_builder/block }}
+<!-- End: /page_builder/_text.antlers.html -->

@@ -1,10 +1,11 @@
 # Project context
-This is a Statamic CMS project (Laravel-based flat-file CMS) with Antlerstemplating, TailwindCSS, and AlpineJS.
+This is a Statamic CMS project (Laravel-based flat-file CMS) with Antlers templating, TailwindCSS, and AlpineJS.
 
 ## Project Structure
 - Navigation views are located in `resources/views/layout/navigation/`
 - Page builder blocks are in `resources/views/page_builder/`
-- Reusable components are in `resources/views/components/`
+- Reusable components for sets are in `resources/views/components/`
+- Common utility partials are in `resources/views/components/utilities`
 - Layout partials (header, footer, etc.) are in `resources/views/layout/`
 
 ### Statamic Patterns
@@ -18,10 +19,10 @@ This is a Statamic CMS project (Laravel-based flat-file CMS) with Antlerstemplat
 
 ## Styling
 - Tailwind CSS v4 is used
-- Custom styles: Use `@apply` in component CSS files
+- Check `resources/css/site.css` for custom styles
+- Custom styles: Use `@apply` in site.css
 - Follow existing component patterns for consistency
 - Follow mobile-first responsive design
-- Check `resources/css/site.css` for custom styles
 
 ## Field Conventions
 - Article fieldset uses "media" group for images and videos

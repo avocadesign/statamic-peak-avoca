@@ -4,9 +4,9 @@
 #}}
 
 <!-- /layout/_footer.antlers.html -->
-<footer class="fluid-grid py-4 mt-auto bg-neutral-100">
+<footer class="fluid-grid py-4 mt-auto bg-dark text-white">
     <div class="span-content flex flex-col gap-4 md:flex-row md:justify-between md:items-center">
-        <div class="flex flex-col gap-4 md:flex-row text-xs font-bold">
+        <div class="flex flex-col gap-4 md:flex-row text-xs font-normal">
             <span>
                 &copy; {{ configuration:copyright_since }}
                 {{ unless (now | format('Y')) == configuration:copyright_since }}
@@ -23,7 +23,7 @@
         {{ if site_details:social_media }}
             <div class="flex">
                 {{ site_details:social_media }}
-                    <a class="p-1 text-neutral" href="{{ prefix }}{{ handle }}" rel="noopener{{ type == 'mastodon' ?= ' me' }}" aria-label="{{ config:app:name }} {{ trans:strings.on }} {{ type | title }}" target="_blank">{{ svg :src="type" attr:class="w-4 h-4 overflow-visible fill-current" attr:alt="" attr:aria-hidden="true" }}</a>
+                    <a class="p-1 text-white" href="{{ prefix }}{{ handle }}" rel="noopener{{ type == 'mastodon' ?= ' me' }}" aria-label="{{ config:app:name }} {{ trans:strings.on }} {{ type | title }}" target="_blank">{{ svg :src="type" attr:class="w-4 h-4 overflow-visible fill-current" attr:alt="" attr:aria-hidden="true" }}</a>
                 {{ /site_details:social_media }}
             </div>
         {{ /if }}

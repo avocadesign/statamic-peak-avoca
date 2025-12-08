@@ -1,0 +1,123 @@
+{{#
+	@name Media and text
+	@desc The Media and text page builder block.
+    @set page.page_builder.media_and_text
+#}}
+
+<!-- /page_builder/_media_and_text.antlers.html -->
+{{# Set color scheme classes #}}
+{{ _block_class = { partial:components/utilities/colour_scheme type='all' :colour_scheme='colour_scheme' } }}
+{{ _text_color = { partial:components/utilities/colour_scheme type='text' :colour_scheme='colour_scheme' } }}
+{{ _prose_invert = { partial:components/utilities/colour_scheme type='prose' :colour_scheme='colour_scheme' } }}
+{{ _margins = { partial:components/utilities/colour_scheme type='margins' :block_margins='block_margins' } }}
+
+{{ partial:page_builder/block class="items-start {{ _block_class }} {{ _margins }} gap-y-fluid-grid-gap" data_attrs="{{ column_widths == 'no-gap' ? 'data-block-type=\"media-and-text-no-gap\"' : '' }}" :is_no_gap="column_widths == 'no-gap'" }}
+
+    {{# Wrapper for no-gap option #}}
+    {{ if column_widths == "no-gap" }}
+        <div class="span-content grid lg:grid-cols-2 gap-0">
+    {{ /if }}
+
+    {{# Wrapper for edge-to-center option #}}
+    {{ if column_widths == "edge-center" }}
+        <div class="span-full grid grid-cols-subgrid gap-y-fluid-grid-gap">
+    {{ /if }}
+
+    {{# text column #}}
+    <article
+        class="flex flex-col gap-4
+        {{ column_widths != 'no-gap' && column_widths != 'edge-center' ? 'span-content order-2 lg:order-none' : '' }} 
+        {{ column_widths == 'no-gap' ? 'order-2 pt-4 lg:py-12' : '' }}
+        {{ (column_widths == 'edge-center') ? 'span-content order-2 pt-4 lg:order-none lg:py-12' : '' }}
+        {{ column_widths == 'no-gap' && media_position == 'right' ? 'lg:order-1' : '' }}
+        {{ switch(
+            (column_widths == 'no-gap') => '',
+            (column_widths == 'edge-center' && media_position == 'left') => 'lg:col-span-6 lg:col-start-[col-7] lg:row-start-1',
+            (column_widths == 'edge-center' && media_position == 'right') => 'lg:col-span-6 lg:col-start-[content-start] lg:row-start-1',
+            (column_widths == 'narrow-left' && media_position == 'left') => 'lg:col-span-8 lg:col-start-[col-5] lg:row-start-1',
+            (column_widths == 'narrow-left' && media_position == 'right') => 'lg:col-span-4 lg:col-start-[content-start] lg:row-start-1',
+            (column_widths == 'narrow-right' && media_position == 'left') => 'lg:col-span-4 lg:col-start-[col-9] lg:row-start-1',
+            (column_widths == 'narrow-right' && media_position == 'right') => 'lg:col-span-8 lg:col-start-[content-start] lg:row-start-1',
+            (column_widths == 'stacked') => 'lg:col-span-8 lg:col-start-[content-start]',
+            (media_position == 'left') => 'lg:col-span-6 lg:col-start-[col-7] lg:row-start-1',
+            () => 'lg:col-span-6 lg:col-start-[content-start] lg:row-start-1'
+        )}}
+        {{ switch(
+            (text_alignment == 'top') => 'self-start',
+            (text_alignment == 'bottom') => 'self-end',
+            () => 'self-center'
+        )}}
+        {{ column_widths == 'no-gap' && media_position == 'left' ? 'lg:pl-8' : '' }}
+        {{ column_widths == 'no-gap' && media_position == 'right' ? 'lg:pr-8' : '' }}
+    ">
+        {{ if block:heading }}
+        <header class="flex flex-col gap-2">
+            {{ partial:typography/h2 :content="block:heading" :color="_text_color" }}
+            
+            {{ if block:sub_heading }}
+                {{ partial:typography/h3 :content="block:sub_heading" :color="_text_color" }}
+            {{ /if }}
+        </header>
+        {{ /if }}
+
+        {{ partial:typography/prose as="div" class="mt-2 contents stack-8 {{ _prose_invert }}" }}
+            {{ article }}
+                {{ partial src="components/{type}" }}
+            {{ /article }}
+        {{ /partial:typography/prose }}
+
+        {{ partial:components/buttons }}
+    </article>
+
+    {{# media wrapper #}}
+    <div class="
+        {{ column_widths != 'no-gap' && column_widths != 'edge-center' ? 'span-content order-1 lg:order-none' : '' }}
+        {{ column_widths == 'no-gap' ? 'order-1 lg:h-full' : '' }}
+        {{ column_widths == 'edge-center' ? 'span-full order-1 lg:order-none lg:h-full' : '' }}
+        {{ column_widths == 'no-gap' && media_position == 'right' ? 'lg:order-2' : '' }}
+        {{ switch(
+            (column_widths == 'no-gap') => '',
+            (column_widths == 'edge-center' && media_position == 'left') => 'lg:col-start-[full-start] lg:col-end-[col-7] lg:row-start-1',
+            (column_widths == 'edge-center' && media_position == 'right') => 'lg:col-start-[col-7] lg:col-end-[full-end] lg:row-start-1',
+            (column_widths == 'narrow-left' && media_position == 'left') => 'lg:col-span-4 lg:col-start-[content-start] lg:row-start-1',
+            (column_widths == 'narrow-left' && media_position == 'right') => 'lg:col-span-8 lg:col-start-[col-5] lg:row-start-1',
+            (column_widths == 'narrow-right' && media_position == 'left') => 'lg:col-span-8 lg:col-start-[content-start] lg:row-start-1',
+            (column_widths == 'narrow-right' && media_position == 'right') => 'lg:col-span-4 lg:col-start-[col-9] lg:row-start-1',
+            (column_widths == 'stacked') => 'lg:col-span-12 lg:col-start-[content-start]',
+            (media_position == 'left') => 'lg:col-span-6 lg:col-start-[content-start] lg:row-start-1',
+            () => 'lg:col-span-6 lg:col-start-[col-7] lg:row-start-1'
+        )}}
+    ">
+        {{ if block:media_type == 'image' }}
+            {{ block:image_group }}
+                {{
+                    partial:components/utilities/figure
+                    :image="image"
+                    :caption="caption"
+                    :crop="crop"
+                    :link_type="link_type"
+                    :link_url="link_url"
+                    :link_entry="link_entry"
+                    :link_file="link_file"
+                    :caption_absolute="column_widths == 'no-gap' || column_widths == 'edge-center'"
+                    :full_height="column_widths == 'no-gap' || column_widths == 'edge-center'"
+                    sizes="(min-width: 1280px) 640px, (min-width: 768px) 50vw, 90vw"
+                }}
+            {{ /block:image_group }}
+        {{ elseif block:media_type == 'video' }}
+            {{ partial:components/video :video_url="block:video_url" }}
+        {{ /if }}
+    </div>
+
+    {{# Close wrapper for no-gap option #}}
+    {{ if column_widths == "no-gap" }}
+        </div>
+    {{ /if }}
+
+    {{# Close wrapper for edge-to-center option #}}
+    {{ if column_widths == "edge-center" }}
+        </div>
+    {{ /if }}
+
+{{ /partial:page_builder/block }}
+<!-- End: /page_builder/_media_and_text.antlers.html -->

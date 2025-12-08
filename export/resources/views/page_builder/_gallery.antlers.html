@@ -1,0 +1,95 @@
+{{#
+	@name Gallery
+	@desc The Gallery page builder block.
+    @set page.page_builder.gallery
+#}}
+
+<!-- /page_builder/_gallery.antlers.html -->
+{{ partial:page_builder/block }}
+
+    {{# CSS-only masonry gallery with Alpine.js lightbox #}}
+    {{ total_images = block:gallery_images | count }}
+
+    <div class="span-content" x-data="{
+        lightboxOpen: false,
+        currentIndex: 0,
+        images: [
+            {{ block:gallery_images }}
+                { url: '{{ url }}', alt: '{{ alt }}' }{{ unless last }},{{ /unless }}
+            {{ /block:gallery_images }}
+        ],
+        openLightbox(index) {
+            this.currentIndex = index;
+            this.lightboxOpen = true;
+            document.body.style.overflow = 'hidden';
+        },
+        closeLightbox() {
+            this.lightboxOpen = false;
+            document.body.style.overflow = '';
+        },
+        nextImage() {
+            this.currentIndex = (this.currentIndex + 1) % this.images.length;
+        },
+        prevImage() {
+            this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
+        }
+    }"
+    @keydown.escape.window="closeLightbox()"
+    @keydown.arrow-right.window="lightboxOpen && nextImage()"
+    @keydown.arrow-left.window="lightboxOpen && prevImage()">
+
+        <div class="{{ block:crop_thumbnails != 'no-crop' ? 'grid grid-cols-2 gap-4' : 'columns-2 gap-4' }} {{ total_images <= 2 ? (block:crop_thumbnails != 'no-crop' ? 'md:grid-cols-2' : 'md:columns-2') : (block:crop_thumbnails != 'no-crop' ? 'md:grid-cols-3' : 'md:columns-3') }}">
+            {{ block:gallery_images }}
+                <div class="cursor-pointer {{ block:crop_thumbnails == 'no-crop' ? 'mb-4 break-inside-avoid' : '' }}" @click="openLightbox({{ index }})">
+                    {{ partial
+                        src="statamic-peak-tools::components/picture"
+                        :image="url"
+                        sizes="{{ total_images <= 2 ? '(min-width: 768px) 50vw, 50vw' : '(min-width: 768px) 33vw, 50vw' }}"
+                        aspect_ratio="
+                            {{ switch(
+                                (block:crop_thumbnails == 'square') => '1/1',
+                                (block:crop_thumbnails == 'landscape') => '3/2',
+                                (block:crop_thumbnails == 'portrait') => '2/3',
+                            )}}
+                        "
+                        cover="{{ block:crop_thumbnails != 'no-crop' ? 'true' : 'false' }}"
+                        lazy="true"
+                        class="w-full h-auto rounded-base transition-opacity hover:opacity-90"
+                    }}
+                </div>
+            {{ /block:gallery_images }}
+        </div>
+
+        {{# Lightbox overlay #}}
+        <div x-show="lightboxOpen"
+             x-transition.opacity
+             class="fixed inset-0 z-50 flex items-center justify-center bg-black/90"
+             @click="closeLightbox()">
+
+            <button @click="closeLightbox()"
+                    class="absolute top-4 right-4 text-white text-4xl leading-none hover:opacity-70 z-10"
+                    aria-label="Close lightbox">
+                &times;
+            </button>
+
+            <button @click.stop="prevImage()"
+                    class="absolute left-4 text-white text-4xl leading-none hover:opacity-70 z-10"
+                    aria-label="Previous image">
+                &#8249;
+            </button>
+
+            <button @click.stop="nextImage()"
+                    class="absolute right-4 text-white text-4xl leading-none hover:opacity-70 z-10"
+                    aria-label="Next image">
+                &#8250;
+            </button>
+
+            <div @click.stop class="max-w-7xl max-h-[90vh] p-4">
+                <img :src="images[currentIndex].url"
+                     :alt="images[currentIndex].alt"
+                     class="max-w-full max-h-[90vh] w-auto h-auto object-contain">
+            </div>
+        </div>
+    </div>
+{{ /partial:page_builder/block }}
+<!-- End: /page_builder/_gallery.antlers.html -->

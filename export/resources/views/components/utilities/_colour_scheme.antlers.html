@@ -1,0 +1,53 @@
+{{#
+    @name Colour Scheme Utility
+    @desc Returns specific CSS class for a given colour scheme and type
+    @param colour_scheme The colour scheme value (default, light, primary, dark)
+    @param block_margins The block margins value (default, no-top, no-bottom, no-top-bottom)
+    @param type The type of class to return (bg, text, prose, spacing, margins, all)
+#}}
+
+{{# Return the appropriate class based on type #}}
+{{ block-padding = 'py-12 md:py-16'}}
+
+{{# Set Block BG Colours #}}
+{{ if type == "bg" }}
+    {{ switch(
+        (colour_scheme == 'light') => 'bg-light',
+        (colour_scheme == 'primary') => 'bg-primary',
+        (colour_scheme == 'dark') => 'bg-dark',
+        () => ''
+    ) }}
+
+{{# Set Heading Colours #}}
+{{ elseif type == "text" }}
+    {{ switch(
+        (colour_scheme == 'primary' || colour_scheme == 'dark') => 'text-white',
+        () => 'text-neutral'
+    ) }}
+{{# Set Prose invert - colours controled in typography.css #}}
+{{ elseif type == "prose" }}
+    {{ switch(
+        (colour_scheme == 'primary' || colour_scheme == 'dark') => 'prose-invert',
+        () => ''
+    ) }}
+{{ elseif type == "spacing" }}
+    {{ switch(
+        (colour_scheme == 'light' || colour_scheme == 'primary' || colour_scheme == 'dark') => 'py-12',
+        () => ''
+    ) }}
+{{# Set Block Margins #}}
+{{ elseif type == "margins" }}
+    {{ switch(
+        (block_margins == 'no-top') => 'no-space-t',
+        (block_margins == 'no-bottom') => 'no-space-b',
+        (block_margins == 'no-top-bottom') => 'no-space-t no-space-b',
+        () => ''
+    ) }}
+{{ elseif type == "all" }}
+    {{ switch(
+        (colour_scheme == 'light') => 'bg-light text-neutral {{ block-padding }}',
+        (colour_scheme == 'primary') => 'bg-primary text-white {{ block-padding }}',
+        (colour_scheme == 'dark') => 'bg-dark text-white {{ block-padding }}',
+        () => 'text-neutral'
+    ) }}
+{{ /if }}

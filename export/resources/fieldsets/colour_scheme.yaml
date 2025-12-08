@@ -1,0 +1,46 @@
+title: 'Common: Colour Scheme'
+fields:
+  -
+    handle: colour_scheme
+    field:
+      options:
+        -
+          key: default
+          value: Default
+        -
+          key: light
+          value: Light
+        -
+          key: primary
+          value: Primary
+        -
+          key: dark
+          value: Dark
+      default: default
+      type: select
+      display: 'Colour Scheme'
+      width: 50
+      replicator_preview: false
+  -
+    handle: block_margins
+    field:
+      options:
+        -
+          key: default
+          value: Default
+        -
+          key: no-top
+          value: 'No top margin'
+        -
+          key: no-bottom
+          value: 'No bottom margin'
+        -
+          key: no-top-bottom
+          value: 'No margin top or bottom'
+      type: select
+      display: 'Block Margins'
+      width: 50
+      default: default
+      replicator_preview: false
+      if:
+        colour_scheme: 'not default'

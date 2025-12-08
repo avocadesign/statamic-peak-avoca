@@ -1,0 +1,44 @@
+{{#
+    @name Figure
+    @desc A reusable figure component for images with optional link and caption.
+    @param full_height Make the figure fill the height of its container
+#}}
+
+<figure class="{{ class ?? 'not-prose' }} {{ caption_absolute ? 'relative' : '' }} {{ full_height ? 'lg:h-full' : '' }}">
+    {{ if link_type && link_type != 'none' }}
+        <a
+            href="{{ switch(
+                (link_type == 'url') => link_url,
+                (link_type == 'entry') => { link_entry:url },
+                (link_type == 'file') => { link_file:url },
+                () => '#'
+            ) }}"
+            {{ if link_type == 'url' }}target="_blank" rel="noopener noreferrer"{{ /if }}
+            class="{{ full_height ? 'lg:h-full lg:block' : '' }}"
+        >
+    {{ /if }}
+
+    {{
+        partial:statamic-peak-tools::components/picture
+        :image="image"
+        class="w-full {{ full_height ? 'lg:h-full lg:object-cover' : 'object-cover' }}"
+        cover="false"
+        lazy="true"
+        :aspect_ratio="switch(
+            (crop == 'landscape') => '3/2',
+            (crop == 'video') => '16/9',
+            (crop == 'square') => '1/1',
+            (crop == 'portrait') => '2/3',
+            () => ''
+        )"
+        :sizes="sizes ?? '100vw'"
+    }}
+
+    {{ if link_type && link_type != 'none' }}
+        </a>
+    {{ /if }}
+
+    {{ if caption }}
+        {{ partial:typography/caption :caption="caption" as="figcaption" class="{{ caption_absolute ? 'absolute bottom-2 left-2 text-xs bg-white/80 px-2.5 py-1' : '' }}" }}
+    {{ /if }}
+</figure>
