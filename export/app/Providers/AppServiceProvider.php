@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Console\Commands\ClearSite;
 use App\Policies\CustomUserPolicy;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
@@ -29,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(UserPolicy::class, CustomUserPolicy::class);
+        $this->commands([ClearSite::class]);
     }
 
     /**
