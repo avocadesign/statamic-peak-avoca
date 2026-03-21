@@ -30,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(UserPolicy::class, CustomUserPolicy::class);
 
-        if (class_exists(\Studio1902\PeakCommands\Commands\ClearSite::class)) {
+        if (class_exists(\App\Console\Commands\ClearSite::class)) {
             $this->commands([\App\Console\Commands\ClearSite::class]);
         }
     }
