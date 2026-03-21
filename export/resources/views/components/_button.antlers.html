@@ -13,22 +13,10 @@
 {{ if label }}
     <{{ as or 'a' }}
         class="
-            inline-flex items-baseline gap-0.5 font-bold motion-safe:transition
-            {{ switch(
-                (button_type === 'inline') => 'underline decoration-2 motion-safe:transition',
-                (button_type === 'button') => 'max-w-full py-3 px-5 rounded-sm leading-none no-underline select-none',
-            )}}
-            {{ switch(
-                (button_type === 'inline' && !inverted) => 'text-neutral decoration-primary focus:outline-primary',
-                (button_type === 'button' && button_colour === 'primary' && button_style === 'solid') => 'bg-primary text-white focus:outline-primary hover:bg-primary-dark',
-                (button_type === 'button' && button_colour === 'primary' && button_style === 'outline') => 'border-2 border-primary text-primary focus:outline-primary hover:bg-primary hover:text-white',
-                (button_type === 'button' && button_colour === 'light' && button_style === 'solid') => 'bg-neutral-200 text-neutral focus:outline-white hover:bg-gray-100',
-                (button_type === 'button' && button_colour === 'light' && button_style === 'outline') => 'border-2 border-neutral-200 text-neutral focus:outline-white hover:bg-white hover:text-primary',
-            )}}
-            {{ switch(
-                (button_type === 'inline' && inverted) => 'text-white decoration-white focus:outline-white',
-                (button_type === 'button' && inverted) => 'bg-white text-primary focus:outline-white',
-            )}}
+            {{ button_type === 'inline'
+                ? 'btn-inline'
+                : 'btn btn-' ~ (button_colour ?? 'primary') ~ (button_style === 'outline' ? '-outline' : '')
+            }}
             {{ class }}
         "
         {{ slot:attributes }}

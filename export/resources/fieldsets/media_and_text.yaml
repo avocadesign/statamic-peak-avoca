@@ -57,10 +57,9 @@ fields:
   -
     handle: display_settings
     field:
-      show_header: true
-      show_toggle: true
-      toggle_controls_visibility: true
-      type: inline_group
+      mode: toggle
+      input_label: 'Show settings'
+      type: revealer
       display: 'Display settings'
       instructions: 'Set media position, column layout, and text alignment'
   -
@@ -90,6 +89,8 @@ fields:
       display: 'Column layout'
       width: 33
       always_save: true
+      if:
+        display_settings: 'equals true'
   -
     handle: media_position
     field:
@@ -106,6 +107,7 @@ fields:
       width: 33
       always_save: true
       if:
+        display_settings: 'equals true'
         column_widths: 'not stacked'
   -
     handle: text_alignment
@@ -129,6 +131,7 @@ fields:
       instructions: "Align the content vertically within it's column"
       instructions_position: below
       if:
+        display_settings: 'equals true'
         column_widths: 'not stacked'
   -
     import: colour_scheme

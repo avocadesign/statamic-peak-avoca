@@ -46,10 +46,9 @@ fields:
   -
     handle: display_settings
     field:
-      show_header: true
-      show_toggle: true
-      toggle_controls_visibility: true
-      type: inline_group
+      mode: toggle
+      input_label: 'Show settings'
+      type: revealer
       display: 'Display settings'
       instructions: 'Set column widths, alignment and mobile order'
   -
@@ -70,6 +69,8 @@ fields:
       display: 'Column Width'
       width: 50
       always_save: true
+      if:
+        display_settings: 'equals true'
   -
     handle: reverse_order_for_mobile
     field:
@@ -77,6 +78,8 @@ fields:
       display: 'Reverse order on mobile'
       replicator_preview: false
       width: 50
+      if:
+        display_settings: 'equals true'
   -
     handle: heading_alignment
     field:
@@ -95,6 +98,8 @@ fields:
       always_save: true
       instructions: 'Alignment of the headings'
       instructions_position: below
+      if:
+        display_settings: 'equals true'
   -
     handle: vertical_align_content
     field:
@@ -116,5 +121,7 @@ fields:
       instructions: 'Align the content vertically within the column'
       always_save: true
       instructions_position: below
+      if:
+        display_settings: 'equals true'
   -
     import: colour_scheme

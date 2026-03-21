@@ -5,21 +5,17 @@
 #}}
 
 <!-- /page_builder/_columns.antlers.html -->
-{{# Set color scheme classes #}}
-{{ _block_class = { partial:components/utilities/colour_scheme type='all' :colour_scheme='colour_scheme' } }}
-{{ _text_color = { partial:components/utilities/colour_scheme type='text' :colour_scheme='colour_scheme' } }}
-{{ _prose_invert = { partial:components/utilities/colour_scheme type='prose' :colour_scheme='colour_scheme' } }}
-{{ _margins = { partial:components/utilities/colour_scheme type='margins' :block_margins='block_margins' } }}
+{{ _margins = switch((block_margins == 'no-top') => 'no-space-t', (block_margins == 'no-bottom') => 'no-space-b', (block_margins == 'no-top-bottom') => 'no-space-t no-space-b', () => '') }}
 
-{{ partial:page_builder/block class="stack-8 {{ _block_class }} {{ _margins }}" }}
+{{ partial:page_builder/block class="stack-8 scheme-{{ colour_scheme ?? 'default' }} {{ _margins }}" }}
 
 {{# headings #}}
     {{ if heading && !hide_col_heading }}
         <div class="span-content grid grid-cols-subgrid">
             <div class="flex flex-col gap-2 col-span-12 md:col-span-8 {{ if heading_alignment == "centre" }} md:col-start-3 items-center {{ /if }}">
-                {{ partial:typography/h2 :content="heading" :color="_text_color" }}
+                {{ partial:typography/h2 :content="heading" }}
                 {{ if block:sub_heading }}
-                    {{ partial:typography/h3 :content="block:sub_heading" :color="_text_color" }}
+                    {{ partial:typography/h3 :content="block:sub_heading" }}
                 {{ /if }}
             </div>
         </div>
@@ -29,7 +25,7 @@
     <div class="span-content grid grid-cols-subgrid {{ vertical_align_content }} gap-y-8">
         {{# left column #}}
         {{ left_column }}
-            {{ partial:typography/prose as="article" class="stack-8 {{ _prose_invert }} {{ switch(
+            {{ partial:typography/prose as="article" class="stack-8 {{ switch(
                 (column_width == 'narrow-left') => 'col-span-12 md:col-span-4',
                 (column_width == 'narrow-right') => 'col-span-12 md:col-span-8',
                 () => 'col-span-12 md:col-span-6'
@@ -45,7 +41,7 @@
 
         {{# right column #}}
         {{ right_column }}
-            {{ partial:typography/prose as="article" class="stack-8 {{ _prose_invert }} {{ switch(
+            {{ partial:typography/prose as="article" class="stack-8 {{ switch(
                 (column_width == 'narrow-left') => 'col-span-12 md:col-span-8',
                 (column_width == 'narrow-right') => 'col-span-12 md:col-span-4',
                 () => 'col-span-12 md:col-span-6'

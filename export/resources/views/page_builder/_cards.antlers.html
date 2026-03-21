@@ -10,7 +10,7 @@
         <header class="span-content flex flex-col gap-1 {{ if block:heading_alignment == 'centre'}} items-center {{ /if }}">
             {{ partial:typography/h2 :content="block:cards_heading" class="" }}
         {{ if block:cards_subheading }}
-            {{ partial:typography/h3 :content="block:cards_subheading" :color="_text_color" }}
+            {{ partial:typography/h3 :content="block:cards_subheading" }}
         {{ /if }}
         </header>
     {{ /if }}

@@ -19,10 +19,9 @@ fields:
   -
     handle: display_settings
     field:
-      show_header: true
-      show_toggle: true
-      toggle_controls_visibility: true
-      type: inline_group
+      mode: toggle
+      input_label: 'Show settings'
+      type: revealer
       display: 'Display Settings'
       instructions: 'Set text and heading alignment'
   -
@@ -39,6 +38,8 @@ fields:
       display: 'Align block'
       width: 50
       default: left
+      if:
+        display_settings: 'equals true'
   -
     handle: align_headings
     field:
@@ -56,6 +57,7 @@ fields:
       display: 'Align Text'
       width: 50
       if:
+        display_settings: 'equals true'
         align: 'equals centre'
   -
     import: colour_scheme

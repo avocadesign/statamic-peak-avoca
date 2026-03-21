@@ -1,27 +1,19 @@
 @layer components {
-    .button {
-        @apply inline-flex items-center justify-center gap-2 max-w-full py-3 px-4 bg-primary rounded select-none text-white motion-safe:transition disabled:cursor-not-allowed disabled:opacity-50 focus:outline-primary;
+    .btn {
+        @apply inline-flex items-baseline gap-0.5 font-bold max-w-full py-3 px-5
+               rounded-sm leading-none no-underline select-none motion-safe:transition;
+    }
+    .btn-primary         { @apply bg-primary text-white focus:outline-primary hover:opacity-90; }
+    .btn-primary-outline { @apply border-2 border-primary text-primary focus:outline-primary hover:bg-primary hover:text-white; }
+    .btn-light           { @apply bg-neutral-200 text-neutral focus:outline-white hover:bg-gray-100; }
+    .btn-light-outline   { @apply border-2 border-neutral-200 text-neutral focus:outline-white hover:bg-white hover:text-primary; }
 
-        span {
-            @apply min-w-fit text-center uppercase font-bold leading-none no-underline motion-safe:transition;
-        }
-
-        /* Small variant */
-        /* &[class*='--small'] {
-
-        } */
-
-        /* Themed variant */
-        /* [data-theme~='primary'] & {
-
-        } */
+    .btn-inline {
+        @apply inline-flex items-baseline gap-0.5 font-bold underline
+               decoration-2 decoration-primary text-body-text focus:outline-primary motion-safe:transition;
     }
 
-    .button-inline {
-        @apply inline-flex items-center gap-1 text-neutral hover:text-primary motion-safe:transition;
-
-        span {
-            @apply min-w-fit font-bold text-current underline decoration-primary focus:outline-primary;
-        }
-    }
+    /* Auto-invert inside dark/primary schemes */
+    :where(.scheme-primary, .scheme-dark) .btn          { @apply bg-white text-primary focus:outline-white; }
+    :where(.scheme-primary, .scheme-dark) .btn-inline   { color: var(--color-body-text); text-decoration-color: var(--color-body-text); }
 }

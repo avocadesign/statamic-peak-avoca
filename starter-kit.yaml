@@ -48,9 +48,8 @@ export_paths:
   - package-lock.json
   - vite.config.js
 dependencies:
-  eminos/statamic-group: ^2.1
-  jacksleight/statamic-bard-texstyle: ^3.5
-  studio1902/statamic-peak-seo: ^10.0
+  jacksleight/statamic-bard-texstyle: ^4.0
+  studio1902/statamic-peak-seo: ^11.0
   studio1902/statamic-peak-tools: ^9.0
 modules:
   commands:

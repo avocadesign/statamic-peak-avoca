@@ -23,6 +23,10 @@
     --color-light: var(--color-neutral-100);
     --color-dark: var(--color-neutral-900);
 
+    /* Semantic text colours */
+    --color-body-text: var(--color-neutral);
+    --color-heading: var(--color-neutral);
+
     /* --font-sans: Gaultier, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; */
     /* --font-serif: Lavigne, ui-serif, Georgia, Cambria, "Times New Roman", Times, serif; */
     /* --font-mono: Anonymous, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; */
@@ -41,7 +45,7 @@
 
 @layer base {
     html {
-        color: var(--color-neutral);
+        color: var(--color-body-text);
         /* Set sans, serif or mono stack with optional custom font as default. */
         font-family: var(--font-sans);
         /* font-family: var(--font-serif); */
@@ -64,6 +68,12 @@
 }
 
 @layer components {
+    /* Colour scheme classes */
+    .scheme-default { /* No-op: inherits root defaults */ }
+    .scheme-light   { @apply bg-light py-12; }
+    .scheme-primary { --color-body-text: var(--color-white); --color-heading: var(--color-white); @apply bg-primary py-12; }
+    .scheme-dark    { --color-body-text: var(--color-white); --color-heading: var(--color-white); @apply bg-dark py-12; }
+
     /* Clickable Parent
     /* https://codepen.io/potatoDie/pen/abzvGxG */
     a.clickable-parent {
