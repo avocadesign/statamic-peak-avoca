@@ -4,7 +4,7 @@
     @param full_height Make the figure fill the height of its container
 #}}
 
-<figure class="{{ class ?? 'not-prose' }} {{ caption_absolute ? 'relative' : '' }} {{ full_height ? 'lg:h-full' : '' }}">
+<figure class="{{ class ?: 'not-prose' }} {{ caption_absolute ? 'relative' : '' }} {{ full_height ? 'lg:h-full' : '' }}">
     {{ if link_type && link_type != 'none' }}
         <a
             href="{{ switch(
@@ -31,7 +31,7 @@
             (crop == 'portrait') => '2/3',
             () => ''
         )"
-        :sizes="sizes ?? '100vw'"
+        :sizes="sizes ?: '100vw'"
     }}
 
     {{ if link_type && link_type != 'none' }}

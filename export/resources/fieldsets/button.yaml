@@ -155,7 +155,6 @@ fields:
       replicator_preview: false
       if:
         show_controls: 'equals true'
-      width: 33
   -
     handle: button_colour
     field:

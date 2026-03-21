@@ -31,7 +31,7 @@ fields:
           import: common_image
           prefix: image2_
   -
-    handle: display_options
+    handle: display_settings
     field:
       mode: toggle
       input_label: 'Show settings'
@@ -59,7 +59,7 @@ fields:
       display: 'Display Style'
       width: 66
       if:
-        display_options: 'equals true'
+        display_settings: 'equals true'
   -
     handle: text_position
     field:
@@ -75,7 +75,7 @@ fields:
       display: 'Text Position'
       width: 50
       if:
-        display_options: 'equals true'
+        display_settings: 'equals true'
         display_style: 'not standard'
       always_save: true
   -
@@ -97,7 +97,7 @@ fields:
       width: 50
       always_save: true
       if:
-        display_options: 'equals true'
+        display_settings: 'equals true'
       if_any:
         display_style: 'contains_any sidebyside,stacked'
   -

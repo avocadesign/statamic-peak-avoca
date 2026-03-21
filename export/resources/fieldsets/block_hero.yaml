@@ -5,18 +5,12 @@ fields:
     field:
       options:
         -
-          key: heading
-          value: Heading
-        -
           key: simple
-          value: 'Heading + lede'
+          value: Simple
         -
           key: hero
           value: Hero
-        -
-          key: none
-          value: None
-      default: heading
+      default: simple
       type: button_group
       display: 'Page header type'
       width: 50
@@ -26,8 +20,6 @@ fields:
       type: toggle
       display: 'Custom page title?'
       width: 50
-      if:
-        hero_type: '!== none'
   -
     handle: page_heading
     field:
@@ -35,7 +27,6 @@ fields:
       display: 'Page Heading (h1)'
       if:
         custom_page_title: 'equals true'
-        hero_type: 'not none'
   -
     handle: hero_image
     field:

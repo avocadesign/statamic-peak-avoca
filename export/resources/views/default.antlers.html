@@ -4,8 +4,7 @@
 #}}
 
 <!-- /default.antlers.html -->
-{{ if hero_type != "none" }}
-    <main
+<main
         x-data
         x-init="
             const lastSection = document.querySelector('main section:last-of-type');
@@ -15,22 +14,7 @@
         "
         class="pb-12 md:pb-16 lg:pb-24 stack-12 md:stack-16 lg:stack-18"
         id="content">
-{{ else }}
-    <main
-        x-data
-        x-init="
-            const lastSection = document.querySelector('main section:last-of-type');
-            if (lastSection?.classList.contains('no-space-b')) {
-                $el.classList.remove('py-12', 'md:py-16', 'lg:py-24');
-                $el.classList.add('pt-12', 'md:pt-16', 'lg:pt-24');
-            }
-        "
-        class="py-12 md:py-16 lg:py-24 stack-12 md:stack-16 lg:stack-18"
-        id="content">
-{{ /if }}
-    {{ if hero_type != "none" }}
-        {{ partial src="layout/page_header" }}
-    {{ /if }}
+    {{ partial src="layout/page_header" }}
     {{ if blueprint == "simple_page" }}
         <!-- /page_builder/_article.antlers.html -->
         {{ partial:page_builder/block }}

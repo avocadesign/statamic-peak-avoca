@@ -45,7 +45,7 @@
                             cover="false"
                             lazy="true"
                             :aspect_ratio="3/2"
-                            :sizes="sizes ?? '100vw'"
+                            :sizes="sizes ?: '100vw'"
                         }}
                     {{ /if}}
 
@@ -56,7 +56,7 @@
                             class="w-32 object-cover"
                             cover="false"
                             lazy="true"
-                            :sizes="sizes ?? '100vw'"
+                            :sizes="sizes ?: '100vw'"
                         }}
                     {{ /if}}
 
@@ -84,7 +84,7 @@
                         {{ if buttons }}
                             <div class="mt-2 flex flex-wrap gap-3 justify-start">
                                 {{ buttons limit="1" }}
-                                    {{ partial:components/button :label="label" button_type="inline" }}
+                                    {{ partial:components/button :label="label" :button_type="button_type" :button_colour="button_colour" :button_style="button_style" }}
                                 {{ /buttons }}
                             </div>
                         {{ /if }}

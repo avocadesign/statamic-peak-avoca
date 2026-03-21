@@ -13,10 +13,7 @@
 {{ if label }}
     <{{ as or 'a' }}
         class="
-            {{ button_type === 'inline'
-                ? 'btn-inline'
-                : 'btn btn-' ~ (button_colour ?? 'primary') ~ (button_style === 'outline' ? '-outline' : '')
-            }}
+            {{ if button_type === 'inline' }}btn-inline{{ else }}btn btn-{{ button_colour ?: 'primary' }}{{ button_style === 'outline' ?= '-outline' }}{{ /if }}
             {{ class }}
         "
         {{ slot:attributes }}

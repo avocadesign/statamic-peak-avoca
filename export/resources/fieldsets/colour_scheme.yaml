@@ -21,6 +21,8 @@ fields:
       display: 'Colour Scheme'
       width: 50
       replicator_preview: false
+      if:
+        display_settings: 'equals true'
   -
     handle: block_margins
     field:
@@ -43,4 +45,4 @@ fields:
       default: default
       replicator_preview: false
       if:
-        colour_scheme: 'not default'
+        display_settings: 'equals true'
