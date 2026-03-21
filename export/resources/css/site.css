@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./buttons.css";
 @import "./peak.css";
 @import "./typography.css";
 
@@ -47,6 +48,12 @@
         /* font-family: var(--font-mono); */
     }
 
+    ::selection,
+    ::target-text {
+        background-color: var(--color-primary);
+        color: var(--color-white);
+    }
+
     .lede {
         @apply text-xl;
     }
@@ -81,6 +88,4 @@
         cursor: pointer !important;
         @apply flex absolute inset-0;
     }
-
-    
 }

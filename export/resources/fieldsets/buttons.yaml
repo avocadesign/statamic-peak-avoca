@@ -3,16 +3,23 @@ fields:
   -
     handle: buttons
     field:
-      mode: stacked
-      add_row: 'Add button'
-      type: grid
-      localizable: true
-      display: Buttons
-      replicator_preview: false
+      collapse: accordion
       fullscreen: false
-      fields:
-        -
-          import: button
+      replicator_preview: false
+      button_label: 'Add button'
+      type: replicator
+      display: Buttons
+      actions: false
+      sets:
+        button:
+          display: Button
+          sets:
+            button:
+              display: Button
+              image: null
+              fields:
+                -
+                  import: button
   -
     handle: button_alignment
     field:

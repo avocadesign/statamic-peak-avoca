@@ -7,7 +7,6 @@
     @param button_colour The color theme of the button: 'primary' or 'light'. Defaults to 'primary'.
     @param button_style The style of the button: 'solid' or 'outline'. Defaults to 'solid'.
     @param faux Boolean. For faux button wrapped in an actual button/anchor.
-    @param inverted Boolean. When the button needs inverted styles.
 #}}
 
 <!-- /components/_button.antlers.html -->
@@ -34,8 +33,9 @@
         "
         {{ slot:attributes }}
         {{ !faux ?= { partial:statamic-peak-tools::snippets/button_attributes } }}
+        {{ aria_label ?= 'aria-label="{aria_label}"' }}
     >
-        <span class="min-w-fit">
+        <span>
             {{ link_type == 'email' ? { label | obfuscate_email } : label }}
         </span>
 

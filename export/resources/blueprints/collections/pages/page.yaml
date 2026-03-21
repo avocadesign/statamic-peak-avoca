@@ -69,6 +69,8 @@ tabs:
               localizable: true
               validate:
                 - required
+              generate: true
+              listable: hidden
               display: Slug
           -
             handle: parent
