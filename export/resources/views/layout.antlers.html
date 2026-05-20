@@ -13,6 +13,7 @@
         {{ vite src="resources/css/site.css|resources/js/site.js" directory="_build" }}
         {{ partial:statamic-peak-seo::snippets/seo }}
         {{ partial:statamic-peak-tools::snippets/browser_appearance }}
+        {{ captcha:head }}
         {{ stack:head }}
     </head>
     <body class="flex flex-col min-h-screen bg-white">
