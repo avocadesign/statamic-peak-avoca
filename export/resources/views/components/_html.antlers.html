@@ -1,0 +1,21 @@
+{{#
+    @name HTML
+    @desc Renders raw HTML, embed codes or scripts. Use sparingly.
+    @set page.article.html
+#}}
+
+<!-- /components/_html.antlers.html -->
+<div
+    class="
+        not-prose
+        {{ switch(
+            (size == 'lg') => 'span-lg',
+            (size == 'xl') => 'span-xl',
+            (size == '2xl') => 'span-content',
+            () => 'span-md'
+        )}}
+    "
+>
+    {{ html }}
+</div>
+<!-- End: /components/_html.antlers.html -->

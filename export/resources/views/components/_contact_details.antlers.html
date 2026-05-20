@@ -1,32 +1,26 @@
 {{#
-    @name Text
-    @desc The text component for regular styled text from Bard.
+    @name Contact Details
+    @desc Renders selected contact details from the Site Details global.
+    @set page.article.contact_details
 #}}
 
 <!-- /components/_contact_details.antlers.html -->
-<div class="flex flex-col items-start gap-1 span-lg">
+<div class="flex flex-col items-start stack-3 span-lg">
     {{ display_contacts }}
-        
-    {{# Phone #}}
         {{ if value == "phone" && site_details:phone }}
-            {{ partial:components/button as="a" button_type="inline" link_type="tel" label="{{ site_details:phone }}" tel="{{ site_details:phone }}" attr_aria="Call {{ configuration:copyright_name ?? config:app:name }}"  }}
+            {{ partial:components/button as="a" button_type="inline" link_type="tel" label="{{ site_details:phone }}" tel="{{ site_details:phone }}" attr_aria="Call {{ configuration:copyright_name ?? config:app:name }}" hide_arrow="true" }}
         {{ /if }}
-        
-    {{# Mobile #}}  
         {{ if value == "mobile" && site_details:mobile }}
-            {{ partial:components/button as="a" button_type="inline" link_type="tel" label="{{ site_details:mobile }}" tel="{{ site_details:mobile }}" attr_aria="Call {{ configuration:copyright_name ?? config:app:name }}'s mobile" }}
+            {{ partial:components/button as="a" button_type="inline" link_type="tel" label="{{ site_details:mobile }}" tel="{{ site_details:mobile }}" attr_aria="Call {{ configuration:copyright_name ?? config:app:name }}'s mobile" hide_arrow="true" }}
         {{ /if }}
-        
-    {{# Email #}}
         {{ if value == "email" && site_details:email }}
-            {{ partial:components/button as="a" button_type="inline" link_type="email" label="{{ site_details:email }}" email="{{ site_details:email }}" attr_aria="Email {{ configuration:copyright_name ?? config:app:name }}" }}
+            {{ partial:components/button as="a" button_type="inline" link_type="email" label="{{ site_details:email }}" email="{{ site_details:email }}" attr_aria="Email {{ configuration:copyright_name ?? config:app:name }}" hide_arrow="true" }}
         {{ /if }}
-        
-    {{# Address #}}
         {{ if value == "address" && site_details:address }}
-            {{ site_details:address }}
+            {{ partial:typography/prose as="div" class="stack-2 overflow-visible" }}
+                {{ site_details:address }}
+            {{ /partial:typography/prose }}
         {{ /if }}
-        
     {{ /display_contacts }}
 </div>
 <!-- End: /components/_contact_details.antlers.html -->

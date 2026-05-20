@@ -19,3 +19,4 @@ fields:
       type: checkboxes
       display: 'Display Contacts'
       inline: true
+      instructions: 'Edit these details in Globals → Site Details'

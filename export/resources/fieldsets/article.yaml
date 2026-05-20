@@ -65,6 +65,20 @@ fields:
               fields:
                 -
                   import: table
+            contact_details:
+              display: 'Contact Details'
+              instructions: 'Show selected contact info from the Site Details global.'
+              icon: mail-chat-bubble-text
+              fields:
+                -
+                  import: contact_details
+            html:
+              display: HTML
+              instructions: 'Embed raw HTML, scripts or third-party widgets.'
+              icon: code-block
+              fields:
+                -
+                  import: html
         media:
           display: Media
           instructions: "Sets with images or embeddable video's."

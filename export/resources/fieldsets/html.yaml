@@ -1,0 +1,19 @@
+title: 'Set: HTML'
+fields:
+  -
+    handle: html
+    field:
+      type: code
+      display: HTML
+      mode: htmlmixed
+      theme: material
+      indent_type: spaces
+      indent_size: 2
+      line_numbers: true
+      line_wrapping: true
+      instructions: 'HTML, embed codes or scripts to render on the page.'
+  -
+    handle: size
+    field: common.size
+    config:
+      instructions: 'The size in which the HTML should be displayed.'
