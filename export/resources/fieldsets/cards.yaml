@@ -20,7 +20,7 @@ fields:
         -
           key: icon
           value: Icon
-      type: button_group
+      type: select
       display: 'Card Type'
       width: 33
       default: text
