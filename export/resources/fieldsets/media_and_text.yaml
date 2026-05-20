@@ -76,14 +76,14 @@ fields:
           key: narrow-right
           value: 'Right col narrow'
         -
+          key: edge-center
+          value: 'Edge to center'
+        -
           key: stacked
-          value: Stacked
+          value: 'Text above media'
         -
           key: no-gap
           value: 'No gap'
-        -
-          key: edge-center
-          value: 'Edge to center'
       default: even
       type: select
       display: 'Column layout'
