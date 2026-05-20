@@ -6,7 +6,11 @@
 
 <!-- /page_builder/_form.antlers.html -->
 {{ partial:page_builder/block }}
-    <div class="span-content md:col-start-[col-3] md:col-span-8">
+    {{# Outer wrapper spans the full content row when contact details are alongside, otherwise the original centered 8 cols. #}}
+    <div class="span-content {{ if block:include_contact_details }}md:col-start-[col-1] md:col-span-12 grid md:grid-cols-3 gap-8{{ else }}md:col-start-[col-3] md:col-span-8{{ /if }}">
+
+        {{# Form column — 2/3 when contact details are shown alongside. #}}
+        <div class="{{ if block:include_contact_details }}md:col-span-2{{ /if }}">
         {{ block:title ?= { partial:typography/h2 as="h2" class="mb-8" :content="block:title" } }}
         {{ block:text ?= { partial:typography/p :content="block:text" } }}
 
@@ -128,6 +132,14 @@
 
             {{# Call in the Peak Tools Alpine Based Precognition Form Handler. #}}
             {{ partial:statamic-peak-tools::snippets/form_handler }}
+        {{ /if }}
+        </div>
+
+        {{# Contact details column — 1/3, sourced from site_details. #}}
+        {{ if block:include_contact_details }}
+            <div class="md:col-span-1">
+                {{ partial:components/contact_details :display_contacts="block:display_contacts" }}
+            </div>
         {{ /if }}
     </div>
 {{ /partial:page_builder/block }}

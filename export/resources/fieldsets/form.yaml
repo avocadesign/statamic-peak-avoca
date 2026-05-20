@@ -17,3 +17,32 @@ fields:
       display: Form
       validate:
         - required
+  -
+    handle: include_contact_details
+    field:
+      type: toggle
+      display: 'Include contact details?'
+      instructions: 'Show contact details alongside the form.'
+      width: 50
+  -
+    handle: display_contacts
+    field:
+      options:
+        -
+          key: phone
+          value: Phone
+        -
+          key: mobile
+          value: Mobile
+        -
+          key: email
+          value: Email
+        -
+          key: address
+          value: Address
+      type: checkboxes
+      display: 'Display Contacts'
+      inline: true
+      instructions: 'Edit these details in Globals → Site Details'
+      if:
+        include_contact_details: 'equals true'
