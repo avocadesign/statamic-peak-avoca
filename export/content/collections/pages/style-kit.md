@@ -7,22 +7,110 @@ seo_nofollow: true
 seo_canonical_type: entry
 sitemap_change_frequency: weekly
 sitemap_priority: 0.5
-updated_by: af987a1f-9c1a-47d8-867a-db3ec0df5b1f
-updated_at: 1765155815
+updated_by: 12abe4cb-de04-4738-b53c-962222c756c8
+updated_at: 1779248401
 page_builder:
   -
-    id: mifa3y8v
-    type: divider
-    enabled: false
-  -
-    id: micva0bf
-    heading: 'Text block heading'
-    sub_heading: 'Sub Heading'
+    id: jDudzT4Np3qa7LpNFs6-N
+    heading: 'Text block'
+    sub_heading: Default
     article:
       -
         type: paragraph
         attrs:
-          textAlign: left
+          class: null
+        content:
+          -
+            type: text
+            text: 'Laborum duis in quis.'
+    align: left
+    colour_scheme: default
+    block_margins: default
+    type: text
+    enabled: true
+  -
+    id: 1flZtxwXEmytePA3MFrGP
+    heading: 'Text block'
+    sub_heading: 'Centered (with left aligned text)'
+    article:
+      -
+        type: paragraph
+        attrs:
+          class: null
+        content:
+          -
+            type: text
+            text: 'Laborum duis in quis.'
+    align: centre
+    align_headings: left
+    colour_scheme: default
+    block_margins: default
+    type: text
+    enabled: true
+  -
+    id: LLg5StYwXMPv0oVPv50wm
+    heading: 'Text block'
+    sub_heading: 'Centered (with left aligned text + centered heading)'
+    article:
+      -
+        type: paragraph
+        attrs:
+          class: null
+        content:
+          -
+            type: text
+            text: 'Laborum duis in quis.'
+    align: centre
+    align_headings: centre
+    colour_scheme: default
+    block_margins: default
+    type: text
+    enabled: true
+  -
+    id: vo4BAH1rFkDDFx-MD837D
+    heading: 'Text block'
+    sub_heading: Centered
+    article:
+      -
+        type: paragraph
+        attrs:
+          class: null
+        content:
+          -
+            type: text
+            text: 'Laborum duis in quis.'
+    align: centre
+    align_headings: centre-all
+    colour_scheme: default
+    block_margins: default
+    type: text
+    enabled: true
+  -
+    id: 8RjrHLJEz3cEYuEsL9h2c
+    heading: 'Text block'
+    sub_heading: Offset
+    article:
+      -
+        type: paragraph
+        attrs:
+          class: null
+        content:
+          -
+            type: text
+            text: 'Laborum duis in quis.'
+    align: offset
+    colour_scheme: default
+    block_margins: default
+    type: text
+    enabled: true
+  -
+    id: micva0bf
+    heading: 'Text block heading'
+    sub_heading: '(Colour scheme light)'
+    article:
+      -
+        type: paragraph
+        attrs:
           class: lede
         content:
           -
@@ -31,7 +119,6 @@ page_builder:
       -
         type: paragraph
         attrs:
-          textAlign: left
           class: null
         content:
           -
@@ -45,7 +132,6 @@ page_builder:
       -
         type: paragraph
         attrs:
-          textAlign: left
           class: null
         content:
           -
@@ -71,7 +157,6 @@ page_builder:
           -
             type: paragraph
             attrs:
-              textAlign: left
               class: null
             content:
               -
@@ -89,7 +174,6 @@ page_builder:
       -
         type: heading
         attrs:
-          textAlign: left
           id: buttons
           level: 3
         content:
@@ -113,6 +197,7 @@ page_builder:
                 button_type: button
                 button_colour: primary
                 button_style: solid
+                enabled: true
               -
                 id: mifa7juz
                 type: button
@@ -123,6 +208,7 @@ page_builder:
                 button_type: button
                 button_colour: primary
                 button_style: outline
+                enabled: true
               -
                 id: mifa88cz
                 type: button
@@ -133,6 +219,7 @@ page_builder:
                 button_type: button
                 button_colour: light
                 button_style: solid
+                enabled: true
               -
                 id: mifa8j0x
                 type: button
@@ -143,6 +230,7 @@ page_builder:
                 button_type: button
                 button_colour: light
                 button_style: outline
+                enabled: true
               -
                 id: mifa8pjh
                 type: button
@@ -151,6 +239,15 @@ page_builder:
                 target_blank: false
                 url: '#'
                 button_type: inline
+                enabled: true
+      -
+        type: paragraph
+        attrs:
+          class: null
+        content:
+          -
+            type: text
+            text: ' '
     block_settings: false
     align: left
     type: text
@@ -160,15 +257,15 @@ page_builder:
   -
     id: m97kdqnk
     type: divider
-    enabled: false
+    enabled: true
   -
     id: mifea0iq
-    heading: 'Media and text (even)'
-    sub_heading: 'Sub heading'
+    heading: 'Media and text'
+    sub_heading: 'Column layout: Even, Image right'
     media_type: image
     media_position: right
     image_group:
-      image: a-peak.jpg
+      image: temp/a-peak.jpg
       caption: 'Image caption'
       crop: none
       link_type: none
@@ -188,6 +285,35 @@ page_builder:
           -
             type: text
             text: 'This is the content'
+    block_margins: default
+  -
+    id: vDfrDmFrbHxvnvg2080Mc
+    heading: 'Media and text'
+    sub_heading: 'Column layout: Even, Image left'
+    media_type: image
+    media_position: left
+    image_group:
+      image: temp/a-peak.jpg
+      caption: 'Image caption'
+      crop: none
+      link_type: none
+    column_widths: even
+    type: media_and_text
+    enabled: true
+    block_settings: true
+    text_alignment: centre
+    colour_scheme: default
+    article:
+      -
+        type: paragraph
+        attrs:
+          textAlign: left
+          class: null
+        content:
+          -
+            type: text
+            text: 'This is the content'
+    block_margins: default
   -
     id: miclrmwa
     heading: 'Media and text (no gap)'
@@ -195,7 +321,7 @@ page_builder:
     media_type: image
     media_position: right
     image_group:
-      image: a-peak.jpg
+      image: temp/a-peak.jpg
       caption: 'Image Caption'
       crop: none
       link_type: none
@@ -215,6 +341,7 @@ page_builder:
           -
             type: text
             text: 'This is the content'
+    block_margins: default
   -
     id: miff4v4m
     heading: 'Media and text (no gap)'
@@ -222,7 +349,7 @@ page_builder:
     media_type: image
     media_position: left
     image_group:
-      image: a-peak.jpg
+      image: temp/a-peak.jpg
       caption: 'Image Caption'
       crop: none
       link_type: none
@@ -242,6 +369,7 @@ page_builder:
           -
             type: text
             text: 'This is the content'
+    block_margins: default
   -
     id: mifbsw8x
     heading: 'Media and text (Edge to centre, a lot of text)'
@@ -249,7 +377,7 @@ page_builder:
     media_type: image
     media_position: left
     image_group:
-      image: a-peak.jpg
+      image: temp/a-peak.jpg
       caption: 'Image caption'
       crop: none
       link_type: none
@@ -287,6 +415,7 @@ page_builder:
           -
             type: text
             text: 'Est veniam velit irure voluptate qui non commodo laboris. Consectetur magna nulla eu. Magna eiusmod et cillum laboris nisi magna Lorem labore cillum dolore officia sint. Velit dolor dolore duis ex velit mollit fugiat est quis tempor ex. Veniam quis in cillum incididunt adipisicing dolore laboris excepteur consectetur enim dolor elit ut. Pariatur labore cillum aute culpa ullamco velit ut.'
+    block_margins: default
   -
     id: miff52ya
     heading: 'Media and text (Edge to centre, a bit of text)'
@@ -299,7 +428,7 @@ page_builder:
     text_alignment: centre
     colour_scheme: default
     image_group:
-      image: a-peak.jpg
+      image: temp/a-peak.jpg
       crop: none
       link_type: none
     article:
@@ -312,6 +441,7 @@ page_builder:
           -
             type: text
             text: 'This is the content. Id nulla quis pariatur ea Lorem velit non. Est duis quis voluptate aliquip culpa ea non ipsum et aliquip. Occaecat minim aliquip sit id irure eu ullamco reprehenderit ut ea dolor. Eiusmod ex reprehenderit quis qui enim dolor exercitation. Nostrud enim non amet fugiat reprehenderit elit ut anim velit. Excepteur consectetur laborum laboris minim. Laborum ad irure adipisicing incididunt commodo eiusmod.'
+    block_margins: default
   -
     id: mif9xvkn
     type: divider
@@ -594,29 +724,236 @@ page_builder:
     layout: false
     hide_col_heading: false
     show_section_settings: false
-    sub_heading: 'Sub heading'
+    sub_heading: 'Sub heading - this block displays the available content sets'
     left_column:
       article:
         -
           type: paragraph
           attrs:
-            textAlign: left
             class: null
           content:
             -
               type: text
-              text: 'Eiusmod labore do ad minim aute deserunt irure in id. Incididunt amet ipsum nisi sit consequat et minim anim proident adipisicing irure proident aliquip est. Enim nulla do officia minim et eiusmod veniam velit officia deserunt culpa consequat qui proident. '
-    right_column:
-      article:
+              text: 'Eiusmod labore do ad minim aute deserunt irure in id. Incididunt amet ipsum nisi sit consequat et minim anim proident adipisicing irure proident aliquip est. Enim nulla do officia minim et eiusmod veniam velit officia deserunt culpa consequat qui proident. Lede text - eiusmod labore do ad minim aute deserunt irure in id. Incididunt amet ipsum nisi sit consequat et minim anim proident adipisicing irure proident aliquip est. '
         -
           type: paragraph
           attrs:
-            textAlign: left
             class: null
           content:
             -
               type: text
-              text: 'Est Lorem minim cillum enim. In eiusmod ad laborum dolor proident quis. Laboris id nostrud fugiat est mollit. Duis ullamco mollit consequat proident dolore Lorem exercitation magna ad Lorem magna esse anim cillum.'
+              marks:
+                -
+                  type: btsSpan
+                  attrs:
+                    class: brand-text
+              text: 'Brand text - Enim nulla do officia minim et eiusmod veniam velit officia deserunt culpa consequat qui proident. '
+        -
+          type: paragraph
+          attrs:
+            class: null
+          content:
+            -
+              type: text
+              text: 'Minim exercitation esse velit. Nisi nulla consectetur elit dolore labore labore laboris adipisicing labore ut occaecat ex enim. Nulla amet est ipsum elit nisi deserunt. '
+            -
+              type: text
+              marks:
+                -
+                  type: link
+                  attrs:
+                    href: '#'
+                    rel: null
+                    target: null
+                    title: null
+              text: 'Nisi ad nulla minim'
+            -
+              type: text
+              text: ' consequat esse in aliquip et eu sunt mollit eu nulla reprehenderit sit. Duis officia laborum ad mollit sint pariatur ipsum enim eiusmod ipsum aliqua in ipsum aute ad.'
+        -
+          type: blockquote
+          content:
+            -
+              type: paragraph
+              attrs:
+                class: null
+              content:
+                -
+                  type: text
+                  text: 'Anim id nostrud et.'
+        -
+          type: set
+          attrs:
+            id: FpScY_nzc9hBmG6o2FW4H
+            values:
+              type: pull_quote
+              quote: 'Pull quote'
+              author: Brendyn
+              size: md
+        -
+          type: heading
+          attrs:
+            id: buttons
+            level: 3
+          content:
+            -
+              type: text
+              text: Buttons
+        -
+          type: set
+          attrs:
+            id: zHoXTMyBzea2K-21F_gkS
+            values:
+              type: buttons
+              buttons:
+                -
+                  id: mifa75yd
+                  type: button
+                  label: Primary
+                  link_type: url
+                  target_blank: false
+                  url: '#'
+                  button_type: button
+                  button_colour: primary
+                  button_style: solid
+                  enabled: true
+                -
+                  id: mifa7juz
+                  type: button
+                  label: 'Primary outline'
+                  link_type: url
+                  target_blank: false
+                  url: '#'
+                  button_type: button
+                  button_colour: primary
+                  button_style: outline
+                  enabled: true
+                -
+                  id: mifa88cz
+                  type: button
+                  label: Light
+                  link_type: url
+                  target_blank: false
+                  url: '#'
+                  button_type: button
+                  button_colour: light
+                  button_style: solid
+                  enabled: true
+                -
+                  id: mifa8j0x
+                  type: button
+                  label: 'Light Outline'
+                  link_type: url
+                  target_blank: false
+                  url: '#'
+                  button_type: button
+                  button_colour: light
+                  button_style: outline
+                  enabled: true
+                -
+                  id: mifa8pjh
+                  type: button
+                  label: Inline
+                  link_type: url
+                  target_blank: false
+                  url: '#'
+                  button_type: inline
+                  enabled: true
+                  button_colour: primary
+                  button_style: solid
+        -
+          type: heading
+          attrs:
+            id: null
+            level: 3
+          content:
+            -
+              type: text
+              text: ' '
+    right_column:
+      article:
+        -
+          type: set
+          attrs:
+            id: DHQuexZx-1bYm-t-YMXcB
+            values:
+              type: image
+              image: temp/a-peak.jpg
+              caption: 'Image set'
+              crop: none
+              link_type: none
+        -
+          type: set
+          attrs:
+            id: 5Ca6h4hFlgK9vEwcm2F17
+            values:
+              type: video
+              video_url: 'https://www.youtube.com/watch?v=7DLxoVzIttA'
+              caption: 'Video set'
+              size: md
+        -
+          type: paragraph
+          attrs:
+            class: lede
+        -
+          type: heading
+          attrs:
+            id: null
+            level: 3
+          content:
+            -
+              type: text
+              text: 'Contact details '
+        -
+          type: paragraph
+          attrs:
+            class: null
+          content:
+            -
+              type: text
+              text: 'Contact details (from Global → Site Details)'
+        -
+          type: set
+          attrs:
+            id: qQskJdYt-yt-5p1Y_GUtm
+            values:
+              type: contact_details
+              display_contacts:
+                - phone
+                - mobile
+                - email
+                - address
+        -
+          type: set
+          attrs:
+            id: 6ZKti7SExC_DBSDEUEN0z
+            values:
+              type: html
+              html:
+                code: |-
+                  <div class="bg-light p-6">
+                  Hello there, this is code output from the HTML block
+                  </div>
+                mode: htmlmixed
+              size: md
+        -
+          type: set
+          attrs:
+            id: b56K4lnplQy0wSSlMAB5Z
+            values:
+              type: table
+              first_row_headers: true
+              first_column_headers: false
+              table:
+                -
+                  cells:
+                    - 'Col 1'
+                    - 'Col 1'
+                -
+                  cells:
+                    - Value
+                    - 'Another value'
+              size: md
     block_settings: true
     layout_two_col: even
     heading_alignment: centre
@@ -624,6 +961,7 @@ page_builder:
     reverse_order_for_mobile: false
     column_width: even
     colour_scheme: default
+    block_margins: default
   -
     id: m96komkd
     type: divider
@@ -646,6 +984,8 @@ page_builder:
         enabled: true
     type: cards
     enabled: true
+    colour_scheme: default
+    block_margins: default
   -
     id: mif9y0fq
     type: divider
@@ -664,12 +1004,12 @@ page_builder:
             type: text
             text: 'This is text content'
     image_1:
-      image1_image: a-peak.jpg
+      image1_image: temp/a-peak.jpg
       image1_caption: 'First image caption'
       image1_crop: portrait
       image1_link_type: none
     image_2:
-      image2_image: placeholder-wepb-image.webp
+      image2_image: temp/placeholder-wepb-image.webp
       image2_caption: 'Second image caption'
       image2_crop: landscape
       image2_link_type: none
@@ -679,6 +1019,7 @@ page_builder:
     colour_scheme: default
     type: two_images
     enabled: true
+    block_margins: default
   -
     id: mifacgu2
     type: divider
@@ -686,11 +1027,13 @@ page_builder:
   -
     id: mifaccn5
     gallery_images:
-      - a-peak.jpg
-      - placeholder-wepb-image.webp
+      - temp/a-peak.jpg
+      - temp/placeholder-wepb-image.webp
     crop_thumbnails: square
     type: gallery
     enabled: true
+    colour_scheme: default
+    block_margins: default
   -
     id: mNL2_hrt2-D7ce7WsBfIa
     anchor_text: above-cta
@@ -712,6 +1055,7 @@ page_builder:
         button_type: button
         button_colour: light
         button_style: solid
+        enabled: true
     type: call_to_action
     enabled: true
   -
@@ -806,5 +1150,6 @@ buttons:
     button_type: button
     button_colour: primary
     button_style: solid
+    enabled: true
 parent: home
 ---
