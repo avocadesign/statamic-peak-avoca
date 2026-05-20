@@ -19,7 +19,7 @@ page_builder:
           -
             type: text
             text: 'The page you requested is not available (anymore).'
-    type: article
+    type: text
     enabled: true
 seo_noindex: true
 seo_nofollow: false

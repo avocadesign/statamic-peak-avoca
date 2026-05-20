@@ -71,14 +71,6 @@ fields:
               fields:
                 -
                   import: divider
-            article:
-              display: 'Long form content'
-              instructions: 'Long form content, can be expanded with media like figures, video, quotes or tables.'
-              icon: text-formatting-image-bottom
-              image: article.jpeg
-              fields:
-                -
-                  import: article
         dynamic:
           display: Dynamic
           instructions: 'dynamic blocks'
