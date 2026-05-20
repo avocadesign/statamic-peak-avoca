@@ -107,3 +107,10 @@ fields:
               fields:
                 -
                   import: two_images
+            gallery:
+              display: Gallery
+              instructions: 'A multi row image gallery with a lightbox.'
+              icon: media-image-picture-gallery
+              fields:
+                -
+                  import: gallery

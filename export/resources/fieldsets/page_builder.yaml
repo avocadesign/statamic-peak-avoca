@@ -56,7 +56,7 @@ fields:
               icon: media-image-picture-gallery
               fields:
                 -
-                  import: gallery
+                  import: gallery_block
             call_to_action:
               display: 'Call to action'
               instructions: 'Show a call to action.'
