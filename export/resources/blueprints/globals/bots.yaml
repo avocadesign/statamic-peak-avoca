@@ -23,5 +23,11 @@ tabs:
           -
             handle: llms_content
             field:
-              type: markdown
+              type: code
               display: 'LLMs.txt content'
+              mode: gfm
+              mode_selectable: false
+              theme: light
+              indent_type: space
+              indent_size: 2
+              line_numbers: false
