@@ -3,7 +3,7 @@ data:
   noindex_local: true
   noindex_staging: true
   noindex_production: false
-  title_separator: ·
+  title_separator: '|'
   hreflang_auto: true
   json_ld_type: none
   breadcrumbs: true
