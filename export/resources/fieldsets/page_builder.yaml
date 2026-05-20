@@ -53,7 +53,7 @@ fields:
             gallery:
               display: Gallery
               instructions: 'A multi row image gallery.'
-              icon: layout-grid-dots
+              icon: media-image-picture-gallery
               fields:
                 -
                   import: gallery
