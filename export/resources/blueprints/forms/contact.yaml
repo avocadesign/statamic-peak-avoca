@@ -36,7 +36,7 @@ tabs:
           -
             handle: consent
             field:
-              inline_label: 'I agree that my submitted data is being collected and stored.'
+              inline_label: 'I understand my details will be stored so you can get back to me.'
               display: Consent
               type: toggle
               validate:
