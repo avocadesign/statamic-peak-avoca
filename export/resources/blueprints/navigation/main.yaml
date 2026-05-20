@@ -4,3 +4,10 @@ tabs:
     sections:
       -
         display: General
+        fields:
+          -
+            handle: target_blank
+            field:
+              type: toggle
+              display: 'Open in new tab'
+              instructions: 'Open the link in a new tab and append an external link icon.'

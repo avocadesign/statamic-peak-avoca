@@ -26,7 +26,7 @@
         x-transition.origin.bottom.right
     >
         <ul class="flex flex-col py-2 gap-y-4 overflow-auto">
-            {{ nav:main max_depth="2" include_home="true" select="title|url" }}
+            {{ nav:main max_depth="2" include_home="true" select="title|url|target_blank" }}
                 {{ unless no_results }}
                     <li
                         {{ if children }}
@@ -48,6 +48,7 @@
                                 :aria-expanded="subnavOpen"
                             {{ else }}
                                 href="{{ url }}"
+                                {{ if target_blank }}target="_blank" rel="noopener"{{ /if }}
                             {{ /if }}
                             {{ is_current ?= 'aria-current="page"' }}
                         >
@@ -57,6 +58,9 @@
                                 <div :class="{ 'scale-y-[-1]': subnavOpen }" class="motion-safe:transition-transform">
                                     {{ svg:chevron_down attr:class="w-2 ml-1 overflow-visible stroke-current text-neutral" attr:aria-hidden="true" }}
                                 </div>
+                            {{ elseif target_blank }}
+                                <span class="sr-only">{{ trans:strings.external_link }}</span>
+                                {{ svg:external attr:class="ml-1 w-3 h-3 fill-current" attr:aria-hidden="true" }}
                             {{ /if }}
                         </a>
 
@@ -75,9 +79,14 @@
                                                 {{ is_current || is_parent ? 'text-primary' : 'text-neutral' }}
                                             "
                                             href="{{ url }}"
+                                            {{ if target_blank }}target="_blank" rel="noopener"{{ /if }}
                                             {{ is_current ?= 'aria-current="page"' }}
                                         >
                                             {{ title }}
+                                            {{ if target_blank }}
+                                                <span class="sr-only">{{ trans:strings.external_link }}</span>
+                                                {{ svg:external attr:class="ml-1 w-3 h-3 inline fill-current" attr:aria-hidden="true" }}
+                                            {{ /if }}
                                         </a>
                                     </li>
                                 {{ /children }}
