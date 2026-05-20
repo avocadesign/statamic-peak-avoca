@@ -9,9 +9,9 @@
 
     {{# Layout classes #}}
     {{ heading_classes = switch(
-        (display_style == 'sidebyside' && text_position == 'left') => 'md:col-span-4 justify-center md:order-first',
-        (display_style == 'sidebyside' && text_position == 'right') => 'md:col-span-4 justify-center md:order-last',
-        (display_style == 'sidebyside') => 'md:col-span-4 justify-center',
+        (display_style == 'inline' && text_position == 'left') => 'md:col-span-4 justify-center md:order-first',
+        (display_style == 'inline' && text_position == 'right') => 'md:col-span-4 justify-center md:order-last',
+        (display_style == 'inline') => 'md:col-span-4 justify-center',
         (display_style == 'stacked' && text_position == 'left') => 'md:col-span-6 justify-center md:order-first',
         (display_style == 'stacked' && text_position == 'right') => 'md:col-span-6 justify-center md:order-last',
         (display_style == 'stacked') => 'md:col-span-6 justify-center',
@@ -22,14 +22,14 @@
     ) }}
 
     {{ image1_classes = switch(
-        (display_style == 'sidebyside') => 'md:col-span-4',
+        (display_style == 'inline') => 'md:col-span-4',
         (display_style == 'offset' && text_position == 'left') => 'md:col-span-6 md:row-start-1 md:row-span-2 md:order-3',
         (display_style == 'offset' && text_position == 'right') => 'md:col-span-6 md:row-start-1 md:row-span-2 md:order-1',
         () => 'md:col-span-6'
     ) }}
 
     {{ image2_classes = switch(
-        (display_style == 'sidebyside') => 'md:col-span-4',
+        (display_style == 'inline') => 'md:col-span-4',
         (display_style == 'offset' && text_position == 'left') => 'md:col-span-6 md:row-start-2 md:order-2 self-end',
         (display_style == 'offset' && text_position == 'right') => 'md:col-span-6 md:row-start-2 md:order-3 self-end',
         (display_style == 'offset') => 'md:col-span-6',
@@ -49,7 +49,7 @@
 
     {{# Headings in standard output #}}
     <div class="span-content grid grid-cols-subgrid gap-fluid-grid-gap gap-y-4 {{ grid_row_classes }}">
-        <header class="span-content flex flex-col gap-1 mb-4 {{ heading_classes }} {{ (display_style == 'sidebyside' || display_style == 'stacked') ? text_vertical_alignment_classes : '' }} {{ display_style == 'offset' ? 'self-start' : '' }}">
+        <header class="span-content flex flex-col gap-1 mb-4 {{ heading_classes }} {{ (display_style == 'inline' || display_style == 'stacked') ? text_vertical_alignment_classes : '' }} {{ display_style == 'offset' ? 'self-start' : '' }}">
             {{ partial:typography/h2 :content="block:heading" }}
             {{ if block:sub_heading }}
                 {{ partial:typography/h3 :content="block:sub_heading" }}
@@ -75,7 +75,7 @@
                     :link_url="image1_link_url"
                     :link_entry="image1_link_entry"
                     :caption_absolute="display_style == 'offset'"
-                    sizes="{{ display_style == 'sidebyside' ? '(min-width: 1280px) 426px, (min-width: 768px) 33vw, 90vw' : '(min-width: 1280px) 640px, (min-width: 768px) 50vw, 90vw' }}"
+                    sizes="{{ display_style == 'inline' ? '(min-width: 1280px) 426px, (min-width: 768px) 33vw, 90vw' : '(min-width: 1280px) 640px, (min-width: 768px) 50vw, 90vw' }}"
                     class="{{ (display_style == 'offset' && (image1_crop == 'none' || !image1_crop)) ? 'h-full [&_img]:h-full [&_img]:object-cover' : 'not-prose' }}"
                 }}
             {{ /block:image_1 }}
@@ -91,7 +91,7 @@
                         :link_url="image2_link_url"
                         :link_entry="image2_link_entry"
                         :caption_absolute="display_style == 'offset'"
-                        sizes="{{ display_style == 'sidebyside' ? '(min-width: 1280px) 426px, (min-width: 768px) 33vw, 90vw' : '(min-width: 1280px) 640px, (min-width: 768px) 50vw, 90vw' }}"
+                        sizes="{{ display_style == 'inline' ? '(min-width: 1280px) 426px, (min-width: 768px) 33vw, 90vw' : '(min-width: 1280px) 640px, (min-width: 768px) 50vw, 90vw' }}"
                     }}
                 {{ /block:image_2 }}
             {{ /if }}
@@ -110,7 +110,7 @@
                         :link_url="image2_link_url"
                         :link_entry="image2_link_entry"
                         :caption_absolute="display_style == 'offset'"
-                        sizes="{{ display_style == 'sidebyside' ? '(min-width: 1280px) 426px, (min-width: 768px) 33vw, 90vw' : '(min-width: 1280px) 640px, (min-width: 768px) 50vw, 90vw' }}"
+                        sizes="{{ display_style == 'inline' ? '(min-width: 1280px) 426px, (min-width: 768px) 33vw, 90vw' : '(min-width: 1280px) 640px, (min-width: 768px) 50vw, 90vw' }}"
                     }}
                 {{ /block:image_2 }}
             </div>

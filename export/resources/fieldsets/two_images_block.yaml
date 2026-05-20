@@ -46,8 +46,8 @@ fields:
           key: standard
           value: Standard
         -
-          key: sidebyside
-          value: 'Side by Side'
+          key: inline
+          value: Inline
         -
           key: stacked
           value: Stacked
@@ -99,6 +99,6 @@ fields:
       if:
         display_settings: 'equals true'
       if_any:
-        display_style: 'contains_any sidebyside,stacked'
+        display_style: 'contains_any inline,stacked'
   -
     import: colour_scheme
