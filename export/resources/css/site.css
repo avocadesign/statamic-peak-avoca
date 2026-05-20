@@ -1,32 +1,10 @@
 @import "tailwindcss";
 @import "./buttons.css";
+@import "./colours.css";
 @import "./peak.css";
 @import "./typography.css";
 
 @theme {
-    --color-primary: oklch(53.24% 0.301 290.86);
-
-    --color-neutral: var(--color-slate-800);
-    --color-neutral-50: var(--color-slate-50);
-    --color-neutral-100: var(--color-slate-100);
-    --color-neutral-200: var(--color-slate-200);
-    --color-neutral-300: var(--color-slate-300);
-    --color-neutral-400: var(--color-slate-400);
-    --color-neutral-500: var(--color-slate-500);
-    --color-neutral-600: var(--color-slate-600);
-    --color-neutral-700: var(--color-slate-700);
-    --color-neutral-800: var(--color-slate-800);
-    --color-neutral-900: var(--color-slate-900);
-    --color-neutral-950: var(--color-slate-950);
-
-    /* Semantic Colours */
-    --color-light: var(--color-neutral-100);
-    --color-dark: var(--color-neutral-900);
-
-    /* Semantic text colours */
-    --color-body-text: var(--color-neutral);
-    --color-heading: var(--color-neutral);
-
     /* --font-sans: Gaultier, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; */
     /* --font-serif: Lavigne, ui-serif, Georgia, Cambria, "Times New Roman", Times, serif; */
     /* --font-mono: Anonymous, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; */
@@ -52,28 +30,12 @@
         /* font-family: var(--font-mono); */
     }
 
-    ::selection,
-    ::target-text {
-        background-color: var(--color-primary);
-        color: var(--color-white);
-    }
-
     .lede {
         @apply text-xl;
-    }
-
-    .brand-text {
-        @apply text-primary;
     }
 }
 
 @layer components {
-    /* Colour scheme classes */
-    .scheme-default { /* No-op: inherits root defaults */ }
-    .scheme-light   { @apply bg-light py-12; }
-    .scheme-primary { --color-body-text: var(--color-white); --color-heading: var(--color-white); @apply bg-primary py-12; }
-    .scheme-dark    { --color-body-text: var(--color-white); --color-heading: var(--color-white); @apply bg-dark py-12; }
-
     /* Clickable Parent
     /* https://codepen.io/potatoDie/pen/abzvGxG */
     a.clickable-parent {
