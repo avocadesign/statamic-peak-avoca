@@ -83,7 +83,8 @@
                                         )}}
                                     ">
                                         {{ unless type == 'spacer' }}
-                                            <label class="font-bold" for="{{ handle }}">
+                                            {{# Consent fields hide the display label visually — the inline_label on the checkbox is the actual statement. Screen readers still see this label via sr-only. #}}
+                                            <label class="{{ handle == 'consent' ? 'sr-only' : 'font-bold' }}" for="{{ handle }}">
                                                 {{ trans :key="field:display" }}
                                                 {{ if validate | contains('required') || validate | contains('accepted') }}
                                                     <sup aria-label="{{ trans:strings.form_required }}" class="text-red-700">*</sup>
