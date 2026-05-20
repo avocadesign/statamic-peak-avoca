@@ -1,6 +1,17 @@
 title: 'Block: Gallery'
 fields:
   -
+    handle: heading
+    field:
+      type: text
+      localizable: true
+      display: Heading
+  -
+    handle: description
+    field: common.text_basic
+    config:
+      display: Description
+  -
     handle: gallery_images
     field:
       min_files: 2

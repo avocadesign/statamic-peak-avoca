@@ -5,7 +5,21 @@
 #}}
 
 <!-- /page_builder/_gallery.antlers.html -->
-{{ partial:page_builder/block }}
+{{ partial:page_builder/block class="gap-y-8" }}
+
+    {{# Heading + description — hidden when both are empty #}}
+    {{ if block:heading || block:description }}
+        <header class="span-content flex flex-col gap-2">
+            {{ if block:heading }}
+                {{ partial:typography/h2 :content="block:heading" }}
+            {{ /if }}
+            {{ if block:description }}
+                {{ partial:typography/prose as="div" }}
+                    {{ block:description }}
+                {{ /partial:typography/prose }}
+            {{ /if }}
+        </header>
+    {{ /if }}
 
     {{# CSS-only masonry gallery with Alpine.js lightbox #}}
     {{ total_images = block:gallery_images | count }}
