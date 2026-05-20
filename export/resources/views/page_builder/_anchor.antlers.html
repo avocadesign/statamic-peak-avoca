@@ -1,0 +1,11 @@
+{{#
+    @name Anchor
+    @desc Outputs an empty element with an id so it can be linked to via #anchor_text.
+    @set page.page_builder.anchor
+#}}
+
+<!-- /page_builder/_anchor.antlers.html -->
+{{ if anchor_text }}
+    <div id="{{ anchor_text }}"></div>
+{{ /if }}
+<!-- End: /page_builder/_anchor.antlers.html -->

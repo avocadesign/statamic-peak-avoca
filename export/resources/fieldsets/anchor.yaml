@@ -1,0 +1,13 @@
+title: 'Block: Anchor'
+fields:
+  -
+    handle: anchor_text
+    field:
+      type: slug
+      from: ''
+      generate: false
+      display: 'Anchor ID'
+      instructions: 'Sets an id on the page that can be linked to (e.g. #my-anchor).'
+      validate:
+        - required
+      localizable: true

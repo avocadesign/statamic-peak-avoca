@@ -692,6 +692,11 @@ page_builder:
     type: gallery
     enabled: true
   -
+    id: mNL2_hrt2-D7ce7WsBfIa
+    anchor_text: above-cta
+    type: anchor
+    enabled: true
+  -
     id: mifadjld
     cta_style: vertical
     title: 'Call to action'
