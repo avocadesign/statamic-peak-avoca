@@ -117,6 +117,9 @@
                         </fieldset>
                     {{ /sections }}
 
+                    {{# Captcha — provider configured in config/captcha.php (default: Turnstile). #}}
+                    {{ captcha }}
+
                     {{# Submit button, disabled on processing. #}}
                     <div class="w-full flex justify-end">
                         <div class="md:col-span-12 flex justify-end">
