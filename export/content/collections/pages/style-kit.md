@@ -2,7 +2,7 @@
 id: b1c59cf8-bb49-40a0-9fa9-2bbfd5d9c8be
 blueprint: style_kit
 title: 'Style Kit'
-seo_noindex: true
+seo_noindex: noindex
 seo_nofollow: true
 seo_canonical_type: entry
 sitemap_change_frequency: weekly
@@ -801,4 +801,5 @@ buttons:
     button_type: button
     button_colour: primary
     button_style: solid
+parent: home
 ---

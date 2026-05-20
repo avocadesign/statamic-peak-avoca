@@ -1095,9 +1095,10 @@ article:
           - address
 updated_by: b1493ffc-652b-408c-a2e0-3224ba2b1f3c
 updated_at: 1744072167
-seo_noindex: true
+seo_noindex: noindex
 seo_nofollow: true
 seo_canonical_type: entry
 sitemap_change_frequency: weekly
 sitemap_priority: 0.5
+parent: home
 ---
