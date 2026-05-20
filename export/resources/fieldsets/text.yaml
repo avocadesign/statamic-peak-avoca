@@ -37,7 +37,7 @@ fields:
         -
           key: offset
           value: Offset
-      type: button_group
+      type: select
       display: 'Display style'
       instructions: 'Offset shows the heading in the left third with the content in the right two-thirds (stacked on mobile).'
       instructions_position: below
