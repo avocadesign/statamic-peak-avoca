@@ -5,9 +5,7 @@
 #}}
 
 <!-- /page_builder/_media_and_text.antlers.html -->
-{{ _margins = switch((block_margins == 'no-top') => 'no-space-t', (block_margins == 'no-bottom') => 'no-space-b', (block_margins == 'no-top-bottom') => 'no-space-t no-space-b', () => '') }}
-
-{{ partial:page_builder/block class="items-start scheme-{{ colour_scheme ?? 'default' }} {{ _margins }} gap-y-fluid-grid-gap" data_attrs="{{ column_widths == 'no-gap' ? 'data-block-type=\"media-and-text-no-gap\"' : '' }}" :is_no_gap="column_widths == 'no-gap'" }}
+{{ partial:page_builder/block class="items-start gap-y-fluid-grid-gap" data_attrs="{{ column_widths == 'no-gap' ? 'data-block-type=\"media-and-text-no-gap\"' : '' }}" :is_no_gap="column_widths == 'no-gap'" }}
 
     {{# Wrapper for no-gap option #}}
     {{ if column_widths == "no-gap" }}

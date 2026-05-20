@@ -5,9 +5,7 @@
 #}}
 
 <!-- /page_builder/_columns.antlers.html -->
-{{ _margins = switch((block_margins == 'no-top') => 'no-space-t', (block_margins == 'no-bottom') => 'no-space-b', (block_margins == 'no-top-bottom') => 'no-space-t no-space-b', () => '') }}
-
-{{ partial:page_builder/block class="stack-8 scheme-{{ colour_scheme ?? 'default' }} {{ _margins }}" }}
+{{ partial:page_builder/block class="stack-8" }}
 
 {{# headings #}}
     {{ if heading && !hide_col_heading }}

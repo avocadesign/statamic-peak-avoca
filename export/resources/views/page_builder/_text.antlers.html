@@ -5,9 +5,7 @@
 #}}
 
 <!-- /page_builder/_text.antlers.html -->
-{{ _margins = switch((block_margins == 'no-top') => 'no-space-t', (block_margins == 'no-bottom') => 'no-space-b', (block_margins == 'no-top-bottom') => 'no-space-t no-space-b', () => '') }}
-
-{{ partial:page_builder/block class="scheme-{{ colour_scheme ?? 'default' }} {{ _margins }}" }}
+{{ partial:page_builder/block }}
 
     <div class="span-content grid md:grid-cols-12 gap-fluid-grid-gap gap-y-6 ">
         <div class="col-span-12 md:col-span-8 stack-2

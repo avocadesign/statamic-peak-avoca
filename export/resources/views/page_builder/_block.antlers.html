@@ -1,9 +1,22 @@
 {{#
 	@name Page builder block
-	@desc The page builder block wrapper
+	@desc The page builder block wrapper. Reads block_margins and colour_scheme
+	      from the caller's scope (via default Antlers partial scope inheritance)
+	      and resolves them into wrapper classes here so individual block partials
+	      don't have to repeat the mapping.
 	@param data_attrs Optional data attributes to add to the section element
 	@param is_no_gap Boolean flag indicating this is a no-gap media and text block
 #}}
+
+{{# Resolved from caller scope — see fieldsets/colour_scheme.yaml for the option keys. #}}
+{{ _margins = switch(
+    (block_margins == 'no-top')        => 'no-space-t',
+    (block_margins == 'no-bottom')     => 'no-space-b',
+    (block_margins == 'no-top-bottom') => 'no-space-t no-space-b',
+    (block_margins == 'half-top')      => 'half-space-t',
+    ()                                  => ''
+) }}
+{{ _scheme = "scheme-{colour_scheme ?? 'default'}" }}
 
 <section
 	{{ if is_no_gap }}
@@ -23,7 +36,7 @@
 			window.addEventListener('resize', () => checkNoSpaceB());
 		"
 	{{ /if }}
-	class="fluid-grid {{ class }}"
+	class="fluid-grid {{ _scheme }} {{ _margins }} {{ class }}"
 	{{ data_attrs }}
 >
     {{ slot }}

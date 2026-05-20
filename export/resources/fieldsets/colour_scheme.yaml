@@ -23,6 +23,8 @@ fields:
       replicator_preview: false
       if:
         display_settings: 'equals true'
+      instructions: 'Set a BG colour for the block'
+      instructions_position: below
   -
     handle: block_margins
     field:
@@ -39,6 +41,9 @@ fields:
         -
           key: no-top-bottom
           value: 'No margin top or bottom'
+        -
+          key: half-top
+          value: 'Half top margin'
       type: select
       display: 'Block Margins'
       width: 50
@@ -46,3 +51,5 @@ fields:
       replicator_preview: false
       if:
         display_settings: 'equals true'
+      instructions: 'Override the default block spacing'
+      instructions_position: below

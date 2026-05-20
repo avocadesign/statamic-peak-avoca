@@ -215,6 +215,10 @@
 }
 
 @layer utilities {
+    .half-space-t {
+        --stack-item-space: calc(var(--stack-space, 4rem) / 2);
+    }
+
     .stack-space-inherit {
         --stack-item-space: initial;
         &:is([class*="stack-"][class*="stack-space-"] > *) {
