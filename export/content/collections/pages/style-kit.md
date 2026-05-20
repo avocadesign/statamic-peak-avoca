@@ -105,6 +105,7 @@ page_builder:
             buttons:
               -
                 id: mifa75yd
+                type: button
                 label: Primary
                 link_type: url
                 target_blank: false
@@ -114,6 +115,7 @@ page_builder:
                 button_style: solid
               -
                 id: mifa7juz
+                type: button
                 label: 'Primary outline'
                 link_type: url
                 target_blank: false
@@ -123,6 +125,7 @@ page_builder:
                 button_style: outline
               -
                 id: mifa88cz
+                type: button
                 label: Light
                 link_type: url
                 target_blank: false
@@ -132,6 +135,7 @@ page_builder:
                 button_style: solid
               -
                 id: mifa8j0x
+                type: button
                 label: 'Light Outline'
                 link_type: url
                 target_blank: false
@@ -141,6 +145,7 @@ page_builder:
                 button_style: outline
               -
                 id: mifa8pjh
+                type: button
                 label: Inline
                 link_type: url
                 target_blank: false
@@ -351,6 +356,7 @@ page_builder:
                 buttons:
                   -
                     id: m97v644o
+                    type: button
                     label: 'Primary Button'
                     link_type: url
                     target_blank: false
@@ -358,6 +364,7 @@ page_builder:
                     button_type: button
                   -
                     id: m97v6h0j
+                    type: button
                     label: 'Primary button (external)'
                     link_type: url
                     target_blank: true
@@ -365,6 +372,7 @@ page_builder:
                     button_type: button
                   -
                     id: m97v6xnn
+                    type: button
                     label: 'Inline button'
                     link_type: url
                     target_blank: false
@@ -372,6 +380,7 @@ page_builder:
                     button_type: inline
                   -
                     id: m97v8ius
+                    type: button
                     label: 'Inline button (external)'
                     link_type: url
                     target_blank: true
@@ -486,6 +495,7 @@ page_builder:
                 buttons:
                   -
                     id: m9koykj7
+                    type: button
                     label: Primary
                     link_type: url
                     target_blank: false
@@ -495,6 +505,7 @@ page_builder:
                     button_style: solid
                   -
                     id: m9kp1za7
+                    type: button
                     label: 'Primary outline (ext)'
                     link_type: url
                     target_blank: true
@@ -504,6 +515,7 @@ page_builder:
                     button_style: outline
                   -
                     id: m9kphktk
+                    type: button
                     label: Light
                     link_type: url
                     target_blank: false
@@ -513,6 +525,7 @@ page_builder:
                     button_style: solid
                   -
                     id: m9kpmh6w
+                    type: button
                     label: 'Light (outline)'
                     link_type: url
                     target_blank: false
@@ -522,6 +535,7 @@ page_builder:
                     button_style: outline
                   -
                     id: m9koyys0
+                    type: button
                     label: inline
                     link_type: url
                     target_blank: false
@@ -529,6 +543,7 @@ page_builder:
                     button_type: inline
                   -
                     id: m9kp1j55
+                    type: button
                     label: 'inline (external)'
                     link_type: url
                     target_blank: true
@@ -684,6 +699,7 @@ page_builder:
     buttons:
       -
         id: mifadw60
+        type: button
         label: 'CTA button'
         link_type: url
         target_blank: false
@@ -869,6 +885,7 @@ colours:
 buttons:
   -
     id: mifgdlbo
+    type: button
     label: 'Hero button'
     link_type: url
     target_blank: false
