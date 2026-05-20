@@ -34,8 +34,13 @@ fields:
         -
           key: centre
           value: Centre
+        -
+          key: offset
+          value: Offset
       type: button_group
-      display: 'Align block'
+      display: 'Display style'
+      instructions: 'Offset shows the heading in the left third with the content in the right two-thirds (stacked on mobile).'
+      instructions_position: below
       width: 50
       default: left
       if:

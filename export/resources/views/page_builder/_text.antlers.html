@@ -7,9 +7,20 @@
 <!-- /page_builder/_text.antlers.html -->
 {{ partial:page_builder/block }}
 
+    {{# Column layout classes per display style. #}}
+    {{ heading_classes = switch(
+        (align == 'offset') => 'md:col-span-4',
+        (align == 'centre') => 'md:col-span-8 md:col-start-3',
+        ()                   => 'md:col-span-8'
+    ) }}
+    {{ content_classes = switch(
+        (align == 'offset') => 'md:col-span-8',
+        (align == 'centre') => 'md:col-span-8 md:col-start-3',
+        ()                   => 'md:col-span-8'
+    ) }}
+
     <div class="span-content grid md:grid-cols-12 gap-fluid-grid-gap gap-y-6 ">
-        <div class="col-span-12 md:col-span-8 stack-2
-            {{ if align == "centre"  }} md:col-start-3 {{ /if }}
+        <div class="col-span-12 {{ heading_classes }} stack-2
             {{ if align_headings == "centre" || align_headings == "centre-all"  }} text-center {{ /if }}
         ">
             {{ if block:heading }}
@@ -19,8 +30,7 @@
                 {{ partial:typography/h3 :content="block:sub_heading" }}
             {{ /if }}
         </div>
-        <div class="col-span-12 md:col-span-8
-            {{ if align == "centre" }} md:col-start-3  {{ /if }}
+        <div class="col-span-12 {{ content_classes }}
             {{ if align_headings == "centre-all" }} text-center  {{ /if }}
         ">
             {{ partial:typography/prose as="article" class="contents stack-8" }}
