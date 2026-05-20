@@ -87,3 +87,13 @@ fields:
                     display: 'Card Text'
                 -
                   import: buttons
+  -
+    handle: display_settings
+    field:
+      mode: toggle
+      input_label: 'Show settings'
+      type: revealer
+      display: 'Display Settings'
+      instructions: 'Set the colour scheme and block margins'
+  -
+    import: colour_scheme
