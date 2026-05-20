@@ -16,6 +16,10 @@ tabs:
               display: Title
               validate:
                 - required
+      -
+        display: Hero
+        collapsible: true
+        fields:
           -
             import: block_hero
       -
@@ -69,8 +73,6 @@ tabs:
               localizable: true
               validate:
                 - required
-              generate: true
-              listable: hidden
               display: Slug
           -
             handle: parent

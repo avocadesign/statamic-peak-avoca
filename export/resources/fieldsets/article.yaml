@@ -13,12 +13,11 @@ fields:
         - orderedlist
         - removeformat
         - quote
+        - superscript
+        - subscript
         - anchor
-        - alignleft
-        - aligncenter
-        - alignright
+        - horizontalrule
         - lede
-        - brand
         - bts_styles
         - bts_attributes
         - bts_hidden
