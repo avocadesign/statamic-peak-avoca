@@ -3,7 +3,7 @@ import tailwindcss from '@tailwindcss/vite'
 import { defineConfig, loadEnv } from 'vite'
 
 export default defineConfig(({ command, mode }) => {
-    const env = loadEnv(mode, process.cwd(), '')
+    const env = loadEnv(mode, process.cwd(), 'VITE_')
     return {
         build: {
             buildDirectory: '_build',
@@ -28,7 +28,7 @@ export default defineConfig(({ command, mode }) => {
             })
         ],
         server: {
-            open: env.APP_URL
+            open: env.VITE_APP_URL
         }
     }
 });
