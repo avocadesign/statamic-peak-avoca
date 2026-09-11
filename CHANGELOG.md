@@ -1,5 +1,129 @@
 # Changelog
 
+## v22.1.1 (2026-09-09)
+
+### What's fixed
+- Prose selector issue. #464 by @marcorieser and @andjsch
+- Typo in the dutch analytics consent explanation. #463 by @lwekuiper
+
+### What's changed
+- Sync config with `statamic/statamic`. 667ee619 by @robdekort
+
+## v22.1.0 (2026-08-27)
+
+### What's new
+- Replace site.ext in README with app name. #462 by @andjsch
+
+## v22.0.1 (2026-08-25)
+
+### What's improved
+- Trash the now redundant typography partials. 42279c38 by @robdekort
+
+## v22.0.0 (2026-08-25)
+
+### What's new
+- Tailwind Typography is replaced with a vanilla CSS version that is easier to customize. [Docs on typography](https://peak.1902.studio/features/typography.html#prose-content). #461 by @robdekort and @andjsch
+- The CSS setup is more open to the use of vanilla CSS with components and utilities. [Docs on components and utilities](https://peak.1902.studio/getting-started/tailwind-css.html#tailwind-css-configuration). #461 by @robdekort and @andjsch
+
+## v21.8.3 (2026-08-18)
+
+### What's fixed
+- Editors can now see page builder preview images, but the asset container is hidden in the CP nav. d23bd621 by @robdekort
+
+## v21.8.2 (2026-08-07)
+
+### What's improved
+- Remove duplicate config key in search.php added in v21.8.1. 74ccca6a by @robdekort
+
+## v21.8.1 (2026-08-06)
+
+### What's improved
+- Sync config with statamic/statamic. 1aacafc4 by @robdekort
+
+## v21.8.0 (2026-07-29)
+
+### What's new
+- Disable elevated sessions locally. 0bb2c0d4 by @robdekort
+- Raise user activation expiry time from 1 to 24 hours. 1a544445 by @robdekort
+
+## v21.7.0 (2026-07-20)
+
+### What's new
+- Remove theming fieldset from browser appearance global. An update in the Tools addon will take care of this on existing sites. 33e7de4c by @robdekort
+
+## v21.6.4 (2026-07-04)
+
+### What's fixed
+- Exclude robots.txt from static caching. An update script in the SEO addon will take care of this on existing sites. 3738916a by @robdekort
+
+## v21.6.3 (2026-06-19)
+
+### What's improved
+- Simplify deploy script. 3738916a by @robdekort
+
+## v21.6.2 (2026-06-12)
+
+### What's improved
+- Sync git config with statamic/statamic. 72e72ca7 by @robdekort
+
+## v21.6.1 (2026-06-11)
+
+### What's improved
+- Remove unused package. bdf4d659 by @andjsch
+
+## v21.6.0 (2026-06-10)
+
+### What's new
+- A global SEO option to edit your `robots.txt` content. An update script handles this for exisiting sites. e6ca65da by @robdekort
+
+## v21.5.3 (2026-06-03)
+
+### What's changed
+- Remove post install license key prompt as the Statamic installer handles this now. d87a94f9 by @robdekort
+
+## v21.5.2 (2026-05-08)
+
+### What's changed
+- Sync config with `statamic/statamic`. ee7de3c0 by @robdekort
+
+## v21.5.1 (2026-04-13)
+
+### What's changed
+- Revert: Update CP config. 6978b81f by @andjsch
+
+## v21.5.0 (2026-04-13)
+
+### What's new
+- Update content and globals required by Statamic Peak SEO v11.2.0. An update script handles this for existing sites. 4a749a5c by @jivedig
+
+### What's fixed
+- Allow editors to manage folders. ac925a1a by @andjsch
+- Update CP config. 4be5e706 by @andjsch
+
+## v21.4.0 (2026-04-08)
+
+### What's new
+- Laravel 13 and update dependencies. 0f09a155 by @robdekort
+
+### What's improved
+- Update buttons.css. d4bba305 by @andjsch
+- Update bootFormConfig logic. ffc0800e by @andjsch
+
+## v21.3.3 (2026-04-01)
+
+### What's fixed
+- A typo in the Dutch translation for meta description. #458 by @wgriffioen
+
+## v21.3.2 (2026-03-31)
+
+### What's improved
+- Update dependencies. 43c3d81f by @robdekort
+
+## v21.3.1 (2026-03-30)
+
+### What's new
+- Upgrade statamic-peak-seo dependency to version 11.0. #457 by @andjsch
+
 ## v21.3.0 (2026-03-19)
 
 ### What's new

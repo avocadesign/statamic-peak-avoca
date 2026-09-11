@@ -1,63 +1,12 @@
 @import "tailwindcss";
-@import "./buttons.css";
-@import "./colours.css";
-@import "./peak.css";
+@import "./fonts.css";
+@import "./components/buttons.css" layer(components);
+@import "./components/caption.css" layer(components);
+@import "./peak.css" ;
+@import "./theme.css";
 @import "./typography.css";
+@import "./utilities.css";
 
-@theme {
-    /* --font-sans: Gaultier, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; */
-    /* --font-serif: Lavigne, ui-serif, Georgia, Cambria, "Times New Roman", Times, serif; */
-    /* --font-mono: Anonymous, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; */
-
-    --font-weight-*: initial;
-    /* --font-weight-hairline: 100; */
-    /* --font-weight-thin: 200; */
-    /* --font-weight-light: 300; */
-    --font-weight-normal: 400;
-    /* --font-weight-medium: 500; */
-    /* --font-weight-semibold: 600; */
-    --font-weight-bold: 700;
-    /* --font-weight-extrabold: 800; */
-    /* --font-weight-black: 900; */
-}
-
-@layer base {
-    html {
-        color: var(--color-body-text);
-        /* Set sans, serif or mono stack with optional custom font as default. */
-        font-family: var(--font-sans);
-        /* font-family: var(--font-serif); */
-        /* font-family: var(--font-mono); */
-    }
-
-    .lede {
-        @apply text-xl;
-    }
-}
-
-@layer components {
-    /* Clickable Parent
-    /* https://codepen.io/potatoDie/pen/abzvGxG */
-    a.clickable-parent {
-        @apply static
-    }
-
-    a.clickable-parent:after {
-        content: "";
-        cursor: pointer !important;
-        @apply flex absolute inset-0;
-    }
-
-    .clickable-parent:not(a) {
-        @apply static
-    }
-    .clickable-parent:not(a) a {
-        @apply static
-    }
-
-    .clickable-parent:not(a) > a:after {
-        content: "";
-        cursor: pointer !important;
-        @apply flex absolute inset-0;
-    }
-}
+/* Avoca: colour schemes + site components layered on top of Peak's defaults. */
+@import "./colours.css";
+@import "./avoca.css";

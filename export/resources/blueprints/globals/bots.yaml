@@ -1,33 +1,15 @@
 tabs:
-  robots:
-    display: Robots
-    sections:
-      -
-        fields:
-          -
-            handle: robots_txt_content
-            field:
-              type: code
-              display: 'Robots.txt content'
-              mode: nginx
-              mode_selectable: false
-              theme: light
-              indent_type: space
-              indent_size: 2
-              line_numbers: false
   llms:
     display: LLMs
     sections:
-      -
-        fields:
-          -
-            handle: llms_content
-            field:
-              type: code
-              display: 'LLMs.txt content'
-              mode: gfm
-              mode_selectable: false
-              theme: light
-              indent_type: space
-              indent_size: 2
-              line_numbers: false
+    - fields:
+      - handle: llms_content
+        field:
+          type: code
+          display: LLMs.txt content
+          mode: gfm
+          mode_selectable: false
+          theme: light
+          indent_type: space
+          indent_size: 2
+          line_numbers: false

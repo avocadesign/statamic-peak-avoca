@@ -11,9 +11,9 @@
     {{ if heading && !hide_col_heading }}
         <div class="span-content grid grid-cols-subgrid">
             <div class="flex flex-col gap-2 col-span-12 md:col-span-8 {{ if heading_alignment == "centre" }} md:col-start-3 items-center {{ /if }}">
-                {{ partial:typography/h2 :content="heading" }}
+                <h2>{{ heading | nl2br }}</h2>
                 {{ if block:sub_heading }}
-                    {{ partial:typography/h3 :content="block:sub_heading" }}
+                    <h3>{{ block:sub_heading | nl2br }}</h3>
                 {{ /if }}
             </div>
         </div>
@@ -23,34 +23,34 @@
     <div class="span-content grid grid-cols-subgrid {{ vertical_align_content }} gap-y-8">
         {{# left column #}}
         {{ left_column }}
-            {{ partial:typography/prose as="article" class="stack-8 {{ switch(
+            <article class="prose max-w-none stack-8 {{ switch(
                 (column_width == 'narrow-left') => 'col-span-12 md:col-span-4',
                 (column_width == 'narrow-right') => 'col-span-12 md:col-span-8',
                 () => 'col-span-12 md:col-span-6'
             )}} {{ switch(
                 (reverse_order_for_mobile) => 'order-last md:order-first',
                 () => ''
-            )}}" }}
+            )}}">
                 {{ article }}
                     {{ partial src="components/{type}" }}
                 {{ /article }}
-            {{ /partial:typography/prose }}
+            </article>
         {{ /left_column }}
 
         {{# right column #}}
         {{ right_column }}
-            {{ partial:typography/prose as="article" class="stack-8 {{ switch(
+            <article class="prose max-w-none stack-8 {{ switch(
                 (column_width == 'narrow-left') => 'col-span-12 md:col-span-8',
                 (column_width == 'narrow-right') => 'col-span-12 md:col-span-4',
                 () => 'col-span-12 md:col-span-6'
             )}} {{ switch(
                 (reverse_order_for_mobile) => 'order-first md:order-last',
                 () => ''
-            )}}" }}
+            )}}">
                 {{ article }}
                     {{ partial src="components/{type}" }}
                 {{ /article }}
-            {{ /partial:typography/prose }}
+            </article>
         {{ /right_column }}
     </div>
 

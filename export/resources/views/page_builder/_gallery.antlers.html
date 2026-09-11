@@ -11,12 +11,12 @@
     {{ if block:heading || block:description }}
         <header class="span-content flex flex-col gap-2">
             {{ if block:heading }}
-                {{ partial:typography/h2 :content="block:heading" }}
+                <h2>{{ block:heading | nl2br }}</h2>
             {{ /if }}
             {{ if block:description }}
-                {{ partial:typography/prose as="div" }}
+                <div class="prose max-w-none">
                     {{ block:description }}
-                {{ /partial:typography/prose }}
+                </div>
             {{ /if }}
         </header>
     {{ /if }}

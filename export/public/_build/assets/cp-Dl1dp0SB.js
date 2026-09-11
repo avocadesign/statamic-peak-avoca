@@ -1,0 +1,1 @@
+Statamic.booting(()=>{Statamic.$conditions.add(`hasMultipleColumns`,({values:e})=>e.show_section_settings?e.columns&&e.columns.length>1:!1),Statamic.$conditions.add(`columnCount`,({values:e,params:t})=>!e.show_section_settings||!e.columns||!Array.isArray(e.columns)?!1:e.columns.length===parseInt(t[0],10))});

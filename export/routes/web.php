@@ -10,8 +10,3 @@ Route::statamic('llms.txt', 'llms', [
     'layout' => null,
     'content_type' => 'text/plain',
 ]);
-
-Route::statamic('robots.txt', 'robots', [
-    'layout' => null,
-    'content_type' => 'text/plain',
-]);

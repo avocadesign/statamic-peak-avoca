@@ -1,0 +1,16 @@
+/* Avoca site components that are not colour schemes. */
+@layer base {
+    /* Bard TextStyle "lede" style (config/statamic/bard_texstyle.php). */
+    .lede {
+        @apply text-xl;
+    }
+}
+
+@layer components {
+    /* Clickable Parent — https://codepen.io/potatoDie/pen/abzvGxG */
+    a.clickable-parent { @apply static; }
+    a.clickable-parent:after { content: ""; cursor: pointer !important; @apply flex absolute inset-0; }
+    .clickable-parent:not(a) { @apply static; }
+    .clickable-parent:not(a) a { @apply static; }
+    .clickable-parent:not(a) > a:after { content: ""; cursor: pointer !important; @apply flex absolute inset-0; }
+}

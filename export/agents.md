@@ -59,7 +59,7 @@ App runs at configured local domain. Statamic Control Panel is at `/cp`.
   - `_main_mobile.antlers.html` — Mobile navigation
 
 ### Page Builder Customizations
-- **Excluded blocks:** This fork does NOT include the "cards" page builder block from upstream
+- **Cards block:** this fork ships its own `cards` block (card types text/image/icon, sub-heading, alignment, colour scheme). Keep it on upstream merges; do not replace it with upstream's.
 - **Block groups:**
   - "Content" group (not "image_and_text") — contains article, columns, divider
   - "dynamic" group (not "interactive") — contains form block

@@ -7,6 +7,7 @@ export_paths:
   - app/Policies/CustomUserPolicy.php
   - app/Providers/AppServiceProvider.php
   - content
+  - config/auth.php
   - config/captcha.php
   - config/filesystems.php
   - config/statamic/assets.php
@@ -19,7 +20,6 @@ export_paths:
   - config/statamic/search.php
   - config/statamic/static_caching.php
   - lang/
-  - public/robots.txt
   - public/_build
   - public/images
   - public/favicons/.gitkeep
@@ -29,11 +29,7 @@ export_paths:
   - public/visuals
   - resources/sites.yaml
   - resources/blueprints
-  - resources/css/buttons.css
-  - resources/css/colours.css
-  - resources/css/peak.css
-  - resources/css/site.css
-  - resources/css/typography.css
+  - resources/css
   - resources/fieldsets
   - resources/forms
   - resources/js/cp.js
@@ -59,4 +55,4 @@ modules:
     prompt: 'Would you like to install the paid Peak Commands addon?'
     default: true
     dependencies:
-      studio1902/statamic-peak-commands: ^10.0
+      studio1902/statamic-peak-commands: ^11.0

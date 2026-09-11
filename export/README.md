@@ -95,6 +95,7 @@ STATAMIC_API_ENABLED=false
 STATAMIC_GIT_ENABLED=true
 STATAMIC_GIT_PUSH=true
 STATAMIC_GIT_DISPATCH_DELAY=5
+STATAMIC_ELEVATED_SESSIONS_ENABLED=true
 
 #IMAGE_MANIPULATION_DRIVER=imagick
 
@@ -142,9 +143,7 @@ npm run build
 
 {RELOAD_PHP_FPM}
 
-{SITE_PHP} artisan cache:clear
-{SITE_PHP} artisan config:cache
-{SITE_PHP} artisan route:cache
+{SITE_PHP} artisan optimize:clear
 {SITE_PHP} artisan statamic:stache:refresh
 {SITE_PHP} artisan queue:restart
 {SITE_PHP} artisan statamic:search:update --all
@@ -176,9 +175,7 @@ touch /tmp/fpmlock 2>/dev/null || true
 ( flock -w 10 9 || exit 1
     echo 'Restarting FPM...'; sudo -S service $FORGE_PHP_FPM reload ) 9</tmp/fpmlock
 
-$FORGE_PHP artisan cache:clear
-$FORGE_PHP artisan config:cache
-$FORGE_PHP artisan route:cache
+$FORGE_PHP artisan optimize:clear
 $FORGE_PHP artisan statamic:stache:refresh
 $FORGE_PHP artisan queue:restart
 $FORGE_PHP artisan statamic:search:update --all

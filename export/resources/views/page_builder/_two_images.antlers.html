@@ -50,16 +50,16 @@
     {{# Headings in standard output #}}
     <div class="span-content grid grid-cols-subgrid gap-fluid-grid-gap gap-y-4 {{ grid_row_classes }}">
         <header class="span-content flex flex-col gap-1 mb-4 {{ heading_classes }} {{ (display_style == 'inline' || display_style == 'stacked') ? text_vertical_alignment_classes : '' }} {{ display_style == 'offset' ? 'self-start' : '' }}">
-            {{ partial:typography/h2 :content="block:heading" }}
+            <h2>{{ block:heading | nl2br }}</h2>
             {{ if block:sub_heading }}
-                {{ partial:typography/h3 :content="block:sub_heading" }}
+                <h3>{{ block:sub_heading | nl2br }}</h3>
             {{ /if }}
             {{ if article }}
-                {{ partial:typography/prose as="article" class="mt-4 stack-8" }}
+                <article class="prose max-w-none mt-4 stack-8">
                     {{ article }}
                         {{ partial src="components/{type}" }}
                     {{ /article }}
-                {{ /partial:typography/prose }}
+                </article>
             {{ /if}}
         </header>
 

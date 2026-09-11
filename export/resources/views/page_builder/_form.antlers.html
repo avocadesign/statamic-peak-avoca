@@ -11,8 +11,8 @@
 
         {{# Form column — 2/3 when contact details are shown alongside. #}}
         <div class="{{ if block:include_contact_details }}md:col-span-2{{ /if }}">
-        {{ block:title ?= { partial:typography/h2 as="h2" class="mb-8" :content="block:title" } }}
-        {{ block:text ?= { partial:typography/p :content="block:text" } }}
+        {{ if block:title }}<h2 class="mb-8">{{ block:title | nl2br }}</h2>{{ /if }}
+        {{ if block:text }}<p>{{ block:text | nl2br }}</p>{{ /if }}
 
         {{# Render form and use Alpine based Statamic conditional logic. #}}
         {{ if form:handle }}
@@ -62,8 +62,8 @@
                         <fieldset class="w-full grid md:grid-cols-12 gap-6">
                             {{ if display || instructions }}
                                 <span class="md:col-span-12">
-                                    {{ display ?= { partial:typography/h2 class="mb-2" as="legend" content="{ trans :key="display" }" } }}
-                                    {{ instructions ?= { partial:typography/p content="{ trans :key="instructions" }" } }}
+                                    {{ if display }}<legend class="mb-2 heading-size-2 font-bold leading-tight">{{ trans :key="display" }}</legend>{{ /if }}
+                                    {{ if instructions }}<p>{{ trans :key="instructions" }}</p>{{ /if }}
                                 </span>
                             {{ /if }}
 

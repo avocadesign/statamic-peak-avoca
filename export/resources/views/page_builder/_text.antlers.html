@@ -24,20 +24,20 @@
             {{ if align_headings == "centre" || align_headings == "centre-all"  }} text-center {{ /if }}
         ">
             {{ if block:heading }}
-                {{ partial:typography/h2 :content="block:heading" }}
+                <h2>{{ block:heading | nl2br }}</h2>
             {{ /if }}
             {{ if block:sub_heading }}
-                {{ partial:typography/h3 :content="block:sub_heading" }}
+                <h3>{{ block:sub_heading | nl2br }}</h3>
             {{ /if }}
         </div>
         <div class="col-span-12 {{ content_classes }}
             {{ if align_headings == "centre-all" }} text-center  {{ /if }}
         ">
-            {{ partial:typography/prose as="article" class="contents stack-8" }}
+            <article class="prose max-w-none contents stack-8">
                 {{ article }}
                     {{ partial src="components/{type}" }}
                 {{ /article }}
-            {{ /partial:typography/prose }}
+            </article>
         </div>
     </div>
 {{ /partial:page_builder/block }}

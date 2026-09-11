@@ -8,9 +8,9 @@
 {{ partial:page_builder/block class="gap-y-8" }}
     {{ if block:cards_heading}}
         <header class="span-content flex flex-col gap-1 {{ if block:heading_alignment == 'centre'}} items-center {{ /if }}">
-            {{ partial:typography/h2 :content="block:cards_heading" class="" }}
+            <h2>{{ block:cards_heading | nl2br }}</h2>
         {{ if block:cards_subheading }}
-            {{ partial:typography/h3 :content="block:cards_subheading" }}
+            <h3>{{ block:cards_subheading | nl2br }}</h3>
         {{ /if }}
         </header>
     {{ /if }}
@@ -65,20 +65,20 @@
                             {{# Link-wrapped heading #}}
                             {{ buttons limit="1" }}
                                 <a class="clickable-parent" {{ partial:statamic-peak-tools::snippets/button_attributes }} aria-hidden="true" tabindex="-1">
-                                    {{ partial:typography/h3 class="mb-0" color="" :content="card_title" }}
+                                    <h3 class="mb-0">{{ card_title | nl2br }}</h3>
                                 </a>
                             {{ /buttons }}
                             {{# Accessible heading for screen readers #}}
-                            {{ partial:typography/h3 class="sr-only" :content="card_title" }}
+                            <h3 class="sr-only">{{ card_title | nl2br }}</h3>
                         {{ else }}
                             {{# Standard heading (no link) #}}
-                            {{ partial:typography/h3 class="mb-0" :content="card_title" }}
+                            <h3 class="mb-0">{{ card_title | nl2br }}</h3>
                         {{ /if }}
 
                         {{ if card_text }}
-                            {{ partial:typography/prose as="article" class="contents stack-8" }}
+                            <article class="prose max-w-none contents stack-8">
                                 {{ card_text}}
-                            {{ /partial:typography/prose }}
+                            </article>
                         {{ /if }}
 
                         {{ if buttons }}

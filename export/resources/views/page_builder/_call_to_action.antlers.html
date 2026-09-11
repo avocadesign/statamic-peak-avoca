@@ -12,13 +12,13 @@
         {{ elseif cta_style == "horizontal"}}
             flex-col md:flex-row items-center md:justify-between
         {{ /if }}
-    " style="--color-body-text: var(--color-white); --color-heading: var(--color-white);">
+    " style="--body-color: var(--color-white); --headings-color: var(--color-white); color: var(--body-color);">
         <div class="flex flex-col gap-2
             {{ if cta_style == "vertical" }} items-center {{ /if }}
             {{ if cta_style == "horizontal" }} items-center md:items-start {{ /if }}
         ">
-            {{ partial:typography/h2 class="" :content="block:title" }}
-            {{ partial:typography/p class="" :content="block:text" }}
+            <h2>{{ block:title | nl2br }}</h2>
+            <p>{{ block:text | nl2br }}</p>
         </div>
         {{ block:buttons ?= { partial:components/buttons } }}
     </div>

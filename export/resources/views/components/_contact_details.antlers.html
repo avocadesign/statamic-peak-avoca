@@ -17,9 +17,9 @@
             {{ partial:components/button as="a" button_type="inline" link_type="email" label="{{ site_details:email }}" email="{{ site_details:email }}" attr_aria="Email {{ configuration:copyright_name ?? config:app:name }}" hide_arrow="true" }}
         {{ /if }}
         {{ if value == "address" && site_details:address }}
-            {{ partial:typography/prose as="div" class="stack-2 overflow-visible" }}
+            <div class="prose max-w-none stack-2 overflow-visible">
                 {{ site_details:address }}
-            {{ /partial:typography/prose }}
+            </div>
         {{ /if }}
     {{ /display_contacts }}
 </div>

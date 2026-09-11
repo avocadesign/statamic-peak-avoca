@@ -39,6 +39,6 @@
     {{ /if }}
 
     {{ if caption }}
-        {{ partial:typography/caption :caption="caption" as="figcaption" class="{{ caption_absolute ? 'absolute bottom-2 left-2 text-xs bg-white/80 px-2.5 py-1' : '' }}" }}
+        <figcaption class="caption">{{ caption }}</figcaption>
     {{ /if }}
 </figure>

@@ -17,23 +17,38 @@ editor:
     - 'edit social_media globals'
     - 'view files assets'
     - 'upload files assets'
+    - 'edit files folders'
     - 'edit files assets'
     - 'move files assets'
     - 'rename files assets'
     - 'delete files assets'
     - 'view images assets'
     - 'upload images assets'
+    - 'edit images folders'
     - 'edit images assets'
     - 'move images assets'
     - 'rename images assets'
     - 'delete images assets'
     - 'view social_images assets'
     - 'upload social_images assets'
+    - 'edit social_images folders'
     - 'edit social_images assets'
     - 'delete social_images assets'
+    - 'view page_builder assets'
     - 'view contact form submissions'
     - 'delete contact form submissions'
-    - 'access default site'
+  preferences:
+    nav:
+      content:
+        'content::assets':
+          action: '@modify'
+          reorder:
+            - 'content::assets::images'
+            - 'content::assets::files'
+            - 'content::assets::social_images'
+            - 'content::assets::favicons'
+          children:
+            'content::assets::page_builder': '@hide'
 marketeer:
   title: Marketeer
   permissions:

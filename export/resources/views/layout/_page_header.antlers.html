@@ -11,9 +11,9 @@
             {{ partial src="typography/h1" content="{ title }" class="z-10"}}
         {{ /if }}
         {{ if hero_type == "simple" && page_lede || hero_type == "hero" && page_lede }}
-            {{ partial:typography/prose class="z-10"}}
+            <article class="prose max-w-none z-10">
                 {{ page_lede }}
-            {{ /partial:typography/prose }}
+            </article>
         {{ /if }}
         {{ if hero_type == "hero" }}
             {{ partial:components/buttons :buttons='buttons' class="z-10" }}

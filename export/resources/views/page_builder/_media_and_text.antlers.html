@@ -46,19 +46,19 @@
     ">
         {{ if block:heading }}
         <header class="flex flex-col gap-2">
-            {{ partial:typography/h2 :content="block:heading" }}
+            <h2>{{ block:heading | nl2br }}</h2>
 
             {{ if block:sub_heading }}
-                {{ partial:typography/h3 :content="block:sub_heading" }}
+                <h3>{{ block:sub_heading | nl2br }}</h3>
             {{ /if }}
         </header>
         {{ /if }}
 
-        {{ partial:typography/prose as="div" class="mt-2 contents stack-8" }}
+        <div class="prose max-w-none mt-2 contents stack-8">
             {{ article }}
                 {{ partial src="components/{type}" }}
             {{ /article }}
-        {{ /partial:typography/prose }}
+        </div>
 
         {{ partial:components/buttons }}
     </article>

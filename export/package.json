@@ -10,20 +10,20 @@
     "author": "Studio 1902",
     "license": "MIT",
     "dependencies": {
-        "@alpinejs/collapse": "^3.15.8",
-        "@alpinejs/focus": "^3.15.8",
-        "@alpinejs/morph": "^3.15.8",
-        "@alpinejs/persist": "^3.15.8",
-        "alpinejs": "^3.15.8",
-        "laravel-precognition-alpine": "^1.0.2",
+        "@alpinejs/collapse": "^3.16.3",
+        "@alpinejs/focus": "^3.16.3",
+        "@alpinejs/morph": "^3.16.3",
+        "@alpinejs/persist": "^3.16.3",
+        "alpinejs": "^3.16.3",
+        "laravel-precognition-alpine": "^2.0.0",
         "puppeteer": "^24.6.0"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.11",
-        "@tailwindcss/typography": "^0.5.19",
-        "@tailwindcss/vite": "^4.1.18",
-        "laravel-vite-plugin": "^2.1.0",
-        "tailwindcss": "^4.1.18",
-        "vite": "^7.3.1"
-    }
+        "@tailwindcss/vite": "^4.3.3",
+        "laravel-vite-plugin": "^3.2.0",
+        "tailwindcss": "^4.3.3",
+        "vite": "^8.2.2"
+    },
+    "$schema": "https://www.schemastore.org/package.json"
 }

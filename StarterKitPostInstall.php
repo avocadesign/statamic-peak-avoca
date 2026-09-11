@@ -89,9 +89,9 @@ class StarterKitPostInstall
         }
 
         $this->setAppName();
-        $this->setLicenseKey();
         $this->setAppUrl();
         $this->setAppKey();
+        $this->setLicenseKey();
         $this->setLocale();
         $this->setDisplayTimezone();
         $this->setMailFromAddress();
@@ -176,7 +176,6 @@ class StarterKitPostInstall
         $this->replaceInSystem("display_timezone=\"$currentDisplayTimezone\"", "display_timezone=\"$newDisplayTimezone\"");
     }
 
-
     protected function setLocale(): void
     {
         $locale = text(
@@ -186,7 +185,7 @@ class StarterKitPostInstall
             required: true,
         );
 
-        $this->replaceInSites("locale: en_US", "locale: $locale");
+        $this->replaceInSites('locale: en_US', "locale: $locale");
     }
 
     protected function setMailFromAddress(): void
@@ -273,7 +272,7 @@ class StarterKitPostInstall
             options: [
                 'yes' => 'Yes',
                 'tell_me_more' => 'Tell me more',
-                'no' => 'No'
+                'no' => 'No',
             ],
             default: 'yes',
             hint: 'To protect freedom for all people and the truth.'
@@ -288,7 +287,6 @@ class StarterKitPostInstall
         if ($fascism !== 'tell_me_more') {
             return;
         }
-
 
         if (PHP_OS_FAMILY === 'Darwin') {
             exec('open https://peak.1902.studio/stop-fascism.html');
@@ -308,8 +306,8 @@ class StarterKitPostInstall
         info('[✓] Peak is installed. Enjoy the view!');
 
         if (! Composer::isInstalled('studio1902/statamic-peak-commands')) {
-            info("Consider buying the Peak Commands addon containing a set of CLI commands to make tedious and recurring tasks a lot easier.");
-            warning("Read more here: https://peak.1902.studio/getting-started/commands.html#add-collection");
+            info('Consider buying the Peak Commands addon containing a set of CLI commands to make tedious and recurring tasks a lot easier.');
+            warning('Read more here: https://peak.1902.studio/getting-started/commands.html#add-collection');
 
             return;
         }
@@ -331,18 +329,7 @@ class StarterKitPostInstall
 
         $this->replaceInEnv('APP_NAME="Statamic Peak"', "APP_NAME=\"{$appName}\"");
         $this->replaceInReadme('APP_NAME="Statamic Peak"', "APP_NAME=\"{$appName}\"");
-    }
-
-    protected function setLicenseKey(): void
-    {
-        $licenseKey = text(
-            label: 'Enter your Statamic License key',
-            hint: 'Leave empty to skip',
-            default: $this->interactive ? '' : 'Statamic Peak',
-            required: false,
-        );
-
-        $this->replaceInEnv('STATAMIC_LICENSE_KEY=', "STATAMIC_LICENSE_KEY=\"{$licenseKey}\"");
+        $this->replaceInReadme('site.ext', $appName);
     }
 
     protected function setAppUrl(): void
@@ -357,6 +344,13 @@ class StarterKitPostInstall
         $appKey = env('APP_KEY');
 
         $this->replaceInEnv('APP_KEY=', "APP_KEY=\"{$appKey}\"");
+    }
+
+    protected function setLicenseKey(): void
+    {
+        $statamicLicenseKey = env('STATAMIC_LICENSE_KEY');
+
+        $this->replaceInEnv('STATAMIC_LICENSE_KEY=', "STATAMIC_LICENSE_KEY=\"{$statamicLicenseKey}\"");
     }
 
     protected function useDebugbar(): void
@@ -459,15 +453,15 @@ class StarterKitPostInstall
 
         $cron
          ? $on = [
-            'schedule' => [
-                0 => [
-                    'cron' => "$cron",
-                ],
-            ],
-            'workflow_dispatch' => NULL,
-        ]
+             'schedule' => [
+                 0 => [
+                     'cron' => "$cron",
+                 ],
+             ],
+             'workflow_dispatch' => null,
+         ]
         : $on = [
-            'workflow_dispatch' => NULL,
+            'workflow_dispatch' => null,
         ];
 
         $workflow = [
@@ -486,7 +480,7 @@ class StarterKitPostInstall
                             'name' => 'composer update action',
                             'uses' => 'kawax/composer-update-action@master',
                             'env' => [
-                            'GITHUB_TOKEN' => '${{ secrets.GITHUB_TOKEN }}',
+                                'GITHUB_TOKEN' => '${{ secrets.GITHUB_TOKEN }}',
                             ],
                         ],
                     ],

@@ -1,0 +1,87 @@
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: --spacing(2);
+    max-width: 100%;
+    padding-block: --spacing(2);
+    padding-inline: --spacing(5);
+
+    background-color: var(--color-primary);
+
+    border-radius: var(--radius-sm);
+
+    color: var(--color-white);
+
+    -webkit-user-select: none;
+    user-select: none;
+
+    &:focus {
+        outline-color: var(--color-primary);
+    }
+
+    &[disabled] {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    span {
+        min-width: fit-content;
+
+        text-align: center;
+    }
+
+
+    /* Small variant */
+    /* &[class*='--small'] {
+
+    } */
+
+    /* Themed variant */
+    /* &[data-theme~='primary'] {
+
+    } */
+}
+
+.button-inline {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing);
+
+    &:hover {
+        color: var(--color-primary);
+    }
+
+    &:focus {
+        outline-color: var(--color-primary);
+    }
+
+    span {
+        min-width: fit-content;
+
+        font-weight: var(--font-weight-bold);
+        text-decoration: underline;
+        text-decoration-color: var(--color-primary)
+    }
+}
+
+/*
+    Avoca button scheme. components/_button.antlers.html emits `btn btn-{colour}{-outline}`
+    or `btn-inline`; the colour and style options come from fieldsets/button.yaml.
+*/
+.btn {
+    @apply inline-flex items-baseline gap-0.5 font-bold max-w-full py-3 px-5 rounded-sm leading-none no-underline select-none motion-safe:transition;
+}
+.btn-primary         { @apply bg-primary text-white focus:outline-primary hover:opacity-90; }
+.btn-primary-outline { @apply border-2 border-primary text-primary focus:outline-primary hover:bg-primary hover:text-white; }
+.btn-light           { @apply bg-neutral-200 text-neutral focus:outline-white hover:bg-gray-100; }
+.btn-light-outline   { @apply border-2 border-neutral-200 text-neutral focus:outline-white hover:bg-white hover:text-primary; }
+
+.btn-inline {
+    @apply inline-flex items-baseline gap-0.5 font-bold underline decoration-2 decoration-primary focus:outline-primary motion-safe:transition;
+    color: var(--body-color);
+}
+
+/* Auto-invert inside dark/primary schemes */
+:where(.scheme-primary, .scheme-dark) .btn        { @apply bg-white text-primary focus:outline-white; }
+:where(.scheme-primary, .scheme-dark) .btn-inline { color: var(--body-color); text-decoration-color: var(--body-color); }
