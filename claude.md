@@ -32,3 +32,6 @@ This is Avoca's fork of studio1902/statamic-peak. `upstream` is the Peak remote;
   `data:` block in the root `content/globals/<handle>.yaml`; the root file holds only the title.
 - After any upstream merge: run the "Kit install check" workflow (or the same steps locally in a
   throwaway site) before merging to main. It installs the kit fresh, builds, and renders pages.
+- Default robots policy (SEO global → Robots): allow search engines and AI search/assistant
+  fetchers, block AI training crawlers. Edit the list in the CP, never in a template; Peak SEO
+  appends the Sitemap line itself, so do not add one.

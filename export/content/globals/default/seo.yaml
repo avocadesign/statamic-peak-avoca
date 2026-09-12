@@ -20,53 +20,44 @@ use_cloudflare_web_analytics: false
 tracker_type: none
 use_consent_banner: false
 robots: |-
+  # Robots policy. Search engines and AI search/assistant fetchers are welcome; crawlers that
+  # collect content to train AI models are not. Peak SEO appends the Sitemap line automatically.
+
+  # Everyone not listed below: allowed.
   User-agent: *
   Allow: /
 
-  User-agent: Applebot-Extended
-  Disallow: /
-
-  User-agent: anthropic-ai
-  Disallow: /
-
-  User-agent: Bytespider
-  Disallow: /
-
-  User-agent: ClaudeBot
-  Disallow: /
-
-  User-agent: cohere-ai
-  Disallow: /
-
-  User-agent: Diffbot
-  Disallow: /
-
-  User-agent: CCBot
-  Disallow: /
-
+  # AI search and assistant fetchers: allowed. These answer a user's question and link back.
+  # Listed explicitly so they are never caught by the training blocks below.
+  User-agent: OAI-SearchBot
   User-agent: ChatGPT-User
-  Disallow: /
-
-  User-agent: FacebookBot
-  Disallow: /
-
-  User-agent: GPTBot
-  Disallow: /
-
-  User-agent: Google-Extended
-  Disallow: /
-
-  User-agent: ImagesiftBot
-  Disallow: /
-
-  User-agent: Omgili
-  Disallow: /
-
-  User-agent: Omgilibot
-  Disallow: /
-
+  User-agent: Claude-SearchBot
+  User-agent: Claude-User
   User-agent: PerplexityBot
+  User-agent: Perplexity-User
+  User-agent: Applebot
+  User-agent: DuckAssistBot
+  User-agent: MistralAI-User
+  User-agent: Meta-ExternalFetcher
+  Allow: /
+
+  # AI training crawlers: blocked. These collect content for model training and send no traffic.
+  User-agent: GPTBot
+  User-agent: ClaudeBot
+  User-agent: anthropic-ai
+  User-agent: Google-Extended
+  User-agent: Applebot-Extended
+  User-agent: Meta-ExternalAgent
+  User-agent: FacebookBot
+  User-agent: Amazonbot
+  User-agent: CCBot
+  User-agent: Bytespider
+  User-agent: cohere-ai
+  User-agent: cohere-training-data-crawler
+  User-agent: Diffbot
+  User-agent: Omgili
+  User-agent: Omgilibot
+  User-agent: webzio-extended
+  User-agent: ImagesiftBot
+  User-agent: AI2Bot
   Disallow: /
-social_images_collections:
-- pages
-use_no_sandbox_for_social_image_generation: false
