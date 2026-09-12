@@ -34,7 +34,7 @@ export default defineConfig(({ command, mode }) => {
                     '**/storage/statamic/**',
                 ],
             },
-            open: env.VITE_APP_URL
+            open: env.VITE_SITE_URL
         }
     }
 });

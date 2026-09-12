@@ -1,0 +1,55 @@
+name: Kit install check
+
+# Installs this starter kit into a fresh Statamic site, builds the front end, and renders the
+# style kit page. Fails if the kit cannot be installed, the CSS/JS does not build, or a page
+# does not render. Run on every push so an upstream Peak merge is verified before it lands.
+on:
+  push:
+  pull_request:
+
+jobs:
+  install:
+    name: Fresh install + build + render
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: kit
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.4"
+          extensions: gd, exif, intl
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Create a fresh Statamic site
+        run: composer create-project statamic/statamic site --no-interaction --prefer-dist --no-progress
+
+      - name: Install the kit from this checkout
+        working-directory: site
+        run: |
+          composer config repositories.kit path ../kit
+          composer config --no-plugins allow-plugins.pixelfear/composer-dist-plugin true
+          php please starter-kit:install avocadesign/statamic-peak-avoca --local --clear-site --no-interaction
+
+      - name: Build the front end
+        working-directory: site
+        env:
+          PUPPETEER_SKIP_DOWNLOAD: "1"
+        run: |
+          npm install --no-audit --no-fund
+          npm run build
+
+      - name: Render the home page and the style kit
+        working-directory: site
+        run: |
+          php please statamic:stache:warm
+          php artisan serve --host=127.0.0.1 --port=8000 > /tmp/serve.log 2>&1 &
+          for i in $(seq 1 20); do curl -fsS -o /dev/null http://127.0.0.1:8000/ && break; sleep 1; done
+          curl -fsS -o /dev/null -w "home       HTTP %{http_code}\n"      http://127.0.0.1:8000/
+          curl -fsS -o /tmp/style-kit.html -w "style-kit  HTTP %{http_code}\n" http://127.0.0.1:8000/style-kit
+          # every page-builder block and bard set must have rendered a section
+          grep -c '<section' /tmp/style-kit.html | xargs -I{} sh -c '[ {} -gt 10 ] && echo "style kit rendered {} sections" || { echo "style kit rendered too few sections"; exit 1; }'

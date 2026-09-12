@@ -1,8 +1,1 @@
 title: Redirects
-data:
-  redirects:
-    -
-      id: m9kpdtuv
-      url_old: /letmein
-      external_url: /cp
-      response: '301'

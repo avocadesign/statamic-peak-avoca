@@ -8,7 +8,7 @@ breadcrumbs: false
 use_social_image_generation: false
 use_sitemap: true
 sitemap_collections:
-  - pages
+- pages
 trackers_local: false
 trackers_staging: false
 trackers_production: true
@@ -67,3 +67,6 @@ robots: |-
 
   User-agent: PerplexityBot
   Disallow: /
+social_images_collections:
+- pages
+use_no_sandbox_for_social_image_generation: false

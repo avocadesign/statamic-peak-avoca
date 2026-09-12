@@ -21,3 +21,14 @@ This is Avoca's fork of studio1902/statamic-peak. `upstream` is the Peak remote;
 - Body and heading colour come from `--body-color` / `--headings-color` (upstream tokens). Do not
   add `text-neutral` or a colour utility to text inside page-builder blocks: the `.scheme-*`
   classes in `colours.css` invert those tokens (and the `--prose-*` tokens) for dark backgrounds.
+
+## Fresh-install rules (learned from the sandbox check)
+
+- `StarterKitPostInstall.php` is stock upstream except one addition in `cleanUp()`: it deletes the
+  skeleton's `public/robots.txt` so Peak SEO's robots route is not shadowed. Re-apply on merge.
+- Never name an env key ending in `APP_URL=` (e.g. `VITE_APP_URL`): the post-install does a
+  substring replace of `APP_URL=` and corrupts the line. The Vite key is `VITE_SITE_URL`.
+- Global values live in `content/globals/default/<handle>.yaml`. Statamic 6 ignores an inline
+  `data:` block in the root `content/globals/<handle>.yaml`; the root file holds only the title.
+- After any upstream merge: run the "Kit install check" workflow (or the same steps locally in a
+  throwaway site) before merging to main. It installs the kit fresh, builds, and renders pages.

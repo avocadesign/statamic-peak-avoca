@@ -6,9 +6,9 @@
 <section class="fluid-grid relative no-space-t py-8 md:py-10 lg:py-12 {{ class }}">
     <div class="span-content flex flex-col items-center gap-3">
         {{ if custom_page_title }}
-            {{ partial src="typography/h1" content="{page_heading}" class="z-10"}}
+            <h1 class="z-10">{{ page_heading | nl2br }}</h1>
         {{ else }}
-            {{ partial src="typography/h1" content="{ title }" class="z-10"}}
+            <h1 class="z-10">{{ title | nl2br }}</h1>
         {{ /if }}
         {{ if hero_type == "simple" && page_lede || hero_type == "hero" && page_lede }}
             <article class="prose max-w-none z-10">

@@ -1,0 +1,23 @@
+llms_content: |-
+  # {{ config:app:name }}
+
+  {{ get_content from="home" }}{{ if seo_description }}> {{ seo_description }}{{ /if }}{{ /get_content }}
+
+  Optional second paragraph: who the organisation is, who they serve, and any
+  context that helps an LLM reference the site accurately. Useful place to clarify
+  ambiguous names, regional scope, or sector.
+
+  ## Pages
+
+  {{ collection:pages }}{{ unless seo_noindex == "noindex" }}- [{{ title }}]({{ permalink }}){{ if seo_description }}: {{ seo_description }}{{ /if }}
+  {{ /unless }}{{ /collection:pages }}
+
+  ## Other collections (1 section per collection)
+
+  -
+
+  ## Contact
+
+  - [Contact page]({{ config:app:url }}/contact)
+  {{ if site_details:email }}- Email: {{ site_details:email }}{{ /if }}
+  - Location: [Town/City, Region, Country]

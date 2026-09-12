@@ -234,6 +234,12 @@ class StarterKitPostInstall
 
     protected function cleanUp(): void
     {
+        // Avoca: a fresh statamic/statamic project ships public/robots.txt, which shadows the
+        // robots.txt route Peak SEO serves from the SEO global. Upstream Peak has the same gap.
+        if (file_exists(base_path('public/robots.txt'))) {
+            unlink(base_path('public/robots.txt'));
+        }
+
         app('files')->exists(base_path('tailwind.config.js')) && app('files')->delete(base_path('tailwind.config.js'));
         app('files')->exists(base_path('postcss.config.js')) && app('files')->delete(base_path('postcss.config.js'));
 
