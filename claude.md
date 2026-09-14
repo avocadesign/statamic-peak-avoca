@@ -57,6 +57,8 @@ This is Avoca's fork of studio1902/statamic-peak. `upstream` is the Peak remote;
 - Block subheadings (the `<h3>` under the `<h2>` in text, media and text, columns, cards and two
   images) carry `.subheading`, declared in `typography.css`: the h4 size in medium weight. Restyle
   subheadings there, not in the partials.
+- Card titles in the Cards block are `<h3>` elements carrying `.card-heading`, declared in
+  `typography.css`: the h4 size. Restyle card titles there, not in the partial.
 - `--font-weight-medium: 500` is enabled in `theme.css` (upstream leaves it commented out). A custom font needs a
   500 file in `fonts.css`, or medium falls back to the regular face.
 - Heading line height is `--typography-headings-line-height` in `typography.css`, set to 1.2.

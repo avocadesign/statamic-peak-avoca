@@ -62,7 +62,7 @@
     }
 
     /* Anything set at a heading size takes the heading line height too. */
-    :is(.heading-size-1, .heading-size-2, .heading-size-3, .heading-size-4, .heading-size-5, .heading-size-6) {
+    :is(.heading-size-1, .heading-size-2, .heading-size-3, .heading-size-4, .heading-size-5, .heading-size-6, .subheading, .card-heading) {
         line-height: var(--typography-headings-line-height);
     }
 
@@ -94,6 +94,11 @@
     .subheading {
         font-size: var(--typography-h4);
         font-weight: var(--font-weight-medium);
+    }
+
+    /* Card titles: an h3 for the outline, set at the h4 size. */
+    .card-heading {
+        font-size: var(--typography-h4);
     }
 
     small {

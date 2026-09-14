@@ -66,14 +66,14 @@
                             {{# Link-wrapped heading #}}
                             {{ buttons limit="1" }}
                                 <a class="clickable-parent" {{ partial:statamic-peak-tools::snippets/button_attributes }} aria-hidden="true" tabindex="-1">
-                                    <h3 class="mb-0">{{ card_title | nl2br }}</h3>
+                                    <h3 class="card-heading mb-0">{{ card_title | nl2br }}</h3>
                                 </a>
                             {{ /buttons }}
                             {{# Accessible heading for screen readers #}}
                             <h3 class="sr-only">{{ card_title | nl2br }}</h3>
                         {{ else }}
                             {{# Standard heading (no link) #}}
-                            <h3 class="mb-0">{{ card_title | nl2br }}</h3>
+                            <h3 class="card-heading mb-0">{{ card_title | nl2br }}</h3>
                         {{ /if }}
 
                         {{ if card_text }}
