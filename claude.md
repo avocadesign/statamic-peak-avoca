@@ -47,3 +47,6 @@ This is Avoca's fork of studio1902/statamic-peak. `upstream` is the Peak remote;
   `colours.css`. Upstream `typography.css` is edited so its `--prose-*` tokens read those two instead
   of `--color-neutral`; re-apply after an upstream merge. Do not put a text colour class on ordinary
   text: it inherits the body colour, which is what lets the dark and primary schemes invert it.
+- Heading sizes are set in `resources/css/avoca.css` (`--typography-h1…h6`, one step per level:
+  4xl, 2xl, xl, lg, base, sm), overriding upstream `typography.css`. Change them there, never in
+  `typography.css`.
