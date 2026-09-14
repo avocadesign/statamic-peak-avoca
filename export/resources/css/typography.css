@@ -155,7 +155,7 @@
 
             hr {
                 border-top: 2px solid var(--prose-hr);
-                /* no margin of its own: the sibling spacing rule applies, like everything else */
+                margin-block: --spacing(16); /* double the standard stack (stack-8) */
             }
 
             blockquote {
