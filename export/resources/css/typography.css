@@ -33,6 +33,7 @@
     --typography-h4: var(--text-lg);
     --typography-h5: var(--text-base);
     --typography-h6: var(--text-sm);
+    --typography-headings-line-height: 1.2;
 
     --prose-sm-modifier: .875;
     --prose-lg-modifier: 1.125;
@@ -54,7 +55,7 @@
    }
 
     :is(h1, h2, h3, h4, h5, h6) {
-        line-height: var(--leading-tight, 1.25);
+        line-height: var(--typography-headings-line-height);
         color: var(--headings-color);
         font-weight: var(--font-weight-bold);
         text-wrap: balance;
