@@ -8,7 +8,7 @@
     --prose-bold: var(--body-color);
     --prose-counters: var(--body-color);
     --prose-bullets: var(--body-color);
-    --prose-hr: var(--body-color);
+    --prose-hr: var(--color-gray-200);
     --prose-quotes: var(--body-color);
     --prose-quote-borders: var(--color-primary);
 
@@ -20,7 +20,7 @@
     --prose-invert-bold: var(--color-white);
     --prose-invert-counters: var(--color-white);
     --prose-invert-bullets: var(--color-white);
-    --prose-invert-hr: var(--color-white);
+    --prose-invert-hr: var(--color-gray-700);
     --prose-invert-quotes: var(--color-white);
     --prose-invert-quote-borders: var(--color-white);
 
