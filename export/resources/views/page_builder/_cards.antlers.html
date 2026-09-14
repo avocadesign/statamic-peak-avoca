@@ -20,7 +20,7 @@
         {{ block:cards }}
             <li
                 class="
-                    relative group flex flex-col justify-between items-start
+                    relative group flex flex-col items-start
                     {{ switch(
                         (total_results === 1) => 'md:col-span-8 md:col-start-3',
                         (total_results === 2) => 'md:col-span-6',
@@ -36,7 +36,8 @@
                     )}}
                 "
             >
-                <div class="group stack-4">
+                {{# Image or icon, then the title and text, stacked so each part has room. #}}
+                <div class="w-full stack-6">
                     {{ if card_type == "image" && card_image }}
                         {{
                             partial:statamic-peak-tools::components/picture
@@ -60,7 +61,7 @@
                         }}
                     {{ /if}}
 
-                    <div class="">
+                    <div class="stack-4">
                         {{ if buttons }}
                             {{# Link-wrapped heading #}}
                             {{ buttons limit="1" }}
@@ -76,21 +77,22 @@
                         {{ /if }}
 
                         {{ if card_text }}
-                            <article class="prose max-w-none contents stack-8">
-                                {{ card_text}}
+                            <article class="prose max-w-none stack-8">
+                                {{ card_text }}
                             </article>
                         {{ /if }}
 
-                        {{ if buttons }}
-                            <div class="mt-2 flex flex-wrap gap-3 justify-start">
-                                {{ buttons limit="1" }}
-                                    {{ partial:components/button :label="label" :button_type="button_type" :button_colour="button_colour" :button_style="button_style" }}
-                                {{ /buttons }}
-                            </div>
-                        {{ /if }}
                     </div>
-
                 </div>
+
+                {{# Buttons sit at the foot of the card, level across the row whatever the card's height. #}}
+                {{ if buttons }}
+                    <div class="mt-auto pt-6 flex flex-wrap gap-3 justify-start">
+                        {{ buttons limit="1" }}
+                            {{ partial:components/button :label="label" :button_type="button_type" :button_colour="button_colour" :button_style="button_style" }}
+                        {{ /buttons }}
+                    </div>
+                {{ /if }}
             </li>
         {{ /block:cards }}
     </ul>

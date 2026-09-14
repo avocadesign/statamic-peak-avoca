@@ -68,3 +68,8 @@ This is Avoca's fork of studio1902/statamic-peak. `upstream` is the Peak remote;
   `span-md`, which starts the buttons in from the text edge.
 - The size field saves its XL option as `2xl`. Pull quote and Video had no `2xl` case, upstream too, so XL
   fell back to `span-md`. They now map it to `span-content`, like Image, HTML and Table.
+
+## Page builder blocks
+
+- Cards: the buttons sit at the foot of each card (`mt-auto`), level across a row, and the image, title
+  and text are stacked (`stack-6`, `stack-4`). The card text article is no longer `contents`.
