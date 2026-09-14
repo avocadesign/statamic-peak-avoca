@@ -2,11 +2,11 @@
 @import "./fonts.css";
 @import "./components/buttons.css" layer(components);
 @import "./components/caption.css" layer(components);
+@import "./components/clickable-parent.css" layer(components);
 @import "./peak.css" ;
 @import "./theme.css";
 @import "./typography.css";
 @import "./utilities.css";
 
-/* Avoca: colour schemes + site components layered on top of Peak's defaults. */
+/* Avoca: every colour token and the colour schemes. */
 @import "./colours.css";
-@import "./avoca.css";

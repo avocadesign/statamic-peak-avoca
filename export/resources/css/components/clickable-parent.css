@@ -1,0 +1,19 @@
+/*
+    Clickable parent: stretch one link inside a card over the whole card.
+    https://codepen.io/potatoDie/pen/abzvGxG
+    Put `clickable-parent` on the link itself, or on a wrapper whose first link should take over.
+*/
+a.clickable-parent,
+.clickable-parent:not(a),
+.clickable-parent:not(a) a {
+    position: static;
+}
+
+a.clickable-parent::after,
+.clickable-parent:not(a) > a::after {
+    content: "";
+    display: flex;
+    position: absolute;
+    inset: 0;
+    cursor: pointer !important;
+}

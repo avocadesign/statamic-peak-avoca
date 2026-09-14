@@ -26,6 +26,7 @@
 
     --typography-sm: var(--text-sm);
     --typography-base: var(--text-base);
+    --typography-lede: var(--text-xl);
     --typography-h1: var(--text-4xl);
     --typography-h2: var(--text-2xl);
     --typography-h3: var(--text-xl);
@@ -85,6 +86,11 @@
 
     small {
         font-size: var(--typography-sm);
+    }
+
+    /* Bard TextStyle "lede" (config/statamic/bard_texstyle.php) */
+    .lede {
+        font-size: var(--typography-lede);
     }
 
     .prose {

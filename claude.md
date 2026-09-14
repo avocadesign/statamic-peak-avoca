@@ -9,9 +9,10 @@ This is Avoca's fork of studio1902/statamic-peak. `upstream` is the Peak remote;
   `resources/views/layout/navigation` in this fork.
 - Cards: this fork ships its own `cards` block (fieldset + `page_builder/_cards`). Keep ours on merge.
 - Text component uses `span-lg` class (not upstream's `span-md`).
-- `resources/css/site.css` must only differ from upstream by the two Avoca imports at the end
-  (`colours.css`, `avoca.css`). Everything Avoca-specific lives in those two files and in
-  `components/buttons.css` (the `.btn` scheme appended after upstream's `.button`).
+- `resources/css/site.css` differs from upstream by two imports: `components/clickable-parent.css`
+  (in the components layer, beside upstream's buttons and caption) and `colours.css` at the end.
+  `.lede` is a typography token and rule in `typography.css`; the `.btn` scheme is appended to
+  `components/buttons.css` after upstream's `.button`. There is no `avoca.css`.
 - Robots: Peak SEO serves `/robots.txt` from the SEO global. The `bots` global only holds `llms.txt`.
 
 ## Typography (since Peak v22, "Modern typography")
