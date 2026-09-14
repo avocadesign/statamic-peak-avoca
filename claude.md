@@ -64,4 +64,5 @@ This is Avoca's fork of studio1902/statamic-peak. `upstream` is the Peak remote;
 
 - The Buttons set uses `span-lg` inside an article, the width of the text around it. Upstream uses
   `span-md`, which starts the buttons in from the text edge.
-- Pull quote text is `text-2xl`. Upstream is `text-xl`.
+- The size field saves its XL option as `2xl`. Pull quote and Video had no `2xl` case, upstream too, so XL
+  fell back to `span-md`. They now map it to `span-content`, like Image, HTML and Table.

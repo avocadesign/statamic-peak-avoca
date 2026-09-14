@@ -12,11 +12,12 @@
             (size == 'md') => 'span-md',
             (size == 'lg') => 'span-lg',
             (size == 'xl') => 'span-xl',
+            (size == '2xl') => 'span-content',
             () => 'span-md'
         )}}
     "
 >
-    <blockquote class="p-0 m-0 text-2xl font-bold leading-snug">
+    <blockquote class="p-0 m-0 text-xl font-bold leading-snug">
         <span class="text-primary">&OpenCurlyDoubleQuote;</span>{{ quote | widont | nl2br }}<span class="text-primary">&CloseCurlyDoubleQuote;</span>
     </blockquote>
     {{ if author }}
