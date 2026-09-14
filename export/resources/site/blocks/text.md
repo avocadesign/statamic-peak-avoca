@@ -10,12 +10,12 @@ description: A heading, an optional subheading and a short passage of text.
 
 ## When not to use
 
-- Long, continuous text such as a policy, terms or an article: use a Simple Page instead of a page builder page.
-- A longer story on a page builder page: break it into short Text blocks with other blocks between them, such as Media and text or Cards.
+- A longer story on a page builder page: break it into multiple blocks with mixed blocks types, such as Media and text or Cards.
 - Text that belongs beside one image or video: use Media and text.
 - Two short pieces of text side by side: use Text Columns.
 - A short prompt to act, with a button: use Call to action.
 - Several short items of equal weight: use Cards.
+- Long, continuous text such as a policy, terms or an article: use a "simple" page or post instead.
 
 ## Notes for AI
 
