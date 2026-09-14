@@ -50,7 +50,8 @@
             {{ /article }}
         </div>
 
-        {{ partial:components/buttons }}
+        {{# Buttons sit a clear step below the text: the column gap plus mt-4. #}}
+        {{ partial:components/buttons class="mt-4" }}
     </article>
 
     {{# media wrapper #}}
