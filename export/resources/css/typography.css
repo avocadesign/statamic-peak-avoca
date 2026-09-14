@@ -22,7 +22,7 @@
     --prose-invert-bullets: var(--color-white);
     --prose-invert-hr: var(--color-gray-700);
     --prose-invert-quotes: var(--color-white);
-    --prose-invert-quote-borders: var(--color-white);
+    --prose-invert-quote-borders: var(--color-primary);
 
     --typography-sm: var(--text-sm);
     --typography-base: var(--text-base);

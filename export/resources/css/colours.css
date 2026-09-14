@@ -83,6 +83,7 @@
         /* primary links would vanish on the primary background */
         --prose-link-decoration: var(--color-white);
         --prose-links-hover: var(--color-white);
+        --prose-quote-borders: var(--color-white);
     }
     .scheme-dark    { background-color: var(--color-dark); }
 }
