@@ -80,7 +80,9 @@
 
     .scheme-primary {
         background-color: var(--color-primary);
-        --prose-link-decoration: var(--color-white); /* a primary underline would vanish here */
+        /* primary links would vanish on the primary background */
+        --prose-link-decoration: var(--color-white);
+        --prose-links-hover: var(--color-white);
     }
     .scheme-dark    { background-color: var(--color-dark); }
 }
