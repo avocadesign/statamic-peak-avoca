@@ -52,7 +52,7 @@
         <header class="span-content flex flex-col gap-1 mb-4 {{ heading_classes }} {{ (display_style == 'inline' || display_style == 'stacked') ? text_vertical_alignment_classes : '' }} {{ display_style == 'offset' ? 'self-start' : '' }}">
             <h2>{{ block:heading | nl2br }}</h2>
             {{ if block:sub_heading }}
-                <h3>{{ block:sub_heading | nl2br }}</h3>
+                <h3 class="subheading">{{ block:sub_heading | nl2br }}</h3>
             {{ /if }}
             {{ if article }}
                 <article class="prose max-w-none mt-4 stack-8">

@@ -54,3 +54,8 @@ This is Avoca's fork of studio1902/statamic-peak. `upstream` is the Peak remote;
 - Heading sizes are the `--typography-h1…h6` tokens at the top of `typography.css` (one step per
   level: 4xl, 2xl, xl, lg, base, sm). That block differs from upstream on purpose, as do the
   prose colour tokens beside it; re-apply both after an upstream merge.
+- Block subheadings (the `<h3>` under the `<h2>` in text, media and text, columns, cards and two
+  images) carry `.subheading`, declared in `typography.css`: the h4 size in medium weight. Restyle
+  subheadings there, not in the partials.
+- `--font-weight-medium: 500` is enabled in `theme.css` (upstream leaves it commented out). A custom font needs a
+  500 file in `fonts.css`, or medium falls back to the regular face.

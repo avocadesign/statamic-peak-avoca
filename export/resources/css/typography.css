@@ -84,6 +84,12 @@
         font-size: var(--typography-h6);
     }
 
+    /* Block subheadings: an h3 for the outline, set at the h4 size in medium weight. */
+    .subheading {
+        font-size: var(--typography-h4);
+        font-weight: var(--font-weight-medium);
+    }
+
     small {
         font-size: var(--typography-sm);
     }
