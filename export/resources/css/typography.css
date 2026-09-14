@@ -1,17 +1,15 @@
 @theme {
-    --body-color: var(--color-neutral);
-    --headings-color: var(--color-neutral);
 
-    --prose-base: var(--color-neutral);
-    --prose-headings: var(--color-neutral);
-    --prose-links: var(--color-neutral);
+    --prose-base: var(--body-color);
+    --prose-headings: var(--headings-color);
+    --prose-links: var(--body-color);
     --prose-links-hover: var(--color-primary);
     --prose-link-decoration: var(--color-primary);
-    --prose-bold: var(--color-neutral);
-    --prose-counters: var(--color-neutral);
-    --prose-bullets: var(--color-neutral);
-    --prose-hr: var(--color-neutral);
-    --prose-quotes: var(--color-neutral);
+    --prose-bold: var(--body-color);
+    --prose-counters: var(--body-color);
+    --prose-bullets: var(--body-color);
+    --prose-hr: var(--body-color);
+    --prose-quotes: var(--body-color);
     --prose-quote-borders: var(--color-primary);
 
     --prose-invert-base: var(--color-white);

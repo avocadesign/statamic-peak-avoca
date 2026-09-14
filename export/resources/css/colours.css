@@ -5,9 +5,10 @@
     removed on purpose. peak.css (upstream) keeps spacing and transitions; its black, white and
     grey lines have moved here. Re-apply both removals after an upstream merge.
 
-    One grey scale, `gray`, mapped to Tailwind's slate. There is no `neutral` scale: use gray-800
-    where upstream Peak used neutral. `@theme static` makes every token exist in the built CSS
-    even when nothing uses it, so hand-written CSS and the style kit can rely on var(--color-*).
+    One grey scale, `gray`, mapped to Tailwind's slate. There is no `neutral` scale and no alias:
+    text takes --body-color and --headings-color, which are set here and read by typography.css.
+    `@theme static` makes every token exist in the built CSS even when nothing uses it, so
+    hand-written CSS and the style kit can rely on var(--color-*).
 */
 @theme static {
     /* Brand */
@@ -34,9 +35,9 @@
     --color-gray-900: var(--color-slate-900);
     --color-gray-950: var(--color-slate-950);
 
-    /* Upstream compatibility only. Peak's typography.css reads --color-neutral for the body,
-       headings and prose colours. Never use `neutral` in Avoca views or CSS. */
-    --color-neutral: var(--color-gray-800);
+    /* Text. Upstream typography.css derives the prose colours from these two. */
+    --body-color: var(--color-gray-800);
+    --headings-color: var(--color-gray-900);
 
     /* Vertical padding applied to non-default colour scheme blocks (spacing(12) → 3rem) */
     --scheme-block-padding: calc(var(--spacing) * 12);

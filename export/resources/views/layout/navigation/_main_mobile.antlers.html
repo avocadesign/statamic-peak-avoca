@@ -38,7 +38,7 @@
                         <a
                             class="
                                 w-full py-2 flex items-center gap-x-1 text-lg font-bold hover:text-primary
-                                {{ is_current || is_parent ? 'text-primary' : 'text-gray-800' }}
+                                {{ is_current || is_parent ? 'text-primary' : '' }}
                             "
                             {{ if children }}
                                 href="#"
@@ -56,7 +56,7 @@
 
                             {{ if children }}
                                 <div :class="{ 'scale-y-[-1]': subnavOpen }" class="motion-safe:transition-transform">
-                                    {{ svg:chevron_down attr:class="w-2 ml-1 overflow-visible stroke-current text-gray-800" attr:aria-hidden="true" }}
+                                    {{ svg:chevron_down attr:class="w-2 ml-1 overflow-visible stroke-current" attr:aria-hidden="true" }}
                                 </div>
                             {{ elseif target_blank }}
                                 <span class="sr-only">{{ trans:strings.external_link }}</span>
@@ -76,7 +76,7 @@
                                         <a
                                             class="
                                                 block py-2 whitespace-nowrap font-bold hover:text-primary
-                                                {{ is_current || is_parent ? 'text-primary' : 'text-gray-800' }}
+                                                {{ is_current || is_parent ? 'text-primary' : '' }}
                                             "
                                             href="{{ url }}"
                                             {{ if target_blank }}target="_blank" rel="noopener"{{ /if }}

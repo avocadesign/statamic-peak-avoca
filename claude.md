@@ -42,5 +42,8 @@ This is Avoca's fork of studio1902/statamic-peak. `upstream` is the Peak remote;
   upstream `theme.css` and the black/white/grey lines in upstream `peak.css` are removed on purpose;
   re-remove them after an upstream merge.
 - One grey scale, spelt `gray` (Peak's and Tailwind's spelling), mapped to Tailwind's slate. There
-  is no `neutral` scale. `--color-neutral` exists only as an alias for upstream `typography.css`;
-  never write `neutral` in Avoca views, CSS or content. Use `gray-800` for text and borders.
+  is no `neutral` scale and no alias. Never write `neutral` in Avoca views, CSS or content.
+- Text colour is `--body-color` (gray-800) and `--headings-color` (gray-900), declared in
+  `colours.css`. Upstream `typography.css` is edited so its `--prose-*` tokens read those two instead
+  of `--color-neutral`; re-apply after an upstream merge. Do not put a text colour class on ordinary
+  text: it inherits the body colour, which is what lets the dark and primary schemes invert it.
