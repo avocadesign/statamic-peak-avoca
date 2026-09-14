@@ -81,9 +81,6 @@ fields:
         -
           key: stacked
           value: 'Text above media'
-        -
-          key: no-gap
-          value: 'No gap'
       default: even
       type: select
       display: 'Column layout'
