@@ -14,16 +14,3 @@
     .clickable-parent:not(a) a { @apply static; }
     .clickable-parent:not(a) > a:after { content: ""; cursor: pointer !important; @apply flex absolute inset-0; }
 }
-
-/*
-    Heading scale: one distinct step per level. Upstream typography.css sets h4, h5 and h6 all to
-    --text-lg; these re-declare the tokens (site.css imports this file last, so they win).
-*/
-@theme {
-    --typography-h1: var(--text-4xl);
-    --typography-h2: var(--text-2xl);
-    --typography-h3: var(--text-xl);
-    --typography-h4: var(--text-lg);
-    --typography-h5: var(--text-base);
-    --typography-h6: var(--text-sm);
-}
