@@ -1,11 +1,5 @@
 tree:
-  -
-    entry: home
-  -
-    entry: a3d989f5-eccf-4aa7-b346-a03819a54dfb
-  -
-    entry: e55aac94-9e98-407a-b8c0-6fb9c3dad7e9
-  -
-    entry: b1c59cf8-bb49-40a0-9fa9-2bbfd5d9c8be
-  -
-    entry: 059d4d8d-fc60-49f8-8823-7da10549e84e
+- entry: home
+- entry: a3d989f5-eccf-4aa7-b346-a03819a54dfb
+- entry: e55aac94-9e98-407a-b8c0-6fb9c3dad7e9
+- entry: 059d4d8d-fc60-49f8-8823-7da10549e84e

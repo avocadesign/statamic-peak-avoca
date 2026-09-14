@@ -26,9 +26,6 @@
         {{ /partial:page_builder/block }}
         <!-- End: /page_builder/_article.antlers.html -->
     {{ /if}}
-    {{ if blueprint == "style_kit" }}
-        {{ partial src="components/style_kit" }}
-    {{ /if }}
     {{ page_builder scope="block" }}
         {{ partial src="page_builder/{type}" }}
     {{ /page_builder }}
