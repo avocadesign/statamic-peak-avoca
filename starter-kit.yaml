@@ -31,6 +31,7 @@ export_paths:
   - resources/blueprints
   - resources/css
   - resources/fieldsets
+  - resources/site
   - resources/forms
   - resources/js/cp.js
   - resources/js/site.js
