@@ -16,7 +16,7 @@
     --prose-invert-headings: var(--color-white);
     --prose-invert-links: var(--color-white);
     --prose-invert-links-hover: var(--color-white);
-    --prose-invert-link-decoration: var(--color-white);
+    --prose-invert-link-decoration: var(--color-primary);
     --prose-invert-bold: var(--color-white);
     --prose-invert-counters: var(--color-white);
     --prose-invert-bullets: var(--color-white);
