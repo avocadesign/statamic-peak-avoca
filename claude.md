@@ -59,3 +59,9 @@ This is Avoca's fork of studio1902/statamic-peak. `upstream` is the Peak remote;
   subheadings there, not in the partials.
 - `--font-weight-medium: 500` is enabled in `theme.css` (upstream leaves it commented out). A custom font needs a
   500 file in `fonts.css`, or medium falls back to the regular face.
+
+## Bard sets
+
+- The Buttons set uses `span-lg` inside an article, the width of the text around it. Upstream uses
+  `span-md`, which starts the buttons in from the text edge.
+- Pull quote text is `text-2xl`. Upstream is `text-xl`.
