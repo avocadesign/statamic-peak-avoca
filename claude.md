@@ -19,6 +19,9 @@ This is Avoca's fork of studio1902/statamic-peak. `upstream` is the Peak remote;
 
 - The `typography/*` partials are gone upstream and here. Write plain elements: `<h2 class="...">`,
   `<p>`, `<figcaption class="caption">`, `<article class="prose max-w-none">`.
+- Peak's `.prose` rules only style content inside a wrapper element that is the direct child of
+  `.prose` (Bard chunks render as `<div>`). Hand-written prose must be wrapped the same way:
+  `<article class="prose"><div>…</div></article>`, never bare headings or lists in the article.
 - Body and heading colour come from `--body-color` / `--headings-color` (upstream tokens). Do not
   add `text-neutral` or a colour utility to text inside page-builder blocks: the `.scheme-*`
   classes in `colours.css` invert those tokens (and the `--prose-*` tokens) for dark backgrounds.
