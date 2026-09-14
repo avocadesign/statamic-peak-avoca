@@ -22,7 +22,7 @@
         {{ if _consent_embeds }}
             <div
                 x-show="!$store.consentBanner.getConsent() || !$store.consentBanner.getConsentValue('embeds')"
-                class="absolute z-10 inset-0 p-6 flex justify-center items-center bg-neutral/10 text-neutral/80"
+                class="absolute z-10 inset-0 p-6 flex justify-center items-center bg-gray-800/10 text-gray-800/80"
             >
                 <a @click.prevent="!$store.consentBanner.getConsent() ? $store.consentBanner.accept('embeds') : $store.consentBanner.revokeConsent()" href="#" class="underline">
                     <span x-show="!$store.consentBanner.getConsent()">{{ explainer_accept ?? { trans:strings.consent_embeds_accept } }}</span>

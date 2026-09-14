@@ -1,16 +1,42 @@
 /*
-    Avoca colour schemes.
+    Colours: the one place every colour token is declared.
 
-    The palette (primary, neutral scale), fonts and fluid type live in theme.css and
-    typography.css from upstream Peak. This file only adds the semantic scheme colours and the
-    .scheme-* classes the page-builder block wrapper applies from the `colour_scheme` field.
+    theme.css (upstream Peak) keeps the fonts and the type scale; its palette block has been
+    removed on purpose. peak.css (upstream) keeps spacing and transitions; its black, white and
+    grey lines have moved here. Re-apply both removals after an upstream merge.
 
-    Text inversion works by overriding the tokens upstream's typography reads per element
-    (--body-color, --headings-color, --prose-*), so nothing in a template needs a colour class.
+    One grey scale, `gray`, mapped to Tailwind's slate. There is no `neutral` scale: use gray-800
+    where upstream Peak used neutral. `@theme static` makes every token exist in the built CSS
+    even when nothing uses it, so hand-written CSS and the style kit can rely on var(--color-*).
 */
-@theme {
-    --color-light: var(--color-neutral-100);
-    --color-dark: var(--color-neutral-900);
+@theme static {
+    /* Brand */
+    --color-primary: oklch(53.24% 0.301 290.86);
+
+    /* Semantic */
+    --color-light: var(--color-gray-100);
+    --color-dark: var(--color-gray-900);
+    --color-black: #000;
+    --color-white: #fff;
+    --color-current: currentColor;
+    --color-transparent: transparent;
+
+    /* Grey scale */
+    --color-gray-50: var(--color-slate-50);
+    --color-gray-100: var(--color-slate-100);
+    --color-gray-200: var(--color-slate-200);
+    --color-gray-300: var(--color-slate-300);
+    --color-gray-400: var(--color-slate-400);
+    --color-gray-500: var(--color-slate-500);
+    --color-gray-600: var(--color-slate-600);
+    --color-gray-700: var(--color-slate-700);
+    --color-gray-800: var(--color-slate-800);
+    --color-gray-900: var(--color-slate-900);
+    --color-gray-950: var(--color-slate-950);
+
+    /* Upstream compatibility only. Peak's typography.css reads --color-neutral for the body,
+       headings and prose colours. Never use `neutral` in Avoca views or CSS. */
+    --color-neutral: var(--color-gray-800);
 
     /* Vertical padding applied to non-default colour scheme blocks (spacing(12) → 3rem) */
     --scheme-block-padding: calc(var(--spacing) * 12);

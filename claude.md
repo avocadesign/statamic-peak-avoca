@@ -35,3 +35,12 @@ This is Avoca's fork of studio1902/statamic-peak. `upstream` is the Peak remote;
 - Default robots policy (SEO global → Robots): allow search engines and AI search/assistant
   fetchers, block AI training crawlers. Edit the list in the CP, never in a template; Peak SEO
   appends the Sitemap line itself, so do not add one.
+
+## Colours (decided 14 Sept 2026)
+
+- Every colour token lives in `resources/css/colours.css` (`@theme static`). The palette block in
+  upstream `theme.css` and the black/white/grey lines in upstream `peak.css` are removed on purpose;
+  re-remove them after an upstream merge.
+- One grey scale, spelt `gray` (Peak's and Tailwind's spelling), mapped to Tailwind's slate. There
+  is no `neutral` scale. `--color-neutral` exists only as an alias for upstream `typography.css`;
+  never write `neutral` in Avoca views, CSS or content. Use `gray-800` for text and borders.

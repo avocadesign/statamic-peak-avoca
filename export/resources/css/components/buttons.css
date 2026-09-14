@@ -74,8 +74,8 @@
 }
 .btn-primary         { @apply bg-primary text-white focus:outline-primary hover:opacity-90; }
 .btn-primary-outline { @apply border-2 border-primary text-primary focus:outline-primary hover:bg-primary hover:text-white; }
-.btn-light           { @apply bg-neutral-200 text-neutral focus:outline-white hover:bg-gray-100; }
-.btn-light-outline   { @apply border-2 border-neutral-200 text-neutral focus:outline-white hover:bg-white hover:text-primary; }
+.btn-light           { @apply bg-gray-200 text-gray-800 focus:outline-white hover:bg-gray-100; }
+.btn-light-outline   { @apply border-2 border-gray-200 text-gray-800 focus:outline-white hover:bg-white hover:text-primary; }
 
 .btn-inline {
     @apply inline-flex items-baseline gap-0.5 font-bold underline decoration-2 decoration-primary focus:outline-primary motion-safe:transition;
