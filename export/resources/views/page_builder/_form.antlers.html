@@ -23,7 +23,7 @@
                     <template x-if="form.hasErrors && submitted">
                         {{ partial:components/notification type="error" }}
                             {{ slot:attributes }}id="summary" role="group"{{ /slot:attributes }}
-                            <h3 class="mb-2 leading-5 font-bold text-red-700">{{ trans:strings.form_error }}</h3>
+                            <h3 class="mb-2 font-bold text-red-700">{{ trans:strings.form_error }}</h3>
                             <ul class="list-disc list-inside marker:text-red-700">
                                 <template x-for="(error, index) in form.errors">
                                     <li>
@@ -62,7 +62,7 @@
                         <fieldset class="w-full grid md:grid-cols-12 gap-6">
                             {{ if display || instructions }}
                                 <span class="md:col-span-12">
-                                    {{ if display }}<legend class="mb-2 heading-size-2 font-bold leading-tight">{{ trans :key="display" }}</legend>{{ /if }}
+                                    {{ if display }}<legend class="mb-2 heading-size-2 font-bold">{{ trans :key="display" }}</legend>{{ /if }}
                                     {{ if instructions }}<p>{{ trans :key="instructions" }}</p>{{ /if }}
                                 </span>
                             {{ /if }}

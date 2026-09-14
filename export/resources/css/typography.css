@@ -61,6 +61,11 @@
         text-wrap: balance;
     }
 
+    /* Anything set at a heading size takes the heading line height too. */
+    :is(.heading-size-1, .heading-size-2, .heading-size-3, .heading-size-4, .heading-size-5, .heading-size-6) {
+        line-height: var(--typography-headings-line-height);
+    }
+
     h1, .heading-size-1 {
         font-size: var(--typography-h1);
     }

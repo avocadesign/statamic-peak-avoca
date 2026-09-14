@@ -60,7 +60,9 @@ This is Avoca's fork of studio1902/statamic-peak. `upstream` is the Peak remote;
 - `--font-weight-medium: 500` is enabled in `theme.css` (upstream leaves it commented out). A custom font needs a
   500 file in `fonts.css`, or medium falls back to the regular face.
 - Heading line height is `--typography-headings-line-height` in `typography.css`, set to 1.2.
-  Upstream uses Tailwind's `--leading-tight` (1.25) directly.
+  Upstream uses Tailwind's `--leading-tight` (1.25) directly. The `.heading-size-*` classes take it too.
+  Size a heading with `heading-size-*`, never `text-*` or `leading-*`: Tailwind's text utilities carry
+  their own line height and would override the token.
 
 ## Bard sets
 
