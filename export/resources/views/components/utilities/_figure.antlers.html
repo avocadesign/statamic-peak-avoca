@@ -2,9 +2,10 @@
     @name Figure
     @desc A reusable figure component for images with optional link and caption.
     @param full_height Make the figure fill the height of its container
+    @param caption_inline Lay the caption over the bottom left of the image instead of below it
 #}}
 
-<figure class="{{ class ?: 'not-prose' }} {{ caption_absolute ? 'relative' : '' }} {{ full_height ? 'lg:h-full' : '' }}">
+<figure class="{{ class ?: 'not-prose' }} {{ caption_inline ? 'relative' : '' }} {{ full_height ? 'lg:h-full' : '' }}">
     {{ if link_type && link_type != 'none' }}
         <a
             href="{{ switch(
@@ -39,6 +40,6 @@
     {{ /if }}
 
     {{ if caption }}
-        <figcaption class="caption">{{ caption }}</figcaption>
+        <figcaption class="caption{{ caption_inline ? ' caption-inline' : '' }}">{{ caption }}</figcaption>
     {{ /if }}
 </figure>

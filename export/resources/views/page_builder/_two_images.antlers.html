@@ -50,7 +50,7 @@
     {{# Headings in standard output #}}
     <div class="span-content grid grid-cols-subgrid gap-fluid-grid-gap gap-y-4 {{ grid_row_classes }}">
         <header class="span-content flex flex-col gap-1 mb-4 {{ heading_classes }} {{ (display_style == 'inline' || display_style == 'stacked') ? text_vertical_alignment_classes : '' }} {{ display_style == 'offset' ? 'self-start' : '' }}">
-            <h2>{{ block:heading | nl2br }}</h2>
+            {{ if block:heading }}<h2>{{ block:heading | nl2br }}</h2>{{ /if }}
             {{ if block:sub_heading }}
                 <h3 class="subheading">{{ block:sub_heading | nl2br }}</h3>
             {{ /if }}
@@ -74,7 +74,7 @@
                     :link_file="image1_link_file"
                     :link_url="image1_link_url"
                     :link_entry="image1_link_entry"
-                    :caption_absolute="display_style == 'offset'"
+                    :caption_inline="display_style == 'offset'"
                     sizes="{{ display_style == 'inline' ? '(min-width: 1280px) 426px, (min-width: 768px) 33vw, 90vw' : '(min-width: 1280px) 640px, (min-width: 768px) 50vw, 90vw' }}"
                     class="{{ (display_style == 'offset' && (image1_crop == 'none' || !image1_crop)) ? 'h-full [&_img]:h-full [&_img]:object-cover' : 'not-prose' }}"
                 }}
@@ -90,7 +90,7 @@
                         :link_file="image2_link_file"
                         :link_url="image2_link_url"
                         :link_entry="image2_link_entry"
-                        :caption_absolute="display_style == 'offset'"
+                        :caption_inline="display_style == 'offset'"
                         sizes="{{ display_style == 'inline' ? '(min-width: 1280px) 426px, (min-width: 768px) 33vw, 90vw' : '(min-width: 1280px) 640px, (min-width: 768px) 50vw, 90vw' }}"
                     }}
                 {{ /block:image_2 }}
@@ -109,7 +109,7 @@
                         :link_file="image2_link_file"
                         :link_url="image2_link_url"
                         :link_entry="image2_link_entry"
-                        :caption_absolute="display_style == 'offset'"
+                        :caption_inline="display_style == 'offset'"
                         sizes="{{ display_style == 'inline' ? '(min-width: 1280px) 426px, (min-width: 768px) 33vw, 90vw' : '(min-width: 1280px) 640px, (min-width: 768px) 50vw, 90vw' }}"
                     }}
                 {{ /block:image_2 }}

@@ -98,6 +98,7 @@ fields:
       always_save: true
       if:
         display_settings: 'equals true'
+        display_style: 'contains_any inline, stacked'
       if_any:
         display_style: 'contains_any inline,stacked'
   -

@@ -266,7 +266,7 @@ This block's content can include the text editor sets listed under Text editor s
 - `display_settings`: Display settings. A switch in the editor that shows the fields depending on it. It saves nothing, so write the fields it reveals directly. Help: Change how this block looks: its layout, colour scheme and spacing.
 - `display_style`: Display Style. Choice (`select`). Options: `standard` Standard, `inline` Inline, `stacked` Stacked, `offset` Offset. Default `standard`. Only when Display settings is on.
 - `text_position`: Text Position. Choice (`button_group`). Options: `left` Left, `right` Right. Default `right`. Only when Display settings is on and Display Style is not Standard.
-- `text_vertical_alignment`: Text vertical alignment. Choice (`select`). Options: `top` Top, `centred` Centred vertically, `bottom` Bottom. Default `centred`. Only when Display settings is on, and only when Display Style is Inline or Stacked.
+- `text_vertical_alignment`: Text vertical alignment. Choice (`select`). Options: `top` Top, `centred` Centred vertically, `bottom` Bottom. Default `centred`. Only when Display settings is on and Display Style is Inline or Stacked, and only when Display Style is Inline or Stacked.
 - `colour_scheme`: Colour Scheme. Choice (`select`). Options: `default` Default, `light` Light, `primary` Primary, `dark` Dark. Default `default`. Only when Display settings is on. Help: Set a BG colour for the block.
 - `block_margins`: Block Margins. Choice (`select`). Options: `default` Default, `no-top` No top margin, `no-bottom` No bottom margin, `no-top-bottom` No margin top or bottom, `half-top` Half top margin. Default `default`. Only when Display settings is on. Help: Override the default block spacing.
 

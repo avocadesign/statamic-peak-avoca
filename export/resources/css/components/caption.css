@@ -4,3 +4,16 @@
 
     font-size: var(--text-sm);
 }
+
+/* Inline caption: laid over the bottom left of its image on translucent white. Figures opt in with caption_inline. */
+.caption-inline {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    max-width: 100%;
+    margin-top: 0;
+    padding: --spacing(2) --spacing(3);
+
+    background-color: color-mix(in oklab, var(--color-white) 80%, transparent);
+    color: var(--color-dark);
+}
