@@ -10,6 +10,8 @@ Build this site's pages only from the page builder blocks and text editor sets l
 
 A heading, an optional subheading and a short passage of text.
 
+Listed under Content in the page builder.
+
 This block's content can include the text editor sets listed under Text editor sets.
 
 #### When to use
@@ -49,6 +51,8 @@ This block's content can include the text editor sets listed under Text editor s
 ### Media and text (`media_and_text`)
 
 An image or video beside a heading, short text and optional buttons.
+
+Listed under Content in the page builder.
 
 This block's content can include the text editor sets listed under Text editor sets.
 
@@ -122,6 +126,8 @@ This block's content can include the text editor sets listed under Text editor s
 
 A heading, an optional subheading and two columns side by side, each holding text and elements such as images, tables, pull quotes or buttons.
 
+Listed under Content in the page builder.
+
 This block's content can include the text editor sets listed under Text editor sets.
 
 #### When to use
@@ -169,6 +175,32 @@ This block's content can include the text editor sets listed under Text editor s
 
 ### Cards (`cards`)
 
+A row of cards, each with a title, short text, an optional image or icon and an optional button.
+
+Listed under Content in the page builder.
+
+#### When to use
+
+- Several short items of equal weight, such as features, benefits, steps in a process or links to key pages.
+- Signposting to other pages, with one button on each card.
+- Choose Card Type for the whole block: Text for bordered cards, Image for a photo above each title, Icon for a small icon or logo.
+
+#### When not to use
+
+- One item on its own: use Media and text or Call to action.
+- Two pieces of longer text: use Text Columns.
+- A set of photos with no text: use Gallery.
+- Items that need headings, lists of several points or more than a short paragraph each: use Text Columns or separate Text blocks.
+
+#### Notes for AI
+
+- When the cards would link to entries in a collection, such as posts, projects or team members, look for a block that lists that collection, usually listed under Dynamic in the page builder, and use it instead of Cards. Use Cards for collection entries only when there is a very good reason.
+- Use three cards, or six in two rows of three. Two or four cards form two columns, and one card sits alone in the middle.
+- Keep every card alike: a title of a few words, and card text of one or two sentences, about 30 words, with no headings.
+- Each card shows only its first button, and that button makes the whole card clickable. Give each card one button at most.
+- With Card Type set to Image or Icon, every card needs an image. Use the same image shape for all cards in a block.
+- Write card titles and text to a similar length, so the cards line up evenly.
+
 #### Fields
 
 - `cards_heading`: Heading. Text (`text`).
@@ -206,6 +238,8 @@ This block's content can include the text editor sets listed under Text editor s
 
 Two images with optional text
 
+Listed under Content in the page builder.
+
 This block's content can include the text editor sets listed under Text editor sets.
 
 #### Fields
@@ -240,6 +274,8 @@ This block's content can include the text editor sets listed under Text editor s
 
 A multi row image gallery.
 
+Listed under Content in the page builder.
+
 #### Fields
 
 - `heading`: Heading. Text (`text`).
@@ -253,6 +289,8 @@ A multi row image gallery.
 ### Call to action (`call_to_action`)
 
 Show a call to action.
+
+Listed under Content in the page builder.
 
 #### Fields
 
@@ -282,6 +320,8 @@ Show a call to action.
 
 A divider between sections
 
+Listed under Content in the page builder.
+
 #### Fields
 
 - None.
@@ -290,6 +330,8 @@ A divider between sections
 
 An invisible anchor that can be linked to via #id.
 
+Listed under Content in the page builder.
+
 #### Fields
 
 - `anchor_text`: Anchor ID. Slug (`slug`), required. Help: Sets an id on the page that can be linked to (e.g. #my-anchor).
@@ -297,6 +339,8 @@ An invisible anchor that can be linked to via #id.
 ### Form (`form`)
 
 Select and render a form.
+
+Listed under Dynamic in the page builder.
 
 #### Fields
 
@@ -316,6 +360,8 @@ These go inside the text editor, which these blocks hold: Text, Media and text, 
 ### Buttons (`buttons`)
 
 Add one or multiple buttons.
+
+Listed under Content in the text editor.
 
 #### Fields
 
@@ -342,6 +388,8 @@ Add one or multiple buttons.
 
 Add a pull quote with an optional author.
 
+Listed under Content in the text editor.
+
 #### Fields
 
 - `quote`: Quote. Plain text over several lines (`textarea`).
@@ -351,6 +399,8 @@ Add a pull quote with an optional author.
 ### Table (`table`)
 
 Add a data table with headers, rows and columns.
+
+Listed under Content in the text editor.
 
 #### Fields
 
@@ -364,6 +414,8 @@ Add a data table with headers, rows and columns.
 
 Show selected contact info from the Site Details global.
 
+Listed under Content in the text editor.
+
 #### Fields
 
 - `display_contacts`: Display Contacts. Choices, any number (`checkboxes`). Options: `phone` Phone, `mobile` Mobile, `email` Email, `address` Address. Help: Edit these details in Globals → Site Details.
@@ -371,6 +423,8 @@ Show selected contact info from the Site Details global.
 ### HTML (`html`)
 
 Embed raw HTML, scripts or third-party widgets.
+
+Listed under Content in the text editor.
 
 #### Fields
 
@@ -380,6 +434,8 @@ Embed raw HTML, scripts or third-party widgets.
 ### Image (`image`)
 
 Add a single image with an optional caption.
+
+Listed under Media in the text editor.
 
 #### Fields
 
@@ -395,6 +451,8 @@ Add a single image with an optional caption.
 
 Add a YouTube or Vimeo video with an optional caption.
 
+Listed under Media in the text editor.
+
 #### Fields
 
 - `video_url`: Video. Video URL (`video`). Help: YouTube or Vimeo URL.
@@ -404,6 +462,8 @@ Add a YouTube or Vimeo video with an optional caption.
 ### Two Images (`two_images`)
 
 Two images, side by side
+
+Listed under Media in the text editor.
 
 #### Fields
 
@@ -429,6 +489,8 @@ Two images, side by side
 ### Gallery (`gallery`)
 
 A multi row image gallery with a lightbox.
+
+Listed under Media in the text editor.
 
 #### Fields
 
