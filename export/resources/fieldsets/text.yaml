@@ -22,8 +22,8 @@ fields:
       mode: toggle
       input_label: 'Show settings'
       type: revealer
-      display: 'Display Settings'
-      instructions: 'Set text and heading alignment'
+      display: 'Display settings'
+      instructions: 'Change how this block looks: its layout, colour scheme and spacing.'
   -
     handle: align
     field:

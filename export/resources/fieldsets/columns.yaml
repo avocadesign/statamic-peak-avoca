@@ -50,7 +50,7 @@ fields:
       input_label: 'Show settings'
       type: revealer
       display: 'Display settings'
-      instructions: 'Set column widths, alignment and mobile order'
+      instructions: 'Change how this block looks: its layout, colour scheme and spacing.'
   -
     handle: column_width
     field:

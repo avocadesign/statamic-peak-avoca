@@ -36,8 +36,8 @@ fields:
       mode: toggle
       input_label: 'Show settings'
       type: revealer
-      display: 'Display options'
-      instructions: 'Set display style and heading alignment'
+      display: 'Display settings'
+      instructions: 'Change how this block looks: its layout, colour scheme and spacing.'
   -
     handle: display_style
     field:

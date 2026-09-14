@@ -52,7 +52,7 @@ fields:
       mode: toggle
       input_label: 'Show settings'
       type: revealer
-      display: 'Display Settings'
-      instructions: 'Set the colour scheme and block margins'
+      display: 'Display settings'
+      instructions: 'Change how this block looks: its layout, colour scheme and spacing.'
   -
     import: colour_scheme
