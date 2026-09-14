@@ -130,6 +130,11 @@
                     padding-inline-start: .375em;
                     margin-block: .5em;
                 }
+
+                /* A nested list sits as close to its item as items sit to each other. */
+                li > :is(ul, ol) {
+                    margin-block: .5em 0;
+                }
             }
 
             ul {
