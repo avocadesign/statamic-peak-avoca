@@ -41,6 +41,30 @@
 
     /* Vertical padding applied to non-default colour scheme blocks (spacing(12) → 3rem) */
     --scheme-block-padding: calc(var(--spacing) * 12);
+
+    /* Buttons on the default (white) scheme. Each .scheme-* class below overrides these. */
+    --btn-focus: var(--color-primary);
+    --btn-primary-bg: var(--color-primary);
+    --btn-primary-text: var(--color-white);
+    --btn-primary-border: var(--color-primary);
+    --btn-primary-hover-bg: color-mix(in oklab, var(--color-primary) 85%, var(--color-black));
+    --btn-primary-hover-text: var(--color-white);
+    --btn-primary-outline-text: var(--color-primary);
+    --btn-primary-outline-border: var(--color-primary);
+    --btn-primary-outline-hover-bg: var(--color-primary);
+    --btn-primary-outline-hover-text: var(--color-white);
+    --btn-light-bg: var(--color-gray-200);
+    --btn-light-text: var(--color-gray-800);
+    --btn-light-border: var(--color-gray-200);
+    --btn-light-hover-bg: var(--color-gray-300);
+    --btn-light-hover-text: var(--color-gray-800);
+    --btn-light-outline-text: var(--color-gray-800);
+    --btn-light-outline-border: var(--color-gray-300);
+    --btn-light-outline-hover-bg: var(--color-gray-200);
+    --btn-light-outline-hover-text: var(--color-gray-800);
+    --btn-inline-text: var(--body-color);
+    --btn-inline-decoration: var(--color-primary);
+    --btn-inline-hover-text: var(--color-primary);
 }
 
 @layer base {
@@ -55,6 +79,13 @@
     .scheme-light {
         background-color: var(--color-light);
         padding-block: var(--scheme-block-padding);
+
+        /* light buttons need to stand off the light background */
+        --btn-light-bg: var(--color-white);
+        --btn-light-border: var(--color-white);
+        --btn-light-hover-bg: var(--color-gray-200);
+        --btn-light-outline-border: var(--color-gray-400);
+        --btn-light-outline-hover-bg: var(--color-white);
     }
 
     .scheme-primary,
@@ -80,10 +111,49 @@
 
     .scheme-primary {
         background-color: var(--color-primary);
+
+        --btn-focus: var(--color-white);
+        --btn-primary-bg: var(--color-white);
+        --btn-primary-text: var(--color-primary);
+        --btn-primary-border: var(--color-white);
+        --btn-primary-hover-bg: var(--color-gray-100);
+        --btn-primary-hover-text: var(--color-primary);
+        --btn-primary-outline-text: var(--color-white);
+        --btn-primary-outline-border: var(--color-white);
+        --btn-primary-outline-hover-bg: var(--color-white);
+        --btn-primary-outline-hover-text: var(--color-primary);
+        --btn-light-bg: var(--color-gray-200);
+        --btn-light-text: var(--color-gray-800);
+        --btn-light-border: var(--color-gray-200);
+        --btn-light-hover-bg: var(--color-white);
+        --btn-light-outline-text: var(--color-white);
+        --btn-light-outline-border: var(--color-gray-200);
+        --btn-light-outline-hover-bg: var(--color-gray-200);
+        --btn-light-outline-hover-text: var(--color-gray-800);
+        --btn-inline-text: var(--color-white);
+        --btn-inline-decoration: var(--color-white);
+        --btn-inline-hover-text: var(--color-gray-200);
         /* primary links would vanish on the primary background */
         --prose-link-decoration: var(--color-white);
         --prose-links-hover: var(--color-white);
         --prose-quote-borders: var(--color-white);
     }
-    .scheme-dark    { background-color: var(--color-dark); }
+    .scheme-dark {
+        background-color: var(--color-dark);
+
+        --btn-focus: var(--color-white);
+        --btn-primary-hover-bg: color-mix(in oklab, var(--color-primary) 85%, var(--color-white));
+        --btn-primary-outline-text: var(--color-white);
+        --btn-primary-outline-border: var(--color-primary);
+        --btn-primary-outline-hover-bg: var(--color-primary);
+        --btn-primary-outline-hover-text: var(--color-white);
+        --btn-light-hover-bg: var(--color-white);
+        --btn-light-outline-text: var(--color-white);
+        --btn-light-outline-border: var(--color-gray-500);
+        --btn-light-outline-hover-bg: var(--color-gray-200);
+        --btn-light-outline-hover-text: var(--color-gray-800);
+        --btn-inline-text: var(--color-white);
+        --btn-inline-decoration: var(--color-primary);
+        --btn-inline-hover-text: var(--color-gray-300);
+    }
 }

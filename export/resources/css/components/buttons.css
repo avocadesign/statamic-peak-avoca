@@ -66,22 +66,35 @@
 }
 
 /*
-    Avoca button scheme. components/_button.antlers.html emits `btn btn-{colour}{-outline}`
-    or `btn-inline`; the colour and style options come from fieldsets/button.yaml.
+    Avoca button scheme. components/_button.antlers.html emits `btn btn-{colour}{-outline}` or
+    `btn-inline`; the colour and style options come from fieldsets/button.yaml. Every colour here is
+    a --btn-* token from colours.css, where each .scheme-* class overrides them, so a variant can
+    look different on each colour scheme without any rule in this file changing.
 */
 .btn {
-    @apply inline-flex items-baseline gap-0.5 font-bold max-w-full py-3 px-5 rounded-sm leading-none no-underline select-none motion-safe:transition;
+    @apply inline-flex items-baseline gap-0.5 font-bold max-w-full rounded-sm leading-none no-underline select-none motion-safe:transition;
+    padding-block: calc(var(--spacing) * 3 - 2px);
+    padding-inline: calc(var(--spacing) * 5 - 2px);
+    border: 2px solid transparent; /* every variant carries the border, so solid and outline are the same size */
 }
-.btn-primary         { @apply bg-primary text-white focus:outline-primary hover:opacity-90; }
-.btn-primary-outline { @apply border-2 border-primary text-primary focus:outline-primary hover:bg-primary hover:text-white; }
-.btn-light           { @apply bg-gray-200 text-gray-800 focus:outline-white hover:bg-gray-100; }
-.btn-light-outline   { @apply border-2 border-gray-200 text-gray-800 focus:outline-white hover:bg-white hover:text-primary; }
+.btn:focus-visible { outline: 2px solid var(--btn-focus); outline-offset: 2px; }
+
+.btn-primary { background-color: var(--btn-primary-bg); color: var(--btn-primary-text); border-color: var(--btn-primary-border); }
+.btn-primary:hover { background-color: var(--btn-primary-hover-bg); color: var(--btn-primary-hover-text); border-color: var(--btn-primary-hover-bg); }
+
+.btn-primary-outline { background-color: transparent; color: var(--btn-primary-outline-text); border-color: var(--btn-primary-outline-border); }
+.btn-primary-outline:hover { background-color: var(--btn-primary-outline-hover-bg); color: var(--btn-primary-outline-hover-text); border-color: var(--btn-primary-outline-hover-bg); }
+
+.btn-light { background-color: var(--btn-light-bg); color: var(--btn-light-text); border-color: var(--btn-light-border); }
+.btn-light:hover { background-color: var(--btn-light-hover-bg); color: var(--btn-light-hover-text); border-color: var(--btn-light-hover-bg); }
+
+.btn-light-outline { background-color: transparent; color: var(--btn-light-outline-text); border-color: var(--btn-light-outline-border); }
+.btn-light-outline:hover { background-color: var(--btn-light-outline-hover-bg); color: var(--btn-light-outline-hover-text); border-color: var(--btn-light-outline-hover-bg); }
 
 .btn-inline {
-    @apply inline-flex items-baseline gap-0.5 font-bold underline decoration-2 decoration-primary focus:outline-primary motion-safe:transition;
-    color: var(--body-color);
+    @apply inline-flex items-baseline gap-0.5 font-bold underline decoration-2 motion-safe:transition;
+    color: var(--btn-inline-text);
+    text-decoration-color: var(--btn-inline-decoration);
 }
-
-/* Auto-invert inside dark/primary schemes */
-:where(.scheme-primary, .scheme-dark) .btn        { @apply bg-white text-primary focus:outline-white; }
-:where(.scheme-primary, .scheme-dark) .btn-inline { color: var(--body-color); text-decoration-color: var(--body-color); }
+.btn-inline:hover { color: var(--btn-inline-hover-text); }
+.btn-inline:focus-visible { outline: 2px solid var(--btn-focus); outline-offset: 2px; }
