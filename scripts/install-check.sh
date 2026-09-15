@@ -8,7 +8,7 @@
 #
 #   scripts/install-check.sh                  checks the last commit
 #   scripts/install-check.sh --ref=<ref>      checks another branch, tag or commit
-#   scripts/install-check.sh --addon=<path>   uses a local Avoca Tools checkout instead of GitHub
+#   scripts/install-check.sh --addon=<path>   uses a local Avoca Tools checkout, labelled with its latest tag
 #   scripts/install-check.sh --keep           keeps the site afterwards, even when everything passes
 #
 # Uncommitted changes are not checked. Without --addon, Avoca Tools comes from GitHub as it does for a real site, so
@@ -36,6 +36,11 @@ commit="$(git -C "$kit_root" rev-parse --short "$ref^{commit}")"
 
 if [ -n "$addon" ]; then
     addon="$(cd "$addon" && pwd)"
+    addon_version="$(git -C "$addon" describe --tags --abbrev=0 2>/dev/null || true)"
+    if [ -z "$addon_version" ]; then
+        echo "$addon has no version tag, so it can't meet the version the kit asks for." >&2
+        exit 2
+    fi
 fi
 
 if [ "$ref" = HEAD ] && [ -n "$(git -C "$kit_root" status --porcelain)" ]; then
@@ -81,12 +86,15 @@ cd "$work/site"
 step "Installing the kit"
 composer config repositories.kit path ../kit
 # Without --addon, Composer isn't told where Avoca Tools is: the kit's post-install hook adds its GitHub repository
-# and requires it, as it does when a site is created with statamic new.
+# and requires a release, as it does when a site is created with statamic new. With --addon, the local checkout is
+# labelled with its latest version tag, so it meets the version the hook asks for.
 if [ -n "$addon" ]; then
-    composer config repositories.avoca-tools "{\"type\": \"path\", \"url\": \"$addon\", \"options\": {\"versions\": {\"avocadesign/avoca-tools\": \"dev-main\"}}}"
+    composer config repositories.avoca-tools "{\"type\": \"path\", \"url\": \"$addon\", \"options\": {\"versions\": {\"avocadesign/avoca-tools\": \"${addon_version#v}\"}}}"
 fi
 composer config --no-plugins allow-plugins.pixelfear/composer-dist-plugin true
 php please starter-kit:install avocadesign/statamic-peak-avoca --local --clear-site --no-interaction
+echo "Avoca Tools in the new site:"
+composer show avocadesign/avoca-tools | grep -E '^(versions|source) '
 
 step "Building the front end"
 PUPPETEER_SKIP_DOWNLOAD=1 npm install --no-audit --no-fund

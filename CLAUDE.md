@@ -33,6 +33,9 @@ This is Avoca's fork of studio1902/statamic-peak. `upstream` is the Peak remote;
   `addAvocaToolsRepository()` and `requireAvocaTools()` add the private avoca-tools repository and require
   the addon. Keep avoca-tools out of `starter-kit.yaml`: Statamic installs a kit's dependencies before the
   hook runs, so a plain `statamic new` can't find a private package listed there.
+- New sites require avoca-tools `^0.1`, the addon's current release line (version tags on GitHub, notes in
+  the addon's CHANGELOG.md). When an addon release moves the middle number while it is 0.x, such as 0.2.0,
+  change the constraint in `requireAvocaTools()` and run `scripts/install-check.sh`.
 - Peak Commands, a paid addon, is off by default: `modules.commands.default` is `false` in `starter-kit.yaml`,
   so the install prompt defaults to No and a non-interactive install leaves it out. Upstream Peak defaults it
   on, so re-apply on merge. Avoca's library and `avoca:make:collection` replace its install and make commands.
