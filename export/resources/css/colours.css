@@ -78,6 +78,9 @@
     --table-border-colour: var(--color-gray-800);
     --table-header-bg: var(--color-gray-800);
     --table-cell-bg: var(--color-light);
+
+    /* The quote marks and the dash before the author in a pull quote */
+    --quote-mark-colour: var(--color-primary);
 }
 
 @layer base {
@@ -163,6 +166,7 @@
         --prose-quote-borders: var(--color-white);
         /* red form errors would not read on the brand colour, whatever it is */
         --form-error: var(--color-white);
+        --quote-mark-colour: var(--color-white);
     }
     .scheme-dark {
         background-color: var(--color-dark);
@@ -182,5 +186,7 @@
         --btn-inline-decoration: var(--color-primary);
         --btn-inline-hover-text: var(--color-gray-300);
         --form-error: var(--color-red-300);
+        /* the brand colour measured 2.79:1 on Dark, so the marks take a lighter tint of it */
+        --quote-mark-colour: color-mix(in oklab, var(--color-primary) 60%, var(--color-white));
     }
 }

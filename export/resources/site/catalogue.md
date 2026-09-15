@@ -519,7 +519,7 @@ Listed under Content in the text editor.
 - Each colour scheme adjusts the button colours to stay readable, so choose Button Colour and Button Style by importance, not to match the background. On a Primary block, a Primary button shows white with brand-colour text.
 - Leave Aria label empty unless the label needs more context. It replaces the label for screen readers, so start it with the label's own words, such as "Download the menu (PDF)".
 - Leave Title and Tracker event empty unless the person asks for them.
-- Buttons line up from the left edge of the text, even under centred text.
+- Buttons line up from the left edge of the text. Set Button Alignment to Centre or Right when the text above them is centred or right-aligned.
 
 #### Fields
 
@@ -541,6 +541,7 @@ Listed under Content in the text editor.
     - `attr_title`: Title. Text (`text`). Only when Show controls is on.
     - `attr_aria`: Aria label. Text (`text`). Only when Show controls is on.
     - `tracker_event`: Tracker event. Text (`text`). Only when Show controls is on and Label passes a custom check. Help: Add the name of the event you want to be fired on click. These events only fire on a production environment. Allowed: `A-Z`, `a-z`, `0-9`, `-`, `_`.
+- `button_alignment`: Button Alignment. Choice (`button_group`). Options: `start` Left, `center` Centre, `end` Right. Default `start`.
 
 ### Pull quote (`pull_quote`)
 
@@ -567,15 +568,15 @@ Listed under Content in the text editor.
 - Keep the quote to one or two sentences, about 30 words, because it shows large and bold.
 - Don't type quotation marks around the quote or a dash before the author: the template adds both.
 - Put the person's name in Author, followed by their role or business after a comma if it helps, such as "Sam Taylor, Owner".
-- Avoid pull quotes in a block with the Primary colour scheme: the quotation marks and the dash are in the brand colour, so they disappear.
-- Size labels don't match their saved keys: Normal is `lg`, LG is `xl` and XL is `2xl`. With Size left out, the quote is narrower than the text on a simple page.
+- The quotation marks and the dash before the author show in the brand colour, in white in a block with the Primary colour scheme, and in a lighter tint of the brand colour with the Dark scheme.
+- Size labels don't match their saved keys: Normal is `lg`, LG is `xl` and XL is `2xl`. With Size left out, the quote takes the width of the text, the same as Normal.
 - Size only works where the text editor sits directly on the page, as on a simple page. Inside every page builder block the quote fills its column, whatever Size says.
 
 #### Fields
 
 - `quote`: Quote. Plain text over several lines (`textarea`).
 - `author`: Author. Text (`text`).
-- `size`: Size. Choice (`button_group`). Options: `lg` Normal, `xl` LG, `2xl` XL. Help: Has no effect in the columns block.
+- `size`: Size. Choice (`button_group`). Options: `lg` Normal, `xl` LG, `2xl` XL. Default `lg`. Help: Only changes the width on a simple page. Inside a page builder block it fills its column.
 
 ### Table (`table`)
 
@@ -598,12 +599,12 @@ Listed under Content in the text editor.
 #### Notes for AI
 
 - Keep tables small: up to about five columns and 15 rows, with a few words in each cell.
-- The table is always at least 580 pixels wide, so on phones and in narrow columns it scrolls sideways. Put it in a Text block or a wide column of Text Columns, not in Media and text.
+- On phones the table is at least 580 pixels wide and scrolls sideways. On wider screens it shrinks to fit its column by wrapping the text in its cells, and only scrolls when its longest words still don't fit. In a narrow column, such as in Media and text, keep it to two or three short columns.
 - Switch on First row as header whenever the first row holds column names, and leave no header cell empty. Header cells show in capitals, so write them in normal case.
 - Cells are plain text. Put links and longer notes in the text around the table.
 - In a block with the Dark or Primary colour scheme, the table takes that scheme's colours: no cell background, light lines and a lightly shaded header row.
 - The caption shows below the table in small text but isn't linked to the table for screen readers, so introduce the table in the text above it as well.
-- Size labels don't match their saved keys: Normal is `lg`, LG is `xl` and XL is `2xl`. With Size left out, the table is narrower than the text on a simple page.
+- Size labels don't match their saved keys: Normal is `lg`, LG is `xl` and XL is `2xl`. With Size left out, the table takes the width of the text, the same as Normal.
 - Size only works where the text editor sits directly on the page, as on a simple page. Inside every page builder block the table fills its column, whatever Size says.
 
 #### Fields
@@ -612,7 +613,7 @@ Listed under Content in the text editor.
 - `first_column_headers`: First column as header. On or off (`toggle`). Default off. Help: Show the first column as header and give it a header styling.
 - `table`: Table. Table (`table`).
 - `caption`: Caption. Text (`text`).
-- `size`: Size. Choice (`button_group`). Options: `lg` Normal, `xl` LG, `2xl` XL. Help: Has no effect in the columns block.
+- `size`: Size. Choice (`button_group`). Options: `lg` Normal, `xl` LG, `2xl` XL. Default `lg`. Help: Only changes the width on a simple page. Inside a page builder block it fills its column.
 
 ### Contact Details (`contact_details`)
 
@@ -678,13 +679,13 @@ Listed under Content in the text editor.
 - The code isn't checked. Close every tag you open, because a broken tag can break the layout of everything below it.
 - Put headings and text in the text editor around the embed, because the HTML set sits outside the site's text styling.
 - On a site generated as static files, the embed must not call this site's own server, such as a form that posts to the site or a search of its pages, because there is no server to answer. Embeds that load everything from the outside service still work.
-- Size labels don't match their saved keys: Normal is `lg`, LG is `xl` and XL is `2xl`. With Size left out, the embed is narrower than the text on a simple page.
+- Size labels don't match their saved keys: Normal is `lg`, LG is `xl` and XL is `2xl`. With Size left out, the embed takes the width of the text, the same as Normal.
 - Size only works where the text editor sits directly on the page, as on a simple page. Inside every page builder block the embed fills its column, whatever Size says.
 
 #### Fields
 
 - `html`: HTML. Code (`code`). Help: HTML, embed codes or scripts to render on the page.
-- `size`: Size. Choice (`button_group`). Options: `lg` Normal, `xl` LG, `2xl` XL. Help: The size in which the HTML should be displayed.
+- `size`: Size. Choice (`button_group`). Options: `lg` Normal, `xl` LG, `2xl` XL. Default `lg`. Help: The size in which the HTML should be displayed.
 
 ### Image (`image`)
 
@@ -698,6 +699,7 @@ Listed under Media in the text editor.
 - Add a caption to credit the photographer or say what the image shows.
 - Leave Crop on No Crop to show the whole image, or choose a crop so the image matches the shape of other images near it.
 - Set Link type to make the image link to a page, another website or a file.
+- On a "simple" page, set Size to LG or XL for an image that deserves more width. Inside a block, the image fills its column.
 
 #### When not to use
 
@@ -713,7 +715,8 @@ Listed under Media in the text editor.
 - When the image is a link, check its alt text also works as the link's text, because screen readers read it out as the link.
 - A link to a website always opens in a new tab. A link to an entry or a file opens in the same tab.
 - A crop keeps the area around the image's focal point, so use a photo whose subject survives being cut to that shape.
-- The Image set has no Size setting. It shows at the width of the text on a simple page, and fills its column inside a block.
+- Size labels don't match their saved keys: Normal is `lg`, LG is `xl` and XL is `2xl`. With Size left out, the image takes the width of the text, the same as Normal.
+- Size only works where the text editor sits directly on the page, as on a simple page. Inside every page builder block the image fills its column, whatever Size says.
 - Keep the caption to one short sentence. It shows below the image in small text.
 
 #### Fields
@@ -725,6 +728,7 @@ Listed under Media in the text editor.
 - `link_file`: Link File. Images or files (`assets`). At most one file. Only when Link type is File.
 - `link_url`: URL. Text (`text`). Only when Link type is Website / URL.
 - `link_entry`: Link Entry. Entries (`entries`). At most one item. Only when Link type is Entry.
+- `size`: Size. Choice (`button_group`). Options: `lg` Normal, `xl` LG, `2xl` XL. Default `lg`. Help: Only changes the width on a simple page. Inside a page builder block it fills its column.
 
 ### Video (`video`)
 
@@ -753,14 +757,14 @@ Listed under Media in the text editor.
 - When the site's consent banner asks visitors about embeds, a message replaces the player until the visitor accepts.
 - Sum up the video in the text nearby, for people who can't or won't play it.
 - Keep the caption to one short sentence. It shows below the player.
-- Size labels don't match their saved keys: Normal is `lg`, LG is `xl` and XL is `2xl`. With Size left out, the video is narrower than the text on a simple page.
+- Size labels don't match their saved keys: Normal is `lg`, LG is `xl` and XL is `2xl`. With Size left out, the video takes the width of the text, the same as Normal.
 - Size only works where the text editor sits directly on the page, as on a simple page. Inside every page builder block the video fills its column, whatever Size says.
 
 #### Fields
 
 - `video_url`: Video. Video URL (`video`). Help: YouTube or Vimeo URL.
 - `caption`: Caption. Text (`text`).
-- `size`: Size. Choice (`button_group`). Options: `lg` Normal, `xl` LG, `2xl` XL. Help: Has no effect in the columns block.
+- `size`: Size. Choice (`button_group`). Options: `lg` Normal, `xl` LG, `2xl` XL. Default `lg`. Help: Only changes the width on a simple page. Inside a page builder block it fills its column.
 
 ### Two Images (`two_images`)
 
@@ -785,7 +789,6 @@ Listed under Media in the text editor.
 
 - Give both images alt text, and choose images that work as a pair.
 - The images sit side by side from tablet width and stack on phones.
-- The right image's Text Field doesn't show on the page, so leave it empty.
 - Put this set in a Text block or a wide column. In a narrow column, or in Media and text, each image ends up small.
 - Don't use it inside the Two Images block, which already shows two images.
 - A link to a website opens in a new tab. A link to an entry or a file opens in the same tab.
@@ -810,8 +813,7 @@ Listed under Media in the text editor.
   - `link_file`: Link File. Images or files (`assets`). At most one file. Only when Link type is File.
   - `link_url`: URL. Text (`text`). Only when Link type is Website / URL.
   - `link_entry`: Link Entry. Entries (`entries`). At most one item. Only when Link type is Entry.
-  - `text_field`: Text Field. Text (`text`).
-- `size`: Size. Choice (`button_group`). Options: `lg` Normal, `xl` LG, `2xl` XL. Help: Has no effect in the columns block.
+- `size`: Size. Choice (`button_group`). Options: `lg` Normal, `xl` LG, `2xl` XL. Default `lg`. Help: Only changes the width on a simple page. Inside a page builder block it fills its column.
 
 ### Gallery (`gallery`)
 

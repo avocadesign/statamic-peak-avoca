@@ -13,16 +13,16 @@
             (size == 'lg') => 'span-lg',
             (size == 'xl') => 'span-xl',
             (size == '2xl') => 'span-content',
-            () => 'span-md'
+            () => 'span-lg'
         )}}
     "
 >
     <blockquote class="p-0 m-0 text-xl font-bold leading-snug">
-        <span class="text-primary">&OpenCurlyDoubleQuote;</span>{{ quote | widont | nl2br }}<span class="text-primary">&CloseCurlyDoubleQuote;</span>
+        <span class="text-(--quote-mark-colour)">&OpenCurlyDoubleQuote;</span>{{ quote | widont | nl2br }}<span class="text-(--quote-mark-colour)">&CloseCurlyDoubleQuote;</span>
     </blockquote>
     {{ if author }}
         <figcaption class="block mt-4 font-bold">
-            <span class="text-primary">- </span>{{ author }}
+            <span class="text-(--quote-mark-colour)">- </span>{{ author }}
         </figcaption>
     {{ /if }}
 </figure>

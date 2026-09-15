@@ -49,6 +49,22 @@ fields:
               fields:
                 -
                   import: buttons
+                -
+                  handle: button_alignment
+                  field:
+                    options:
+                      -
+                        key: start
+                        value: Left
+                      -
+                        key: center
+                        value: Centre
+                      -
+                        key: end
+                        value: Right
+                    default: start
+                    type: button_group
+                    display: 'Button Alignment'
             pull_quote:
               display: 'Pull quote'
               instructions: 'Add a pull quote with an optional author.'

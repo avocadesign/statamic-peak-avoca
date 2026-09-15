@@ -23,5 +23,5 @@ description: A YouTube or Vimeo video in a player that fits the page, with an op
 - When the site's consent banner asks visitors about embeds, a message replaces the player until the visitor accepts.
 - Sum up the video in the text nearby, for people who can't or won't play it.
 - Keep the caption to one short sentence. It shows below the player.
-- Size labels don't match their saved keys: Normal is `lg`, LG is `xl` and XL is `2xl`. With Size left out, the video is narrower than the text on a simple page.
+- Size labels don't match their saved keys: Normal is `lg`, LG is `xl` and XL is `2xl`. With Size left out, the video takes the width of the text, the same as Normal.
 - Size only works where the text editor sits directly on the page, as on a simple page. Inside every page builder block the video fills its column, whatever Size says.

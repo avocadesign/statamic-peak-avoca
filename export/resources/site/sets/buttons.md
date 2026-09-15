@@ -27,4 +27,4 @@ description: One or more buttons or text links to a page, a file, an email addre
 - Each colour scheme adjusts the button colours to stay readable, so choose Button Colour and Button Style by importance, not to match the background. On a Primary block, a Primary button shows white with brand-colour text.
 - Leave Aria label empty unless the label needs more context. It replaces the label for screen readers, so start it with the label's own words, such as "Download the menu (PDF)".
 - Leave Title and Tracker event empty unless the person asks for them.
-- Buttons line up from the left edge of the text, even under centred text.
+- Buttons line up from the left edge of the text. Set Button Alignment to Centre or Right when the text above them is centred or right-aligned.

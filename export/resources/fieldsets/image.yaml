@@ -2,3 +2,6 @@ title: 'Set: Image'
 fields:
   -
     import: common_image
+  -
+    handle: size
+    field: common.size

@@ -12,12 +12,12 @@
             (size == 'lg') => 'span-lg',
             (size == 'xl') => 'span-xl',
             (size == '2xl') => 'span-content',
-            () => 'span-md'
+            () => 'span-lg'
         )}}
     "
 >
 
-    <table class="w-full bg-(--table-cell-bg) border-collapse min-w-[580px] sm:min-w-none">
+    <table class="w-full bg-(--table-cell-bg) border-collapse min-w-[580px] sm:min-w-0">
         {{ table }}
             {{ if first && first_row_headers }}
                 <thead>

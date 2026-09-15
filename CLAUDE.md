@@ -73,6 +73,9 @@ This is Avoca's fork of studio1902/statamic-peak. `upstream` is the Peak remote;
   cards and the desktop navigation), and `--table-border-colour`, `--table-header-bg` and `--table-cell-bg`
   (the Table set). Light, Primary and Dark override them, so tables keep readable text on dark backgrounds.
   Use `border-(--border-colour)` for any new bordered element.
+  The Pull quote set's quotation marks and author dash use `--quote-mark-colour`: the brand colour, white
+  on Primary (where the brand colour vanishes) and 60% brand colour mixed with white on Dark (the brand
+  colour alone measured 2.79:1 there).
 
 ## Bard sets
 

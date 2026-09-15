@@ -82,9 +82,9 @@ fields:
           value: XL
       type: button_group
       localizable: true
-      default: md
+      default: lg
       display: Size
-      instructions: 'Has no effect in the columns block'
+      instructions: 'Only changes the width on a simple page. Inside a page builder block it fills its column.'
   -
     handle: crop
     field:

@@ -8,13 +8,13 @@
 <div class="flex flex-col items-start stack-3 span-lg">
     {{ display_contacts }}
         {{ if value == "phone" && site_details:phone }}
-            {{ partial:components/button as="a" button_type="inline" link_type="tel" label="{{ site_details:phone }}" tel="{{ site_details:phone }}" attr_aria="Call {{ configuration:copyright_name ?? config:app:name }}" hide_arrow="true" }}
+            {{ partial:components/button as="a" button_type="inline" link_type="tel" label="{{ site_details:phone }}" tel="{{ site_details:phone }}" hide_arrow="true" }}
         {{ /if }}
         {{ if value == "mobile" && site_details:mobile }}
-            {{ partial:components/button as="a" button_type="inline" link_type="tel" label="{{ site_details:mobile }}" tel="{{ site_details:mobile }}" attr_aria="Call {{ configuration:copyright_name ?? config:app:name }}'s mobile" hide_arrow="true" }}
+            {{ partial:components/button as="a" button_type="inline" link_type="tel" label="{{ site_details:mobile }}" tel="{{ site_details:mobile }}" hide_arrow="true" }}
         {{ /if }}
         {{ if value == "email" && site_details:email }}
-            {{ partial:components/button as="a" button_type="inline" link_type="email" label="{{ site_details:email }}" email="{{ site_details:email }}" attr_aria="Email {{ configuration:copyright_name ?? config:app:name }}" hide_arrow="true" }}
+            {{ partial:components/button as="a" button_type="inline" link_type="email" label="{{ site_details:email }}" email="{{ site_details:email }}" hide_arrow="true" }}
         {{ /if }}
         {{ if value == "address" && site_details:address }}
             <div class="prose max-w-none stack-2 overflow-visible">

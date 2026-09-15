@@ -29,5 +29,5 @@ description: Embed code from a trusted outside service, such as a map, booking c
 - The code isn't checked. Close every tag you open, because a broken tag can break the layout of everything below it.
 - Put headings and text in the text editor around the embed, because the HTML set sits outside the site's text styling.
 - On a site generated as static files, the embed must not call this site's own server, such as a form that posts to the site or a search of its pages, because there is no server to answer. Embeds that load everything from the outside service still work.
-- Size labels don't match their saved keys: Normal is `lg`, LG is `xl` and XL is `2xl`. With Size left out, the embed is narrower than the text on a simple page.
+- Size labels don't match their saved keys: Normal is `lg`, LG is `xl` and XL is `2xl`. With Size left out, the embed takes the width of the text, the same as Normal.
 - Size only works where the text editor sits directly on the page, as on a simple page. Inside every page builder block the embed fills its column, whatever Size says.

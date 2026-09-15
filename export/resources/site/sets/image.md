@@ -8,6 +8,7 @@ description: A single image with an optional caption, crop and link.
 - Add a caption to credit the photographer or say what the image shows.
 - Leave Crop on No Crop to show the whole image, or choose a crop so the image matches the shape of other images near it.
 - Set Link type to make the image link to a page, another website or a file.
+- On a "simple" page, set Size to LG or XL for an image that deserves more width. Inside a block, the image fills its column.
 
 ## When not to use
 
@@ -23,5 +24,6 @@ description: A single image with an optional caption, crop and link.
 - When the image is a link, check its alt text also works as the link's text, because screen readers read it out as the link.
 - A link to a website always opens in a new tab. A link to an entry or a file opens in the same tab.
 - A crop keeps the area around the image's focal point, so use a photo whose subject survives being cut to that shape.
-- The Image set has no Size setting. It shows at the width of the text on a simple page, and fills its column inside a block.
+- Size labels don't match their saved keys: Normal is `lg`, LG is `xl` and XL is `2xl`. With Size left out, the image takes the width of the text, the same as Normal.
+- Size only works where the text editor sits directly on the page, as on a simple page. Inside every page builder block the image fills its column, whatever Size says.
 - Keep the caption to one short sentence. It shows below the image in small text.

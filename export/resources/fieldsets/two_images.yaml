@@ -16,11 +16,6 @@ fields:
       fields:
         -
           import: common_image
-        -
-          handle: text_field
-          field:
-            type: text
-            display: 'Text Field'
   -
     handle: size
     field: common.size

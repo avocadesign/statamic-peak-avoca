@@ -19,7 +19,6 @@ description: Two images side by side, each with an optional caption, crop and li
 
 - Give both images alt text, and choose images that work as a pair.
 - The images sit side by side from tablet width and stack on phones.
-- The right image's Text Field doesn't show on the page, so leave it empty.
 - Put this set in a Text block or a wide column. In a narrow column, or in Media and text, each image ends up small.
 - Don't use it inside the Two Images block, which already shows two images.
 - A link to a website opens in a new tab. A link to an entry or a file opens in the same tab.
