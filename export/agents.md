@@ -58,13 +58,13 @@ App runs at configured local domain. Statamic Control Panel is at `/cp`.
   - `_main_desktop.antlers.html` — Desktop navigation
   - `_main_mobile.antlers.html` — Mobile navigation
 
-### Page Builder Customizations
-- **Cards block:** this fork ships its own `cards` block (card types text/image/icon, sub-heading, alignment, colour scheme). Keep it on upstream merges; do not replace it with upstream's.
-- **Block groups:**
-  - "Content" group (not "image_and_text") — contains article, columns, divider
-  - "dynamic" group (not "interactive") — contains form block
-- **Field naming:**
-  - Article fieldset uses "media" group (not "image_video")
+### Page Builder Blocks and Text Editor Sets
+- **Don't rely on a list of blocks in this file.** The blocks and sets this site has, with their fields, options, groups and usage guidance, are listed in `resources/site/catalogue.md`. It is generated from the fieldsets, so it is always current. Read it before adding or changing blocks or page content.
+- Each block's guidance is in `resources/site/blocks/<handle>.md` and each set's in `resources/site/sets/<handle>.md`. Site-wide design rules are in `resources/site/design.md`.
+- People see the same list with live previews at `/site/content`.
+- After changing a fieldset or a guidance file, run `php please avoca:site:catalogue`, then `php please avoca:site:check --strict`.
+- **Groups:** a block with its own content fields goes in the Content group. A block that shows entries from a collection goes in the Dynamic group.
+- **Field naming:** the article fieldset uses the "media" group, not "image_video".
 
 ### Component Preferences
 - Text component uses `span-lg` class (not upstream's `span-md`)

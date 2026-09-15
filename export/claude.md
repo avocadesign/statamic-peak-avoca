@@ -4,6 +4,7 @@ This is a Statamic CMS project (Laravel-based flat-file CMS) with Antlers templa
 ## Project Structure
 - Navigation views are located in `resources/views/layout/navigation/`
 - Page builder blocks are in `resources/views/page_builder/`
+- The blocks and sets this site has, with their fields, options and usage guidance, are listed in `resources/site/catalogue.md`. Read it rather than relying on any list of blocks written elsewhere.
 - Reusable components for sets are in `resources/views/components/`
 - Common utility partials are in `resources/views/components/utilities`
 - Layout partials (header, footer, etc.) are in `resources/views/layout/`
