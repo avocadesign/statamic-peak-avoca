@@ -5,7 +5,7 @@
 #}}
 
 <!-- /page_builder/_cards.antlers.html -->
-{{ partial:page_builder/block class="gap-y-8" }}
+{{ partial:page_builder/block :colour_scheme="block:colour_scheme" :block_margins="block:block_margins" class="gap-y-8" }}
     {{ if block:cards_heading}}
         <header class="span-content flex flex-col gap-1 {{ if block:heading_alignment == 'centre'}} items-center {{ /if }}">
             <h2>{{ block:cards_heading | nl2br }}</h2>
@@ -17,7 +17,7 @@
 
     <ul class="span-content grid md:grid-cols-12 gap-fluid-grid-gap">
 
-        {{ block:cards }}
+        {{ block:cards scope="card" }}
             <li
                 class="
                     relative group flex flex-col items-start
@@ -31,16 +31,16 @@
                     )}}
 
                     {{ switch(
-                        (card_type == 'text') => 'border border-(--border-colour) p-6',
+                        (block:card_type == 'text') => 'border border-(--border-colour) p-6',
                     )}}
                 "
             >
                 {{# Image or icon, then the title and text, stacked so each part has room. #}}
                 <div class="w-full stack-6">
-                    {{ if card_type == "image" && card_image }}
+                    {{ if block:card_type == "image" && card:card_image }}
                         {{
                             partial:statamic-peak-tools::components/picture
-                            :image="card_image"
+                            :image="card:card_image"
                             class="w-full object-cover aspect-[3/2]"
                             cover="false"
                             lazy="true"
@@ -49,10 +49,10 @@
                         }}
                     {{ /if}}
 
-                    {{ if card_type == "icon" && card_image }}
+                    {{ if block:card_type == "icon" && card:card_image }}
                         {{
                             partial:statamic-peak-tools::components/picture
-                            :image="card_image"
+                            :image="card:card_image"
                             class="w-32 object-cover"
                             cover="false"
                             lazy="true"
@@ -61,23 +61,23 @@
                     {{ /if}}
 
                     <div class="stack-4">
-                        {{ if buttons }}
+                        {{ if card:buttons }}
                             {{# Link-wrapped heading #}}
-                            {{ buttons limit="1" }}
+                            {{ card:buttons limit="1" }}
                                 <a class="clickable-parent" {{ partial:statamic-peak-tools::snippets/button_attributes }} aria-hidden="true" tabindex="-1">
-                                    <h3 class="card-heading mb-0">{{ card_title | nl2br }}</h3>
+                                    <h3 class="card-heading mb-0">{{ card:card_title | nl2br }}</h3>
                                 </a>
-                            {{ /buttons }}
+                            {{ /card:buttons }}
                             {{# Accessible heading for screen readers #}}
-                            <h3 class="sr-only">{{ card_title | nl2br }}</h3>
+                            <h3 class="sr-only">{{ card:card_title | nl2br }}</h3>
                         {{ else }}
                             {{# Standard heading (no link) #}}
-                            <h3 class="card-heading mb-0">{{ card_title | nl2br }}</h3>
+                            <h3 class="card-heading mb-0">{{ card:card_title | nl2br }}</h3>
                         {{ /if }}
 
-                        {{ if card_text }}
+                        {{ if card:card_text }}
                             <article class="prose max-w-none stack-8">
-                                {{ card_text }}
+                                {{ card:card_text }}
                             </article>
                         {{ /if }}
 
@@ -85,11 +85,11 @@
                 </div>
 
                 {{# Buttons sit at the foot of the card, level across the row whatever the card's height. #}}
-                {{ if buttons }}
+                {{ if card:buttons }}
                     <div class="mt-auto pt-6 flex flex-wrap gap-3 justify-start">
-                        {{ buttons limit="1" }}
-                            {{ partial:components/button :label="label" :button_type="button_type" :button_colour="button_colour" :button_style="button_style" }}
-                        {{ /buttons }}
+                        {{ card:buttons limit="1" scope="button" }}
+                            {{ partial:components/button :label="button:label" :button_type="button:button_type" :button_colour="button:button_colour" :button_style="button:button_style" }}
+                        {{ /card:buttons }}
                     </div>
                 {{ /if }}
             </li>

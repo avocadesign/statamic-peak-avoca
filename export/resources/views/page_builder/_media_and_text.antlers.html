@@ -5,32 +5,32 @@
 #}}
 
 <!-- /page_builder/_media_and_text.antlers.html -->
-{{ partial:page_builder/block class="items-start gap-y-fluid-grid-gap" }}
+{{ partial:page_builder/block :colour_scheme="block:colour_scheme" :block_margins="block:block_margins" class="items-start gap-y-fluid-grid-gap" }}
 
     {{# Wrapper for edge-to-center option #}}
-    {{ if column_widths == "edge-center" }}
+    {{ if block:column_widths == "edge-center" }}
         <div class="span-full grid grid-cols-subgrid gap-y-fluid-grid-gap">
     {{ /if }}
 
     {{# text column #}}
     <article
         class="flex flex-col gap-4
-        {{ column_widths != 'edge-center' ? 'span-content order-2 lg:order-none' : '' }}
-        {{ (column_widths == 'edge-center') ? 'span-content order-2 pt-4 lg:order-none lg:py-12' : '' }}
+        {{ block:column_widths != 'edge-center' ? 'span-content order-2 lg:order-none' : '' }}
+        {{ (block:column_widths == 'edge-center') ? 'span-content order-2 pt-4 lg:order-none lg:py-12' : '' }}
         {{ switch(
-            (column_widths == 'edge-center' && media_position == 'left') => 'lg:col-span-6 lg:col-start-[col-7] lg:row-start-1',
-            (column_widths == 'edge-center' && media_position == 'right') => 'lg:col-span-6 lg:col-start-[content-start] lg:row-start-1',
-            (column_widths == 'narrow-left' && media_position == 'left') => 'lg:col-span-8 lg:col-start-[col-5] lg:row-start-1',
-            (column_widths == 'narrow-left' && media_position == 'right') => 'lg:col-span-4 lg:col-start-[content-start] lg:row-start-1',
-            (column_widths == 'narrow-right' && media_position == 'left') => 'lg:col-span-4 lg:col-start-[col-9] lg:row-start-1',
-            (column_widths == 'narrow-right' && media_position == 'right') => 'lg:col-span-8 lg:col-start-[content-start] lg:row-start-1',
-            (column_widths == 'stacked') => 'lg:col-span-8 lg:col-start-[content-start]',
-            (media_position == 'left') => 'lg:col-span-6 lg:col-start-[col-7] lg:row-start-1',
+            (block:column_widths == 'edge-center' && block:media_position == 'left') => 'lg:col-span-6 lg:col-start-[col-7] lg:row-start-1',
+            (block:column_widths == 'edge-center' && block:media_position == 'right') => 'lg:col-span-6 lg:col-start-[content-start] lg:row-start-1',
+            (block:column_widths == 'narrow-left' && block:media_position == 'left') => 'lg:col-span-8 lg:col-start-[col-5] lg:row-start-1',
+            (block:column_widths == 'narrow-left' && block:media_position == 'right') => 'lg:col-span-4 lg:col-start-[content-start] lg:row-start-1',
+            (block:column_widths == 'narrow-right' && block:media_position == 'left') => 'lg:col-span-4 lg:col-start-[col-9] lg:row-start-1',
+            (block:column_widths == 'narrow-right' && block:media_position == 'right') => 'lg:col-span-8 lg:col-start-[content-start] lg:row-start-1',
+            (block:column_widths == 'stacked') => 'lg:col-span-8 lg:col-start-[content-start]',
+            (block:media_position == 'left') => 'lg:col-span-6 lg:col-start-[col-7] lg:row-start-1',
             () => 'lg:col-span-6 lg:col-start-[content-start] lg:row-start-1'
         )}}
         {{ switch(
-            (text_alignment == 'top') => 'self-start',
-            (text_alignment == 'bottom') => 'self-end',
+            (block:text_alignment == 'top') => 'self-start',
+            (block:text_alignment == 'bottom') => 'self-end',
             () => 'self-center'
         )}}
     ">
@@ -45,44 +45,44 @@
         {{ /if }}
 
         <div class="prose max-w-none mt-2 contents stack-8">
-            {{ article }}
+            {{ block:article }}
                 {{ partial src="components/{type}" }}
-            {{ /article }}
+            {{ /block:article }}
         </div>
 
         {{# Buttons sit a clear step below the text: the column gap plus mt-6. #}}
-        {{ partial:components/buttons class="mt-6" }}
+        {{ partial:components/buttons :buttons="block:buttons" class="mt-6" }}
     </article>
 
     {{# media wrapper #}}
     <div class="
-        {{ column_widths != 'edge-center' ? 'span-content order-1 lg:order-none' : '' }}
-        {{ column_widths == 'edge-center' ? 'span-full order-1 lg:order-none lg:h-full' : '' }}
+        {{ block:column_widths != 'edge-center' ? 'span-content order-1 lg:order-none' : '' }}
+        {{ block:column_widths == 'edge-center' ? 'span-full order-1 lg:order-none lg:h-full' : '' }}
         {{ switch(
-            (column_widths == 'edge-center' && media_position == 'left') => 'lg:col-start-[full-start] lg:col-end-[col-7] lg:row-start-1',
-            (column_widths == 'edge-center' && media_position == 'right') => 'lg:col-start-[col-7] lg:col-end-[full-end] lg:row-start-1',
-            (column_widths == 'narrow-left' && media_position == 'left') => 'lg:col-span-4 lg:col-start-[content-start] lg:row-start-1',
-            (column_widths == 'narrow-left' && media_position == 'right') => 'lg:col-span-8 lg:col-start-[col-5] lg:row-start-1',
-            (column_widths == 'narrow-right' && media_position == 'left') => 'lg:col-span-8 lg:col-start-[content-start] lg:row-start-1',
-            (column_widths == 'narrow-right' && media_position == 'right') => 'lg:col-span-4 lg:col-start-[col-9] lg:row-start-1',
-            (column_widths == 'stacked') => 'lg:col-span-12 lg:col-start-[content-start]',
-            (media_position == 'left') => 'lg:col-span-6 lg:col-start-[content-start] lg:row-start-1',
+            (block:column_widths == 'edge-center' && block:media_position == 'left') => 'lg:col-start-[full-start] lg:col-end-[col-7] lg:row-start-1',
+            (block:column_widths == 'edge-center' && block:media_position == 'right') => 'lg:col-start-[col-7] lg:col-end-[full-end] lg:row-start-1',
+            (block:column_widths == 'narrow-left' && block:media_position == 'left') => 'lg:col-span-4 lg:col-start-[content-start] lg:row-start-1',
+            (block:column_widths == 'narrow-left' && block:media_position == 'right') => 'lg:col-span-8 lg:col-start-[col-5] lg:row-start-1',
+            (block:column_widths == 'narrow-right' && block:media_position == 'left') => 'lg:col-span-8 lg:col-start-[content-start] lg:row-start-1',
+            (block:column_widths == 'narrow-right' && block:media_position == 'right') => 'lg:col-span-4 lg:col-start-[col-9] lg:row-start-1',
+            (block:column_widths == 'stacked') => 'lg:col-span-12 lg:col-start-[content-start]',
+            (block:media_position == 'left') => 'lg:col-span-6 lg:col-start-[content-start] lg:row-start-1',
             () => 'lg:col-span-6 lg:col-start-[col-7] lg:row-start-1'
         )}}
     ">
         {{ if block:media_type == 'image' }}
-            {{ block:image_group }}
+            {{ block:image_group scope="media" }}
                 {{
                     partial:components/utilities/figure
-                    :image="image"
-                    :caption="caption"
-                    :crop="crop"
-                    :link_type="link_type"
-                    :link_url="link_url"
-                    :link_entry="link_entry"
-                    :link_file="link_file"
-                    :caption_inline="column_widths == 'edge-center'"
-                    :full_height="column_widths == 'edge-center'"
+                    :image="media:image"
+                    :caption="media:caption"
+                    :crop="media:crop"
+                    :link_type="media:link_type"
+                    :link_url="media:link_url"
+                    :link_entry="media:link_entry"
+                    :link_file="media:link_file"
+                    :caption_inline="block:column_widths == 'edge-center'"
+                    :full_height="block:column_widths == 'edge-center'"
                     sizes="(min-width: 1280px) 640px, (min-width: 768px) 50vw, 90vw"
                 }}
             {{ /block:image_group }}
@@ -92,7 +92,7 @@
     </div>
 
     {{# Close wrapper for edge-to-center option #}}
-    {{ if column_widths == "edge-center" }}
+    {{ if block:column_widths == "edge-center" }}
         </div>
     {{ /if }}
 

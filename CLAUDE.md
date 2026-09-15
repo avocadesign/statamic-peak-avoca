@@ -80,6 +80,20 @@ This is Avoca's fork of studio1902/statamic-peak. `upstream` is the Peak remote;
 
 ## Page builder blocks
 
+- Scope: block templates read the block's own fields through `block:` (`{{ block:heading }}`, `{{ if block:align == 'centre' }}`,
+  `:image="block:image"`), in conditions, switches and attribute values too. Blocks render inside `{{ page_builder scope="block" }}`,
+  and an unscoped read of a key the block lacks falls back to the page, then to anything else in scope such as globals. Statamic
+  gives every field in a block's fieldset a key, null when empty, so the risk is a name the fieldset lacks: the Call to action and
+  Divider have no `colour_scheme` or `block_margins`, so a page value of either name used to style their section.
+  - Pass the block's values into shared partials as parameters: `{{ partial:components/buttons :buttons="block:buttons" }}`, and
+    `:colour_scheme="block:colour_scheme" :block_margins="block:block_margins"` on every `page_builder/block` call. A parameter is
+    set even when it is null, so nothing falls back, and the partial still works as a text editor set, where the set's own fields
+    are in scope.
+  - A loop over the block's own replicator, grid, group or assets that reads item fields takes a named scope and reads them through
+    it: `{{ block:cards scope="card" }}{{ card:card_title }}{{ /block:cards }}`. Loop variables such as `index`, `last` and
+    `total_results` stay unscoped.
+  - Text editor loops need no scope inside: `{{ block:article }}{{ partial src="components/{type}" }}{{ /block:article }}`. Every
+    item has its own `type`, and each set's partial reads its own fields.
 - Call to action: the panel takes a colour scheme class, `scheme-{panel_scheme}`, Primary by default, with
   Dark and Light as options. Its heading, text and buttons use that scheme's tokens, so a Primary button shows
   white with brand-colour text on the Primary panel. The field is `panel_scheme`, not `colour_scheme`, because

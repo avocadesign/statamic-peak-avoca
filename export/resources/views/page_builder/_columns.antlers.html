@@ -5,13 +5,13 @@
 #}}
 
 <!-- /page_builder/_columns.antlers.html -->
-{{ partial:page_builder/block class="stack-8" }}
+{{ partial:page_builder/block :colour_scheme="block:colour_scheme" :block_margins="block:block_margins" class="stack-8" }}
 
 {{# headings #}}
-    {{ if heading && !hide_col_heading }}
+    {{ if block:heading && !block:hide_col_heading }}
         <div class="span-content grid grid-cols-subgrid">
-            <div class="flex flex-col gap-2 col-span-12 md:col-span-8 {{ if heading_alignment == "centre" }} md:col-start-3 items-center {{ /if }}">
-                <h2>{{ heading | nl2br }}</h2>
+            <div class="flex flex-col gap-2 col-span-12 md:col-span-8 {{ if block:heading_alignment == "centre" }} md:col-start-3 items-center {{ /if }}">
+                <h2>{{ block:heading | nl2br }}</h2>
                 {{ if block:sub_heading }}
                     <h3 class="subheading">{{ block:sub_heading | nl2br }}</h3>
                 {{ /if }}
@@ -20,38 +20,38 @@
     {{ /if}}
     
 {{# columns #}}
-    <div class="span-content grid grid-cols-subgrid {{ vertical_align_content }} gap-y-8">
+    <div class="span-content grid grid-cols-subgrid {{ block:vertical_align_content }} gap-y-8">
         {{# left column #}}
-        {{ left_column }}
+        {{ block:left_column scope="left" }}
             <article class="prose max-w-none stack-8 {{ switch(
-                (column_width == 'narrow-left') => 'col-span-12 md:col-span-4',
-                (column_width == 'narrow-right') => 'col-span-12 md:col-span-8',
+                (block:column_width == 'narrow-left') => 'col-span-12 md:col-span-4',
+                (block:column_width == 'narrow-right') => 'col-span-12 md:col-span-8',
                 () => 'col-span-12 md:col-span-6'
             )}} {{ switch(
-                (reverse_order_for_mobile) => 'order-last md:order-first',
+                (block:reverse_order_for_mobile) => 'order-last md:order-first',
                 () => ''
             )}}">
-                {{ article }}
+                {{ left:article }}
                     {{ partial src="components/{type}" }}
-                {{ /article }}
+                {{ /left:article }}
             </article>
-        {{ /left_column }}
+        {{ /block:left_column }}
 
         {{# right column #}}
-        {{ right_column }}
+        {{ block:right_column scope="right" }}
             <article class="prose max-w-none stack-8 {{ switch(
-                (column_width == 'narrow-left') => 'col-span-12 md:col-span-8',
-                (column_width == 'narrow-right') => 'col-span-12 md:col-span-4',
+                (block:column_width == 'narrow-left') => 'col-span-12 md:col-span-8',
+                (block:column_width == 'narrow-right') => 'col-span-12 md:col-span-4',
                 () => 'col-span-12 md:col-span-6'
             )}} {{ switch(
-                (reverse_order_for_mobile) => 'order-first md:order-last',
+                (block:reverse_order_for_mobile) => 'order-first md:order-last',
                 () => ''
             )}}">
-                {{ article }}
+                {{ right:article }}
                     {{ partial src="components/{type}" }}
-                {{ /article }}
+                {{ /right:article }}
             </article>
-        {{ /right_column }}
+        {{ /block:right_column }}
     </div>
 
 

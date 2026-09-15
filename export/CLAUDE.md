@@ -18,7 +18,9 @@ Avoca's build recipe comes from the avocadesign/avoca-tools package. Follow it w
 - Reference existing fieldsets in `resources/fieldsets/`
 - Content files are in `content/collections/`
 - Always consider flat-file structure (no database)
-- Scope the field data where appropriate to prevent similarly named fields conflicting when mutliple collections are using the same partial or being displayed on the same template
+- Page builder blocks read their own fields through the `block:` scope (`{{ block:heading }}`, `{{ if block:align == 'centre' }}`), in conditions, switches and attribute values too. An unscoped read of a field the block doesn't have falls back to the page, then to anything else in scope such as globals, so a block can pick up a page value of the same name.
+  - Pass a block's values into shared partials as parameters: `{{ partial:components/buttons :buttons="block:buttons" }}`, and `:colour_scheme="block:colour_scheme" :block_margins="block:block_margins"` on `page_builder/block`. A parameter is set even when it is null, so nothing falls back, and the partial still works as a text editor set.
+  - When a loop over the block's own replicator, grid, group or assets reads item fields, give it a named scope: `{{ block:cards scope="card" }}{{ card:card_title }}{{ /block:cards }}`. Text editor loops need none: `{{ block:article }}{{ partial src="components/{type}" }}{{ /block:article }}`.
 
 ## Component Conventions
 - Bard fields use `remove_empty_nodes: trim` setting

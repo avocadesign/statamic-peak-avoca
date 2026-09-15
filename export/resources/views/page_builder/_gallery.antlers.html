@@ -5,7 +5,7 @@
 #}}
 
 <!-- /page_builder/_gallery.antlers.html -->
-{{ partial:page_builder/block class="gap-y-8" }}
+{{ partial:page_builder/block :colour_scheme="block:colour_scheme" :block_margins="block:block_margins" class="gap-y-8" }}
 
     {{# Heading + description — hidden when both are empty #}}
     {{ if block:heading || block:description }}
@@ -28,8 +28,8 @@
         lightboxOpen: false,
         currentIndex: 0,
         images: [
-            {{ block:gallery_images }}
-                { url: '{{ url }}', alt: '{{ alt }}' }{{ unless last }},{{ /unless }}
+            {{ block:gallery_images scope="image" }}
+                { url: '{{ image:url }}', alt: '{{ image:alt }}' }{{ unless last }},{{ /unless }}
             {{ /block:gallery_images }}
         ],
         openLightbox(index) {
@@ -53,11 +53,11 @@
     @keydown.arrow-left.window="lightboxOpen && prevImage()">
 
         <div class="{{ block:crop_thumbnails != 'no-crop' ? 'grid grid-cols-2 gap-4' : 'columns-2 gap-4' }} {{ total_images <= 2 ? (block:crop_thumbnails != 'no-crop' ? 'md:grid-cols-2' : 'md:columns-2') : (block:crop_thumbnails != 'no-crop' ? 'md:grid-cols-3' : 'md:columns-3') }}">
-            {{ block:gallery_images }}
+            {{ block:gallery_images scope="image" }}
                 <div class="cursor-pointer {{ block:crop_thumbnails == 'no-crop' ? 'mb-4 break-inside-avoid' : '' }}" @click="openLightbox({{ index }})">
                     {{ partial
                         src="statamic-peak-tools::components/picture"
-                        :image="url"
+                        :image="image:url"
                         sizes="{{ total_images <= 2 ? '(min-width: 768px) 50vw, 50vw' : '(min-width: 768px) 33vw, 50vw' }}"
                         aspect_ratio="
                             {{ switch(

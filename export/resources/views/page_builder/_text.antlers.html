@@ -5,23 +5,23 @@
 #}}
 
 <!-- /page_builder/_text.antlers.html -->
-{{ partial:page_builder/block }}
+{{ partial:page_builder/block :colour_scheme="block:colour_scheme" :block_margins="block:block_margins" }}
 
     {{# Column layout classes per display style. #}}
     {{ heading_classes = switch(
-        (align == 'offset') => 'md:col-span-4',
-        (align == 'centre') => 'md:col-span-8 md:col-start-3',
+        (block:align == 'offset') => 'md:col-span-4',
+        (block:align == 'centre') => 'md:col-span-8 md:col-start-3',
         ()                   => 'md:col-span-8'
     ) }}
     {{ content_classes = switch(
-        (align == 'offset') => 'md:col-span-8',
-        (align == 'centre') => 'md:col-span-8 md:col-start-3',
+        (block:align == 'offset') => 'md:col-span-8',
+        (block:align == 'centre') => 'md:col-span-8 md:col-start-3',
         ()                   => 'md:col-span-8'
     ) }}
 
     <div class="span-content grid md:grid-cols-12 gap-fluid-grid-gap gap-y-6 ">
         <div class="col-span-12 {{ heading_classes }} stack-2
-            {{ if align_headings == "centre" || align_headings == "centre-all"  }} text-center {{ /if }}
+            {{ if block:align_headings == "centre" || block:align_headings == "centre-all"  }} text-center {{ /if }}
         ">
             {{ if block:heading }}
                 <h2>{{ block:heading | nl2br }}</h2>
@@ -31,12 +31,12 @@
             {{ /if }}
         </div>
         <div class="col-span-12 {{ content_classes }}
-            {{ if align_headings == "centre-all" }} text-center  {{ /if }}
+            {{ if block:align_headings == "centre-all" }} text-center  {{ /if }}
         ">
             <article class="prose max-w-none contents stack-8">
-                {{ article }}
+                {{ block:article }}
                     {{ partial src="components/{type}" }}
-                {{ /article }}
+                {{ /block:article }}
             </article>
         </div>
     </div>

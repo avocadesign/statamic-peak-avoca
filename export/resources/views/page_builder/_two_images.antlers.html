@@ -5,112 +5,112 @@
 #}}
 
 <!-- /page_builder/_two_images.antlers.html -->
-{{ partial:page_builder/block }}
+{{ partial:page_builder/block :colour_scheme="block:colour_scheme" :block_margins="block:block_margins" }}
 
     {{# Layout classes #}}
     {{ heading_classes = switch(
-        (display_style == 'inline' && text_position == 'left') => 'md:col-span-4 justify-center md:order-first',
-        (display_style == 'inline' && text_position == 'right') => 'md:col-span-4 justify-center md:order-last',
-        (display_style == 'inline') => 'md:col-span-4 justify-center',
-        (display_style == 'stacked' && text_position == 'left') => 'md:col-span-6 justify-center md:order-first',
-        (display_style == 'stacked' && text_position == 'right') => 'md:col-span-6 justify-center md:order-last',
-        (display_style == 'stacked') => 'md:col-span-6 justify-center',
-        (display_style == 'offset' && text_position == 'left') => 'md:col-span-6 md:row-start-1 md:order-1',
-        (display_style == 'offset' && text_position == 'right') => 'md:col-span-6 md:row-start-1 md:order-2',
-        (display_style == 'offset') => 'md:col-span-6',
+        (block:display_style == 'inline' && block:text_position == 'left') => 'md:col-span-4 justify-center md:order-first',
+        (block:display_style == 'inline' && block:text_position == 'right') => 'md:col-span-4 justify-center md:order-last',
+        (block:display_style == 'inline') => 'md:col-span-4 justify-center',
+        (block:display_style == 'stacked' && block:text_position == 'left') => 'md:col-span-6 justify-center md:order-first',
+        (block:display_style == 'stacked' && block:text_position == 'right') => 'md:col-span-6 justify-center md:order-last',
+        (block:display_style == 'stacked') => 'md:col-span-6 justify-center',
+        (block:display_style == 'offset' && block:text_position == 'left') => 'md:col-span-6 md:row-start-1 md:order-1',
+        (block:display_style == 'offset' && block:text_position == 'right') => 'md:col-span-6 md:row-start-1 md:order-2',
+        (block:display_style == 'offset') => 'md:col-span-6',
         () => 'md:col-span-8'
     ) }}
 
     {{ image1_classes = switch(
-        (display_style == 'inline') => 'md:col-span-4',
-        (display_style == 'offset' && text_position == 'left') => 'md:col-span-6 md:row-start-1 md:row-span-2 md:order-3',
-        (display_style == 'offset' && text_position == 'right') => 'md:col-span-6 md:row-start-1 md:row-span-2 md:order-1',
+        (block:display_style == 'inline') => 'md:col-span-4',
+        (block:display_style == 'offset' && block:text_position == 'left') => 'md:col-span-6 md:row-start-1 md:row-span-2 md:order-3',
+        (block:display_style == 'offset' && block:text_position == 'right') => 'md:col-span-6 md:row-start-1 md:row-span-2 md:order-1',
         () => 'md:col-span-6'
     ) }}
 
     {{ image2_classes = switch(
-        (display_style == 'inline') => 'md:col-span-4',
-        (display_style == 'offset' && text_position == 'left') => 'md:col-span-6 md:row-start-2 md:order-2 self-end',
-        (display_style == 'offset' && text_position == 'right') => 'md:col-span-6 md:row-start-2 md:order-3 self-end',
-        (display_style == 'offset') => 'md:col-span-6',
+        (block:display_style == 'inline') => 'md:col-span-4',
+        (block:display_style == 'offset' && block:text_position == 'left') => 'md:col-span-6 md:row-start-2 md:order-2 self-end',
+        (block:display_style == 'offset' && block:text_position == 'right') => 'md:col-span-6 md:row-start-2 md:order-3 self-end',
+        (block:display_style == 'offset') => 'md:col-span-6',
         () => 'md:col-span-6'
     ) }}
 
     {{ grid_row_classes = switch(
-        (display_style == 'offset') => 'md:grid-rows-[auto_auto]',
+        (block:display_style == 'offset') => 'md:grid-rows-[auto_auto]',
         () => ''
     ) }}
 
     {{ text_vertical_alignment_classes = switch(
-        (text_vertical_alignment == 'top') => 'justify-start',
-        (text_vertical_alignment == 'bottom') => 'justify-end',
+        (block:text_vertical_alignment == 'top') => 'justify-start',
+        (block:text_vertical_alignment == 'bottom') => 'justify-end',
         () => 'justify-center'
     ) }}
 
     {{# Headings in standard output #}}
     <div class="span-content grid grid-cols-subgrid gap-fluid-grid-gap gap-y-4 {{ grid_row_classes }}">
-        <header class="span-content flex flex-col gap-1 mb-4 {{ heading_classes }} {{ (display_style == 'inline' || display_style == 'stacked') ? text_vertical_alignment_classes : '' }} {{ display_style == 'offset' ? 'self-start md:mb-16' : '' }}">
+        <header class="span-content flex flex-col gap-1 mb-4 {{ heading_classes }} {{ (block:display_style == 'inline' || block:display_style == 'stacked') ? text_vertical_alignment_classes : '' }} {{ block:display_style == 'offset' ? 'self-start md:mb-16' : '' }}">
             {{ if block:heading }}<h2>{{ block:heading | nl2br }}</h2>{{ /if }}
             {{ if block:sub_heading }}
                 <h3 class="subheading">{{ block:sub_heading | nl2br }}</h3>
             {{ /if }}
-            {{ if article }}
+            {{ if block:article }}
                 <article class="prose max-w-none mt-4 stack-8">
-                    {{ article }}
+                    {{ block:article }}
                         {{ partial src="components/{type}" }}
-                    {{ /article }}
+                    {{ /block:article }}
                 </article>
             {{ /if}}
         </header>
 
         {{# Image #1 #}}
-        <div class="col-span-12 {{ image1_classes }} {{ display_style == 'offset' ? 'h-full' : 'flex flex-col gap-6' }}">
-            {{ block:image_1 }}
+        <div class="col-span-12 {{ image1_classes }} {{ block:display_style == 'offset' ? 'h-full' : 'flex flex-col gap-6' }}">
+            {{ block:image_1 scope="image1" }}
                 {{ partial:components/utilities/figure
-                    :image="image1_image"
-                    :caption="image1_caption"
-                    :crop="image1_crop"
-                    :link_type="image1_link_type"
-                    :link_file="image1_link_file"
-                    :link_url="image1_link_url"
-                    :link_entry="image1_link_entry"
-                    :caption_inline="display_style == 'offset'"
-                    sizes="{{ display_style == 'inline' ? '(min-width: 1280px) 426px, (min-width: 768px) 33vw, 90vw' : '(min-width: 1280px) 640px, (min-width: 768px) 50vw, 90vw' }}"
-                    class="{{ (display_style == 'offset' && (image1_crop == 'none' || !image1_crop)) ? 'h-full [&_img]:h-full [&_img]:object-cover' : 'not-prose' }}"
+                    :image="image1:image1_image"
+                    :caption="image1:image1_caption"
+                    :crop="image1:image1_crop"
+                    :link_type="image1:image1_link_type"
+                    :link_file="image1:image1_link_file"
+                    :link_url="image1:image1_link_url"
+                    :link_entry="image1:image1_link_entry"
+                    :caption_inline="block:display_style == 'offset'"
+                    sizes="{{ block:display_style == 'inline' ? '(min-width: 1280px) 426px, (min-width: 768px) 33vw, 90vw' : '(min-width: 1280px) 640px, (min-width: 768px) 50vw, 90vw' }}"
+                    class="{{ (block:display_style == 'offset' && (image1:image1_crop == 'none' || !image1:image1_crop)) ? 'h-full [&_img]:h-full [&_img]:object-cover' : 'not-prose' }}"
                 }}
             {{ /block:image_1 }}
 
-            {{ if display_style == "stacked" }}
-                {{ block:image_2 }}
+            {{ if block:display_style == "stacked" }}
+                {{ block:image_2 scope="image2" }}
                     {{ partial:components/utilities/figure
-                        :image="image2_image"
-                        :caption="image2_caption"
-                        :crop="image2_crop"
-                        :link_type="image2_link_type"
-                        :link_file="image2_link_file"
-                        :link_url="image2_link_url"
-                        :link_entry="image2_link_entry"
-                        :caption_inline="display_style == 'offset'"
-                        sizes="{{ display_style == 'inline' ? '(min-width: 1280px) 426px, (min-width: 768px) 33vw, 90vw' : '(min-width: 1280px) 640px, (min-width: 768px) 50vw, 90vw' }}"
+                        :image="image2:image2_image"
+                        :caption="image2:image2_caption"
+                        :crop="image2:image2_crop"
+                        :link_type="image2:image2_link_type"
+                        :link_file="image2:image2_link_file"
+                        :link_url="image2:image2_link_url"
+                        :link_entry="image2:image2_link_entry"
+                        :caption_inline="block:display_style == 'offset'"
+                        sizes="{{ block:display_style == 'inline' ? '(min-width: 1280px) 426px, (min-width: 768px) 33vw, 90vw' : '(min-width: 1280px) 640px, (min-width: 768px) 50vw, 90vw' }}"
                     }}
                 {{ /block:image_2 }}
             {{ /if }}
         </div>
 
         {{# Image #2 #}}
-        {{ unless display_style == "stacked"}}
-            <div class="col-span-12 {{ image2_classes }} {{ display_style == 'offset' ? 'self-end' : '' }}">
-                {{ block:image_2 }}
+        {{ unless block:display_style == "stacked"}}
+            <div class="col-span-12 {{ image2_classes }} {{ block:display_style == 'offset' ? 'self-end' : '' }}">
+                {{ block:image_2 scope="image2" }}
                     {{ partial:components/utilities/figure
-                        :image="image2_image"
-                        :caption="image2_caption"
-                        :crop="image2_crop"
-                        :link_type="image2_link_type"
-                        :link_file="image2_link_file"
-                        :link_url="image2_link_url"
-                        :link_entry="image2_link_entry"
-                        :caption_inline="display_style == 'offset'"
-                        sizes="{{ display_style == 'inline' ? '(min-width: 1280px) 426px, (min-width: 768px) 33vw, 90vw' : '(min-width: 1280px) 640px, (min-width: 768px) 50vw, 90vw' }}"
+                        :image="image2:image2_image"
+                        :caption="image2:image2_caption"
+                        :crop="image2:image2_crop"
+                        :link_type="image2:image2_link_type"
+                        :link_file="image2:image2_link_file"
+                        :link_url="image2:image2_link_url"
+                        :link_entry="image2:image2_link_entry"
+                        :caption_inline="block:display_style == 'offset'"
+                        sizes="{{ block:display_style == 'inline' ? '(min-width: 1280px) 426px, (min-width: 768px) 33vw, 90vw' : '(min-width: 1280px) 640px, (min-width: 768px) 50vw, 90vw' }}"
                     }}
                 {{ /block:image_2 }}
             </div>
