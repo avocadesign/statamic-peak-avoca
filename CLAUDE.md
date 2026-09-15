@@ -65,6 +65,11 @@ This is Avoca's fork of studio1902/statamic-peak. `upstream` is the Peak remote;
   Upstream uses Tailwind's `--leading-tight` (1.25) directly. The `.heading-size-*` classes take it too.
   Size a heading with `heading-size-*`, never `text-*` or `leading-*`: Tailwind's text utilities carry
   their own line height and would override the token.
+- Lines, borders and tables read tokens from `colours.css`, never a grey class, so each colour scheme can
+  override them: `--divider-colour` (the Divider block), `--border-colour` (the generic border, used by text
+  cards and the desktop navigation), and `--table-border-colour`, `--table-header-bg` and `--table-cell-bg`
+  (the Table set). Light, Primary and Dark override them, so tables keep readable text on dark backgrounds.
+  Use `border-(--border-colour)` for any new bordered element.
 
 ## Bard sets
 

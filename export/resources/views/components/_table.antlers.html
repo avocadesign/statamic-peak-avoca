@@ -17,13 +17,13 @@
     "
 >
 
-    <table class="w-full bg-light border-collapse min-w-[580px] sm:min-w-none">
+    <table class="w-full bg-(--table-cell-bg) border-collapse min-w-[580px] sm:min-w-none">
         {{ table }}
             {{ if first && first_row_headers }}
                 <thead>
                     <tr>
                         {{ cells }}
-                            <th class="px-3 py-3 text-xs font-bold tracking-wider text-left text-white uppercase border-b xl:px-6 border-gray-800 bg-gray-800">{{ value }}</th>
+                            <th class="px-3 py-3 text-xs font-bold tracking-wider text-left text-white uppercase border-b xl:px-6 border-(--table-border-colour) bg-(--table-header-bg)">{{ value }}</th>
                         {{ /cells }}
                     </tr>
                 </thead>
@@ -35,9 +35,9 @@
                 <tr>
                     {{ cells }}
                         {{ if first && first_column_headers }}
-                            <th class="px-3 py-3 text-xs font-bold tracking-wider text-left text-white uppercase border-b xl:px-6 border-gray-800 bg-gray-800">{{ value }}</th>
+                            <th class="px-3 py-3 text-xs font-bold tracking-wider text-left text-white uppercase border-b xl:px-6 border-(--table-border-colour) bg-(--table-header-bg)">{{ value }}</th>
                         {{ else }}
-                            <td class="px-3 py-3 text-sm border-b xl:px-6 border-gray-800 align-top ">{{ value }}</td>
+                            <td class="px-3 py-3 text-sm border-b xl:px-6 border-(--table-border-colour) align-top ">{{ value }}</td>
                         {{ /if }}
                     {{ /cells }}
                 </tr>

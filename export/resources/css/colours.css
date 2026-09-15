@@ -68,6 +68,16 @@
 
     /* Forms: required markers and inline error messages. The Primary and Dark schemes override it, because red does not read on them. */
     --form-error: var(--color-red-700);
+
+    /* Lines and borders. The divider line, and a generic border for cards and any other bordered element.
+       Each .scheme-* class below overrides what would not read on its background. */
+    --divider-colour: var(--color-gray-200);
+    --border-colour: color-mix(in oklab, var(--color-gray-800) 10%, transparent);
+
+    /* Tables */
+    --table-border-colour: var(--color-gray-800);
+    --table-header-bg: var(--color-gray-800);
+    --table-cell-bg: var(--color-light);
 }
 
 @layer base {
@@ -89,6 +99,10 @@
         --btn-light-hover-bg: var(--color-gray-200);
         --btn-light-outline-border: var(--color-gray-400);
         --btn-light-outline-hover-bg: var(--color-white);
+
+        /* lines and table cells need to stand off the light background */
+        --divider-colour: var(--color-gray-300);
+        --table-cell-bg: var(--color-white);
     }
 
     .scheme-primary,
@@ -110,6 +124,13 @@
         --prose-hr: var(--prose-invert-hr);
         --prose-quotes: var(--prose-invert-quotes);
         --prose-quote-borders: var(--prose-invert-quote-borders);
+
+        /* lines, borders and tables on a dark or brand background: cell text is the scheme's white */
+        --divider-colour: color-mix(in oklab, var(--color-white) 30%, transparent);
+        --border-colour: color-mix(in oklab, var(--color-white) 25%, transparent);
+        --table-border-colour: color-mix(in oklab, var(--color-white) 35%, transparent);
+        --table-header-bg: color-mix(in oklab, var(--color-white) 15%, transparent);
+        --table-cell-bg: transparent;
     }
 
     .scheme-primary {
