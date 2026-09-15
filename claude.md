@@ -84,6 +84,9 @@ This is Avoca's fork of studio1902/statamic-peak. `upstream` is the Peak remote;
 - Form: the heading field is `heading`, labelled Heading, like the other blocks. The template used to read
   `title`, so the heading never showed, and the contact page content moved from `title` to `heading` with the fix.
   The heading and text sit together in a `header` (`gap-2`), and the form column is `stack-8`.
+  Required markers and inline errors use `--form-error` from `colours.css`: red on Default and Light, white on
+  Primary and a light red on Dark, so they stay readable on every scheme. The consent link hover uses
+  `--btn-inline-hover-text` for the same reason, and the success message uses `heading-size-6`.
 
 ## Site guidance and the AI block catalogue
 

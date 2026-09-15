@@ -20,9 +20,9 @@
             {{ trans :key="inline_label" }}
             {{ if handle === 'consent' }}
                 {{ if configuration:privacy_statement_type == 'entry' }}
-                    <a class="underline hover:text-primary" href="{{ configuration:privacy_statement_entry:url }}">{{ trans:strings.consent_learn_more }}</a>
+                    <a class="underline hover:text-(--btn-inline-hover-text)" href="{{ configuration:privacy_statement_entry:url }}">{{ trans:strings.consent_learn_more }}</a>
                 {{ elseif configuration:privacy_statement_type == 'pdf' }}
-                    <a class="underline hover:text-primary" href="{{ configuration:privacy_statement_asset }}" target="_blank">{{ trans:strings.consent_learn_more }}</a>
+                    <a class="underline hover:text-(--btn-inline-hover-text)" href="{{ configuration:privacy_statement_asset }}" target="_blank">{{ trans:strings.consent_learn_more }}</a>
                 {{ /if }}
             {{ /if }}
         </span>

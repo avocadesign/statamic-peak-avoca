@@ -58,7 +58,7 @@
 
                     {{# Honeypot spam protection. #}}
                     <div class="hidden">
-                        <label class="font-bold" for="{{ honeypot }}">{{ trans:strings.form_honeypot }} <sup class="text-red-700">*</sup></label>
+                        <label class="font-bold" for="{{ honeypot }}">{{ trans:strings.form_honeypot }} <sup class="text-(--form-error)">*</sup></label>
                         <input class="form-input w-full" id="{{ honeypot }}" type="text" name="{{ honeypot }}" x-model="form.{{ honeypot }}" tabindex="-1" autocomplete="off"/>
                     </div>
 
@@ -72,7 +72,7 @@
                                 </span>
                             {{ /if }}
 
-                            {{# Render the default-styled fields. #}}
+                            {{# Render the default-styled fields. Required markers and inline errors use --form-error, which each colour scheme sets in colours.css so they stay readable. #}}
                             {{ %form:fields scope="field" }}
                                 <template x-if="{{ show_field }}">
                                     <div class="
@@ -92,7 +92,7 @@
                                             <label class="{{ handle == 'consent' ? 'sr-only' : 'font-bold' }}" for="{{ handle }}">
                                                 {{ trans :key="field:display" }}
                                                 {{ if validate | contains('required') || validate | contains('accepted') }}
-                                                    <sup aria-label="{{ trans:strings.form_required }}" class="text-red-700">*</sup>
+                                                    <sup aria-label="{{ trans:strings.form_required }}" class="text-(--form-error)">*</sup>
                                                 {{ /if }}
                                             </label>
 
@@ -108,7 +108,7 @@
 
                                             {{# Inline error. #}}
                                             <template x-if="form.invalid('{{ handle }}')">
-                                                <span class="mt-1 text-red-700 text-sm font-bold" x-text="form.errors.{{ handle }}"></span>
+                                                <span class="mt-1 text-(--form-error) text-sm font-bold" x-text="form.errors.{{ handle }}"></span>
                                             </template>
 
                                             {{ if field:instructions && instructions_position === 'below' }}

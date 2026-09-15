@@ -65,6 +65,9 @@
     --btn-inline-text: var(--body-color);
     --btn-inline-decoration: var(--color-primary);
     --btn-inline-hover-text: var(--color-primary);
+
+    /* Forms: required markers and inline error messages. The Primary and Dark schemes override it, because red does not read on them. */
+    --form-error: var(--color-red-700);
 }
 
 @layer base {
@@ -137,6 +140,8 @@
         --prose-link-decoration: var(--color-white);
         --prose-links-hover: var(--color-white);
         --prose-quote-borders: var(--color-white);
+        /* red form errors would not read on the brand colour, whatever it is */
+        --form-error: var(--color-white);
     }
     .scheme-dark {
         background-color: var(--color-dark);
@@ -155,5 +160,6 @@
         --btn-inline-text: var(--color-white);
         --btn-inline-decoration: var(--color-primary);
         --btn-inline-hover-text: var(--color-gray-300);
+        --form-error: var(--color-red-300);
     }
 }
