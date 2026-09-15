@@ -33,6 +33,9 @@ This is Avoca's fork of studio1902/statamic-peak. `upstream` is the Peak remote;
   `addAvocaToolsRepository()` and `requireAvocaTools()` add the private avoca-tools repository and require
   the addon. Keep avoca-tools out of `starter-kit.yaml`: Statamic installs a kit's dependencies before the
   hook runs, so a plain `statamic new` can't find a private package listed there.
+- Peak Commands, a paid addon, is off by default: `modules.commands.default` is `false` in `starter-kit.yaml`,
+  so the install prompt defaults to No and a non-interactive install leaves it out. Upstream Peak defaults it
+  on, so re-apply on merge. Avoca's library and `avoca:make:collection` replace its install and make commands.
 - Never name an env key ending in `APP_URL=` (e.g. `VITE_APP_URL`): the post-install does a
   substring replace of `APP_URL=` and corrupts the line. The Vite key is `VITE_SITE_URL`.
 - Global values live in `content/globals/default/<handle>.yaml`. Statamic 6 ignores an inline
