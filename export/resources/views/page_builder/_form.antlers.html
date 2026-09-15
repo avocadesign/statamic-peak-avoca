@@ -24,15 +24,19 @@
             {{ form:create :in="block:form:handle" js="alpine:form" attr:x-ref="form" }}
                 {{# Use Laravel Precognition for live validation and submission. #}}
                 <div x-data="formHandler()" class="flex flex-col gap-8" x-cloak>
-                    {{# Error notifications. #}}
+                    {{# Error notifications. The summary's ID carries the form handle, so each form on a page has its own.
+                        Avoca's copy of the Peak Tools form handler finds it by the -form-summary ending, inside its own form. #}}
                     <template x-if="form.hasErrors && submitted">
                         {{ partial:components/notification type="error" }}
-                            {{ slot:attributes }}id="summary" role="group"{{ /slot:attributes }}
+                            {{ slot:attributes }}id="{{ block:form:handle }}-form-summary" role="group"{{ /slot:attributes }}
                             <h3 class="mb-2 font-bold text-red-700">{{ trans:strings.form_error }}</h3>
                             <ul class="list-disc list-inside marker:text-red-700">
                                 <template x-for="(error, index) in form.errors">
                                     <li>
-                                        <a :href="`#${index}`" @click.prevent="$focus.focus(document.querySelector(`#${index}`))" x-text="error" class="underline text-red-700 focus:outline-red-700"></a>
+                                        {{# Each link builds the field's ID the way Statamic does ({form}-form-{handle}-field, with dots and underscores as hyphens,
+                                            see RendersForms::generateFieldId()) and focuses that field inside this form. Radio and checkbox groups carry
+                                            the ID on the group, so focus moves to the group's first input. #}}
+                                        <a :href="`#{{ block:form:handle }}-form-${index}-field`.replace(/[._]/g, '-')" @click.prevent="$focus.focus($refs.form.querySelector(`${$el.hash} input`) ?? $refs.form.querySelector($el.hash))" x-text="error" class="underline text-red-700 focus:outline-red-700"></a>
                                     </li>
                                 </template>
                             </ul>
@@ -56,10 +60,10 @@
                         </template>
                     </ul>
 
-                    {{# Honeypot spam protection. #}}
+                    {{# Honeypot spam protection. The ID shared by the label and input carries the form handle, so each form on a page has its own. #}}
                     <div class="hidden">
-                        <label class="font-bold" for="{{ honeypot }}">{{ trans:strings.form_honeypot }} <sup class="text-(--form-error)">*</sup></label>
-                        <input class="form-input w-full" id="{{ honeypot }}" type="text" name="{{ honeypot }}" x-model="form.{{ honeypot }}" tabindex="-1" autocomplete="off"/>
+                        <label class="font-bold" for="{{ block:form:handle }}-form-{{ honeypot }}">{{ trans:strings.form_honeypot }} <sup class="text-(--form-error)">*</sup></label>
+                        <input class="form-input w-full" id="{{ block:form:handle }}-form-{{ honeypot }}" type="text" name="{{ honeypot }}" x-model="form.{{ honeypot }}" tabindex="-1" autocomplete="off"/>
                     </div>
 
                     {{# Render various form sections. #}}
@@ -73,6 +77,8 @@
                             {{ /if }}
 
                             {{# Render the default-styled fields. Required markers and inline errors use --form-error, which each colour scheme sets in colours.css so they stay readable. #}}
+                            {{# field:id is the ID Statamic gives each field, unique to its form ({form}-form-{handle}-field). The label, the instructions
+                                and the field views use it rather than the handle, which another form on the same page may share. #}}
                             {{ %form:fields scope="field" }}
                                 <template x-if="{{ show_field }}">
                                     <div class="
@@ -88,8 +94,8 @@
                                         )}}
                                     ">
                                         {{ unless type == 'spacer' }}
-                                            {{# Consent fields hide the display label visually — the inline_label on the checkbox is the actual statement. Screen readers still see this label via sr-only. #}}
-                                            <label class="{{ handle == 'consent' ? 'sr-only' : 'font-bold' }}" for="{{ handle }}">
+                                            {{# Consent fields hide the display label visually: the inline_label on the checkbox is the actual statement. Screen readers still see this label via sr-only. #}}
+                                            <label class="{{ handle == 'consent' ? 'sr-only' : 'font-bold' }}" for="{{ field:id }}">
                                                 {{ trans :key="field:display" }}
                                                 {{ if validate | contains('required') || validate | contains('accepted') }}
                                                     <sup aria-label="{{ trans:strings.form_required }}" class="text-(--form-error)">*</sup>
@@ -97,7 +103,7 @@
                                             </label>
 
                                             {{ if field:instructions && instructions_position != 'below' }}
-                                                <span id="{{ field:handle }}-instructions" class="text-sm">
+                                                <span id="{{ field:id }}-instructions" class="text-sm">
                                                     {{ trans :key="field:instructions" }}
                                                 </span>
                                             {{ /if }}
@@ -112,7 +118,7 @@
                                             </template>
 
                                             {{ if field:instructions && instructions_position === 'below' }}
-                                                <span id="{{ field:handle }}-instructions" class="text-sm">
+                                                <span id="{{ field:id }}-instructions" class="text-sm">
                                                     {{ trans :key="field:instructions" }}
                                                 </span>
                                             {{ /if }}
@@ -123,7 +129,7 @@
                         </fieldset>
                     {{ /sections }}
 
-                    {{# Captcha — provider configured in config/captcha.php (default: Turnstile). #}}
+                    {{# Captcha, with the provider set in config/captcha.php (default: Turnstile). #}}
                     {{ captcha data-theme="light" }}
 
                     {{# Submit button, disabled on processing. #}}
@@ -144,7 +150,7 @@
         {{ /if }}
         </div>
 
-        {{# Contact details column — 1/3, sourced from site_details. #}}
+        {{# Contact details column, a third of the width, from site_details. #}}
         {{ if block:include_contact_details }}
             <div class="md:col-span-1">
                 {{ partial:components/contact_details :display_contacts="block:display_contacts" }}

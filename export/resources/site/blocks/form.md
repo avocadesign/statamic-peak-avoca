@@ -18,7 +18,7 @@ description: A form built under Forms in the control panel, with an optional hea
 ## Notes for AI
 
 - Forms are built under Forms in the control panel, not in this block. Choose an existing form by its handle, such as `contact`, and ask for a new form to be built when none fits.
-- Use one Form block per page. Its field IDs come from the form's field handles and its error summary always has the ID `summary`, so a second form on the page sends labels, error links and focus to the first.
+- Two Form blocks can share a page when they show different forms, such as a contact form and a quote request. Don't put the same form on a page twice: its field IDs come from the form's handle, so the second copy sends labels, error links and focus to the first.
 - Always write a heading, such as "Get in touch". It shows as a level-two heading.
 - Keep the text to one or two sentences. It is plain text, so it can't hold links or formatting, but line breaks show.
 - The submit button's label and the messages people see after sending come from the site's language strings, not the block, so don't repeat them in the text.

@@ -1,8 +1,9 @@
+{{# id is Statamic's ID for this field, unique to its form, so the same handle in another form on the page does not clash. Upstream Peak uses the handle. #}}
 <!-- /vendor/statamic/forms/fields/toggle.antlers.html -->
 <label
     class="inline-flex items-baseline"
     :aria-invalid="form.invalid('{{ handle }}')"
-    {{ instructions ?= 'aria-describedBy="{handle}-instructions"' }}
+    {{ instructions ?= 'aria-describedBy="{id}-instructions"' }}
 >
     <input type="hidden" name="{{ handle }}" value="0">
     <input
@@ -12,7 +13,7 @@
         type="checkbox"
         name="{{ handle }}"
         value="1"
-        id="{{ handle }}"
+        id="{{ id }}"
         {{ (!old && default) ?= 'checked' }}
     >
     {{ if inline_label }}

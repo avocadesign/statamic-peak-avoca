@@ -1,0 +1,79 @@
+{{#
+    Avoca's copy of the Peak Tools form handler (statamic-peak-tools::snippets/_form_handler, copied from Peak Tools v9.2.1).
+    Laravel uses this file instead of the package's because it sits in resources/views/vendor/statamic-peak-tools.
+
+    What changed and why: only the error summary lookup in submit(). Peak Tools searches the whole page for #summary, so on a
+    page with two forms, focus after a failed submit could land in the other form's summary. This copy searches inside its
+    own form (this.$refs.form) for the summary, whose ID carries the form handle and ends in -form-summary
+    (see page_builder/_form.antlers.html).
+
+    If Peak Tools changes its form handler, copy the new version over this file and make the same change again.
+#}}
+{{#
+    @name Form handler
+    @desc Alpine based form handler used in `resources/views/page_builder/_form.antlers.html`.
+#}}
+
+<!-- statamic-peak-tools::snippets/_form_handler.antlers.html -->
+{{ once }}
+    {{# The Statamic helpers for conditional fields. #}}
+    <script src="/vendor/statamic/frontend/js/helpers.js"></script>
+
+    <script>
+        document.addEventListener('alpine:initializing', () => {
+            Alpine.data('formHandler', () => ({
+                success: false,
+                submitted: false,
+                form: null,
+                init() {
+                    this.form = this.$form(
+                        'post',
+                        this.$refs.form.getAttribute('action'),
+                        JSON.parse(this.$refs.form.getAttribute('x-data')).form,
+                        {
+                            headers: {
+                                'X-CSRF-Token': {
+                                    toString: () => this.$refs.form.querySelector('[name="_token"]').value,
+                                }
+                            }
+                        }
+                    )
+                },
+                successHook(response) {
+                    {{ success_hook }}
+
+                    setTimeout(() => {
+                        this.success = false
+                    }, 10000)
+                },
+                submit() {
+                    if (Object.keys(this.form).includes('captcha-response')) {
+                        this.form['captcha-response'] = this.$refs.form.querySelector('{{ captcha:selector }}')?.value
+                    }
+
+                    this.submitted = true
+                    this.form.submit()
+                        .then(response => {
+                            this.form.reset()
+                            this.form.setErrors([])
+                            this.$refs.form.reset()
+                            this.success = true
+                            this.submitted = false
+                            this.successHook(response)
+                        })
+                        .then(this.$refs.form.scrollIntoView())
+                        .catch(error => {
+                            const summary = this.$refs.form.querySelector('[id$="-form-summary"]')
+                            if (summary) {
+                                this.$focus.focus(summary.querySelector('a'))
+                            }
+                            else {
+                                console.log(error)
+                            }
+                        })
+                }
+            }))
+        })
+    </script>
+{{ /once }}
+<!-- End: statamic-peak-tools::snippets/_form_handler.antlers.html -->

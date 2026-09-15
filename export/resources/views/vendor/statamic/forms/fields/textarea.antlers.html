@@ -1,3 +1,4 @@
+{{# id is Statamic's ID for this field, unique to its form, so the same handle in another form on the page does not clash. Upstream Peak uses the handle. #}}
 <!-- /vendor/statamic/forms/fields/textarea.antlers.html -->
 <textarea
     x-model="form.{{ handle }}"
@@ -8,11 +9,11 @@
         'border-gray-800 focus:border-primary': !form.invalid('{{ handle }}')
     }"
     class="w-full h-32 rounded-sm caret-primary field-sizing-content"
-    id="{{ handle }}"
+    id="{{ id }}"
     name="{{ handle }}"
     rows="5"
     {{ placeholder ?= 'placeholder="{placeholder}"' }}
-    {{ instructions ?= 'aria-describedBy="{handle}-instructions"' }}
+    {{ instructions ?= 'aria-describedBy="{id}-instructions"' }}
     {{ character_limit ?= 'maxlength="{character_limit}"' }}
     {{ autocomplete ?= 'autocomplete="{autocomplete}"' }}
 >{{ old }}</textarea>

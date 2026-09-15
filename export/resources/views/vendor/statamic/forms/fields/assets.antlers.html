@@ -1,8 +1,10 @@
+{{# id is Statamic's ID for this field, unique to its form: the Form block's label points at it and the instructions ID builds on it. Upstream Peak gives this input no id. #}}
 <!-- /vendor/statamic/forms/fields/assets.antlers.html -->
 <input
     @change="form.{{ handle }} = Object.values($event.target.files)"
     :aria-invalid="form.invalid('{{ handle }}')"
     class="w-full file:py-2 file:mr-4 file:px-4 file:border-2 file:border-solid file:border-primary file:bg-white file:text-primary file:text-xs file:uppercase file:tracking-widest file:font-bold file:rounded-sm border-gray-800 focus:border-primary motion-safe:transition"
+    id="{{ id }}"
     type="file"
     {{ if max_files === 1 }}
         name="{{ handle }}"
@@ -10,6 +12,6 @@
         name="{{ handle }}[]"
         multiple
     {{ /if }}
-    {{ instructions ?= 'aria-describedBy="{handle}-instructions"' }}
+    {{ instructions ?= 'aria-describedBy="{id}-instructions"' }}
 >
 <!-- End: /vendor/statamic/forms/fields/assets.antlers.html -->

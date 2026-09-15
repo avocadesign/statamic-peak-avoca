@@ -119,6 +119,14 @@ This is Avoca's fork of studio1902/statamic-peak. `upstream` is the Peak remote;
   Required markers and inline errors use `--form-error` from `colours.css`: red on Default and Light, white on
   Primary and a light red on Dark, so they stay readable on every scheme. The consent link hover uses
   `--btn-inline-hover-text` for the same reason, and the success message uses `heading-size-6`.
+- Form IDs: each Form block's IDs carry its form's handle, so two different forms can share a page. The
+  field views in `resources/views/vendor/statamic/forms/fields/` use Statamic's per-form `{{ id }}` (upstream
+  Peak uses the handle); `_form` uses `field:id` for labels and instructions and `block:form:handle` for the
+  error summary and honeypot; its error links rebuild Statamic's ID pattern, `{form}-form-{handle}-field` with
+  dots and underscores as hyphens (`RendersForms::generateFieldId()`, a private method, so recheck it after a
+  Statamic upgrade). `resources/views/vendor/statamic-peak-tools/snippets/_form_handler.antlers.html` is
+  Avoca's copy of the Peak Tools handler, changed only to find the summary inside its own form: when Peak
+  Tools changes its handler, copy it again and repeat that change. Keep all of this on upstream merges.
 
 ## Site guidance and the AI block catalogue
 

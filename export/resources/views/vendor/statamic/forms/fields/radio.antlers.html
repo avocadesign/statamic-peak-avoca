@@ -1,9 +1,10 @@
+{{# id is Statamic's ID for this field, unique to its form, so the same handle in another form on the page does not clash. Upstream Peak uses the handle. #}}
 <!-- /vendor/statamic/forms/fields/radio.antlers.html -->
 <fieldset
     :aria-invalid="form.invalid('{{ handle }}')"
     class="flex {{ inline ? 'gap-x-4' : 'flex-col gap-y-2' }}"
-    id="{{ handle }}"
-    {{ instructions ?= 'aria-describedBy="{handle}-instructions"' }}
+    id="{{ id }}"
+    {{ instructions ?= 'aria-describedBy="{id}-instructions"' }}
 >
     {{ foreach:options as="value|label" }}
         <label class="inline-flex items-baseline">
