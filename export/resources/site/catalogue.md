@@ -332,7 +332,7 @@ Listed under Content in the page builder.
 
 ### Call to action (`call_to_action`)
 
-A short title, a sentence of text and buttons in a panel of the brand colour, prompting people to act.
+A short title, a sentence of text and buttons in a coloured panel, prompting people to act.
 
 Listed under Content in the page builder.
 
@@ -341,6 +341,7 @@ Listed under Content in the page builder.
 - Asking people to take the next step, such as getting in touch, booking, buying or signing up.
 - Closing a page, or breaking up a long page with one clear action.
 - Choose Call to action style: Vertical centres everything, Horizontal puts the text on the left and the buttons on the right.
+- The panel is the brand colour by default. Set Colour Scheme to Dark or Light when the brand colour clashes with the blocks around it.
 
 #### When not to use
 
@@ -354,14 +355,15 @@ Listed under Content in the page builder.
 - Use one Call to action per page, usually near the end. Only add a second when the page is long.
 - Keep the title to a few words and the text to one sentence, about 20 words. The text is plain, so it can't hold links or formatting.
 - Always add a button. Use one, or two at most, with the most important action first.
-- Buttons here are light by default, to stand out on the brand colour. Leave their colour alone unless the design asks for something else.
+- The panel's Colour Scheme sets the colours of its heading, text and buttons. Leave buttons on Primary: on the Primary panel a Primary button shows white with brand-colour text.
 - Write button labels that say what happens, such as "Book a consultation", not "Click here".
-- Don't place a Call to action next to another block in the brand colour.
+- Don't place a Call to action next to a block with the same colour scheme as its panel.
 - Use Horizontal for a short title and text, and Vertical when the text runs longer.
 
 #### Fields
 
 - `cta_style`: Call to action style. Choice (`button_group`). Options: `vertical` Vertical, `horizontal` Horizontal. Default `vertical`.
+- `panel_scheme`: Colour Scheme. Choice (`button_group`). Options: `primary` Primary, `dark` Dark, `light` Light. Default `primary`. Help: The colour of the panel. Its text and buttons take their colours from it.
 - `title`: Title. Text (`text`), required.
 - `text`: Call to action text. Plain text over several lines (`textarea`), required.
 - `buttons`: Buttons. List of items (`replicator`).
