@@ -34,8 +34,11 @@ This is Avoca's fork of studio1902/statamic-peak. `upstream` is the Peak remote;
   substring replace of `APP_URL=` and corrupts the line. The Vite key is `VITE_SITE_URL`.
 - Global values live in `content/globals/default/<handle>.yaml`. Statamic 6 ignores an inline
   `data:` block in the root `content/globals/<handle>.yaml`; the root file holds only the title.
-- After any upstream merge: run the "Kit install check" workflow (or the same steps locally in a
-  throwaway site) before merging to main. It installs the kit fresh, builds, and renders pages.
+- After any upstream merge, and after changing `starter-kit.yaml`, `StarterKitPostInstall.php` or the
+  kit's dependencies: run `scripts/install-check.sh` before merging to main. It installs the last commit
+  into a new site in a temporary folder, builds, renders pages and runs `avoca:site:check --strict`. It
+  runs on this computer rather than in GitHub Actions: it needs read access to the private avoca-tools
+  repository, and this repository is public.
 - Default robots policy (SEO global → Robots): allow search engines and AI search/assistant
   fetchers, block AI training crawlers. Edit the list in the CP, never in a template; Peak SEO
   appends the Sitemap line itself, so do not add one.
