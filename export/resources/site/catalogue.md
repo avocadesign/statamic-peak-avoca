@@ -387,9 +387,26 @@ Listed under Content in the page builder.
 
 ### Divider (`divider`)
 
-A divider between sections
+A thin line across the page that separates two blocks.
 
 Listed under Content in the page builder.
+
+#### When to use
+
+- Marking a change of topic between two blocks with the Default colour scheme, where the usual space between them doesn't separate them enough.
+- Splitting a long run of similar blocks, such as several Text blocks, into groups.
+
+#### When not to use
+
+- Making one section stand apart: set that block's Colour Scheme to Light, Primary or Dark instead, because a change of background separates sections more clearly than a line.
+- A break within a passage of text: use the horizontal line button in the text editor.
+- Changing the space between blocks: use Block Margins in a block's display settings, because a Divider always adds its own space.
+
+#### Notes for AI
+
+- The Divider has no settings. It draws a pale grey line on the plain page background, so only place it between two blocks with the Default colour scheme.
+- It replaces the usual gap between blocks with its own space above and below the line, so the blocks either side end up about twice as far apart as usual. Block Margins on those blocks don't change this.
+- Use one or two on a page at most, never two in a row, and never as the first or last block.
 
 #### Fields
 
@@ -397,9 +414,30 @@ Listed under Content in the page builder.
 
 ### Anchor (`anchor`)
 
-An invisible anchor that can be linked to via #id.
+An invisible marker between blocks that a link can jump to.
 
 Listed under Content in the page builder.
+
+#### When to use
+
+- Letting a link or button jump straight to a section further down a long page, such as "See our prices".
+- A short list of links at the top of a long page, where each link jumps to its section.
+- Sharing a link that opens a page at a particular section, such as the prices on a services page.
+
+#### When not to use
+
+- Linking to another page, or to the top of a page: link to the page itself, because no anchor is needed.
+- Adding space between blocks: use Block Margins in a block's display settings, because an Anchor shows nothing and adds no space.
+- Marking the start of a section people can see: use a heading in a Text block, or a Divider, because an Anchor is invisible.
+
+#### Notes for AI
+
+- Place the Anchor directly above the block people should land on. A link to it scrolls smoothly to the top of that block.
+- Use a short, lowercase ID of a word or two joined by hyphens, such as `pricing` or `our-team`. The field turns what is typed into that form.
+- Every ID must be unique on the page. `content` is already used by the page's main content area, and a Form block uses `summary` and its form's field handles, such as `name` and `email` in the Contact form.
+- An Anchor does nothing on its own, so add the link that points to it in the same change: `#pricing` in a button's URL or a text link on the same page, or `/services#pricing` from another page.
+- When you rename or remove an Anchor, update every link that points to it.
+- An Anchor only sits between blocks, so it can't mark a heading inside a block's text. Place it above that block instead.
 
 #### Fields
 
@@ -407,9 +445,33 @@ Listed under Content in the page builder.
 
 ### Form (`form`)
 
-Select and render a form.
+A form built under Forms in the control panel, with an optional heading, short text and contact details beside it.
 
 Listed under Dynamic in the page builder.
+
+#### When to use
+
+- Letting people get in touch, ask for a quote or make an enquiry without leaving the page.
+- A contact page, or the end of a service page where people are ready to ask about the service.
+- Add a heading, and a sentence on what happens after someone sends the form, such as when they can expect a reply.
+- Switch on Include contact details to show the phone, email or address from Site Details beside the form, for people who would rather call or email.
+
+#### When not to use
+
+- Contact details with no form: use the Contact Details set in a Text block.
+- Sending people to a booking or payment system on another website: use Call to action, or the Buttons set, with a link to it.
+- A newsletter sign-up from an email marketing service: use the HTML set with the service's own embed code, because this block only shows forms built on this site.
+
+#### Notes for AI
+
+- Forms are built under Forms in the control panel, not in this block. Choose an existing form by its handle, such as `contact`, and ask for a new form to be built when none fits.
+- Use one Form block per page. Its field IDs come from the form's field handles and its error summary always has the ID `summary`, so a second form on the page sends labels, error links and focus to the first.
+- Always write a heading, such as "Get in touch". It shows as a level-two heading.
+- Keep the text to one or two sentences. It is plain text, so it can't hold links or formatting, but line breaks show.
+- The submit button's label and the messages people see after sending come from the site's language strings, not the block, so don't repeat them in the text.
+- With Include contact details on, tick at least one detail that has a value in Site Details, or the column beside the form is empty. The details take a third of the width beside the form, and sit below it on phones.
+- The form needs the site's server, which checks each answer as people fill the form in, verifies the captcha and receives the submission. It doesn't work on a site generated as static files, so don't add it there: ask the developer how that site takes enquiries.
+- The captcha only checks forms listed in the site's captcha settings, and the kit lists only the Contact form. Tell the developer when a page uses any other form.
 
 #### Fields
 
@@ -428,9 +490,36 @@ These go inside the text editor, which these blocks hold: Text, Media and text, 
 
 ### Buttons (`buttons`)
 
-Add one or multiple buttons.
+One or more buttons or text links to a page, a file, an email address or a phone number.
 
 Listed under Content in the text editor.
+
+#### When to use
+
+- A clear next step after some text, such as "Book a consultation" or "Download the menu".
+- Linking to a page on the site, another website, a file to download, an email address or a phone number.
+- Choose Button type: Button for a solid or outlined button, or Inline for a bold, underlined link that sits more quietly.
+- Use a Primary, Solid button for the main action, and an Outline or Light button for a second, less important one.
+
+#### When not to use
+
+- A link within a sentence: use the link button in the text editor, so the link reads as part of the text.
+- Buttons in a Media and text block: use the block's own Buttons field, which places them a clear step below the text.
+- A prompt to act that should stand out as its own section: use Call to action.
+- A long list of links, such as a set of documents: use a bulleted list of links in the text editor.
+- Several destinations that each need a title and a sentence: use Cards.
+
+#### Notes for AI
+
+- Use one button, or two at most, with the most important first.
+- Write labels of two to four words that say what happens, such as "Book a table", never "Click here".
+- For a page on this site, use the Entry link type rather than a URL, so the link keeps working if the page's address changes.
+- The Asset link type makes the browser download the file instead of opening it.
+- Switch on Open in new window only for links to other websites. It adds an external link icon and tells screen reader users that the link is external.
+- Each colour scheme adjusts the button colours to stay readable, so choose Button Colour and Button Style by importance, not to match the background. On a Primary block, a Primary button shows white with brand-colour text.
+- Leave Aria label empty unless the label needs more context. It replaces the label for screen readers, so start it with the label's own words, such as "Download the menu (PDF)".
+- Leave Title and Tracker event empty unless the person asks for them.
+- Buttons line up from the left edge of the text, even under centred text.
 
 #### Fields
 
@@ -455,9 +544,32 @@ Listed under Content in the text editor.
 
 ### Pull quote (`pull_quote`)
 
-Add a pull quote with an optional author.
+A short quote in large, bold text, with the name of the person who said it.
 
 Listed under Content in the text editor.
+
+#### When to use
+
+- Pulling out a striking line from the text around it, so people skimming the page catch the main point.
+- A short quote from a client, customer or expert, with their name as the author.
+- Breaking up a long passage of text with one memorable line.
+- On a "simple" page, set Size to LG or XL to let the quote run wider than the text. Inside a block, the quote always fills the width of the text.
+
+#### When not to use
+
+- Quoting a longer passage, such as a paragraph from a report: use the quote button in the text editor, which keeps it at text size.
+- A key sentence that isn't a quote: use a heading or the text editor's Lede style, because a pull quote wraps its text in quotation marks.
+- Several client or customer quotes together: use Cards, with each quote as a card's text and the person's name as its title.
+
+#### Notes for AI
+
+- Only quote words someone really said or wrote. Never invent a quote, a testimonial or its author.
+- Keep the quote to one or two sentences, about 30 words, because it shows large and bold.
+- Don't type quotation marks around the quote or a dash before the author: the template adds both.
+- Put the person's name in Author, followed by their role or business after a comma if it helps, such as "Sam Taylor, Owner".
+- Avoid pull quotes in a block with the Primary colour scheme: the quotation marks and the dash are in the brand colour, so they disappear.
+- Size labels don't match their saved keys: Normal is `lg`, LG is `xl` and XL is `2xl`. With Size left out, the quote is narrower than the text on a simple page.
+- Size only works where the text editor sits directly on the page, as on a simple page. Inside every page builder block the quote fills its column, whatever Size says.
 
 #### Fields
 
@@ -467,9 +579,32 @@ Listed under Content in the text editor.
 
 ### Table (`table`)
 
-Add a data table with headers, rows and columns.
+A table of rows and columns, with an optional header row, header column and caption.
 
 Listed under Content in the text editor.
+
+#### When to use
+
+- Information people compare across rows and columns, such as prices, opening hours, sizes or specifications.
+- Switch on First row as header when the top row names the columns, and First column as header when the first column names each row.
+- Add a caption to say what the table shows or where its figures come from.
+
+#### When not to use
+
+- A simple list of items: use a bulleted list in the text editor, which reads better on phones.
+- Setting text or images side by side: use Text Columns or Cards, because tables are for data and confuse screen readers when used for layout.
+- A large spreadsheet with many columns: link to the file with the Buttons set, because a wide table has to scroll sideways on phones.
+
+#### Notes for AI
+
+- Keep tables small: up to about five columns and 15 rows, with a few words in each cell.
+- The table is always at least 580 pixels wide, so on phones and in narrow columns it scrolls sideways. Put it in a Text block or a wide column of Text Columns, not in Media and text.
+- Switch on First row as header whenever the first row holds column names, and leave no header cell empty. Header cells show in capitals, so write them in normal case.
+- Cells are plain text. Put links and longer notes in the text around the table.
+- In a block with the Dark or Primary colour scheme, the table takes that scheme's colours: no cell background, light lines and a lightly shaded header row.
+- The caption shows below the table in small text but isn't linked to the table for screen readers, so introduce the table in the text above it as well.
+- Size labels don't match their saved keys: Normal is `lg`, LG is `xl` and XL is `2xl`. With Size left out, the table is narrower than the text on a simple page.
+- Size only works where the text editor sits directly on the page, as on a simple page. Inside every page builder block the table fills its column, whatever Size says.
 
 #### Fields
 
@@ -481,9 +616,30 @@ Listed under Content in the text editor.
 
 ### Contact Details (`contact_details`)
 
-Show selected contact info from the Site Details global.
+The business's phone, mobile, email or address, taken from Site Details.
 
 Listed under Content in the text editor.
+
+#### When to use
+
+- Showing how to reach the business on a page, such as a contact, location or about page.
+- Keeping details the same everywhere: they come from Site Details, so a change there updates every page that shows them.
+- Tick only the details that suit the page, such as just the phone and email under a short invitation to get in touch.
+
+#### When not to use
+
+- Contact details beside a form: switch on Include contact details in the Form block.
+- A different person's or branch's details: write them in the text editor, because this set only shows what is saved in Site Details.
+- A prompt to get in touch as its own section: use Call to action with a button to the contact page.
+
+#### Notes for AI
+
+- Before adding the set, check that Site Details has a value for each detail you tick. An empty detail shows nothing, and with no values the set shows nothing at all.
+- Change a detail only in Site Details, and only when the person asks, because the change reaches every page that shows it. Never type the details into the page instead.
+- Phone, mobile and email show as links that start a call or an email. The address shows as text with its line breaks.
+- The details show one below another, in the order they are listed in Display Contacts.
+- The set has no heading, so put a short heading or sentence before it, such as "Get in touch".
+- It suits a Text block, or the narrow column of Text Columns beside a map or opening hours.
 
 #### Fields
 
@@ -491,9 +647,39 @@ Listed under Content in the text editor.
 
 ### HTML (`html`)
 
-Embed raw HTML, scripts or third-party widgets.
+Embed code from a trusted outside service, such as a map, booking calendar or sign-up form.
 
 Listed under Content in the text editor.
+
+#### When to use
+
+- Embedding a tool from a service the business already uses and trusts, such as a map, a booking calendar, a newsletter sign-up or a social media post.
+- When that service gives you code to copy from its own embed or share option.
+- On a "simple" page, set Size to LG or XL for an embed that needs more width, such as a map. Inside a block, the embed fills the width of the text.
+
+#### When not to use
+
+- A YouTube or Vimeo video: use Video, which sizes the player for phones, adds a caption and waits for cookie consent when the site asks for it.
+- A contact or enquiry form: use the Form block, which checks what people enter, blocks spam and sends each submission to the business.
+- Buttons, a table, an image or contact details: use the Buttons, Table, Image or Contact Details set, which match the site's design.
+- Tracking or analytics code for the whole site: ask the developer, because it belongs in the site's SEO settings, not on one page.
+- Code from a website or person you don't know: ask the developer to check it before anything is added.
+- Changing how the page looks: ask the developer.
+
+#### Notes for AI
+
+- Only add embed code from a service the person names, copied from that service's own embed option. Never write your own scripts, and never paste code from an unknown site: a script can change the page, read what visitors type or send them elsewhere.
+- When a service offers an iframe embed as well as a script, use the iframe, because a script runs with full access to the page.
+- Give every iframe a `title` that says what it shows, such as `title="Map of our Nelson office"`, so screen readers can announce it.
+- Offer another way to get the same information, such as the address in text beside a map, because many embeds are hard to use with a keyboard or screen reader.
+- Set the embed's width to 100% rather than a fixed number of pixels, so it fits on phones.
+- Every embed loads code from another company and slows the page. Add `loading="lazy"` to iframes below the top of the page, use one or two embeds per page at most, and never add the same script twice.
+- The HTML set isn't held back by the site's cookie consent banner, unlike Video, so an embed that sets cookies loads before visitors agree.
+- The code isn't checked. Close every tag you open, because a broken tag can break the layout of everything below it.
+- Put headings and text in the text editor around the embed, because the HTML set sits outside the site's text styling.
+- On a site generated as static files, the embed must not call this site's own server, such as a form that posts to the site or a search of its pages, because there is no server to answer. Embeds that load everything from the outside service still work.
+- Size labels don't match their saved keys: Normal is `lg`, LG is `xl` and XL is `2xl`. With Size left out, the embed is narrower than the text on a simple page.
+- Size only works where the text editor sits directly on the page, as on a simple page. Inside every page builder block the embed fills its column, whatever Size says.
 
 #### Fields
 
@@ -502,9 +688,33 @@ Listed under Content in the text editor.
 
 ### Image (`image`)
 
-Add a single image with an optional caption.
+A single image with an optional caption, crop and link.
 
 Listed under Media in the text editor.
+
+#### When to use
+
+- A photo, diagram or illustration that belongs with the text around it, such as a photo of a finished project within its write-up.
+- Add a caption to credit the photographer or say what the image shows.
+- Leave Crop on No Crop to show the whole image, or choose a crop so the image matches the shape of other images near it.
+- Set Link type to make the image link to a page, another website or a file.
+
+#### When not to use
+
+- An image that leads a section, with a heading and short text beside it: use Media and text.
+- Two images side by side: use the Two Images set.
+- Three or more images: use the Gallery set, or the Gallery block for a gallery with its own heading.
+- A video: use Video.
+- A price list, poster or notice saved as a picture: type the words in the text editor or a Table, because people can't search or copy text in an image and screen readers can't read it.
+
+#### Notes for AI
+
+- Always give the image alt text. Alt text is saved on the image itself rather than in the set, and an image without it is hidden from screen readers.
+- When the image is a link, check its alt text also works as the link's text, because screen readers read it out as the link.
+- A link to a website always opens in a new tab. A link to an entry or a file opens in the same tab.
+- A crop keeps the area around the image's focal point, so use a photo whose subject survives being cut to that shape.
+- The Image set has no Size setting. It shows at the width of the text on a simple page, and fills its column inside a block.
+- Keep the caption to one short sentence. It shows below the image in small text.
 
 #### Fields
 
@@ -518,9 +728,33 @@ Listed under Media in the text editor.
 
 ### Video (`video`)
 
-Add a YouTube or Vimeo video with an optional caption.
+A YouTube or Vimeo video in a player that fits the page, with an optional caption.
 
 Listed under Media in the text editor.
+
+#### When to use
+
+- Showing a YouTube or Vimeo video within a page's text, such as a project walkthrough, a talk or a how-to.
+- Add a caption to say what the video shows or how long it runs.
+- On a "simple" page, set Size to LG or XL for a video that deserves more width. Inside a block, the video fills the width of the text.
+
+#### When not to use
+
+- A video that leads a section, with a heading and short text beside it: use Media and text with Media type set to Video.
+- A video file that isn't on YouTube or Vimeo: this set can't play it, so upload it to YouTube or Vimeo first, or ask the developer.
+- A podcast or sound recording: use the HTML set with the host's own embed code.
+
+#### Notes for AI
+
+- Use the video's normal address, such as a youtube.com/watch, youtu.be, YouTube Shorts or vimeo.com link. The site turns it into an embedded player.
+- The player is always 16:9, so a vertical video such as a YouTube Short shows with wide black bars.
+- The video must be public or unlisted and allow embedding, or the player shows an error.
+- Each player loads a lot of code from YouTube or Vimeo, so use one or two videos per page at most.
+- When the site's consent banner asks visitors about embeds, a message replaces the player until the visitor accepts.
+- Sum up the video in the text nearby, for people who can't or won't play it.
+- Keep the caption to one short sentence. It shows below the player.
+- Size labels don't match their saved keys: Normal is `lg`, LG is `xl` and XL is `2xl`. With Size left out, the video is narrower than the text on a simple page.
+- Size only works where the text editor sits directly on the page, as on a simple page. Inside every page builder block the video fills its column, whatever Size says.
 
 #### Fields
 
@@ -530,9 +764,33 @@ Listed under Media in the text editor.
 
 ### Two Images (`two_images`)
 
-Two images, side by side
+Two images side by side, each with an optional caption, crop and link.
 
 Listed under Media in the text editor.
+
+#### When to use
+
+- Two related photos together within some text, such as before and after, or a space and a detail of it.
+- Add a short caption under each image, or leave both empty.
+- Give both images the same Crop so they sit level, or leave both on No Crop when the photos already share a shape.
+
+#### When not to use
+
+- One image: use the Image set.
+- Three or more images: use the Gallery set.
+- Two images that lead a section, with a heading and short text: use the Two Images block, which has more layouts.
+- One image beside text: use Media and text.
+
+#### Notes for AI
+
+- Give both images alt text, and choose images that work as a pair.
+- The images sit side by side from tablet width and stack on phones.
+- The right image's Text Field doesn't show on the page, so leave it empty.
+- Put this set in a Text block or a wide column. In a narrow column, or in Media and text, each image ends up small.
+- Don't use it inside the Two Images block, which already shows two images.
+- A link to a website opens in a new tab. A link to an entry or a file opens in the same tab.
+- Size labels don't match their saved keys: Normal is `lg`, LG is `xl` and XL is `2xl`. With Size left out, the images take the width of the text on a simple page, the same as Normal.
+- Size only works where the text editor sits directly on the page, as on a simple page. Inside every page builder block the images fill their column, whatever Size says.
 
 #### Fields
 
@@ -557,9 +815,32 @@ Listed under Media in the text editor.
 
 ### Gallery (`gallery`)
 
-A multi row image gallery with a lightbox.
+A grid of images inside the text, which open larger in a lightbox.
 
 Listed under Media in the text editor.
+
+#### When to use
+
+- A set of photos within a page's text, such as photos of the project the text describes.
+- When people will want to look through the images at a larger size.
+- Set Crop thumbnails to Square, Landscape or Portrait for a tidy grid of matching shapes, or leave it at No crop for a looser layout that keeps each photo's own shape.
+
+#### When not to use
+
+- A gallery that is a section of its own, with a heading and description: use the Gallery block.
+- One or two images: use the Image or Two Images set.
+- Images that each need a caption: use an Image set for each one, because the gallery shows no captions.
+
+#### Notes for AI
+
+- Use at least three images. With a crop, use a multiple of three, such as six or nine, so the rows fill evenly.
+- Set Crop thumbnails to Square unless the gallery has a lot of photos. Then check how many of them are portrait, and if a good share are, use No crop so every photo keeps its real proportions.
+- Give every image alt text, because the gallery and its lightbox use it to describe each image.
+- The set has no heading or captions, so introduce the photos in the text above it.
+- The gallery has no Size setting and always fills the width it's given, so on a simple page it runs wider than the text.
+- Put it in a Text block or a wide column, because in a narrow column the thumbnails get small.
+- The grid shows two columns on phones and three from tablet width, or two when there are only two images.
+- With a crop, choose images whose subject survives being cut to that shape. No crop keeps every photo whole.
 
 #### Fields
 
