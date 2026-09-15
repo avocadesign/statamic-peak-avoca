@@ -45,7 +45,7 @@ Avoca's build recipe comes from the avocadesign/avoca-tools package. Follow it w
 - Place complex logic in separate JS files in `resources/js/`
 
 ## Development Workflow
-- See `agents.md` for comprehensive development guidelines
+- See `AGENTS.md` for comprehensive development guidelines
 - Use partials for reusable template fragments
 - Always check existing components before creating new ones
 - Match the style and structure of neighboring files

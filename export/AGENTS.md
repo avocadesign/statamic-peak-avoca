@@ -5,10 +5,10 @@ Guidance for AI coding agents working in this repository. Follow these conventio
 **Scope:** This file applies to the entire repository.
 
 ## Project Overview
-- **Stack:** Laravel 12 (PHP 8.3+), Statamic 5 (flat-file CMS), Antlers templates, Tailwind CSS 4, Alpine.js, Vite
+- **Stack:** Laravel 13 (PHP 8.3+), Statamic 6 (flat-file CMS), Antlers templates, Tailwind CSS 4, Alpine.js, Vite
 - **Base:** Forked from [studio1902/statamic-peak](https://github.com/studio1902/statamic-peak) starter kit
 - **Content:** File-based under `content/`; no database by default
-- **Customizations:** See `claude.md` for project-specific preferences and structure
+- **Customizations:** See `CLAUDE.md` for project-specific preferences and structure
 
 ## Build recipe
 - Before building or changing a page builder block, a text editor set, a collection, a global, the page header, the header or the footer, read Avoca's build recipe at `vendor/avocadesign/avoca-tools/recipe/recipe.md` and follow it. It sets the order for deciding how to build something (use a block the site has, install a library item, change an existing block, build a new block), the conventions for blocks, sets and collections, and the review steps.
@@ -67,7 +67,7 @@ App runs at configured local domain. Statamic Control Panel is at `/cp`.
 - Each block's guidance is in `resources/site/blocks/<handle>.md` and each set's in `resources/site/sets/<handle>.md`. Site-wide design rules are in `resources/site/design.md`.
 - People see the same list with live previews at `/site/content`.
 - After changing a fieldset or a guidance file, run `php please avoca:site:catalogue`, then `php please avoca:site:check --strict`.
-- **Groups:** a block with its own content fields goes in the Content group. A block that shows entries from a collection goes in the Dynamic group.
+- **Groups:** a block with its own content fields goes in the Content group. A block that calls in content from elsewhere, such as a form, collection entries or contact details, goes in the Dynamic group.
 - **Field naming:** the article fieldset uses the "media" group, not "image_video".
 
 ### Component Preferences
@@ -192,13 +192,13 @@ App runs at configured local domain. Statamic Control Panel is at `/cp`.
 - Test in Control Panel (`/cp`) if relevant
 
 ## Documentation Files
-- `claude.md` — Project-specific conventions and preferences for AI agents
-- `agents.md` — Comprehensive guidance for AI coding agents
+- `CLAUDE.md` — Project-specific conventions and preferences for AI agents
+- `AGENTS.md` — Comprehensive guidance for AI coding agents
 - `CHANGELOG.md` — Version history and changes (inherited from upstream)
 - `README.example.md` — Deployment scripts and environment setup examples
 
 ## Need Help?
-- Check `claude.md` for project-specific conventions
+- Check `CLAUDE.md` for project-specific conventions
 - Review similar existing files for patterns
 - Statamic documentation: https://statamic.dev
 - Peak starter kit docs: https://github.com/studio1902/statamic-peak

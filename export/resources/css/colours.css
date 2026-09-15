@@ -8,7 +8,7 @@
     One grey scale, `gray`, mapped to Tailwind's slate. There is no `neutral` scale and no alias:
     text takes --body-color and --headings-color, which are set here and read by typography.css.
     `@theme static` makes every token exist in the built CSS even when nothing uses it, so
-    hand-written CSS and the style kit can rely on var(--color-*).
+    hand-written CSS and the /site/style page can rely on var(--color-*).
 */
 @theme static {
     /* Brand */
