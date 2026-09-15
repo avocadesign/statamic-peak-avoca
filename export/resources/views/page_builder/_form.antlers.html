@@ -9,10 +9,15 @@
     {{# Outer wrapper spans the full content row when contact details are alongside, otherwise the original centered 8 cols. #}}
     <div class="span-content {{ if block:include_contact_details }}md:col-start-[col-1] md:col-span-12 grid md:grid-cols-3 gap-8{{ else }}md:col-start-[col-3] md:col-span-8{{ /if }}">
 
-        {{# Form column — 2/3 when contact details are shown alongside. #}}
-        <div class="{{ if block:include_contact_details }}md:col-span-2{{ /if }}">
-        {{ if block:title }}<h2 class="mb-8">{{ block:title | nl2br }}</h2>{{ /if }}
-        {{ if block:text }}<p>{{ block:text | nl2br }}</p>{{ /if }}
+        {{# Form column, two thirds wide when contact details sit alongside.
+            The heading and text sit close together, and stack-8 puts the standard step between them and the form. #}}
+        <div class="stack-8 {{ if block:include_contact_details }}md:col-span-2{{ /if }}">
+        {{ if block:heading || block:text }}
+            <header class="flex flex-col gap-2">
+                {{ if block:heading }}<h2>{{ block:heading | nl2br }}</h2>{{ /if }}
+                {{ if block:text }}<p>{{ block:text | nl2br }}</p>{{ /if }}
+            </header>
+        {{ /if }}
 
         {{# Render form and use Alpine based Statamic conditional logic. #}}
         {{ if form:handle }}

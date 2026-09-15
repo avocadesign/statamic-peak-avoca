@@ -81,6 +81,9 @@ This is Avoca's fork of studio1902/statamic-peak. `upstream` is the Peak remote;
   the block wrapper applies `colour_scheme` to the whole section.
 - Cards: the buttons sit at the foot of each card (`mt-auto`), level across a row, and the image, title
   and text are stacked (`stack-6`, `stack-4`). The card text article is no longer `contents`.
+- Form: the heading field is `heading`, labelled Heading, like the other blocks. The template used to read
+  `title`, so the heading never showed, and the contact page content moved from `title` to `heading` with the fix.
+  The heading and text sit together in a `header` (`gap-2`), and the form column is `stack-8`.
 
 ## Site guidance and the AI block catalogue
 

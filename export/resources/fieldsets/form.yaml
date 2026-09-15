@@ -5,7 +5,7 @@ fields:
     field:
       type: text
       localizable: true
-      display: Title
+      display: Heading
   -
     handle: text
     field: common.text_plain

@@ -413,7 +413,7 @@ Listed under Dynamic in the page builder.
 
 #### Fields
 
-- `heading`: Title. Text (`text`).
+- `heading`: Heading. Text (`text`).
 - `text`: Text plain. Plain text over several lines (`textarea`).
 - `form`: Form. Form (`form`), required. At most one item.
 - `include_contact_details`: Include contact details?. On or off (`toggle`). Default off. Help: Show contact details alongside the form.

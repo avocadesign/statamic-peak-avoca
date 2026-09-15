@@ -5,7 +5,7 @@ title: Contact
 page_builder:
   -
     id: m96ek6cq
-    title: 'Contact us'
+    heading: 'Contact us'
     form: contact
     type: form
     enabled: true
