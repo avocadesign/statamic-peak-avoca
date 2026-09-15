@@ -7,7 +7,7 @@
 <!-- /page_builder/_gallery.antlers.html -->
 {{ partial:page_builder/block :colour_scheme="block:colour_scheme" :block_margins="block:block_margins" class="gap-y-8" }}
 
-    {{# Heading + description — hidden when both are empty #}}
+    {{# Heading and description, hidden when both are empty #}}
     {{ if block:heading || block:description }}
         <header class="span-content flex flex-col gap-2">
             {{ if block:heading }}
@@ -21,25 +21,34 @@
         </header>
     {{ /if }}
 
-    {{# CSS-only masonry gallery with Alpine.js lightbox #}}
+    {{#
+        CSS-only masonry gallery with an Alpine.js lightbox.
+        Each thumbnail button carries its image's URL and alt text in entity-escaped data attributes, and init()
+        reads them into the lightbox, so an apostrophe, quote or backslash in alt text can't break the JavaScript.
+    #}}
     {{ total_images = block:gallery_images | count }}
 
     <div class="span-content" x-data="{
         lightboxOpen: false,
         currentIndex: 0,
-        images: [
-            {{ block:gallery_images scope="image" }}
-                { url: '{{ image:url }}', alt: '{{ image:alt }}' }{{ unless last }},{{ /unless }}
-            {{ /block:gallery_images }}
-        ],
-        openLightbox(index) {
+        images: [],
+        opener: null,
+        init() {
+            this.images = Array.from(this.$el.querySelectorAll('[data-lightbox-url]'), (thumbnail) => ({
+                url: thumbnail.dataset.lightboxUrl,
+                alt: thumbnail.dataset.lightboxAlt || '',
+            }));
+        },
+        openLightbox(index, opener) {
             this.currentIndex = index;
+            this.opener = opener;
             this.lightboxOpen = true;
-            document.body.style.overflow = 'hidden';
+            this.$nextTick(() => this.$refs.close.focus());
         },
         closeLightbox() {
+            if (! this.lightboxOpen) return;
             this.lightboxOpen = false;
-            document.body.style.overflow = '';
+            this.$nextTick(() => this.opener && this.opener.focus());
         },
         nextImage() {
             this.currentIndex = (this.currentIndex + 1) % this.images.length;
@@ -47,14 +56,17 @@
         prevImage() {
             this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
         }
-    }"
-    @keydown.escape.window="closeLightbox()"
-    @keydown.arrow-right.window="lightboxOpen && nextImage()"
-    @keydown.arrow-left.window="lightboxOpen && prevImage()">
+    }">
 
+        {{# Each thumbnail is named by its alt text, or by its place in the gallery when it has none. #}}
         <div class="{{ block:crop_thumbnails != 'no-crop' ? 'grid grid-cols-2 gap-4' : 'columns-2 gap-4' }} {{ total_images <= 2 ? (block:crop_thumbnails != 'no-crop' ? 'md:grid-cols-2' : 'md:columns-2') : (block:crop_thumbnails != 'no-crop' ? 'md:grid-cols-3' : 'md:columns-3') }}">
             {{ block:gallery_images scope="image" }}
-                <div class="cursor-pointer {{ block:crop_thumbnails == 'no-crop' ? 'mb-4 break-inside-avoid' : '' }}" @click="openLightbox({{ index }})">
+                <button type="button"
+                        class="block w-full rounded-base {{ block:crop_thumbnails == 'no-crop' ? 'mb-4 break-inside-avoid' : '' }}"
+                        data-lightbox-url="{{ image:url | entities }}"
+                        data-lightbox-alt="{{ image:alt | entities }}"
+                        aria-label="{{ if image:alt }}{{ image:alt | entities }}{{ else }}Open image {{ count }} of {{ total_images }}{{ /if }}"
+                        @click="openLightbox({{ index }}, $el)">
                     {{ partial
                         src="statamic-peak-tools::components/picture"
                         :image="image:url"
@@ -68,39 +80,63 @@
                         "
                         cover="{{ block:crop_thumbnails != 'no-crop' ? 'true' : 'false' }}"
                         lazy="true"
-                        class="w-full h-auto rounded-base transition-opacity hover:opacity-90"
+                        class="w-full h-auto rounded-base motion-safe:transition-opacity hover:opacity-90"
                     }}
-                </div>
+                </button>
             {{ /block:gallery_images }}
         </div>
 
-        {{# Lightbox overlay #}}
-        <div x-show="lightboxOpen"
-             x-transition.opacity
+        {{#
+            Lightbox dialog. While it's open, x-trap keeps focus inside it, hides the rest of the page from screen
+            readers and locks page scrolling. Focus moves to the close button once the dialog shows, and back to the
+            thumbnail that opened it on close. The key handlers sit on the dialog, not the window, so they only act
+            while it's open, and tabindex="-1" keeps focus on the dialog when someone clicks the image. The fade only
+            runs for people who haven't asked for reduced motion.
+        #}}
+        <div x-cloak
+             x-show="lightboxOpen"
+             x-trap.inert.noscroll.noautofocus.noreturn="lightboxOpen"
+             x-transition:enter="motion-safe:transition-opacity motion-safe:duration-150"
+             x-transition:enter-start="opacity-0"
+             x-transition:enter-end="opacity-100"
+             x-transition:leave="motion-safe:transition-opacity motion-safe:duration-75"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0"
+             role="dialog"
+             aria-modal="true"
+             :aria-label="`Image ${currentIndex + 1} of ${images.length}`"
+             tabindex="-1"
              class="fixed inset-0 z-50 flex items-center justify-center bg-black/90"
-             @click="closeLightbox()">
+             @click="closeLightbox()"
+             @keydown.escape="closeLightbox()"
+             @keydown.arrow-right="nextImage()"
+             @keydown.arrow-left="prevImage()">
 
-            <button @click="closeLightbox()"
+            <button type="button"
+                    x-ref="close"
+                    @click="closeLightbox()"
                     class="absolute top-4 right-4 text-white text-4xl leading-none hover:opacity-70 z-10"
                     aria-label="Close lightbox">
                 &times;
             </button>
 
-            <button @click.stop="prevImage()"
+            <button type="button"
+                    @click.stop="prevImage()"
                     class="absolute left-4 text-white text-4xl leading-none hover:opacity-70 z-10"
                     aria-label="Previous image">
                 &#8249;
             </button>
 
-            <button @click.stop="nextImage()"
+            <button type="button"
+                    @click.stop="nextImage()"
                     class="absolute right-4 text-white text-4xl leading-none hover:opacity-70 z-10"
                     aria-label="Next image">
                 &#8250;
             </button>
 
             <div @click.stop class="max-w-7xl max-h-[90vh] p-4">
-                <img :src="images[currentIndex].url"
-                     :alt="images[currentIndex].alt"
+                <img :src="images[currentIndex]?.url"
+                     :alt="images[currentIndex]?.alt"
                      class="max-w-full max-h-[90vh] w-auto h-auto object-contain">
             </div>
         </div>
