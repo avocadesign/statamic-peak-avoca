@@ -20,7 +20,8 @@
             <h2>{{ block:title | nl2br }}</h2>
             <p>{{ block:text | nl2br }}</p>
         </div>
-        {{ block:buttons ?= { partial:components/buttons } }}
+        {{# The panel is the primary colour, so a button with no colour of its own is light here. #}}
+    {{ block:buttons ?= { partial:components/buttons default_colour="light" } }}
     </div>
 {{ /partial:page_builder/block }}
 <!-- End: /page_builder/_call_to_action.antlers.html -->
