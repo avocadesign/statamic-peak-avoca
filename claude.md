@@ -75,6 +75,10 @@ This is Avoca's fork of studio1902/statamic-peak. `upstream` is the Peak remote;
 
 ## Page builder blocks
 
+- Call to action: the panel takes a colour scheme class, `scheme-{panel_scheme}`, Primary by default, with
+  Dark and Light as options. Its heading, text and buttons use that scheme's tokens, so a Primary button shows
+  white with brand-colour text on the Primary panel. The field is `panel_scheme`, not `colour_scheme`, because
+  the block wrapper applies `colour_scheme` to the whole section.
 - Cards: the buttons sit at the foot of each card (`mt-auto`), level across a row, and the image, title
   and text are stacked (`stack-6`, `stack-4`). The card text article is no longer `contents`.
 

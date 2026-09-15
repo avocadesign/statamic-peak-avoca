@@ -13,6 +13,26 @@ fields:
       default: vertical
       type: button_group
       display: 'Call to action style'
+      width: 50
+  -
+    handle: panel_scheme
+    field:
+      options:
+        -
+          key: primary
+          value: Primary
+        -
+          key: dark
+          value: Dark
+        -
+          key: light
+          value: Light
+      default: primary
+      type: button_group
+      display: 'Colour Scheme'
+      instructions: 'The colour of the panel. Its text and buttons take their colours from it.'
+      instructions_position: below
+      width: 50
   -
     handle: title
     field:

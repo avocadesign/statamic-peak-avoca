@@ -4,8 +4,7 @@
     @param* label The caption label.
     @param as The wrapping element. Defaults to `a`.
     @param button_type `Inline` if the button needs to be rendered as an inline button.
-    @param button_colour The color theme of the button: 'primary' or 'light'. Defaults to default_colour, then 'primary'.
-    @param default_colour The colour for a button with none of its own, set by the block it sits in.
+    @param button_colour The color theme of the button: 'primary' or 'light'. Defaults to 'primary'.
     @param button_style The style of the button: 'solid' or 'outline'. Defaults to 'solid'.
     @param faux Boolean. For faux button wrapped in an actual button/anchor.
 #}}
@@ -14,7 +13,7 @@
 {{ if label }}
     <{{ as or 'a' }}
         class="
-            {{ if button_type === 'inline' }}btn-inline{{ else }}btn btn-{{ button_colour ?: default_colour ?: 'primary' }}{{ button_style === 'outline' ?= '-outline' }}{{ /if }}
+            {{ if button_type === 'inline' }}btn-inline{{ else }}btn btn-{{ button_colour ?: 'primary' }}{{ button_style === 'outline' ?= '-outline' }}{{ /if }}
             {{ class }}
         "
         {{ slot:attributes }}

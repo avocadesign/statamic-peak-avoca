@@ -6,22 +6,22 @@
 
 <!-- /page_builder/_call_to_action.antlers.html -->
 {{ partial:page_builder/block }}
-    <div class="span-content flex bg-primary p-8 gap-6
-        {{ if cta_style == "vertical" }}
-            flex-col items-center
-        {{ elseif cta_style == "horizontal"}}
+    {{# The panel takes a colour scheme, Primary by default, so its heading, text and buttons use that scheme's colours.
+        The field is panel_scheme rather than colour_scheme, which the block wrapper would apply to the whole section. #}}
+    <div class="span-content flex p-8 gap-6 scheme-{{ panel_scheme ?: 'primary' }}
+        {{ if cta_style == "horizontal" }}
             flex-col md:flex-row items-center md:justify-between
+        {{ else }}
+            flex-col items-center
         {{ /if }}
-    " style="--body-color: var(--color-white); --headings-color: var(--color-white); color: var(--body-color);">
+    ">
         <div class="flex flex-col gap-2
-            {{ if cta_style == "vertical" }} items-center {{ /if }}
-            {{ if cta_style == "horizontal" }} items-center md:items-start {{ /if }}
+            {{ if cta_style == "horizontal" }} items-center md:items-start {{ else }} items-center {{ /if }}
         ">
             <h2>{{ block:title | nl2br }}</h2>
             <p>{{ block:text | nl2br }}</p>
         </div>
-        {{# The panel is the primary colour, so a button with no colour of its own is light here. #}}
-    {{ block:buttons ?= { partial:components/buttons default_colour="light" } }}
+        {{ block:buttons ?= { partial:components/buttons } }}
     </div>
 {{ /partial:page_builder/block }}
 <!-- End: /page_builder/_call_to_action.antlers.html -->
