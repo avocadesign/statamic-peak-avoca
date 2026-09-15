@@ -52,6 +52,7 @@ class StarterKitPostInstall
         $this->excludeFormsFolderFromGit();
         $this->setupComposerUpdateWorkflow();
         $this->addAvocaToolsRepository();
+        $this->requireAvocaTools();
         $this->installNodeDependencies();
         $this->installTranslations();
         $this->runPeakClearSite();
@@ -122,6 +123,28 @@ class StarterKitPostInstall
             command: 'composer config repositories.avoca-tools vcs https://github.com/avocadesign/avoca-tools',
             processingMessage: 'Adding the Avoca Tools repository to composer.json...',
             successMessage: 'Avoca Tools repository added to composer.json.',
+        );
+    }
+
+    /**
+     * Avoca Tools is required here rather than listed in starter-kit.yaml. Statamic installs a kit's dependencies
+     * before this hook runs, when Composer doesn't yet know the repository added above, so `statamic new` stopped
+     * with "avocadesign/avoca-tools, it could not be found in any version". A site that already requires it, such
+     * as the sandbox through a path repository, is left as it is.
+     */
+    protected function requireAvocaTools(): void
+    {
+        $composer = json_decode(app('files')->get(base_path('composer.json')), true) ?: [];
+        if (isset($composer['require']['avocadesign/avoca-tools'])) {
+            return;
+        }
+
+        $this->run(
+            command: 'composer require avocadesign/avoca-tools:dev-main --no-interaction',
+            processingMessage: 'Installing Avoca Tools...',
+            successMessage: 'Avoca Tools installed.',
+            errorMessage: 'Avoca Tools could not be installed. Check that Composer on this computer can read https://github.com/avocadesign/avoca-tools, then run: composer require avocadesign/avoca-tools:dev-main',
+            timeout: 600,
         );
     }
 

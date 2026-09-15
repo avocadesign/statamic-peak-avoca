@@ -28,8 +28,11 @@ This is Avoca's fork of studio1902/statamic-peak. `upstream` is the Peak remote;
 
 ## Fresh-install rules (learned from the sandbox check)
 
-- `StarterKitPostInstall.php` is stock upstream except one addition in `cleanUp()`: it deletes the
-  skeleton's `public/robots.txt` so Peak SEO's robots route is not shadowed. Re-apply on merge.
+- `StarterKitPostInstall.php` is stock upstream except for three Avoca additions, to re-apply on merge:
+  `cleanUp()` deletes the skeleton's `public/robots.txt` so Peak SEO's robots route is not shadowed, and
+  `addAvocaToolsRepository()` and `requireAvocaTools()` add the private avoca-tools repository and require
+  the addon. Keep avoca-tools out of `starter-kit.yaml`: Statamic installs a kit's dependencies before the
+  hook runs, so a plain `statamic new` can't find a private package listed there.
 - Never name an env key ending in `APP_URL=` (e.g. `VITE_APP_URL`): the post-install does a
   substring replace of `APP_URL=` and corrupts the line. The Vite key is `VITE_SITE_URL`.
 - Global values live in `content/globals/default/<handle>.yaml`. Statamic 6 ignores an inline

@@ -80,10 +80,10 @@ cd "$work/site"
 
 step "Installing the kit"
 composer config repositories.kit path ../kit
+# Without --addon, Composer isn't told where Avoca Tools is: the kit's post-install hook adds its GitHub repository
+# and requires it, as it does when a site is created with statamic new.
 if [ -n "$addon" ]; then
     composer config repositories.avoca-tools "{\"type\": \"path\", \"url\": \"$addon\", \"options\": {\"versions\": {\"avocadesign/avoca-tools\": \"dev-main\"}}}"
-else
-    composer config repositories.avoca-tools vcs https://github.com/avocadesign/avoca-tools
 fi
 composer config --no-plugins allow-plugins.pixelfear/composer-dist-plugin true
 php please starter-kit:install avocadesign/statamic-peak-avoca --local --clear-site --no-interaction
