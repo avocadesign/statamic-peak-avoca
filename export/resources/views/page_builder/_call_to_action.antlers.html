@@ -18,7 +18,7 @@
         <div class="flex flex-col gap-2
             {{ if block:cta_style == "horizontal" }} items-center md:items-start {{ else }} items-center {{ /if }}
         ">
-            <h2>{{ block:title | nl2br }}</h2>
+            <h2>{{ block:heading | nl2br }}</h2>
             <p>{{ block:text | nl2br }}</p>
         </div>
         {{ block:buttons ?= { partial:components/buttons :buttons="block:buttons" } }}

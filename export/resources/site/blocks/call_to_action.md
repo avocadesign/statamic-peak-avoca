@@ -1,6 +1,6 @@
 ---
 title: Call to action
-description: A short title, a sentence of text and buttons in a coloured panel, prompting people to act.
+description: A short heading, a sentence of text and buttons in a coloured panel, prompting people to act.
 ---
 ## When to use
 
@@ -19,9 +19,9 @@ description: A short title, a sentence of text and buttons in a coloured panel, 
 
 - Before adding this block, check whether the site already shows a call to action in its footer. Some sites build one into the footer with a default that each page can override. If this site does, set the page's override instead of adding a block, unless the page needs a second, different action.
 - Use one Call to action per page, usually near the end. Only add a second when the page is long.
-- Keep the title to a few words and the text to one sentence, about 20 words. The text is plain, so it can't hold links or formatting.
+- Keep the heading to a few words and the text to one sentence, about 20 words. The text is plain, so it can't hold links or formatting.
 - Always add a button. Use one, or two at most, with the most important action first.
 - The panel's Colour Scheme sets the colours of its heading, text and buttons. Leave buttons on Primary: on the Primary panel a Primary button shows white with brand-colour text.
 - Write button labels that say what happens, such as "Book a consultation", not "Click here".
 - Don't place a Call to action next to a block with the same colour scheme as its panel.
-- Use Horizontal for a short title and text, and Vertical when the text runs longer.
+- Use Horizontal for a short heading and text, and Vertical when the text runs longer.

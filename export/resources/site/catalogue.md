@@ -203,9 +203,9 @@ Listed under Content in the page builder.
 
 #### Fields
 
-- `cards_heading`: Heading. Text (`text`).
+- `heading`: Heading. Text (`text`).
 - `card_type`: Card Type. Choice (`select`). Options: `text` Text, `image` Image, `icon` Icon. Default `text`.
-- `cards_subheading`: Sub heading. Text (`text`).
+- `sub_heading`: Sub heading. Text (`text`).
 - `heading_alignment`: Heading alignment. Choice (`button_group`). Options: `left` Left, `centre` Centred. Default `left`.
 - `cards`: Cards. List of items (`replicator`).
   - Each `card` item (Card) has:
@@ -332,7 +332,7 @@ Listed under Content in the page builder.
 
 ### Call to action (`call_to_action`)
 
-A short title, a sentence of text and buttons in a coloured panel, prompting people to act.
+A short heading, a sentence of text and buttons in a coloured panel, prompting people to act.
 
 Listed under Content in the page builder.
 
@@ -353,18 +353,18 @@ Listed under Content in the page builder.
 
 - Before adding this block, check whether the site already shows a call to action in its footer. Some sites build one into the footer with a default that each page can override. If this site does, set the page's override instead of adding a block, unless the page needs a second, different action.
 - Use one Call to action per page, usually near the end. Only add a second when the page is long.
-- Keep the title to a few words and the text to one sentence, about 20 words. The text is plain, so it can't hold links or formatting.
+- Keep the heading to a few words and the text to one sentence, about 20 words. The text is plain, so it can't hold links or formatting.
 - Always add a button. Use one, or two at most, with the most important action first.
 - The panel's Colour Scheme sets the colours of its heading, text and buttons. Leave buttons on Primary: on the Primary panel a Primary button shows white with brand-colour text.
 - Write button labels that say what happens, such as "Book a consultation", not "Click here".
 - Don't place a Call to action next to a block with the same colour scheme as its panel.
-- Use Horizontal for a short title and text, and Vertical when the text runs longer.
+- Use Horizontal for a short heading and text, and Vertical when the text runs longer.
 
 #### Fields
 
 - `cta_style`: Call to action style. Choice (`button_group`). Options: `vertical` Vertical, `horizontal` Horizontal. Default `vertical`.
 - `panel_scheme`: Colour Scheme. Choice (`button_group`). Options: `primary` Primary, `dark` Dark, `light` Light. Default `primary`. Help: The colour of the panel. Its text and buttons take their colours from it.
-- `title`: Title. Text (`text`), required.
+- `heading`: Heading. Text (`text`), required.
 - `text`: Call to action text. Plain text over several lines (`textarea`), required.
 - `buttons`: Buttons. List of items (`replicator`).
   - Each `button` item (Button) has:

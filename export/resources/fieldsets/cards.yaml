@@ -1,7 +1,7 @@
 title: 'Block: Cards'
 fields:
   -
-    handle: cards_heading
+    handle: heading
     field:
       type: text
       localizable: true
@@ -25,7 +25,7 @@ fields:
       width: 33
       default: text
   -
-    handle: cards_subheading
+    handle: sub_heading
     field:
       type: text
       display: 'Sub heading'

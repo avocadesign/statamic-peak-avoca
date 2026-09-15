@@ -80,6 +80,10 @@ This is Avoca's fork of studio1902/statamic-peak. `upstream` is the Peak remote;
 
 ## Page builder blocks
 
+- Heading fields: every block's heading is `heading`, with `sub_heading` where it has one. Cards (once
+  `cards_heading` and `cards_subheading`) and Call to action (once `title`) were renamed to match. Keep these
+  names if an upstream merge brings the old ones back. Fields inside a repeated item, such as `card_title`, keep
+  their own names.
 - Scope: block templates read the block's own fields through `block:` (`{{ block:heading }}`, `{{ if block:align == 'centre' }}`,
   `:image="block:image"`), in conditions, switches and attribute values too. Blocks render inside `{{ page_builder scope="block" }}`,
   and an unscoped read of a key the block lacks falls back to the page, then to anything else in scope such as globals. Statamic
