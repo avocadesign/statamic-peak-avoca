@@ -10,6 +10,10 @@ Guidance for AI coding agents working in this repository. Follow these conventio
 - **Content:** File-based under `content/`; no database by default
 - **Customizations:** See `claude.md` for project-specific preferences and structure
 
+## Build recipe
+- Before building or changing a page builder block, a text editor set, a collection, a global, the page header, the header or the footer, read Avoca's build recipe at `vendor/avocadesign/avoca-tools/recipe/recipe.md` and follow it. It sets the order for deciding how to build something (use a block the site has, install a library item, change an existing block, build a new block), the conventions for blocks, sets and collections, and the review steps.
+- The recipe comes with the avocadesign/avoca-tools package. If the file is missing, the package is not installed: tell the developer before you build anything.
+
 ## Local Setup
 1. `composer install`
 2. `php please make:user` (create Statamic admin user)

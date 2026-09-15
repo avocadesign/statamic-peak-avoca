@@ -1,6 +1,11 @@
 # Project context
 This is a Statamic CMS project (Laravel-based flat-file CMS) with Antlers templating, TailwindCSS, and AlpineJS.
 
+## Build recipe
+Avoca's build recipe comes from the avocadesign/avoca-tools package. Follow it when building or extending this site: it sets the order for deciding how to build something, the conventions for blocks, sets and collections, and the review steps.
+
+@vendor/avocadesign/avoca-tools/recipe/recipe.md
+
 ## Project Structure
 - Navigation views are located in `resources/views/layout/navigation/`
 - Page builder blocks are in `resources/views/page_builder/`
