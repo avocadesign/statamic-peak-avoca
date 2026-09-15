@@ -14,7 +14,7 @@ editor:
     - 'view main nav'
     - 'edit main nav'
     - 'edit configuration globals'
-    - 'edit social_media globals'
+    - 'edit site_details globals'
     - 'view files assets'
     - 'upload files assets'
     - 'edit files folders'
