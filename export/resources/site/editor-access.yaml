@@ -1,0 +1,13 @@
+# Structures kept away from the editor role. avoca:site:permissions and the automatic
+# updates never add permissions for these. Handles sit under the content folder that
+# holds each structure's settings: collections, taxonomies, navigation, globals or assets.
+# These match what the kit's editor role has always left out.
+globals:
+  - bots
+  - browser_appearance
+  - redirects
+  - seo
+assets:
+  - favicons
+  - page_builder
+  - social_images
