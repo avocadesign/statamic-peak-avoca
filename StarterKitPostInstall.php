@@ -51,6 +51,7 @@ class StarterKitPostInstall
         $this->excludeUsersFolderFromGit();
         $this->excludeFormsFolderFromGit();
         $this->setupComposerUpdateWorkflow();
+        $this->addAvocaToolsRepository();
         $this->installNodeDependencies();
         $this->installTranslations();
         $this->runPeakClearSite();
@@ -101,6 +102,27 @@ class StarterKitPostInstall
         $this->writeEnv();
 
         info('[✓] `.env` file overwritten.');
+    }
+
+    /**
+     * Avoca Tools is a private package, so a new site's composer.json needs its repository before a server
+     * or CI can install it. A repository for it added before the kit was installed, such as a path
+     * repository in the sandbox, is left as it is.
+     */
+    protected function addAvocaToolsRepository(): void
+    {
+        $composer = json_decode(app('files')->get(base_path('composer.json')), true) ?: [];
+        foreach ((array) ($composer['repositories'] ?? []) as $repository) {
+            if (str_contains((string) ($repository['url'] ?? ''), 'avoca-tools')) {
+                return;
+            }
+        }
+
+        $this->run(
+            command: 'composer config repositories.avoca-tools vcs https://github.com/avocadesign/avoca-tools',
+            processingMessage: 'Adding the Avoca Tools repository to composer.json...',
+            successMessage: 'Avoca Tools repository added to composer.json.',
+        );
     }
 
     protected function installNodeDependencies(): void

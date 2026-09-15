@@ -41,8 +41,8 @@ export_paths:
   - resources/users/roles.yaml
   - resources/views
   - routes/web.php
-  - agents.md
-  - claude.md
+  - AGENTS.md
+  - CLAUDE.md
   - package.json
   - package-lock.json
   - vite.config.js
@@ -51,6 +51,7 @@ dependencies:
   jacksleight/statamic-bard-texstyle: ^4.0
   studio1902/statamic-peak-seo: ^11.0
   studio1902/statamic-peak-tools: ^9.0
+  avocadesign/avoca-tools: dev-main
 modules:
   commands:
     prompt: 'Would you like to install the paid Peak Commands addon?'
