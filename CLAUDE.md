@@ -79,6 +79,9 @@ This is Avoca's fork of studio1902/statamic-peak. `upstream` is the Peak remote;
   Upstream uses Tailwind's `--leading-tight` (1.25) directly. The `.heading-size-*` classes take it too.
   Size a heading with `heading-size-*`, never `text-*` or `leading-*`: Tailwind's text utilities carry
   their own line height and would override the token.
+- Line height is tokens in `typography.css`: `--typography-line-height` (1.5) on `body` for body copy, and
+  `--typography-headings-line-height` (1.2) for headings and anything set at a heading size. Before that,
+  body copy took Tailwind's preflight 1.5 on `html` and nothing in the kit set it.
 - Prose spacing is tokens in `typography.css`, in a `:root` block rather than `@theme`, because the
   `--prose-*` tokens in there are the prose colours that `/site/style` lists as swatches. `--prose-space`
   is the gap between paragraphs and the text around them, and `--prose-list-space`,

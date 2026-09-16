@@ -33,6 +33,8 @@
     --typography-h4: var(--text-lg);
     --typography-h5: var(--text-base);
     --typography-h6: var(--text-sm);
+    /* Line height: body copy, then anything set at a heading size. */
+    --typography-line-height: 1.5;
     --typography-headings-line-height: 1.2;
 
     --prose-sm-modifier: .875;
@@ -56,6 +58,7 @@
     body {
         color: var(--body-color);
         font-size: var(--typography-base);
+        line-height: var(--typography-line-height);
         font-family: var(--font-sans, 'system-ui');
         font-size-adjust: from-font;
     }
