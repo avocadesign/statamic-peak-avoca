@@ -1,14 +1,11 @@
 phone: 123 4567
 mobile: 021 123 4567
 email: email@address.com
-address:
-- type: paragraph
-  content:
-  - type: text
-    text: 123 Somewhere st
-  - type: hardBreak
-  - type: text
-    text: SomeCity
+street_address: 123 Somewhere Street
+locality: SomeCity
+region: SomeRegion
+postcode: '1234'
+country: NZ
 social_media:
 - id: m97vut9r
   handle: website

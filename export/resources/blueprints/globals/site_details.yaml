@@ -23,11 +23,75 @@ tabs:
               display: Email
               validate:
                 - email
+      -
+        display: Address
+        instructions: 'Your address, in separate parts so search engines can read it. The address shown on the website is built from these parts.'
+        fields:
+          -
+            handle: street_address
+            field:
+              type: text
+              display: 'Street address'
+              instructions: 'The number and street, with the unit or building first if there is one.'
+          -
+            handle: locality
+            field:
+              type: text
+              display: 'Town or city'
+              width: 50
+          -
+            handle: region
+            field:
+              type: text
+              display: Region
+              width: 50
+              instructions: 'The region, province or state.'
+          -
+            handle: postcode
+            field:
+              type: text
+              display: Postcode
+              width: 50
+          -
+            handle: country
+            field:
+              type: text
+              display: Country
+              width: 50
+              default: NZ
+              instructions: 'The two letter country code, such as NZ. This one is for search engines and is not shown on the website.'
+          -
+            handle: latitude
+            field:
+              type: text
+              display: Latitude
+              width: 50
+              instructions: 'Right click the place on Google Maps and copy the two numbers it shows. Latitude is the first one. For search engines only.'
+          -
+            handle: longitude
+            field:
+              type: text
+              display: Longitude
+              width: 50
+              instructions: 'The second of those two numbers.'
           -
             handle: address
             field: common.text_basic
             config:
-              display: Address
+              display: 'Address shown on the website'
+              instructions: 'Leave this empty and the parts above are used. Fill it in only when the address should read differently on the page.'
+      -
+        display: 'Search engines'
+        instructions: 'Used when a search engine shows the business itself, rather than one of your pages.'
+        fields:
+          -
+            handle: logo
+            field: common.image
+            config:
+              display: Logo
+              width: 50
+              instructions: 'A square PNG or JPG, at least 112 pixels wide. Search engines do not accept an SVG here.'
+              show_set_alt: false
       -
         display: 'Social media'
         instructions: 'Configure social media links.'

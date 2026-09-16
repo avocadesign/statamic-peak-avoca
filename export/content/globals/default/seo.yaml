@@ -3,8 +3,71 @@ hreflang_auto: true
 noindex_local: true
 noindex_staging: true
 noindex_production: false
-json_ld_type: none
-breadcrumbs: false
+json_ld_type: custom
+json_ld: |
+  {{#
+      Who this business is, for search engines. The values in double braces come from Site Details and
+      the Page meta tab, so they never go stale. Antlers reads values and modifiers here but does not
+      run tags, so a glide or collection tag comes out empty. The commented out lines are the facts no
+      field holds: to use one, take the comment markers off it and write the value in. Check the whole
+      thing in Google's Rich Results Test before the site goes live.
+  #}}
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        {{# Organization suits most sites. A business people can visit is better as the closest type
+            under schema.org/LocalBusiness, such as ProfessionalService, Restaurant or Dentist. #}}
+        "@type": "Organization",
+        "@id": "{{ config:app:url }}/#organization",
+        "name": "{{ seo:site_name ?? config:app:name }}",
+        "url": "{{ config:app:url }}"
+        {{# ,"alternateName": "The short name people use" #}}
+        {{# ,"description": "One line saying what the business does" #}}
+        {{# ,"priceRange": "$$" #}}
+        {{# ,"areaServed": { "@type": "Country", "name": "New Zealand" } #}}
+        {{ if site_details:logo }},"logo": "{{ config:app:url }}{{ site_details:logo:url }}"{{ /if }}
+        {{ if configuration:copyright_since }},"foundingDate": "{{ configuration:copyright_since }}"{{ /if }}
+        {{ if site_details:phone }},"telephone": "{{ site_details:phone }}"{{ /if }}
+        {{ if site_details:email }},"email": "{{ site_details:email }}"{{ /if }}
+        {{ if site_details:street_address }},
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "{{ site_details:street_address }}"
+          {{ if site_details:locality }},"addressLocality": "{{ site_details:locality }}"{{ /if }}
+          {{ if site_details:region }},"addressRegion": "{{ site_details:region }}"{{ /if }}
+          {{ if site_details:postcode }},"postalCode": "{{ site_details:postcode }}"{{ /if }}
+          {{ if site_details:country }},"addressCountry": "{{ site_details:country }}"{{ /if }}
+        }{{ /if }}
+        {{ if site_details:latitude && site_details:longitude }},
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "{{ site_details:latitude }}",
+          "longitude": "{{ site_details:longitude }}"
+        }{{ /if }}
+        {{ if site_details:social_media }},
+        "sameAs": [
+          {{ site_details:social_media }}"{{ prefix }}{{ handle }}"{{ !last ?= ',' }}{{ /site_details:social_media }}
+        ]{{ /if }}
+      },
+      {
+        "@type": "WebSite",
+        "@id": "{{ config:app:url }}/#website",
+        "url": "{{ config:app:url }}",
+        "name": "{{ seo:site_name ?? config:app:name }}",
+        "publisher": { "@id": "{{ config:app:url }}/#organization" }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "{{ permalink }}#webpage",
+        "url": "{{ permalink }}",
+        "name": "{{ seo_title ?? title }}",
+        "isPartOf": { "@id": "{{ config:app:url }}/#website" },
+        "about": { "@id": "{{ config:app:url }}/#organization" }
+      }
+    ]
+  }
+breadcrumbs: true
 use_social_image_generation: false
 use_sitemap: true
 sitemap_collections:

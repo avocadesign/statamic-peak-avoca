@@ -170,6 +170,7 @@ App runs at configured local domain. Statamic Control Panel is at `/cp`.
   - Breaking changes to existing content structure
 
 ## Performance & SEO
+- Structured data is set up once per site in the SEO global, Globals → SEO → JSON-ld with Type set to Custom, never in a template or a block. The kit ships the business graph in that field, filled from Site Details. A page adds only its own node, in the page's SEO tab. Read the Structured data section of the build recipe before changing any of it.
 - Leverage Statamic image transforms (Glide) for responsive images
 - Use static caching for production performance
 - Write semantic HTML for accessibility

@@ -1,0 +1,298 @@
+{{#
+    Avoca's copy of the Peak SEO snippet (statamic-peak-seo::snippets/_seo, copied from Peak SEO v11.9.3).
+    Laravel uses this file instead of the package's because it sits in resources/views/vendor/statamic-peak-seo.
+
+    What changed and why: one line, the per-entry JSON-ld field. The field's own instructions say you can use
+    Antlers in it, but Peak prints the value raw, so tags like {{ permalink }} come out as text and the schema
+    on the page is wrong. This copy pipes it through the antlers modifier. That is what lets a page's Service
+    node point at the site's business entity with the same variables the global graph uses, so the two @ids
+    always match. Peak's own field config can't fix this: turning its antlers flag on makes an empty field
+    print an empty script tag on every page.
+
+    If Peak SEO changes this snippet, copy the new version over this file and make the same change again.
+#}}
+{{#
+	@name SEO
+	@desc The SEO partial rendered in the <head> of your page.
+#}}
+
+<!-- statamic-peak-seo::snippets/_seo.antlers.html -->
+{{# Page title #}}
+<title>
+    {{ seperator = seo:title_separator ?? " &#124; " }}
+    {{ site_name = seo:site_name ?? config:app:name }}
+    {{ if seo_title }}
+        {{ seo_title }}
+    {{ elseif seo:change_page_title | where('collection', collection) }}
+        {{ seo:change_page_title | where('collection', collection) }}
+            {{ if manipulate_title == 'collection_title' }}
+                {{ title }} {{ seperator }} {{ collection:title }} {{ seperator }} {{ site_name }}
+            {{ elseif manipulate_title == 'custom_text' }}
+                {{ title }} {{ seperator }} {{ custom_text }} {{ seperator }} {{ site_name }}
+            {{ elseif manipulate_title == 'replace_title' }}
+                {{ custom_text }}
+            {{ /if }}
+        {{ /seo:change_page_title }}
+    {{ else }}
+        {{ yield:seo_title }}{{ title }} {{ seperator }} {{ site_name }}
+    {{ /if }}
+</title>
+
+{{# Page description #}}
+{{ if seo_description }}
+    <meta name="description" content="{{ seo_description | strip_tags | entities | trim }}">
+{{ elseif seo:collection_defaults }}
+    <meta name="description" content="{{ partial:statamic-peak-seo::snippets/fallback_description }}">
+{{ /if }}
+
+{{# Resolve noindex: entry override → global default → index #}}
+{{ _resolved_noindex = false }}
+{{ if seo_noindex == 'noindex' }}
+    {{ _resolved_noindex = true }}
+{{ elseif seo_noindex == 'inherit' || !seo_noindex }}
+    {{ if collection }}
+        {{ seo:collection_indexing_defaults | where('collection', collection) }}
+            {{ if noindex == 'noindex' }}
+                {{ _resolved_noindex = true }}
+            {{ /if }}
+        {{ /seo:collection_indexing_defaults }}
+    {{ elseif taxonomy }}
+        {{ seo:taxonomy_indexing_defaults | where('taxonomy', taxonomy) }}
+            {{ if noindex == 'noindex' }}
+                {{ _resolved_noindex = true }}
+            {{ /if }}
+        {{ /seo:taxonomy_indexing_defaults }}
+    {{ /if }}
+{{ /if }}
+
+{{# No index, no follow and hreflang tags. #}}
+{{ if
+    (environment == 'local' && !seo:noindex_local) or
+    (environment == 'staging' && !seo:noindex_staging) or
+    (environment == 'production' && !seo:noindex_production)
+}}
+   {{ if _resolved_noindex && seo_nofollow }}
+       <meta name="robots" content="noindex, nofollow">
+   {{ elseif seo_nofollow }}
+       <meta name="robots" content="nofollow">
+   {{ elseif _resolved_noindex }}
+       <meta name="robots" content="noindex">
+   {{ else }}
+       <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+   {{ /if }}
+
+   {{# hreflang tags #}}
+   {{ if seo:hreflang_auto }}
+       {{ if not _resolved_noindex and seo_canonical_type == 'entry' and current_url === permalink }}
+           {{ locales all="false" }}
+                {{ if site:attributes:identifier === locale:attributes:identifier }}
+                    {{# Resolve noindex: entry override → global default → index #}}
+                    {{ _resolved_noindex_alternate = false }}
+                    {{ get_content :url="url" }}
+                        {{ if seo_noindex == 'noindex' }}
+                            {{ _resolved_noindex_alternate = true }}
+                        {{ elseif seo_noindex == 'inherit' || !seo_noindex }}
+                            {{ if collection }}
+                                {{ seo:collection_indexing_defaults | where('collection', collection) }}
+                                    {{ if noindex == 'noindex' }}
+                                        {{ _resolved_noindex_alternate = true }}
+                                    {{ /if }}
+                                {{ /seo:collection_indexing_defaults }}
+                            {{ elseif taxonomy }}
+                                {{ seo:taxonomy_indexing_defaults | where('taxonomy', taxonomy) }}
+                                    {{ if noindex == 'noindex' }}
+                                        {{ _resolved_noindex_alternate = true }}
+                                    {{ /if }}
+                                {{ /seo:taxonomy_indexing_defaults }}
+                            {{ /if }}
+                        {{ /if }}
+                    {{ /get_content }}
+                    {{ unless _resolved_noindex_alternate }}
+                        <link rel="alternate" hreflang="{{ locale:full | replace('_','-') }}" href="{{ permalink }}">
+                    {{ /unless}}
+               {{ /if }}
+           {{ /locales }}
+       {{ /if }}
+   {{ /if }}
+{{ else }}
+   <meta name="robots" content="noindex, nofollow">
+{{ /if }}
+
+{{# Canonical URL #}}
+{{ if not _resolved_noindex }}
+    {{ if seo_canonical_type == 'current' }}
+        <link rel="canonical" href="{{ config:app:url }}{{ seo_canonical_current | url }}">
+    {{ elseif seo_canonical_type == 'external' }}
+        <link rel="canonical" href="{{ seo_canonical_external }}">
+    {{ elseif seo_canonical_type == 'entry' }}
+        <link rel="canonical" href="{{ permalink }}">
+    {{ /if }}
+{{ /if }}
+
+{{# Auto add pagination link's when using statamic-peak-tools::components/_pagination.antlers.html. #}}
+{{ yield:pagination }}
+
+{{# Knowledge graph JSON-ld #}}
+{{ if seo:json_ld_type && seo:json_ld_type != 'none' }}
+   <script type="application/ld+json" id="schema">
+       {{ if seo:json_ld_type == 'organization'  }}
+           {
+               "@context": "http://schema.org",
+               "@type": "Organization",
+               "@id": "{{ config:app:url }}/#organization",
+               "name": "{{ seo:organization_name | strip_tags | entities | trim }}"{{ if seo:organization_alternate_name }},
+               "alternateName": "{{ seo:organization_alternate_name | strip_tags | entities | trim }}"{{ /if }},
+               "url": "{{ site:permalink }}"{{ if configuration:copyright_since }},
+               "foundingDate": "{{ configuration:copyright_since }}"{{ /if }}{{ if seo:organization_description }},
+               "description": "{{ seo:organization_description | strip_tags | entities | trim }}"{{ /if }}{{ if seo:organization_logo }},
+               "logo": {
+                    "@type": "ImageObject",
+                    "url": "{{ config:app:url }}{{ glide:seo:organization_logo width='336' height='336' fit='fill' }}",
+                    "width": 336,
+                    "height": 336
+               }{{ /if }}{{ if social_media:social_media }},
+               "sameAs": [
+                {{ social_media:social_media }}
+                    "{{ prefix }}{{ handle }}"{{ !last ?= ',' }}
+                {{ /social_media:social_media }}
+               ]{{ /if }}
+           }
+       {{ elseif seo:json_ld_type == 'person' }}
+           {
+               "@context": "http://schema.org",
+               "@type": "Person",
+               "@id": "{{ site:permalink }}/#{{ seo:person_name | slugify }}",
+               "url": "{{ site:permalink }}",
+               "name": "{{ seo:person_name }}"
+           }
+       {{ elseif seo:json_ld_type == 'custom' }}
+           {{ seo:json_ld }}
+       {{ /if }}
+   </script>
+{{ /if }}
+
+{{ if schema_jsonld  }}
+   <script type="application/ld+json">{{ schema_jsonld | antlers }}</script>
+{{ /if }}
+
+{{# Breadcrumbs JSON-ld #}}
+{{ if seo:breadcrumbs && segment_1 }}
+   <script type="application/ld+json">
+       {
+           "@context": "https://schema.org",
+           "@type": "BreadcrumbList",
+           "itemListElement": [
+               {{ nav:breadcrumbs }}
+                   {
+                       "@type": "ListItem",
+                       "position": {{ count }},
+                       "name": "{{ title | strip_tags | entities | trim }}",
+                       "item": "{{ permalink }}"
+                   } {{ unless last}},{{ /unless}}
+               {{ /nav:breadcrumbs }}
+           ]
+       }
+   </script>
+{{ /if }}
+
+{{# Open Graph #}}
+<meta property="og:site_name" content="{{ seo:site_name ? seo:site_name : config:app:name }}">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="{{ site:locale }}">
+<meta property="og:url" content="{{ permalink }}">
+{{ if og_title }}
+    <meta property="og:title" content="{{ og_title | strip_tags | entities | trim }}">
+{{ else }}
+    <meta property="og:title" content="{{ seo_title ? (seo_title | strip_tags | entities | trim) : (title | strip_tags | entities | trim) }}">
+{{ /if }}
+{{ if og_description }}
+    <meta property="og:description" content="{{ og_description | strip_tags | entities | trim }}">
+{{ elseif seo_description }}
+    <meta property="og:description" content="{{ seo_description | strip_tags | entities | trim }}">
+{{ elseif seo:collection_defaults }}
+    <meta property="og:description" content="{{ partial:statamic-peak-seo::snippets/fallback_description }}">
+{{ /if }}
+{{ if og_image }}
+    <meta property="og:image" content="{{ glide:og_image width='1200' height='630' fit='crop_focal' absolute="true" }}">
+{{ elseif seo:og_image }}
+    <meta property="og:image" content="{{ glide:seo:og_image width='1200' height='630' fit='crop_focal' absolute="true" }}">
+{{ /if }}
+
+{{# Trackers #}}
+{{ if
+    (environment == 'local' && seo:trackers_local) or
+    (environment == 'staging' && seo:trackers_staging) or
+    (environment == 'production' && seo:trackers_production)
+}}
+    {{ if seo:tracker_type == 'gtm' || seo:tracker_type == 'gtag' || seo:tracker_type == 'sgtm' }}
+        <script>
+            window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}
+        </script>
+    {{ /if }}
+    {{ if seo:use_consent_banner && (seo:tracker_type == 'gtm' || seo:tracker_type == 'gtag' || seo:tracker_type == 'sgtm') }}
+        <script>
+            gtag('consent', 'default', {
+                'analytics_storage': 'denied',
+                'ad_storage': 'denied',
+                'ad_user_data': 'denied',
+                'ad_personalization': 'denied',
+                'wait_for_update': 1500
+            });
+        </script>
+    {{ /if }}
+
+    {{ if seo:tracker_type == 'gtm' }}
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','{{ seo:google_tag_manager }}')</script>
+    {{ elseif seo:tracker_type == 'gtag' }}
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ seo:google_analytics }}"></script>
+        <script>gtag('js', new Date());gtag('set', new Date());gtag('config', '{{ seo:google_analytics }}' {{ if seo:anonymize_ip }}, {'anonymize_ip': true}{{ /if }});</script>
+    {{ elseif seo:tracker_type == 'sgtm' }}
+        <script>{{ seo:sgtm_script }}</script>
+    {{ elseif seo:tracker_type == 'scripts' && !seo:use_consent_banner }}
+        {{ seo:scripts }}
+            {{ script_fragments }}
+                {{ if type == 'script_tag' }}
+                    <script {{ async ?= 'async' }} {{ defer ?= 'defer' }} src="{{ source }}" {{ script_attributes }}{{ attribute | slugify }}{{ attribute_value ?= '="{ attribute_value | entities }"' }}{{ !last ?= ' ' }}{{ /script_attributes }}></script>
+                {{ else }}
+                    <script {{ script_attributes }}{{ attribute | slugify }}{{ attribute_value ?= '="{ attribute_value | entities }"' }}{{ !last ?= ' ' }}{{ /script_attributes }}>{{ inline_script | remove_left('<script>') | remove_right('</script>') }}</script>
+                {{ /if }}
+            {{ /script_fragments }}
+        {{ /seo:scripts }}
+    {{ /if }}
+
+    {{# Render this stack in all your layouts after opening the <body>. #}}
+    {{ push:seo_body }}
+        {{ if seo:use_consent_banner }}
+            {{ partial:statamic-peak-seo::components/consent_banner }}
+        {{ /if }}
+    {{ /push:seo_body }}
+
+    {{ if seo:use_google_site_verification }}
+        <meta name="google-site-verification" content="{{ seo:google_site_verification }}" />
+    {{ /if }}
+
+    {{ if seo:use_fathom }}
+        <script src="https://cdn.usefathom.com/script.js" site="{{ seo:fathom }}" defer></script>
+    {{ /if }}
+
+    {{ if seo:use_matomo }}
+        <script type="text/javascript">var _mtm = _mtm || []; _mtm.push({'mtm.startTime': (new Date().getTime()), 'event': 'mtm.Start'}); var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript'; g.async=true; g.defer=true; g.src='{{ seo:matomo_script_url }}'; s.parentNode.insertBefore(g,s);</script>
+    {{ /if }}
+
+    {{ if seo:use_plausible && seo:plausible }}
+        <script async src="https://plausible.io/js/{{ seo:plausible }}.js"></script>
+        <script>
+        window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+        plausible.init()
+        </script>
+    {{ /if }}
+
+    {{ if seo:use_umami && seo:umami_website_id && seo:umami_script_url }}
+        <script defer src="{{ seo:umami_script_url }}" data-website-id="{{ seo:umami_website_id }}"></script>
+    {{ /if }}
+
+    {{ if seo:use_cloudflare_web_analytics }}
+        <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "{{ seo:cloudflare_web_analytics }}"}'></script>
+    {{ /if }}
+{{ /if }}
+<!-- End: statamic-peak-seo::snippets/_seo.antlers.html -->
