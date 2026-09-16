@@ -79,6 +79,13 @@ This is Avoca's fork of studio1902/statamic-peak. `upstream` is the Peak remote;
   Upstream uses Tailwind's `--leading-tight` (1.25) directly. The `.heading-size-*` classes take it too.
   Size a heading with `heading-size-*`, never `text-*` or `leading-*`: Tailwind's text utilities carry
   their own line height and would override the token.
+- Prose spacing is tokens in `typography.css`, in a `:root` block rather than `@theme`, because the
+  `--prose-*` tokens in there are the prose colours that `/site/style` lists as swatches. `--prose-space`
+  is the gap between paragraphs and the text around them, and `--prose-list-space`,
+  `--prose-list-item-space`, `--prose-list-indent` and `--prose-list-marker-gap` set the list rhythm.
+  Text straight inside a prose container takes the smaller of the container's stack spacing and
+  `--prose-space`, so a block that renders Bard into a stacked prose container keeps the paragraph
+  rhythm, while a tighter container such as the contact details keeps its own.
 - Lines, borders and tables read tokens from `colours.css`, never a grey class, so each colour scheme can
   override them: `--divider-colour` (the Divider block), `--border-colour` (the generic border, used by text
   cards and the desktop navigation), and `--table-border-colour`, `--table-header-bg` and `--table-cell-bg`
