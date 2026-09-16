@@ -130,8 +130,9 @@ class StarterKitPostInstall
      * Avoca Tools is required here rather than listed in starter-kit.yaml. Statamic installs a kit's dependencies
      * before this hook runs, when Composer doesn't yet know the repository added above, so `statamic new` stopped
      * with "avocadesign/avoca-tools, it could not be found in any version". A site that already requires it, such
-     * as the sandbox through a path repository, is left as it is. New sites get the newest release that `^0.1`
-     * allows; when an addon release moves to 0.2, change the constraint here.
+     * as the sandbox through a path repository, is left as it is. New sites take every Avoca Tools release up to and
+     * including 1.x, the launch line, so the constraint is `<2.0`: a new release line inside it reaches them like any
+     * other release. Moving to 2.0 is deliberate: change this constraint and run scripts/install-check.sh.
      */
     protected function requireAvocaTools(): void
     {
@@ -141,10 +142,10 @@ class StarterKitPostInstall
         }
 
         $this->run(
-            command: 'composer require avocadesign/avoca-tools:^0.1 --no-interaction',
+            command: 'composer require avocadesign/avoca-tools:<2.0 --no-interaction',
             processingMessage: 'Installing Avoca Tools...',
             successMessage: 'Avoca Tools installed.',
-            errorMessage: 'Avoca Tools could not be installed. Check that Composer on this computer can read https://github.com/avocadesign/avoca-tools, then run: composer require "avocadesign/avoca-tools:^0.1"',
+            errorMessage: 'Avoca Tools could not be installed. Check that Composer on this computer can read https://github.com/avocadesign/avoca-tools, then run: composer require "avocadesign/avoca-tools:<2.0"',
             timeout: 600,
         );
     }
