@@ -12,6 +12,15 @@
     --prose-quotes: var(--body-color);
     --prose-quote-borders: var(--color-primary);
 
+    /* The gap between paragraphs, and between them and the other text around them, inside prose. */
+    --prose-space: 1em;
+    /* Lists: the space above and below a list, between its items, the indent that holds the markers, and the gap
+       between a marker and its text. A nested list sits its item space away from the item above it. */
+    --prose-list-space: var(--prose-space);
+    --prose-list-item-space: .5em;
+    --prose-list-indent: 1.625em;
+    --prose-list-marker-gap: .375em;
+
     --prose-invert-base: var(--color-white);
     --prose-invert-headings: var(--color-white);
     --prose-invert-links: var(--color-white);
@@ -40,18 +49,6 @@
     --prose-sm-modifier: .875;
     --prose-lg-modifier: 1.125;
     --prose-xl-modifier: 1.25;
-}
-
-/* Prose spacing. Not in @theme: the tokens there are the prose colours, which /site/style lists as swatches. */
-:root {
-    /* The gap between paragraphs, and between them and the other text around them, inside prose. */
-    --prose-space: 1em;
-    /* Lists: the space above and below a list, between its items, the indent that holds the markers, and the gap
-       between a marker and its text. A nested list sits its item space away from the item above it. */
-    --prose-list-space: var(--prose-space);
-    --prose-list-item-space: .5em;
-    --prose-list-indent: 1.625em;
-    --prose-list-marker-gap: .375em;
 }
 
 @layer base {
