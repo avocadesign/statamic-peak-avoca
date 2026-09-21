@@ -114,13 +114,13 @@ class StarterKitPostInstall
     {
         $composer = json_decode(app('files')->get(base_path('composer.json')), true) ?: [];
         foreach ((array) ($composer['repositories'] ?? []) as $repository) {
-            if (str_contains((string) ($repository['url'] ?? ''), 'avoca-tools')) {
+            if (str_contains((string) ($repository['url'] ?? ''), 'statamic-tools')) {
                 return;
             }
         }
 
         $this->run(
-            command: 'composer config repositories.avoca-tools vcs https://github.com/avocadesign/avoca-tools',
+            command: 'composer config repositories.statamic-tools vcs https://github.com/avocadesign/statamic-tools',
             processingMessage: 'Adding the Avoca Tools repository to composer.json...',
             successMessage: 'Avoca Tools repository added to composer.json.',
         );
@@ -129,7 +129,7 @@ class StarterKitPostInstall
     /**
      * Avoca Tools is required here rather than listed in starter-kit.yaml. Statamic installs a kit's dependencies
      * before this hook runs, when Composer doesn't yet know the repository added above, so `statamic new` stopped
-     * with "avocadesign/avoca-tools, it could not be found in any version". A site that already requires it, such
+     * with "avocadesign/statamic-tools, it could not be found in any version". A site that already requires it, such
      * as the sandbox through a path repository, is left as it is. New sites take every Avoca Tools release up to and
      * including 1.x, the launch line, so the constraint is `<2.0`: a new release line inside it reaches them like any
      * other release. Moving to 2.0 is deliberate: change this constraint and run scripts/install-check.sh.
@@ -137,15 +137,15 @@ class StarterKitPostInstall
     protected function requireAvocaTools(): void
     {
         $composer = json_decode(app('files')->get(base_path('composer.json')), true) ?: [];
-        if (isset($composer['require']['avocadesign/avoca-tools'])) {
+        if (isset($composer['require']['avocadesign/statamic-tools'])) {
             return;
         }
 
         $this->run(
-            command: 'composer require avocadesign/avoca-tools:<2.0 --no-interaction',
+            command: 'composer require avocadesign/statamic-tools:<2.0 --no-interaction',
             processingMessage: 'Installing Avoca Tools...',
             successMessage: 'Avoca Tools installed.',
-            errorMessage: 'Avoca Tools could not be installed. Check that Composer on this computer can read https://github.com/avocadesign/avoca-tools, then run: composer require "avocadesign/avoca-tools:<2.0"',
+            errorMessage: 'Avoca Tools could not be installed. Check that Composer on this computer can read https://github.com/avocadesign/statamic-tools, then run: composer require "avocadesign/statamic-tools:<2.0"',
             timeout: 600,
         );
     }

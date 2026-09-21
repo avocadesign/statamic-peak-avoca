@@ -12,7 +12,7 @@
 #   scripts/install-check.sh --keep           keeps the site afterwards, even when everything passes
 #
 # Uncommitted changes are not checked. Without --addon, Avoca Tools comes from GitHub as it does for a real site, so
-# Composer on this computer needs read access to the private avocadesign/avoca-tools repository. It takes a few
+# Composer on this computer needs read access to the private avocadesign/statamic-tools repository. It takes a few
 # minutes and needs an internet connection.
 
 set -euo pipefail
@@ -89,12 +89,12 @@ composer config repositories.kit path ../kit
 # and requires a release, as it does when a site is created with statamic new. With --addon, the local checkout is
 # labelled with its latest version tag, so it meets the version the hook asks for.
 if [ -n "$addon" ]; then
-    composer config repositories.avoca-tools "{\"type\": \"path\", \"url\": \"$addon\", \"options\": {\"versions\": {\"avocadesign/avoca-tools\": \"${addon_version#v}\"}}}"
+    composer config repositories.statamic-tools "{\"type\": \"path\", \"url\": \"$addon\", \"options\": {\"versions\": {\"avocadesign/statamic-tools\": \"${addon_version#v}\"}}}"
 fi
 composer config --no-plugins allow-plugins.pixelfear/composer-dist-plugin true
 php please starter-kit:install avocadesign/statamic-peak-avoca --local --clear-site --no-interaction
 echo "Avoca Tools in the new site:"
-composer show avocadesign/avoca-tools | grep -E '^(versions|source) '
+composer show avocadesign/statamic-tools | grep -E '^(versions|source) '
 
 step "Building the front end"
 PUPPETEER_SKIP_DOWNLOAD=1 npm install --no-audit --no-fund
