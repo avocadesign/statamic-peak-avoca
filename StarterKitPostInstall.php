@@ -51,8 +51,6 @@ class StarterKitPostInstall
         $this->excludeUsersFolderFromGit();
         $this->excludeFormsFolderFromGit();
         $this->setupComposerUpdateWorkflow();
-        $this->addAvocaToolsRepository();
-        $this->requireAvocaTools();
         $this->installNodeDependencies();
         $this->installTranslations();
         $this->runPeakClearSite();
@@ -103,51 +101,6 @@ class StarterKitPostInstall
         $this->writeEnv();
 
         info('[✓] `.env` file overwritten.');
-    }
-
-    /**
-     * Avoca Tools is a private package, so a new site's composer.json needs its repository before a server
-     * or CI can install it. A repository for it added before the kit was installed, such as a path
-     * repository in the sandbox, is left as it is.
-     */
-    protected function addAvocaToolsRepository(): void
-    {
-        $composer = json_decode(app('files')->get(base_path('composer.json')), true) ?: [];
-        foreach ((array) ($composer['repositories'] ?? []) as $repository) {
-            if (str_contains((string) ($repository['url'] ?? ''), 'statamic-tools')) {
-                return;
-            }
-        }
-
-        $this->run(
-            command: 'composer config repositories.statamic-tools vcs https://github.com/avocadesign/statamic-tools',
-            processingMessage: 'Adding the Avoca Tools repository to composer.json...',
-            successMessage: 'Avoca Tools repository added to composer.json.',
-        );
-    }
-
-    /**
-     * Avoca Tools is required here rather than listed in starter-kit.yaml. Statamic installs a kit's dependencies
-     * before this hook runs, when Composer doesn't yet know the repository added above, so `statamic new` stopped
-     * with "avocadesign/statamic-tools, it could not be found in any version". A site that already requires it, such
-     * as the sandbox through a path repository, is left as it is. New sites take every Avoca Tools release up to and
-     * including 1.x, the launch line, so the constraint is `<2.0`: a new release line inside it reaches them like any
-     * other release. Moving to 2.0 is deliberate: change this constraint and run scripts/install-check.sh.
-     */
-    protected function requireAvocaTools(): void
-    {
-        $composer = json_decode(app('files')->get(base_path('composer.json')), true) ?: [];
-        if (isset($composer['require']['avocadesign/statamic-tools'])) {
-            return;
-        }
-
-        $this->run(
-            command: 'composer require avocadesign/statamic-tools:<2.0 --no-interaction',
-            processingMessage: 'Installing Avoca Tools...',
-            successMessage: 'Avoca Tools installed.',
-            errorMessage: 'Avoca Tools could not be installed. Check that Composer on this computer can read https://github.com/avocadesign/statamic-tools, then run: composer require "avocadesign/statamic-tools:<2.0"',
-            timeout: 600,
-        );
     }
 
     protected function installNodeDependencies(): void
