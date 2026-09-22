@@ -55,8 +55,6 @@ class StarterKitPostInstall
         $this->runPeakClearSite();
         $this->writeFiles();
         $this->cleanUp();
-        $this->starPeakRepo();
-        $this->stopFascism();
         $this->finish();
     }
 
@@ -83,10 +81,6 @@ class StarterKitPostInstall
 
     protected function overwriteEnvWithPresets(): void
     {
-        if (! confirm(label: 'Do you want overwrite your `.env` file with the Peak presets?', default: true)) {
-            return;
-        }
-
         $this->setAppName();
         $this->setAppUrl();
         $this->setAppKey();
@@ -103,10 +97,6 @@ class StarterKitPostInstall
 
     protected function installNodeDependencies(): void
     {
-        if (! confirm(label: 'Do you want to install npm dependencies?', default: true)) {
-            return;
-        }
-
         $this->run(
             command: 'npm i',
             processingMessage: 'Installing npm dependencies...',
@@ -118,17 +108,14 @@ class StarterKitPostInstall
 
     protected function installPuppeteerAndBrowsershot(): void
     {
-        if (! confirm(label: 'Do you want to install Puppeteer and Browsershot for generating social images?', default: true)) {
-            return;
-        }
-
         $this->installPuppeteer();
         $this->installBrowsershot();
     }
 
     protected function installTranslations(): void
     {
-        if (! confirm(label: 'Do you want to install missing Laravel translation files?', default: $this->interactive)) {
+        // English only, unless a site needs more: AVOCA_TRANSLATIONS=1 brings back Peak's language picker.
+        if (getenv('AVOCA_TRANSLATIONS') !== '1') {
             return;
         }
 
@@ -149,25 +136,18 @@ class StarterKitPostInstall
 
     protected function setLocale(): void
     {
-        $locale = text(
-            label: 'What should be the default site locale?',
-            placeholder: 'en_US',
-            default: 'en_US',
-            required: true,
-        );
-
-        $this->replaceInSites('locale: en_US', "locale: $locale");
+        $this->replaceInSites('locale: en_US', 'locale: '.(getenv('AVOCA_LOCALE') ?: 'en_NZ'));
     }
 
     protected function setMailFromAddress(): void
     {
-        $email = text(
-            label: 'What email should be the mail from address?',
-            placeholder: 'hello@example.com',
-            default: 'hello@example.com',
-        );
+        // Mail leaves an Avoca site as Avoca, whatever address enquiries are sent to: the preset in
+        // .env.example already says so, and AVOCA_MAIL_FROM changes it for a site that needs its own.
+        if (! $email = getenv('AVOCA_MAIL_FROM')) {
+            return;
+        }
 
-        $this->replaceInEnv('MAIL_FROM_ADDRESS="hello@example.com"', "MAIL_FROM_ADDRESS=\"{$email}\"");
+        $this->replaceInEnv('MAIL_FROM_ADDRESS="hosting@avoca.design"', "MAIL_FROM_ADDRESS=\"{$email}\"");
         $this->replaceInReadme('MAIL_FROM_ADDRESS=', "MAIL_FROM_ADDRESS=\"{$email}\"");
     }
 
@@ -219,65 +199,11 @@ class StarterKitPostInstall
         );
     }
 
-    protected function starPeakRepo(): void
-    {
-        if (! confirm(label: 'Would you like to star the Peak repo?', default: false)) {
-            return;
-        }
-
-        if (PHP_OS_FAMILY === 'Darwin') {
-            exec('open https://github.com/studio1902/statamic-peak');
-        }
-
-        if (PHP_OS_FAMILY === 'Windows') {
-            exec('start https://github.com/studio1902/statamic-peak');
-        }
-
-        if (PHP_OS_FAMILY === 'Linux') {
-            exec('xdg-open https://github.com/studio1902/statamic-peak');
-        }
-
-        info('Thank you!');
-    }
-
-    protected function stopFascism(): void
-    {
-        $fascism = select(
-            label: 'Peak actively stands against fascism. Are you with us?',
-            options: [
-                'yes' => 'Yes',
-                'tell_me_more' => 'Tell me more',
-                'no' => 'No',
-            ],
-            default: 'yes',
-            hint: 'To protect freedom for all people and the truth.'
-        );
-
-        if ($fascism === 'yes') {
-            info('Thank you!');
-
-            return;
-        }
-
-        if ($fascism !== 'tell_me_more') {
-            return;
-        }
-
-        if (PHP_OS_FAMILY === 'Darwin') {
-            exec('open https://peak.1902.studio/stop-fascism.html');
-        }
-
-        if (PHP_OS_FAMILY === 'Windows') {
-            exec('start https://peak.1902.studio/stop-fascism.html');
-        }
-
-        if (PHP_OS_FAMILY === 'Linux') {
-            exec('xdg-open https://peak.1902.studio/stop-fascism.html');
-        }
-    }
-
     protected function finish(): void
     {
+        // Peak asks every installer whether they stand against fascism. Avoca's answer does not change,
+        // so the kit says it rather than asking: https://1902.studio/en/journal/stop-fascism
+        info('Avoca stands with Peak against fascism.');
         info('[✓] Peak is installed. Enjoy the view!');
 
         if (! Composer::isInstalled('studio1902/statamic-peak-commands')) {
@@ -293,15 +219,15 @@ class StarterKitPostInstall
 
     protected function setAppName(): void
     {
-        $appName = text(
-            label: 'What should be your app name?',
-            placeholder: 'Statamic Peak',
-            default: $this->interactive ? '' : 'Statamic Peak',
-            required: true,
-        );
+        $appName = $this->siteName();
+        if ($this->interactive) {
+            $appName = text(label: 'What is the site called?', default: $appName, required: true);
+        }
 
         $appName = preg_replace('/([\'|\"#])/m', '', $appName);
 
+        // Both, because the kit's own preset renamed it and Peak's search string no longer matched.
+        $this->replaceInEnv('APP_NAME="Statamic Peak - Avoca"', "APP_NAME=\"{$appName}\"");
         $this->replaceInEnv('APP_NAME="Statamic Peak"', "APP_NAME=\"{$appName}\"");
         $this->replaceInReadme('APP_NAME="Statamic Peak"', "APP_NAME=\"{$appName}\"");
         $this->replaceInReadme('site.ext', $appName);
@@ -309,9 +235,32 @@ class StarterKitPostInstall
 
     protected function setAppUrl(): void
     {
-        $appUrl = env('APP_URL');
+        $appUrl = (string) (getenv('AVOCA_APP_URL') ?: env('APP_URL'));
+
+        // Herd serves ~/Herd/<folder> at <folder>.test, and the installer hands over a URL with a port on it.
+        if ($appUrl === '' || str_contains($appUrl, 'localhost') || preg_match('/:\d+$/', $appUrl)) {
+            $appUrl = 'http://'.basename(base_path()).'.test';
+        }
 
         $this->replaceInEnv('APP_URL=', "APP_URL=\"{$appUrl}\"");
+    }
+
+    /**
+     * The site's name, from its own folder: stressless-massage becomes Stressless Massage. AVOCA_APP_NAME wins,
+     * for a script that knows better, and a folder that is where sites live rather than the name of one is ignored.
+     */
+    protected function siteName(): string
+    {
+        if ($fromEnv = getenv('AVOCA_APP_NAME')) {
+            return $fromEnv;
+        }
+
+        $folder = basename(base_path());
+        $whereSitesLive = ['herd', 'sites', 'www', 'html', 'public_html', 'code', 'projects', 'dev', 'web', 'valet'];
+
+        return in_array(strtolower($folder), $whereSitesLive, true)
+            ? 'Statamic Peak - Avoca'
+            : Str::of($folder)->replace(['-', '_'], ' ')->title()->toString();
     }
 
     protected function setAppKey(): void
@@ -330,37 +279,19 @@ class StarterKitPostInstall
 
     protected function useDebugbar(): void
     {
-        if (confirm(label: 'Do you want to use the debugbar?', default: false)) {
-            return;
-        }
-
         $this->replaceInEnv('DEBUGBAR_ENABLED=true', 'DEBUGBAR_ENABLED=false');
     }
 
     protected function useImagick(): void
     {
-        if (! confirm(label: 'Do you want use Imagick as an image processor instead of GD?', default: true)) {
-            return;
-        }
-
         $this->replaceInEnv('#IMAGE_MANIPULATION_DRIVER=imagick', 'IMAGE_MANIPULATION_DRIVER=imagick');
         $this->replaceInReadme('#IMAGE_MANIPULATION_DRIVER=imagick', 'IMAGE_MANIPULATION_DRIVER=imagick');
     }
 
     protected function setLocalMailer(): void
     {
-        $localMailer = select(
-            label: 'Which local mailer do you use?',
-            options: [
-                'helo' => 'Helo',
-                'herd' => 'Herd Pro',
-                'log' => 'Log',
-                'mailpit' => 'Mailpit',
-                'mailtrap' => 'Mailtrap',
-            ],
-            default: 'herd',
-            scroll: 10
-        );
+        // Avoca develops on Herd. AVOCA_LOCAL_MAILER takes helo, herd, log, mailpit or mailtrap.
+        $localMailer = getenv('AVOCA_LOCAL_MAILER') ?: 'herd';
 
         if ($localMailer === 'mailpit') {
             return;
@@ -384,29 +315,17 @@ class StarterKitPostInstall
 
     protected function excludeBuildFolderFromGit(): void
     {
-        if (! confirm(label: 'Do you want to exclude the `public/_build` folder from git?', default: true)) {
-            return;
-        }
-
         $this->appendToGitignore('/public/_build/');
     }
 
     protected function excludeUsersFolderFromGit(): void
     {
-        if (! confirm(label: 'Do you want to exclude the `users` folder from git?', default: false)) {
-            return;
-        }
-
-        $this->appendToGitignore('/users');
+        // Users stay in git: a site's accounts travel with it, and their passwords are stored hashed.
     }
 
     protected function excludeFormsFolderFromGit(): void
     {
-        if (! confirm(label: 'Do you want to exclude the `storage/form` folder from git?', default: false)) {
-            return;
-        }
-
-        $this->appendToGitignore('/storage/forms');
+        // Form submissions stay in git too, so a deploy never loses one.
     }
 
     protected function run(string $command, string $processingMessage = '', string $successMessage = '', ?string $errorMessage = null, bool $tty = false, bool $spinner = true, int $timeout = 120): bool
