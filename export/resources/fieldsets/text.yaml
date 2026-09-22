@@ -23,7 +23,7 @@ fields:
       input_label: 'Show settings'
       type: revealer
       display: 'Display settings'
-      instructions: 'Change how this block looks: its layout, colour scheme and spacing.'
+      instructions: 'Change how this block looks'
   -
     handle: align
     field:
@@ -39,7 +39,7 @@ fields:
           value: Offset
       type: select
       display: 'Display style'
-      instructions: 'Offset shows the heading in the left third with the content in the right two-thirds (stacked on mobile).'
+      instructions: 'Choose a layout for this block'
       instructions_position: below
       width: 50
       default: left

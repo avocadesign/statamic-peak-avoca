@@ -26,5 +26,5 @@ fields:
       replicator_preview: false
       if:
         display_settings: 'equals true'
-      instructions: 'Override the default block spacing'
+      instructions: 'Change the space above and below'
       instructions_position: below

@@ -23,5 +23,5 @@ fields:
       replicator_preview: false
       if:
         display_settings: 'equals true'
-      instructions: 'Set a BG colour for the block'
+      instructions: "Set the block's colour scheme"
       instructions_position: below

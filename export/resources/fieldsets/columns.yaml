@@ -50,7 +50,7 @@ fields:
       input_label: 'Show settings'
       type: revealer
       display: 'Display settings'
-      instructions: 'Change how this block looks: its layout, colour scheme and spacing.'
+      instructions: 'Change how this block looks'
   -
     handle: column_width
     field:
@@ -118,7 +118,7 @@ fields:
       width: 50
       default: items-start
       replicator_preview: false
-      instructions: 'Align the content vertically within the column'
+      instructions: 'Align content vertically in the column'
       always_save: true
       instructions_position: below
       if:

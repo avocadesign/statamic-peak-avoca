@@ -57,6 +57,7 @@ fields:
       input_label: 'Show settings'
       type: revealer
       display: 'Display settings'
+      instructions: 'Change how this block looks'
   -
     import: colour_scheme
   -
