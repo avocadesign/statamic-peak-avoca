@@ -1,7 +1,7 @@
 ---
 id: 059d4d8d-fc60-49f8-8823-7da10549e84e
 blueprint: page
-title: 'Page not found'
+title: 'Page not found (404)'
 page_builder:
   -
     article:
@@ -12,7 +12,7 @@ page_builder:
         content:
           -
             type: text
-            text: '404 Page not found'
+            text: "Sorry, we couldn't find the content you're looking for"
       -
         type: paragraph
         content:
