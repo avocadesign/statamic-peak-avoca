@@ -1,2 +1,15 @@
 title: 'Block: Divider'
-fields: {  }
+fields:
+  -
+    handle: display_settings
+    field:
+      mode: toggle
+      input_label: 'Show settings'
+      type: revealer
+      display: 'Display settings'
+  -
+    import: colour_scheme
+  -
+    import: block_margins
+  -
+    import: custom_class

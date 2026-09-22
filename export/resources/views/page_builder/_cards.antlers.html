@@ -5,7 +5,7 @@
 #}}
 
 <!-- /page_builder/_cards.antlers.html -->
-{{ partial:page_builder/block :colour_scheme="block:colour_scheme" :block_margins="block:block_margins" class="gap-y-8" }}
+{{ partial:page_builder/block :colour_scheme="block:colour_scheme" :block_margins="block:block_margins" :custom_class="block:custom_class" class="gap-y-8" }}
     {{ if block:heading }}
         <header class="span-content flex flex-col gap-1 {{ if block:heading_alignment == 'centre'}} items-center {{ /if }}">
             <h2>{{ block:heading | nl2br }}</h2>

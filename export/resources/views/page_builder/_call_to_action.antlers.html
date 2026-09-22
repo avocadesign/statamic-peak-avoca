@@ -5,7 +5,7 @@
 #}}
 
 <!-- /page_builder/_call_to_action.antlers.html -->
-{{ partial:page_builder/block :colour_scheme="block:colour_scheme" :block_margins="block:block_margins" }}
+{{ partial:page_builder/block :colour_scheme="block:colour_scheme" :block_margins="block:block_margins" :custom_class="block:custom_class" }}
     {{# The panel takes a colour scheme, Primary by default, so its heading, text and buttons use that scheme's colours.
         The field is panel_scheme rather than colour_scheme, which the block wrapper would apply to the whole section. #}}
     <div class="span-content flex p-8 gap-6 scheme-{{ block:panel_scheme ?: 'primary' }}

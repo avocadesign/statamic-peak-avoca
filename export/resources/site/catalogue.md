@@ -55,6 +55,7 @@ This block's content can include the text editor sets listed under Text editor s
 - `align_headings`: Align Text. Choice (`button_group`). Options: `left` Left, `centre` Centre Headings, `centre-all` Centre all text. Only when Display settings is on and Display style is Centre.
 - `colour_scheme`: Colour Scheme. Choice (`select`). Options: `default` Default, `light` Light, `primary` Primary, `dark` Dark. Default `default`. Only when Display settings is on. Help: Set a BG colour for the block.
 - `block_margins`: Block Margins. Choice (`select`). Options: `default` Default, `no-top` No top margin, `no-bottom` No bottom margin, `no-top-bottom` No margin top or bottom, `half-top` Half top margin. Default `default`. Only when Display settings is on. Help: Override the default block spacing.
+- `custom_class`: CSS class. Text (`text`). Only when Display settings is on. Help: For design work on this one block. Use a class the site's own CSS defines. A Tailwind utility typed here only exists after the site is rebuilt, so one typed on the live site does nothing.
 
 ### Media and text (`media_and_text`)
 
@@ -129,6 +130,7 @@ This block's content can include the text editor sets listed under Text editor s
 - `text_alignment`: Content vertical alignment. Choice (`select`). Options: `top` Top, `centre` Centre, `bottom` Bottom. Default `centre`. Only when Display settings is on and Column layout is not Text above media. Help: Align the content vertically within it's column.
 - `colour_scheme`: Colour Scheme. Choice (`select`). Options: `default` Default, `light` Light, `primary` Primary, `dark` Dark. Default `default`. Only when Display settings is on. Help: Set a BG colour for the block.
 - `block_margins`: Block Margins. Choice (`select`). Options: `default` Default, `no-top` No top margin, `no-bottom` No bottom margin, `no-top-bottom` No margin top or bottom, `half-top` Half top margin. Default `default`. Only when Display settings is on. Help: Override the default block spacing.
+- `custom_class`: CSS class. Text (`text`). Only when Display settings is on. Help: For design work on this one block. Use a class the site's own CSS defines. A Tailwind utility typed here only exists after the site is rebuilt, so one typed on the live site does nothing.
 
 ### Text Columns (`columns`)
 
@@ -180,6 +182,7 @@ This block's content can include the text editor sets listed under Text editor s
 - `vertical_align_content`: Vertical Align Content. Choice (`select`). Options: `items-start` Top, `items-center` Centre, `items-end` Bottom. Default `items-start`. Only when Display settings is on. Help: Align the content vertically within the column.
 - `colour_scheme`: Colour Scheme. Choice (`select`). Options: `default` Default, `light` Light, `primary` Primary, `dark` Dark. Default `default`. Only when Display settings is on. Help: Set a BG colour for the block.
 - `block_margins`: Block Margins. Choice (`select`). Options: `default` Default, `no-top` No top margin, `no-bottom` No bottom margin, `no-top-bottom` No margin top or bottom, `half-top` Half top margin. Default `default`. Only when Display settings is on. Help: Override the default block spacing.
+- `custom_class`: CSS class. Text (`text`). Only when Display settings is on. Help: For design work on this one block. Use a class the site's own CSS defines. A Tailwind utility typed here only exists after the site is rebuilt, so one typed on the live site does nothing.
 
 ### Cards (`cards`)
 
@@ -241,6 +244,7 @@ Listed under Content in the page builder.
 - `display_settings`: Display settings. A switch in the editor that shows the fields depending on it. It saves nothing, so write the fields it reveals directly. Help: Change how this block looks: its layout, colour scheme and spacing.
 - `colour_scheme`: Colour Scheme. Choice (`select`). Options: `default` Default, `light` Light, `primary` Primary, `dark` Dark. Default `default`. Only when Display settings is on. Help: Set a BG colour for the block.
 - `block_margins`: Block Margins. Choice (`select`). Options: `default` Default, `no-top` No top margin, `no-bottom` No bottom margin, `no-top-bottom` No margin top or bottom, `half-top` Half top margin. Default `default`. Only when Display settings is on. Help: Override the default block spacing.
+- `custom_class`: CSS class. Text (`text`). Only when Display settings is on. Help: For design work on this one block. Use a class the site's own CSS defines. A Tailwind utility typed here only exists after the site is rebuilt, so one typed on the live site does nothing.
 
 ### Two Images (`two_images`)
 
@@ -299,6 +303,7 @@ This block's content can include the text editor sets listed under Text editor s
 - `text_vertical_alignment`: Text vertical alignment. Choice (`select`). Options: `top` Top, `centred` Centred vertically, `bottom` Bottom. Default `centred`. Only when Display settings is on and Display Style is Inline or Stacked, and only when Display Style is Inline or Stacked.
 - `colour_scheme`: Colour Scheme. Choice (`select`). Options: `default` Default, `light` Light, `primary` Primary, `dark` Dark. Default `default`. Only when Display settings is on. Help: Set a BG colour for the block.
 - `block_margins`: Block Margins. Choice (`select`). Options: `default` Default, `no-top` No top margin, `no-bottom` No bottom margin, `no-top-bottom` No margin top or bottom, `half-top` Half top margin. Default `default`. Only when Display settings is on. Help: Override the default block spacing.
+- `custom_class`: CSS class. Text (`text`). Only when Display settings is on. Help: For design work on this one block. Use a class the site's own CSS defines. A Tailwind utility typed here only exists after the site is rebuilt, so one typed on the live site does nothing.
 
 ### Gallery (`gallery`)
 
@@ -337,6 +342,7 @@ Listed under Content in the page builder.
 - `display_settings`: Display settings. A switch in the editor that shows the fields depending on it. It saves nothing, so write the fields it reveals directly. Help: Change how this block looks: its layout, colour scheme and spacing.
 - `colour_scheme`: Colour Scheme. Choice (`select`). Options: `default` Default, `light` Light, `primary` Primary, `dark` Dark. Default `default`. Only when Display settings is on. Help: Set a BG colour for the block.
 - `block_margins`: Block Margins. Choice (`select`). Options: `default` Default, `no-top` No top margin, `no-bottom` No bottom margin, `no-top-bottom` No margin top or bottom, `half-top` Half top margin. Default `default`. Only when Display settings is on. Help: Override the default block spacing.
+- `custom_class`: CSS class. Text (`text`). Only when Display settings is on. Help: For design work on this one block. Use a class the site's own CSS defines. A Tailwind utility typed here only exists after the site is rebuilt, so one typed on the live site does nothing.
 
 ### Call to action (`call_to_action`)
 
@@ -392,6 +398,10 @@ Listed under Content in the page builder.
     - `attr_title`: Title. Text (`text`). Only when Show controls is on.
     - `attr_aria`: Aria label. Text (`text`). Only when Show controls is on.
     - `tracker_event`: Tracker event. Text (`text`). Only when Show controls is on and Label passes a custom check. Help: Add the name of the event you want to be fired on click. These events only fire on a production environment. Allowed: `A-Z`, `a-z`, `0-9`, `-`, `_`.
+- `display_settings`: Display settings. A switch in the editor that shows the fields depending on it. It saves nothing, so write the fields it reveals directly.
+- `colour_scheme`: Colour Scheme. Choice (`select`). Options: `default` Default, `light` Light, `primary` Primary, `dark` Dark. Default `default`. Only when Display settings is on. Help: Set a BG colour for the block.
+- `block_margins`: Block Margins. Choice (`select`). Options: `default` Default, `no-top` No top margin, `no-bottom` No bottom margin, `no-top-bottom` No margin top or bottom, `half-top` Half top margin. Default `default`. Only when Display settings is on. Help: Override the default block spacing.
+- `custom_class`: CSS class. Text (`text`). Only when Display settings is on. Help: For design work on this one block. Use a class the site's own CSS defines. A Tailwind utility typed here only exists after the site is rebuilt, so one typed on the live site does nothing.
 
 ### Divider (`divider`)
 
@@ -418,7 +428,10 @@ Listed under Content in the page builder.
 
 #### Fields
 
-- None.
+- `display_settings`: Display settings. A switch in the editor that shows the fields depending on it. It saves nothing, so write the fields it reveals directly.
+- `colour_scheme`: Colour Scheme. Choice (`select`). Options: `default` Default, `light` Light, `primary` Primary, `dark` Dark. Default `default`. Only when Display settings is on. Help: Set a BG colour for the block.
+- `block_margins`: Block Margins. Choice (`select`). Options: `default` Default, `no-top` No top margin, `no-bottom` No bottom margin, `no-top-bottom` No margin top or bottom, `half-top` Half top margin. Default `default`. Only when Display settings is on. Help: Override the default block spacing.
+- `custom_class`: CSS class. Text (`text`). Only when Display settings is on. Help: For design work on this one block. Use a class the site's own CSS defines. A Tailwind utility typed here only exists after the site is rebuilt, so one typed on the live site does nothing.
 
 ### Anchor (`anchor`)
 
@@ -494,6 +507,7 @@ Listed under Dynamic in the page builder.
 - `display_settings`: Display settings. A switch in the editor that shows the fields depending on it. It saves nothing, so write the fields it reveals directly. Help: Change how this block looks: its layout, colour scheme and spacing.
 - `colour_scheme`: Colour Scheme. Choice (`select`). Options: `default` Default, `light` Light, `primary` Primary, `dark` Dark. Default `default`. Only when Display settings is on. Help: Set a BG colour for the block.
 - `block_margins`: Block Margins. Choice (`select`). Options: `default` Default, `no-top` No top margin, `no-bottom` No bottom margin, `no-top-bottom` No margin top or bottom, `half-top` Half top margin. Default `default`. Only when Display settings is on. Help: Override the default block spacing.
+- `custom_class`: CSS class. Text (`text`). Only when Display settings is on. Help: For design work on this one block. Use a class the site's own CSS defines. A Tailwind utility typed here only exists after the site is rebuilt, so one typed on the live site does nothing.
 
 ## Text editor sets
 

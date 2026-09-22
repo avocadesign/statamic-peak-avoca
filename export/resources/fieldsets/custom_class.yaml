@@ -1,0 +1,15 @@
+title: 'Common: custom class'
+fields:
+  -
+    handle: custom_class
+    field:
+      type: text
+      display: 'CSS class'
+      instructions: "For design work on this one block. Use a class the site's own CSS defines. A Tailwind utility typed here only exists after the site is rebuilt, so one typed on the live site does nothing."
+      instructions_position: below
+      width: 50
+      validate:
+        - nullable
+        - 'regex:/^[a-z0-9][a-z0-9 -]*$/'
+      if:
+        display_settings: 'equals true'

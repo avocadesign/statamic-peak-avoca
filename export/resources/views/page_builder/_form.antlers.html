@@ -5,7 +5,7 @@
 #}}
 
 <!-- /page_builder/_form.antlers.html -->
-{{ partial:page_builder/block :colour_scheme="block:colour_scheme" :block_margins="block:block_margins" }}
+{{ partial:page_builder/block :colour_scheme="block:colour_scheme" :block_margins="block:block_margins" :custom_class="block:custom_class" }}
     {{# Outer wrapper spans the full content row when contact details are alongside, otherwise the original centered 8 cols. #}}
     <div class="span-content {{ if block:include_contact_details }}md:col-start-[col-1] md:col-span-12 grid md:grid-cols-3 gap-8{{ else }}md:col-start-[col-3] md:col-span-8{{ /if }}">
 

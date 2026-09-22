@@ -21,7 +21,7 @@
 {{ _scheme = "scheme-{colour_scheme ?? 'default'}" }}
 
 <section
-	class="fluid-grid {{ _scheme }} {{ _margins }} {{ class }}"
+	class="fluid-grid {{ _scheme }} {{ _margins }} {{ class }} {{ custom_class }}"
 	{{ data_attrs }}
 >
     {{ slot }}

@@ -1,0 +1,30 @@
+title: 'Common: Block Margins'
+fields:
+  -
+    handle: block_margins
+    field:
+      options:
+        -
+          key: default
+          value: Default
+        -
+          key: no-top
+          value: 'No top margin'
+        -
+          key: no-bottom
+          value: 'No bottom margin'
+        -
+          key: no-top-bottom
+          value: 'No margin top or bottom'
+        -
+          key: half-top
+          value: 'Half top margin'
+      type: select
+      display: 'Block Margins'
+      width: 50
+      default: default
+      replicator_preview: false
+      if:
+        display_settings: 'equals true'
+      instructions: 'Override the default block spacing'
+      instructions_position: below
