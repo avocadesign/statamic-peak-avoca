@@ -50,7 +50,6 @@ class StarterKitPostInstall
         $this->excludeBuildFolderFromGit();
         $this->excludeUsersFolderFromGit();
         $this->excludeFormsFolderFromGit();
-        $this->setupComposerUpdateWorkflow();
         $this->installNodeDependencies();
         $this->installTranslations();
         $this->runPeakClearSite();
@@ -436,69 +435,6 @@ class StarterKitPostInstall
         }
 
         $this->appendToGitignore('/storage/forms');
-    }
-
-    protected function setupComposerUpdateWorkflow(): void
-    {
-        if (! confirm(label: 'Do you want to add a GitHub workflow that does PR\'s with updates?', default: true)) {
-            return;
-        }
-
-        $cron = select(
-            label: 'How often do you want this workflow to automatically run?',
-            options: [
-                '0 2 * * 1' => 'Every week',
-                '0 2 1 * *' => 'Every month',
-                '0 2 1 */3 *' => 'Every three months',
-                false => 'Never, I\'ll trigger it manually',
-            ],
-            default: '0 2 1 */3 *',
-        );
-
-        $cron
-         ? $on = [
-             'schedule' => [
-                 0 => [
-                     'cron' => "$cron",
-                 ],
-             ],
-             'workflow_dispatch' => null,
-         ]
-        : $on = [
-            'workflow_dispatch' => null,
-        ];
-
-        $workflow = [
-            'name' => 'Composer Update',
-            'on' => $on,
-            'jobs' => [
-                'composer_update_job' => [
-                    'runs-on' => 'ubuntu-latest',
-                    'name' => 'composer update',
-                    'steps' => [
-                        0 => [
-                            'name' => 'Checkout',
-                            'uses' => 'actions/checkout@v3',
-                        ],
-                        1 => [
-                            'name' => 'composer update action',
-                            'uses' => 'kawax/composer-update-action@master',
-                            'env' => [
-                                'GITHUB_TOKEN' => '${{ secrets.GITHUB_TOKEN }}',
-                            ],
-                        ],
-                    ],
-                ],
-            ],
-        ];
-
-        $disk = Storage::build([
-            'driver' => 'local',
-            'root' => base_path(),
-        ]);
-
-        $disk->makeDirectory('.github/workflows');
-        $disk->put('.github/workflows/composer_update.yaml', Yaml::dump($workflow, 99, 2));
     }
 
     protected function run(string $command, string $processingMessage = '', string $successMessage = '', ?string $errorMessage = null, bool $tty = false, bool $spinner = true, int $timeout = 120): bool

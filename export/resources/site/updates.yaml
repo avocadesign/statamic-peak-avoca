@@ -1,0 +1,18 @@
+# How this site takes automated dependency updates. Nothing in the site reads this at runtime:
+# it is here so the updater does not have to hold a special case for every site.
+#
+# enrolled  Whether the updater touches this site at all.
+# group     canary first, then fleet a few days later, so a bad release is caught on a site we
+#           watch rather than on a hundred we don't.
+# branch    The branch updates are raised against. The updater fast forwards it before it starts
+#           and stops if it can't, because on a site whose content is edited on the server the
+#           branch moves without us.
+# urls      Pages the check must render before an update can be proposed. Keep the list short and
+#           keep the ones that would break first: a page builder page, a form, a listing.
+enrolled: true
+group: fleet
+branch: main
+urls:
+  - /
+  - /site/content
+  - /site/style
