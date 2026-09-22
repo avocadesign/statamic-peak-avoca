@@ -8,7 +8,7 @@ page_builder:
       -
         type: heading
         attrs:
-          level: 1
+          level: 2
         content:
           -
             type: text
