@@ -7,8 +7,12 @@
 # branch    The branch updates are raised against. The updater fast forwards it before it starts
 #           and stops if it can't, because on a site whose content is edited on the server the
 #           branch moves without us.
-# urls      Pages the check must render before an update can be proposed. Keep the list short and
-#           keep the ones that would break first: a page builder page, a form, a listing.
+# urls      Pages that must always render. Keep this list short: the check adds every page a
+#           collection is mounted on, one entry from each collection, and then whichever pages
+#           cover the most blocks and blueprints between them. `php please avoca:site:urls` says
+#           what it would render.
+# sample    How many pages to add for that coverage, on top of the ones above. Enough to reach the
+#           blocks a site actually uses, not enough to render a thousand pages that are all alike.
 enrolled: true
 group: fleet
 branch: main
@@ -16,3 +20,4 @@ urls:
   - /
   - /site/content
   - /site/style
+sample: 5
