@@ -92,7 +92,6 @@ class StarterKitPostInstall
         $this->setAppKey();
         $this->setLicenseKey();
         $this->setLocale();
-        $this->setDisplayTimezone();
         $this->setMailFromAddress();
         $this->useDebugbar();
         $this->useImagick();
@@ -146,33 +145,6 @@ class StarterKitPostInstall
         }
 
         $this->selectLanguagesToInstall();
-    }
-
-    protected function setDisplayTimezone(): void
-    {
-        if (! $this->interactive || DIRECTORY_SEPARATOR === '\\') {
-            return;
-        }
-
-        $newDisplayTimezone = search(
-            label: 'What timezone should your app be displayed in?',
-            options: function (string $value) {
-                if (! $value) {
-                    return timezone_identifiers_list(DateTimeZone::ALL, null);
-                }
-
-                return collect(timezone_identifiers_list(DateTimeZone::ALL, null))
-                    ->filter(fn (string $item) => Str::contains($item, $value, true))
-                    ->values()
-                    ->all();
-            },
-            placeholder: 'UTC',
-            required: true,
-        );
-
-        $currentDisplayTimezone = config('statamic.system.display_timezone');
-
-        $this->replaceInSystem("display_timezone=\"$currentDisplayTimezone\"", "display_timezone=\"$newDisplayTimezone\"");
     }
 
     protected function setLocale(): void
