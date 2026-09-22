@@ -34,7 +34,7 @@ email:
     id: iwArpANx
     to: info@site.com
     reply_to: '{{ email }}'
-    subject: '{{ trans:strings.form_subject_received }}'
+    subject: '{{ trans:strings.form_subject_received }}: {{ name }}'
     html: email/form_owner
     text: email/form_owner_text
   -
