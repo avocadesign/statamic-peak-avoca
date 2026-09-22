@@ -467,13 +467,15 @@ Listed under Dynamic in the page builder.
 #### When not to use
 
 - Contact details with no form: use the Contact Details set in a Text block.
+- A different kind of enquiry, such as a quote or a booking: use this block with the site's form, and add a select field to that form for the kind of enquiry. Don't ask for a second form.
 - Sending people to a booking or payment system on another website: use Call to action, or the Buttons set, with a link to it.
 - A newsletter sign-up from an email marketing service: use the HTML set with the service's own embed code, because this block only shows forms built on this site.
 
 #### Notes for AI
 
-- Forms are built under Forms in the control panel, not in this block. Choose an existing form by its handle, such as `contact`, and ask for a new form to be built when none fits.
-- Two Form blocks can share a page when they show different forms, such as a contact form and a quote request. Don't put the same form on a page twice: its field IDs come from the form's handle, so the second copy sends labels, error links and focus to the first.
+- Forms are built under Forms in the control panel, not in this block. Choose an existing form by its handle, such as `contact`.
+- Most sites have exactly one form, because Statamic's free edition allows one. Never add a second, either in the control panel or as a file in `resources/forms/`. Where a page needs a different kind of enquiry, add a select field to the one form naming what the enquiry is about, and use that field in the notification's subject. A second form means buying Statamic Pro for that site, so it is the developer's decision: put it in the plan and ask.
+- Two Form blocks can share a page only where the site has more than one form, which needs Pro. Don't put the same form on a page twice: its field IDs come from the form's handle, so the second copy sends labels, error links and focus to the first.
 - Always write a heading, such as "Get in touch". It shows as a level-two heading.
 - Keep the text to one or two sentences. It is plain text, so it can't hold links or formatting, but line breaks show.
 - The submit button's label and the messages people see after sending come from the site's language strings, not the block, so don't repeat them in the text.
