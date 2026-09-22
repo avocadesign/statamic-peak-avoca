@@ -1,4 +1,9 @@
 @theme {
+    /* The space between page builder blocks, at each breakpoint. Anything derived from block spacing,
+       such as the half top margin, reads --stack-space, which the stack-block utility sets from these. */
+    --block-space: calc(var(--spacing) * 12);
+    --block-space-md: calc(var(--spacing) * 16);
+    --block-space-lg: calc(var(--spacing) * 18);
     /* Add custom fonts in fonts.css and add the family to the stack you want to use. */
     /* --font-sans: Awesome, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; */
     /* --font-serif: Awesome, ui-serif, Georgia, Cambria, "Times New Roman", Times, serif; */
