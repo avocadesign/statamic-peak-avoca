@@ -28,13 +28,14 @@ This is Avoca's fork of studio1902/statamic-peak. `upstream` is the Peak remote;
 
 ## Fresh-install rules (learned from the sandbox check)
 
-- `StarterKitPostInstall.php` is stock upstream except for three Avoca additions, to re-apply on merge:
-  `cleanUp()` deletes the skeleton's `public/robots.txt` so Peak SEO's robots route is not shadowed, and
-  `addAvocaToolsRepository()` and `requireAvocaTools()` add the private statamic-tools repository and require
-  the addon. Keep statamic-tools out of `starter-kit.yaml`: Statamic installs a kit's dependencies before the
-  hook runs, so a plain `statamic new` can't find a private package listed there. A fourth change is a
-  removal: `setMailFromAddress()` no longer rewrites the contact form's `to` and `reply_to`, because the
-  form reads the Site Details email instead. Remove those two `replaceInContact()` calls again after a merge.
+- `StarterKitPostInstall.php` is stock upstream except for one Avoca addition and one removal, both to
+  re-apply on merge: `cleanUp()` deletes the skeleton's `public/robots.txt` so Peak SEO's robots route is
+  not shadowed, and `setMailFromAddress()` no longer rewrites the contact form's `to` and `reply_to`,
+  because the form reads the Site Details email instead. Remove those two `replaceInContact()` calls
+  again after a merge. Avoca Tools is listed in `starter-kit.yaml` like any other dependency, which it
+  can be now that the package is public. It used to be required by the hook, because Statamic installs a
+  kit's dependencies before the hook runs and a plain `statamic new` couldn't find a private package
+  listed there.
 - New sites require statamic-tools `<2.0`, so they take every release up to and including 1.x, the launch
   line. Version tags live on GitHub and the addon's CHANGELOG.md says what each release changed. A site
   stays on the version in its own `composer.lock` until someone updates it; to hold one back, pin it there
@@ -50,8 +51,8 @@ This is Avoca's fork of studio1902/statamic-peak. `upstream` is the Peak remote;
 - After any upstream merge, and after changing `starter-kit.yaml`, `StarterKitPostInstall.php` or the
   kit's dependencies: run `scripts/install-check.sh` before merging to main. It installs the last commit
   into a new site in a temporary folder, builds, renders pages and runs `avoca:site:check --strict`. It
-  runs on this computer rather than in GitHub Actions: it needs read access to the private statamic-tools
-  repository, and this repository is public.
+  runs on this computer rather than in GitHub Actions, which the kit no longer needs now that every
+  package it installs is public.
 - Default robots policy (SEO global → Robots): allow search engines and AI search/assistant
   fetchers, block AI training crawlers. Edit the list in the CP, never in a template; Peak SEO
   appends the Sitemap line itself, so do not add one.

@@ -11,9 +11,8 @@
 #   scripts/install-check.sh --addon=<path>   uses a local Avoca Tools checkout, labelled with its latest tag
 #   scripts/install-check.sh --keep           keeps the site afterwards, even when everything passes
 #
-# Uncommitted changes are not checked. Without --addon, Avoca Tools comes from GitHub as it does for a real site, so
-# Composer on this computer needs read access to the private avocadesign/statamic-tools repository. It takes a few
-# minutes and needs an internet connection.
+# Uncommitted changes are not checked. Without --addon, Avoca Tools comes from Packagist as it does for a real site.
+# It takes a few minutes and needs an internet connection.
 
 set -euo pipefail
 

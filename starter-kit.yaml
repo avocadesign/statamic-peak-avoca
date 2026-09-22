@@ -48,6 +48,7 @@ export_paths:
   - vite.config.js
 dependencies:
   aryehraber/statamic-captcha: ^1.17
+  avocadesign/statamic-tools: '<2.0'
   jacksleight/statamic-bard-texstyle: ^4.0
   studio1902/statamic-peak-seo: ^11.0
   studio1902/statamic-peak-tools: ^9.0
