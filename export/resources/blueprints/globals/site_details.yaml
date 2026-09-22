@@ -25,14 +25,15 @@ tabs:
                 - email
       -
         display: Address
-        instructions: 'Your address, in separate parts so search engines can read it. The address shown on the website is built from these parts.'
+        instructions: 'Used on the site and by search engines'
         fields:
           -
             handle: street_address
             field:
               type: text
               display: 'Street address'
-              instructions: 'The number and street, with the unit or building first if there is one.'
+              instructions: 'Number and street'
+              instructions_position: below
           -
             handle: locality
             field:
@@ -45,7 +46,8 @@ tabs:
               type: text
               display: Region
               width: 50
-              instructions: 'The region, province or state.'
+              instructions: 'Region, province or state'
+              instructions_position: below
           -
             handle: postcode
             field:
@@ -59,30 +61,34 @@ tabs:
               display: Country
               width: 50
               default: NZ
-              instructions: 'The two letter country code, such as NZ. This one is for search engines and is not shown on the website.'
+              instructions: 'Two letter code, such as NZ'
+              instructions_position: below
           -
             handle: latitude
             field:
               type: text
               display: Latitude
               width: 50
-              instructions: 'Right click the place on Google Maps and copy the two numbers it shows. Latitude is the first one. For search engines only.'
+              instructions: 'From Google Maps, the first number'
+              instructions_position: below
           -
             handle: longitude
             field:
               type: text
               display: Longitude
               width: 50
-              instructions: 'The second of those two numbers.'
+              instructions: 'The second number'
+              instructions_position: below
           -
             handle: address
             field: common.text_basic
             config:
               display: 'Address shown on the website'
-              instructions: 'Leave this empty and the parts above are used. Fill it in only when the address should read differently on the page.'
+              instructions: 'Overrides the address shown on the site'
+              instructions_position: below
       -
         display: 'Search engines'
-        instructions: 'Used when a search engine shows the business itself, rather than one of your pages.'
+        instructions: 'Shown when a search engine shows the business'
         fields:
           -
             handle: logo
@@ -90,7 +96,8 @@ tabs:
             config:
               display: Logo
               width: 50
-              instructions: 'A square PNG or JPG, at least 112 pixels wide. Search engines do not accept an SVG here.'
+              instructions: 'Square PNG or JPG, 112px or bigger'
+              instructions_position: below
               show_set_alt: false
       -
         display: 'Social media'
