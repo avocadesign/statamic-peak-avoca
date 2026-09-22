@@ -53,6 +53,7 @@ class StarterKitPostInstall
         $this->installNodeDependencies();
         $this->installTranslations();
         $this->runPeakClearSite();
+        $this->publishServerScript();
         $this->writeFiles();
         $this->cleanUp();
         $this->finish();
@@ -149,6 +150,20 @@ class StarterKitPostInstall
 
         $this->replaceInEnv('MAIL_FROM_ADDRESS="hosting@avoca.design"', "MAIL_FROM_ADDRESS=\"{$email}\"");
         $this->replaceInReadme('MAIL_FROM_ADDRESS=', "MAIL_FROM_ADDRESS=\"{$email}\"");
+    }
+
+    /**
+     * The script the server runs to commit content edited in the control panel. It starts in the site, at
+     * scripts/server-git.sh, rather than staying in the package: how a server handles a site's content is the site's
+     * business, and a site that needs something different edits its own copy. Avoca Tools holds the one it starts from.
+     */
+    protected function publishServerScript(): void
+    {
+        $this->run(
+            command: 'php artisan avoca:site:script',
+            processingMessage: 'Adding the server git script...',
+            successMessage: 'Server git script added at `scripts/server-git.sh`.',
+        );
     }
 
     protected function runPeakClearSite(): void
