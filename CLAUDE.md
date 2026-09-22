@@ -32,7 +32,9 @@ This is Avoca's fork of studio1902/statamic-peak. `upstream` is the Peak remote;
   `cleanUp()` deletes the skeleton's `public/robots.txt` so Peak SEO's robots route is not shadowed, and
   `addAvocaToolsRepository()` and `requireAvocaTools()` add the private statamic-tools repository and require
   the addon. Keep statamic-tools out of `starter-kit.yaml`: Statamic installs a kit's dependencies before the
-  hook runs, so a plain `statamic new` can't find a private package listed there.
+  hook runs, so a plain `statamic new` can't find a private package listed there. A fourth change is a
+  removal: `setMailFromAddress()` no longer rewrites the contact form's `to` and `reply_to`, because the
+  form reads the Site Details email instead. Remove those two `replaceInContact()` calls again after a merge.
 - New sites require statamic-tools `<2.0`, so they take every release up to and including 1.x, the launch
   line. Version tags live on GitHub and the addon's CHANGELOG.md says what each release changed. A site
   stays on the version in its own `composer.lock` until someone updates it; to hold one back, pin it there
