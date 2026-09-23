@@ -35,6 +35,14 @@
                     )}}
                 "
             >
+                {{# The card's width, for the image's sizes: the column spans above, capped at the 1280px content width.
+                    One card is 8 of 12 columns, two or four are 6, three or more than four are 4. Full width on phones. #}}
+                {{ _card_sizes = switch(
+                    (total_results === 1) => '(min-width: 1400px) 843px, (min-width: 768px) 60vw, 90vw',
+                    (total_results === 2 || total_results === 4) => '(min-width: 1400px) 624px, (min-width: 768px) 45vw, 90vw',
+                    () => '(min-width: 1400px) 405px, (min-width: 768px) 30vw, 90vw'
+                ) }}
+
                 {{# Image or icon, then the title and text, stacked so each part has room. #}}
                 <div class="w-full stack-6">
                     {{ if block:card_type == "image" && card:card_image }}
@@ -45,7 +53,7 @@
                             cover="false"
                             lazy="true"
                             :aspect_ratio="3/2"
-                            :sizes="sizes ?: '100vw'"
+                            :sizes="_card_sizes"
                         }}
                     {{ /if}}
 
@@ -56,7 +64,7 @@
                             class="w-32 object-cover"
                             cover="false"
                             lazy="true"
-                            :sizes="sizes ?: '100vw'"
+                            sizes="128px"
                         }}
                     {{ /if}}
 
