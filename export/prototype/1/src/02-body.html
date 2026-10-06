@@ -8,12 +8,18 @@
             <strong id="brand-name"></strong>
             <span id="brand-sub"></span>
         </div>
+        <div class="version">
+            <button type="button" class="version-btn" id="version-btn" aria-haspopup="true" aria-expanded="false" aria-controls="version-menu"></button>
+            <div class="version-menu" id="version-menu" hidden></div>
+        </div>
         <nav class="seg tabs" role="tablist" aria-label="View" id="views">
             <button type="button" role="tab" data-view="wireframes" aria-selected="true">Prototype</button>
             <button type="button" role="tab" data-view="sitemap" aria-selected="false">Sitemap</button>
             <button type="button" role="tab" data-view="model" aria-selected="false">Content model</button>
             <button type="button" role="tab" data-view="decisions" aria-selected="false">Decisions<span class="count" id="dec-count"></span></button>
         </nav>
+        <div class="viewer" id="viewer" hidden></div>
+        <button type="button" class="icon-btn theme-btn" id="theme-toggle"></button>
         <button type="button" class="btn help-btn" id="help-open" aria-label="How to use">
             <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M6.2 6.2a1.9 1.9 0 1 1 2.6 1.8c-.5.2-.8.6-.8 1.1v.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="11.6" r=".9" fill="currentColor"/></svg>
             <span class="lbl">How to use</span>

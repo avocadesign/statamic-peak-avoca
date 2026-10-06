@@ -10,7 +10,7 @@ const PROJECT = {
     prepared: 'Prototype, [Month Year]',          // shown under "Prepared by Avoca"
     fromLabel: 'From the brief',                  // heads a decision's `from` note: what its evidence comes from
     decisionsIntro: '',                           // one or two sentences atop the Decisions panel: who decides what
-    sitemapIntro: 'Pages marked as suggested are ours, for discussion; the rest are as planned, URLs included.'
+    sitemapIntro: 'Pages marked to confirm are our suggestions, each with the decision that settles it. The rest are agreed, URLs included.'
 };
 
 /* ---------- Who decides ----------
@@ -36,7 +36,16 @@ const WHO = {
 */
 
 const AGREED_ON = '';                             // date shown on agreed decisions, such as '1 October'
-const DECISIONS = [];
+const DECISIONS = [
+    { id: 'D1', title: 'Approve the prototype?', who: ['client'], pages: ['home'],
+      q: 'Does this prototype show the right pages, what goes on them and how people move through the site, so design can start from it?',
+      options: [
+          ['Approve it', 'Design starts from this version. Anything that changes later is made in design, or as a new version.'],
+          ['Approve it with changes', 'List the changes. We make them as a new version, and design starts from that.'],
+          ['Not yet', 'Tell us what’s missing or wrong, and we’ll come back with a new version.']
+      ], rec: -1,
+      why: 'Design builds on what the prototype settles. Changes are quick here, and slower and costlier once design is under way.' }
+];
 const DEC = Object.fromEntries(DECISIONS.map(d => [d.id, d]));
 
 /* ---------- Audiences ----------
@@ -54,8 +63,6 @@ const AUD = {};
        decisions: ['D1'],                         // listed first; other markers on the page are picked up as well
        consider: ['Something to keep in mind.'],
        fed: ['modelId'],                          // MODEL ids whose content appears here
-       badge: 'Suggested page',                   // optional: marks a page we suggest that isn't in the plan yet
-       plannedAs: 'Voices',                       // optional: the name in the plan, when that differs
        tryit: true                                // optional: show the timeline mode switch (for a page with a timeline)
    }
 */
@@ -65,7 +72,7 @@ const NOTES = {
         purpose: '',
         aud: [],
         content: [],
-        decisions: [],
+        decisions: ['D1'],
         consider: [],
         fed: ['pages']
     },
@@ -78,7 +85,7 @@ const NOTES = {
         ],
         decisions: [],
         consider: [],
-        fed: ['pages', 'contact_form']
+        fed: ['pages', 'contact_form', 'site_details']
     }
 };
 
@@ -101,37 +108,51 @@ const JOURNEYS = [];
 
 /* ---------- Content model ----------
    Collections, taxonomies, globals and navigations. `area` places the card on the diagram's grid, named in
-   MODEL_LAYOUT (CSS grid-template-areas, three columns). Fields are [handle, type] with an optional third value,
+   MODEL_LAYOUT (CSS grid-template-areas, three columns), with Pages always in the top row. Fields are [handle, type] with an optional third value,
    's' suggested or 'x' to drop, and an optional fourth, a decision id.
 
-   { id: 'stories', kind: 'Collection', name: 'Stories', handle: 'stories', count: '~20', status: 'planned',  // or 'suggested', 'built'
+   { id: 'stories', kind: 'Collection', name: 'Stories', handle: 'stories', count: '~20', status: 'suggested',  // only for one of ours: to confirm until dec[0] is agreed
      area: 'stories', route: '/stories/{slug}', dec: ['D3'],
      fields: [['title', 'text, required'], ['summary', 'textarea', 's']], terms: 'Optional: a taxonomy's terms' }
 
-   kind is Collection, Taxonomy, Form, Global or Navigation.
+   kind is Collection, Taxonomy, Form, Global, Navigation or Assets. Navigation and Assets (asset libraries) sit in
+   sections of their own below the diagram, so they need no area.
 
    RELS: [fromId, toId, 'label', suggested?]. Use the label 'taxonomy' for a collection's taxonomy: it reads as
    "Stories uses the Story type taxonomy".
 */
 
 const MODEL = [
-    { id: 'pages', kind: 'Collection', name: 'Pages', handle: 'pages', count: '2', status: 'built', area: 'pages', route: '/{parent_uri}/{slug}',
+    { id: 'pages', kind: 'Collection', name: 'Pages', handle: 'pages', count: '2', area: 'pages', route: '/{parent_uri}/{slug}',
       fields: [
           ['title', 'text, required'], ['page header', 'type, heading, lede, image, buttons'], ['page_builder', 'blocks'],
           ['seo', 'title, description, social image'], ['parent', 'the page above it']
       ] },
-    { id: 'contact_form', kind: 'Form', name: 'Contact form', handle: 'contact', count: 'submissions', status: 'built', area: 'form',
-      fields: [['name', 'text, required'], ['email', 'email, required'], ['message_body', 'textarea, required'], ['consent', 'toggle, required']] }
+    { id: 'contact_form', kind: 'Form', name: 'Contact form', handle: 'contact', count: 'submissions', area: 'form',
+      fields: [['name', 'text, required'], ['email', 'email, required'], ['message_body', 'textarea, required'], ['consent', 'toggle, required']] },
+    { id: 'site_details', kind: 'Global', name: 'Site Details', handle: 'site_details', area: 'details',
+      fields: [
+          ['phone', 'text'], ['mobile', 'text'], ['email', 'text: where enquiries go'],
+          ['address', 'street, town, region, postcode, country, map position'], ['address shown', 'text: replaces the address on the page'],
+          ['logo', 'image for search engines'], ['social_media', 'links']
+      ] },
+    { id: 'nav_main', kind: 'Navigation', name: 'Main', handle: 'main',
+      fields: [['items', 'chosen from Pages, up to two levels']] },
+    { id: 'images', kind: 'Assets', name: 'Images', handle: 'images',
+      fields: [['alt', 'text: alt text, required unless exempt'], ['exempt_from_alt', 'toggle: for decorative images']] },
+    { id: 'files', kind: 'Assets', name: 'Files', handle: 'files', fields: [] }
 ];
-const MODEL_LAYOUT = '"pages form ."';            // CSS grid-template-areas, three columns
+const MODEL_LAYOUT = '"pages form ." "details . ."';  // CSS grid-template-areas, three columns
 const RELS = [
-    ['pages', 'contact_form', 'show']
+    ['pages', 'contact_form', 'show'],
+    ['pages', 'site_details', 'show'],
+    ['contact_form', 'site_details', 'sends to the email in']
 ];
 
 /* ---------- Sitemap ----------
    The home page sits above the columns. Each column is a top level page with its children.
-   t title, u URL, k route key (opens its page), s suggested, coll collection entries, count, note,
-   d a decision id, nav 'main' or 'footer', kids children. */
+   t title, u URL, k route key (opens its page), s one of our suggestions (to confirm until decision d is agreed),
+   coll collection entries, count, note, d a decision id, nav 'main' or 'footer', kids children. */
 
 const SITEMAP_ROOT = { t: 'Home', u: '/', k: 'home' };
 const SITEMAP = [
@@ -148,7 +169,7 @@ const CHANGES = [];
 const SOURCE_MAP = [];
 const SOURCE_CHECKS = [];
 const SITEMAP_DECISIONS = [];
-const BEFORE_DESIGN = [];
+const BEFORE_DESIGN = ['D1'];
 
 /* ---------- Glossary ----------
    Words the gw() helper in 06-render.js wraps in the site's tooltip. { word, type, also, def } */

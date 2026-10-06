@@ -6,12 +6,13 @@ const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 const STORE = `${PROJECT.key}-prototype-v1`;
 const state = Object.assign({
     view: 'wireframes', route: '/', frames: 'both', annotate: true, rail: 'notes',
-    journey: JOURNEYS[0]?.id, step: -1, modes: { desktop: 'pinned', mobile: 'swipe' }, entity: MODEL[0]?.id, who: 'all',
-    sync: true, notes: false, side: true
+    journey: JOURNEYS[0]?.id, step: -1, modes: { desktop: 'pinned', mobile: 'swipe' }, entity: null, who: 'all',
+    sync: true, notes: false, side: true, decs: 'open'
 }, (() => { try { return JSON.parse(localStorage.getItem(STORE) || '{}'); } catch (e) { return {}; } })());
 state.step = -1;
+state.entity = null;  // the content model opens with nothing selected
 function save() {
-    try { localStorage.setItem(STORE, JSON.stringify({ view: state.view, route: state.route, frames: state.frames, annotate: state.annotate, modes: state.modes, entity: state.entity, journey: state.journey, sync: state.sync, notes: state.notes, side: state.side, welcomed: state.welcomed })); } catch (e) { /* storage unavailable */ }
+    try { localStorage.setItem(STORE, JSON.stringify({ view: state.view, route: state.route, frames: state.frames, annotate: state.annotate, modes: state.modes, entity: state.entity, journey: state.journey, sync: state.sync, notes: state.notes, side: state.side, decs: state.decs, welcomed: state.welcomed })); } catch (e) { /* storage unavailable */ }
 }
 const agreedCount = () => DECISIONS.filter(d => d.status === 'agreed').length;
 
@@ -170,24 +171,39 @@ function toast(msg) {
     toastTimer = setTimeout(() => { t.hidden = true; }, 3200);
 }
 
+/* ---------- Agreed or to confirm ---------- */
+
+// Clients see one question: is it settled? A suggestion of ours stays to confirm until the decision that settles it
+// is agreed; everything else is agreed.
+const isOpen = (suggested, id) => !!suggested && !(id && DEC[id] && DEC[id].status === 'agreed');
+const sitemapNode = key => { const all = []; const walk = n => { all.push(n); (n.kids || []).forEach(walk); }; SITEMAP.forEach(walk); return all.find(n => n.k === key); };
+const confirmBadge = id => `<span class="badge sugg">To confirm${id && DEC[id] ? ` · decision ${decNum(id)}` : ''}</span>`;
+
 /* ---------- Decisions ---------- */
 
-function decisionCard(d, { open = false, locate = true, pagesLinks = true } = {}) {
+function decisionCard(d, { open = false, locate = true, pagesLinks = true, row = false, tag = '' } = {}) {
     const agreed = d.status === 'agreed';
-    return `<details class="dec${agreed ? ' agreed' : ''}" id="dec-${d.id}" ${open ? 'open' : ''}>
-        <summary><span class="pinnum">${decNum(d.id)}</span><span class="t">${esc(d.title)}${agreed ? ' <span class="state">Agreed</span>' : ''}</span><span class="chev" aria-hidden="true">›</span><span class="who">${agreed ? `Agreed${AGREED_ON ? ` ${AGREED_ON}` : ''}` : `Decides: ${esc(whoLabel(d.who))}`}</span></summary>
-        <div class="inner">
-            ${agreed ? `<p class="agreed-note"><b>Agreed.</b> ${esc(d.agreed)}</p>` : ''}
-            <p class="q">${esc(d.q)}</p>
-            ${d.from ? `<p class="from"><b>${esc(PROJECT.fromLabel)}.</b> ${esc(d.from)}</p>` : ''}
-            <ol class="opts">${d.options.map((o, i) => `<li class="${i === d.rec ? (agreed ? 'chosen' : 'rec') : ''}"><b>${esc(o[0])}</b><span>${esc(o[1])}</span></li>`).join('')}</ol>
-            <p class="why"><b>${agreed ? 'Why' : d.rec === -1 ? 'Why it matters' : 'Why we suggest it'}.</b> ${esc(d.why)}</p>
-            ${d.change ? `<p class="portal"><b>If agreed:</b> ${esc(d.change)}</p>` : ''}
-            <div class="dec-actions">
+    const cls = `dec${row ? ' row' : ''}${agreed ? ' agreed' : ''}`;
+    const head = `<span class="pinnum">${decNum(d.id)}</span><span class="t">${esc(d.title)}${agreed ? ' <span class="state">Agreed</span>' : ''}${tag ? ` <span class="dtag">${esc(tag)}</span>` : ''}</span>${row ? '' : '<span class="chev" aria-hidden="true">›</span>'}<span class="who">${agreed ? `Agreed${AGREED_ON ? ` ${AGREED_ON}` : ''}` : `Decides: ${esc(whoLabel(d.who))}`}</span>`;
+    const note = agreed ? `<p class="agreed-note"><b>Agreed.</b> ${esc(d.agreed)}</p>` : '';
+    const question = `<p class="q">${esc(d.q)}</p>${d.from ? `<p class="from"><b>${esc(PROJECT.fromLabel)}.</b> ${esc(d.from)}</p>` : ''}`;
+    const options = `<p class="opts-h">Options</p><ol class="opts">${d.options.map((o, i) => `<li class="${i === d.rec ? (agreed ? 'chosen' : 'rec') : ''}"><span class="opt-l">${String.fromCharCode(65 + i)}</span><span class="opt-b"><b>${esc(o[0])}${i === d.rec ? `<em>${agreed ? 'Agreed' : 'Suggested'}</em>` : ''}</b><span>${esc(o[1])}</span></span></li>`).join('')}</ol>`;
+    const why = `<p class="why"><b>${agreed ? 'Why' : d.rec === -1 ? 'Why it matters' : 'Why we suggest it'}.</b> ${esc(d.why)}</p>${d.change ? `<p class="portal"><b>If agreed:</b> ${esc(d.change)}</p>` : ''}`;
+    const links = `<div class="dec-actions">
                 ${locate ? `<button type="button" class="chip-btn" data-locate="${d.id}">Show on the page</button>` : ''}
                 ${pagesLinks ? (d.pages || []).map(k => { const r = ROUTES.find(x => x.key === k); return r ? `<button type="button" class="chip-btn" data-go="${sampleRoute(r)}" data-pin-after="${d.id}">${esc(r.title)}</button>` : ''; }).join('') : ''}
-            </div>
-        </div>
+            </div>`;
+    // On the Decisions tab each decision reads in full: the question and its pages on the left, the options on the
+    // right. Elsewhere it folds away.
+    if (row) {
+        return `<article class="${cls}" id="dec-${d.id}">
+            <div class="dec-l"><div class="dec-h">${head}</div>${note}${question}${links}</div>
+            <div class="dec-r">${options}${why}</div>
+        </article>`;
+    }
+    return `<details class="${cls}" id="dec-${d.id}" ${open ? 'open' : ''}>
+        <summary>${head}</summary>
+        <div class="inner">${note}${question}${options}${why}${links}</div>
     </details>`;
 }
 
@@ -209,6 +225,8 @@ function renderRail() {
     const body = $('#rail-body');
     // Page notes fold to a strip; the other views always show their panel.
     const folded = state.view === 'wireframes' && !state.notes;
+    // The Decisions tab has the width to itself.
+    $('.body').classList.toggle('rail-off', state.view === 'decisions');
     $('.body').classList.toggle('notes-off', folded);
     $('#rail').classList.toggle('mini', folded);
     if (state.view !== 'wireframes' || state.step < 0) $$('.device').forEach(d => d.classList.remove('dim'));
@@ -216,13 +234,14 @@ function renderRail() {
     else if (state.view === 'wireframes') body.innerHTML = notesRail();
     else if (state.view === 'sitemap') body.innerHTML = sitemapRail();
     else if (state.view === 'model') body.innerHTML = modelRail();
-    else body.innerHTML = decisionsRail();
+    else body.innerHTML = '';
 }
 
 function notesRail() {
     const pr = parseRoute(state.route);
     const n = Object.assign({ purpose: '', aud: [], content: [], decisions: [], consider: [], fed: [] }, NOTES[pr.key]);
     const r = pr.r;
+    const node = sitemapNode(pr.key);
     const onPage = pinsOn(pr);
     const listed = n.decisions.filter(id => DEC[id]);
     const extra = onPage.filter(id => !listed.includes(id)).sort((a, b) => decNum(a) - decNum(b));
@@ -233,7 +252,7 @@ function notesRail() {
             <h2>${esc(r.title)}</h2>
             <p class="path">${esc(r.path)}${r.sample ? `  ·  showing ${esc(pr.slug)}` : ''}</p>
             <div class="badges">
-                ${n.badge ? `<span class="badge sugg">${esc(n.badge)}: not in the plan yet</span>` : `<span class="badge">In the sitemap${n.plannedAs ? ` as ${esc(n.plannedAs)}` : ''}</span>`}
+                ${isOpen(node ? node.s : n.badge, node && node.d) ? confirmBadge(node && node.d) : '<span class="badge">Agreed</span>'}
                 ${n.aud.filter(a => AUD[a]).map(a => `<span class="badge aud" title="${esc(AUD[a][1])}">${AUD[a][0]}</span>`).join('')}
             </div>
         </div>
@@ -287,6 +306,7 @@ const ICON = {
     desktop: '<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="2" width="13" height="9" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M6 14h4M8 11v3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>',
     panel: '<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="2.5" width="13" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M6 2.5v11" stroke="currentColor" stroke-width="1.4"/></svg>',
     panelR: '<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="2.5" width="13" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M10 2.5v11" stroke="currentColor" stroke-width="1.4"/></svg>',
+    close: '<svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 3.5l9 9M12.5 3.5l-9 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>',
     chev: '<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>'
 };
 const activeJourney = () => JOURNEYS.find(x => x.id === state.journey) || JOURNEYS[0];
@@ -391,7 +411,7 @@ function closeSidebar() { $('#sidebar').classList.remove('open'); $('#scrim').hi
 /* ---------- Sitemap ---------- */
 
 function smNode(n, top) {
-    const cls = ['node', top ? 'top' : '', n.s ? 's' : '', n.count ? 'c' : ''].join(' ');
+    const cls = ['node', top ? 'top' : '', isOpen(n.s, n.d) ? 's' : '', n.count ? 'c' : ''].join(' ');
     const tags = [
         n.nav === 'main' ? 'main menu' : '', n.nav === 'footer' || n.foot ? 'footer' : '',
         n.count ? `${n.count} ${n.coll ? n.coll.toLowerCase() + ' entries' : 'entries'}` : ''
@@ -406,17 +426,17 @@ function smKids(kids) {
 function renderSitemap() {
     $('#view-sitemap').innerHTML = `<div class="canvas">
         <div class="canvas-head">
-            <div><h2>Sitemap</h2><p>The pages the site will have, with our suggested additions. Select a page to open it; select a number to read the decision.</p></div>
+            <div><h2>Sitemap</h2><p>The pages the site will have. Those to confirm are our suggestions, each settled by the decision numbered beside it. Select a page to open it; select a number to read the decision.</p></div>
             <div class="legend">
-                <span><i class="sw"></i>Planned</span>
-                <span><i class="sw s"></i>Suggested</span>
+                <span><i class="sw"></i>Agreed</span>
+                <span><i class="sw s"></i>To confirm</span>
                 <span><i class="sw c"></i>Collection entries</span>
                 <span><span class="pinnum" style="min-width:16px;height:16px;font-size:9px">1</span>Decision</span>
             </div>
         </div>
-        <div class="scroll-x"><div class="sm">
+        <div class="scroll-x"><div class="sm" style="--cols:${Math.max(1, SITEMAP.length)}">
             <div class="sm-root">${smNode(SITEMAP_ROOT, true)}</div>
-            <div class="sm-cols">${SITEMAP.map(c => `<div class="sm-col">${smNode(c, true)}${c.kids ? smKids(c.kids) : ''}</div>`).join('')}</div>
+            <div class="sm-cols${SITEMAP.length === 1 ? ' one' : ''}">${SITEMAP.map(c => `<div class="sm-col">${smNode(c, true)}${c.kids ? smKids(c.kids) : ''}</div>`).join('')}</div>
         </div></div>
     </div>`;
 }
@@ -446,40 +466,82 @@ function changesList() {
 
 /* ---------- Content model ---------- */
 
+// The handle, and for anything with pages its slug, with any note about the slug on a line of its own in italics.
+// Without a slug (a route of 'none'), the note stands in for it.
+function entMeta(e) {
+    const route = String(e.route || '');
+    const [, slug = '', note = route] = route.match(/^(\/\S*)\s*(.*)$/) || [];
+    const aside = note.replace(/^\((.*)\)$/, '$1');
+    if (!route) return `<span class="ent-m">Handle: <code>${esc(e.handle)}</code></span>`;
+    return `<span class="ent-m">Handle: <code>${esc(e.handle)}</code></span>`
+        + `<span class="ent-m">Slug: ${slug ? `<code>${esc(slug)}</code>` : `<em>${esc(aside)}</em>`}</span>`
+        + (slug && aside ? `<span class="ent-m"><em>${esc(aside)}</em></span>` : '');
+}
+
+// An icon for each kind of content, as the control panel draws them: a stack for a collection, a tag for a
+// taxonomy, a form, a globe for globals, lines for a navigation and a picture for an asset library.
+const KIND_ICON = {
+    collection: '<rect x="2.5" y="5" width="11" height="8.5" rx="1.5"/><path d="M4.5 2.5h7"/>',
+    taxonomy: '<path d="M2.5 3.5v4.1l6.4 6.4 5.1-5.1-6.4-6.4H3.5a1 1 0 0 0-1 1Z"/><circle cx="5.6" cy="5.6" r="1"/>',
+    form: '<rect x="3" y="2.5" width="10" height="11" rx="1.5"/><path d="M5.5 6h5M5.5 8.5h5M5.5 11h3"/>',
+    globals: '<circle cx="8" cy="8" r="5.5"/><path d="M2.5 8h11M8 2.5c1.8 1.6 2.6 3.4 2.6 5.5S9.8 11.9 8 13.5M8 2.5C6.2 4.1 5.4 5.9 5.4 8s.8 3.9 2.6 5.5"/>',
+    navigation: '<path d="M3 4h10M3 8h10M3 12h6"/>',
+    assets: '<rect x="2.5" y="3" width="11" height="10" rx="1.5"/><circle cx="6" cy="6.5" r="1.2"/><path d="m2.5 11.5 3.5-3.5 3 3 2-2 2.5 2.5"/>'
+};
+function kindIcon(kind) {
+    const k = String(kind).toLowerCase().replace(/^global$/, 'globals');
+    return KIND_ICON[k] ? `<svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${KIND_ICON[k]}</svg>` : '';
+}
+
+// The key to the field marks, both to confirm, shown under the fields only when there are marks to explain.
+function fieldKey(e) {
+    const key = [];
+    if (e.fields.some(f => f[2] === 's')) key.push('<span><span class="mono" style="color:var(--sugg-line)">+ field</span>to add</span>');
+    if (e.fields.some(f => f[2] === 'x')) key.push('<span><span class="mono" style="color:var(--drop);text-decoration:line-through">field</span>to remove</span>');
+    return key.length ? `<p class="legend field-key"><span>To confirm:</span>${key.join('')}</p>` : '';
+}
+
+// Pages always comes first, so it leads on a phone too, where the cards stack in this order.
+const modelOrder = () => [...MODEL].sort((a, b) => (b.handle === 'pages') - (a.handle === 'pages'));
+
+// Navigation and asset libraries sit in sections of their own below the diagram.
+const MODEL_SECTIONS = [['Navigation', 'Navigation'], ['Asset libraries', 'Assets']];
+
 function renderModel() {
-    const card = e => `<button type="button" class="ent ${e.status === 'suggested' ? 's' : e.status === 'built' ? 'b' : ''}" style="grid-area:${e.area}" data-ent="${e.id}" aria-pressed="${state.entity === e.id}">
+    const diagram = modelOrder().filter(e => !MODEL_SECTIONS.some(([, kind]) => e.kind === kind));
+    const card = e => `<button type="button" class="ent${isOpen(e.status === 'suggested', (e.dec || [])[0]) ? ' s' : ''}"${e.area ? ` style="grid-area:${e.area}"` : ''} data-ent="${e.id}" aria-pressed="${state.entity === e.id}">
         <span class="ent-h">
-            <span class="ent-k"><span>${e.kind}</span><span>${esc(e.count)}</span></span>
+            <span class="ent-k"><span class="kind">${kindIcon(e.kind)}${e.kind}</span><span>${esc(e.count)}</span></span>
             <span class="ent-n">${esc(e.name)} ${(e.dec || []).map(id => `<span class="pinnum">${decNum(id)}</span>`).join('')}</span>
-            <span class="mono muted" style="font-size:11px">${esc(e.handle)}${e.route ? ` · ${esc(e.route)}` : ''}</span>
+            ${entMeta(e)}
         </span>
-        <ul class="ent-f">${e.fields.map(f => `<li class="${f[2] || ''}"><span class="fn">${esc(f[0])}</span><span class="ft">${esc(f[1])}</span></li>`).join('')}</ul>
-        ${e.terms ? `<span class="ent-t">${esc(e.terms)}</span>` : ''}
     </button>`;
     $('#view-model').innerHTML = `<div class="canvas">
         <div class="canvas-head">
             <div><h2>Content model</h2><p>The collections, taxonomies, forms and globals behind the site, with the fields we suggest adding. Select one to see where it appears and what it depends on.</p></div>
             <div class="legend">
-                <span><i class="sw"></i>Planned</span>
-                <span><i class="sw b"></i>Already built</span>
-                <span><i class="sw s"></i>Suggested</span>
-                <span><span class="mono" style="color:var(--sugg-line)">+ field</span>suggested field</span>
-                <span><span class="mono" style="color:var(--drop);text-decoration:line-through">field</span>drop</span>
+                <span><i class="sw"></i>Agreed</span>
+                <span><i class="sw s"></i>To confirm</span>
             </div>
         </div>
-        ${MODEL.length ? `<div class="model" id="model" style="grid-template-areas:${esc(MODEL_LAYOUT)}"><svg aria-hidden="true" id="model-svg"></svg>${MODEL.map(card).join('')}</div>` : '<p class="note-line">No content model yet.</p>'}
+        ${diagram.length ? `<div class="model" id="model" style="grid-template-areas:${esc(MODEL_LAYOUT)}"><svg aria-hidden="true" id="model-svg"></svg>${diagram.map(card).join('')}</div>` : ''}
+        ${MODEL_SECTIONS.map(([title, kind]) => { const items = modelOrder().filter(e => e.kind === kind); return items.length ? `<section class="model-sec"><h3>${title}</h3><div class="model-row">${items.map(card).join('')}</div></section>` : ''; }).join('')}
+        ${MODEL.length ? '' : '<p class="note-line">No content model yet.</p>'}
     </div>`;
     requestAnimationFrame(drawRels);
 }
 
 function drawRels() {
+    const sel = state.entity;
+    const related = new Set([sel]);
+    RELS.forEach(([a, b]) => { if (a === sel) related.add(b); if (b === sel) related.add(a); });
+    $$('#view-model .ent').forEach(el => { el.classList.toggle('dim', !!sel && !related.has(el.dataset.ent)); el.setAttribute('aria-pressed', String(el.dataset.ent === sel)); });
     const wrap = $('#model'), svg = $('#model-svg');
     if (!wrap || !svg || getComputedStyle(svg).display === 'none') return;
     const box = wrap.getBoundingClientRect();
     const rect = id => { const r = $(`[data-ent="${id}"]`, wrap).getBoundingClientRect(); return { l: r.left - box.left, t: r.top - box.top, r: r.right - box.left, b: r.bottom - box.top, cx: (r.left + r.right) / 2 - box.left, cy: (r.top + r.bottom) / 2 - box.top }; };
-    const sel = state.entity;
     let out = '';
-    RELS.forEach(([a, b, label, sug]) => {
+    RELS.filter(([a, b]) => $(`[data-ent="${a}"]`, wrap) && $(`[data-ent="${b}"]`, wrap)).forEach(([a, b, label, sug]) => {
         const A = rect(a), B = rect(b);
         const dx = B.cx - A.cx, dy = B.cy - A.cy;
         let x1, y1, x2, y2, d;
@@ -502,9 +564,6 @@ function drawRels() {
         out += `<text x="${(x1 + x2) / 2}" y="${(y1 + y2) / 2 + 4}" text-anchor="middle" class="${on ? 'on' : ''}">${esc(label)}</text>`;
     });
     svg.innerHTML = out;
-    const related = new Set([sel]);
-    RELS.forEach(([a, b]) => { if (a === sel) related.add(b); if (b === sel) related.add(a); });
-    $$('.ent', wrap).forEach(el => { el.classList.toggle('dim', !!sel && !related.has(el.dataset.ent)); el.setAttribute('aria-pressed', String(el.dataset.ent === sel)); });
 }
 
 // A relationship as a sentence: a taxonomy reads "Stories uses the Story type taxonomy".
@@ -512,22 +571,41 @@ function relSentence(r, a, b) {
     return r[2] === 'taxonomy' ? `${esc(a.name)} uses the ${esc(b.name)} taxonomy` : `${esc(a.name)} ${esc(r[2])} ${esc(b.name)}`;
 }
 
+// With nothing selected, the panel says what the model holds.
+function modelOverview() {
+    const plural = { Collection: 'Collections', Taxonomy: 'Taxonomies', Form: 'Forms', Global: 'Globals', Globals: 'Globals', Navigation: 'Navigation menus', Assets: 'Asset libraries' };
+    const counts = {};
+    MODEL.forEach(m => { const k = plural[m.kind] || m.kind; counts[k] = (counts[k] || 0) + 1; });
+    return `
+        <div class="rail-head"><h2>Content model</h2><p class="purpose" style="font-size:14px">${MODEL.length ? 'Select an item to see its fields, where it appears and what it connects to. Select it again, or press Escape, to clear.' : 'Nothing here yet.'}</p></div>
+        ${MODEL.length ? `<section><h3>What it holds</h3><div class="counts">${Object.entries(counts).map(([k, n]) => `<span>${esc(k)}</span><b>${n}</b>`).join('')}</div></section>` : ''}
+        ${CHANGES.length ? `<details class="fold"><summary>What changed since the proposal</summary><div>${changesList()}</div></details>` : ''}
+        ${SOURCE_CHECKS.length ? `<details class="fold"><summary>Checked against the source documents</summary><div>${sourceChecks()}</div></details>` : ''}`;
+}
+
+function clearEntity() {
+    state.entity = null;
+    save();
+    drawRels();
+    renderRail();
+}
+
 function modelRail() {
-    const e = MODEL.find(m => m.id === state.entity) || MODEL[0];
-    if (!e) return '<div class="rail-head"><h2>Content model</h2><p class="purpose" style="font-size:14px">Nothing here yet.</p></div>';
+    const e = MODEL.find(m => m.id === state.entity);
+    if (!e) return modelOverview();
     const rels = RELS.filter(r => r[0] === e.id || r[1] === e.id);
     const pages = pagesFor(e.id);
     return `
         <div class="rail-head">
-            <p class="mono muted" style="font-size:11px;text-transform:uppercase;letter-spacing:.06em">${e.kind} · ${esc(e.handle)}</p>
+            <div class="rail-kind"><p class="kind">${kindIcon(e.kind)}${e.kind}</p><button type="button" class="icon-btn tiny" data-ent-clear aria-label="Clear selection" title="Clear selection">${ICON.close}</button></div>
             <h2>${esc(e.name)}</h2>
+            <div class="ent-meta">${entMeta(e)}</div>
             <div class="badges">
-                <span class="badge ${e.status === 'suggested' ? 'sugg' : e.status === 'built' ? 'built' : ''}">${e.status === 'suggested' ? 'Suggested' : e.status === 'built' ? 'Already built' : 'Planned'}</span>
-                ${e.count ? `<span class="badge">${esc(e.count)}${/^[~\d]/.test(e.count) ? (e.kind === 'Taxonomy' ? ' terms' : ' entries') : ''}</span>` : ''}
-                ${e.route ? `<span class="badge mono" style="font-size:11px">${esc(e.route)}</span>` : ''}
+                ${isOpen(e.status === 'suggested', (e.dec || [])[0]) ? confirmBadge((e.dec || [])[0]) : '<span class="badge">Agreed</span>'}
+                ${e.count ? `<span class="badge">${esc(e.count)}${/^[~\d]/.test(e.count) ? ({ Collection: ' entries', Taxonomy: ' terms' }[e.kind] || '') : ''}</span>` : ''}
             </div>
         </div>
-        <section><h3>Fields</h3><table class="ftable">${e.fields.map(f => `<tr class="${f[2] || ''}"><td>${f[2] === 's' ? '+ ' : ''}${esc(f[0])}</td><td>${esc(f[1])}${f[3] ? ` <span class="pinnum" style="min-width:18px;height:18px;font-size:10px">${decNum(f[3])}</span>` : ''}</td></tr>`).join('')}</table>
+        <section><h3>Fields</h3>${e.fields.length ? '' : '<p class="note-line">No fields of its own.</p>'}<table class="ftable">${e.fields.map(f => `<tr class="${f[2] || ''}"><td>${f[2] === 's' ? '+ ' : ''}${esc(f[0])}</td><td>${esc(f[1])}${f[3] ? ` <span class="pinnum" style="min-width:18px;height:18px;font-size:10px">${decNum(f[3])}</span>` : ''}</td></tr>`).join('')}</table>${fieldKey(e)}
             ${e.terms ? `<p class="note-line" style="margin-top:10px">${esc(e.terms)}</p>` : ''}</section>
         ${rels.length ? `<section><h3>Relationships</h3><ul class="bullets">${rels.map(r => { const other = MODEL.find(m => m.id === (r[0] === e.id ? r[1] : r[0])); return `<li>${r[0] === e.id ? relSentence(r, e, other) : relSentence(r, other, e)}${r[3] ? ' (suggested)' : ''}</li>`; }).join('')}</ul></section>` : ''}
         ${pages.length ? `<section><h3>Appears on</h3><div class="chips">${pages.map(r => `<button type="button" class="chip-btn" data-go="${sampleRoute(r)}">${esc(r.title)}</button>`).join('')}</div></section>` : ''}
@@ -539,38 +617,39 @@ function modelRail() {
 /* ---------- Decisions view ---------- */
 
 function renderDecisions() {
-    const list = DECISIONS.filter(d => state.who === 'all' || d.who.includes(state.who));
+    const mine = DECISIONS.filter(d => state.who === 'all' || d.who.includes(state.who));
+    const groups = { open: mine.filter(d => d.status !== 'agreed'), agreed: mine.filter(d => d.status === 'agreed') };
+    const list = groups[state.decs] || groups.open;
+    const before = new Set(BEFORE_DESIGN);
+    const intro = PROJECT.decisionsIntro;
     $('#view-decisions').innerHTML = `<div class="canvas">
         <div class="canvas-head">
-            <div><h2>Decisions</h2><p>${DECISIONS.length ? `Every question the prototype raises, with the options and what we suggest. ${agreedCount()} are agreed; the rest are open. Numbers match the markers on the pages.` : 'Questions to settle appear here as the prototype raises them, each with its options and what we suggest.'}</p></div>
-            <div class="seg" id="who-pick">${[['all', 'All']].concat(Object.entries(WHO)).map(([k, v]) => `<button type="button" data-who="${k}" aria-pressed="${state.who === k}">${esc(v)}</button>`).join('')}</div>
+            <div><h2>Decisions</h2><p>${DECISIONS.length ? `Every question the prototype raises, with the options and what we suggest. Numbers match the markers on the pages.${intro ? ` ${esc(intro)}` : ''}` : 'Questions to settle appear here as the prototype raises them, each with its options and what we suggest.'}</p></div>
         </div>
-        <div class="dgrid">${list.map(d => decisionCard(d, { open: d.status !== 'agreed', locate: false })).join('')}</div>
+        ${DECISIONS.length ? `<div class="dec-filters">
+            <div class="seg" id="decs-pick">${[['open', 'Unresolved'], ['agreed', 'Agreed']].map(([k, v]) => `<button type="button" data-decs="${k}" aria-pressed="${(groups[state.decs] ? state.decs : 'open') === k}">${v}<span class="count">${groups[k].length}</span></button>`).join('')}</div>
+            <div class="seg" id="who-pick">${[['all', 'All']].concat(Object.entries(WHO)).map(([k, v]) => `<button type="button" data-who="${k}" aria-pressed="${state.who === k}">${esc(v)}</button>`).join('')}</div>
+        </div>` : ''}
+        ${list.length ? `<div class="dlist">${list.map(d => decisionCard(d, { locate: false, row: true, tag: before.has(d.id) && d.status !== 'agreed' ? 'Needed before design' : '' })).join('')}</div>`
+            : DECISIONS.length ? `<p class="note-line">${state.decs === 'agreed' ? 'Nothing agreed yet' : 'Nothing left to decide'}${state.who === 'all' ? '' : ` for ${esc(WHO[state.who])}`}.</p>` : ''}
     </div>`;
-}
-function decisionsRail() {
-    const counts = Object.entries(WHO).map(([k, v]) => [v, DECISIONS.filter(d => d.who.includes(k)).length]);
-    const agreed = DECISIONS.filter(d => d.status === 'agreed');
-    const before = BEFORE_DESIGN.filter(id => DEC[id]);
-    return `
-        <div class="rail-head"><h2>${DECISIONS.length ? `${DECISIONS.length} decisions, ${agreedCount()} agreed` : 'No decisions yet'}</h2>${PROJECT.decisionsIntro ? `<p class="purpose" style="font-size:14px">${esc(PROJECT.decisionsIntro)}</p>` : ''}</div>
-        ${agreed.length ? `<section><h3>Agreed</h3><ul class="changes">${agreed.map(d => `<li><b>${esc(d.title)}</b><span>${esc(d.agreed)}</span><button type="button" data-open-dec="${d.id}" aria-label="Decision ${decNum(d.id)}"><span class="pinnum">${decNum(d.id)}</span></button></li>`).join('')}</ul></section>` : ''}
-        ${before.length ? `<section><h3>Needed before design starts</h3><ul class="bullets">${before.map(id => `<li>${esc(DEC[id].title)} (${decNum(id)})</li>`).join('')}</ul></section>` : ''}
-        ${DECISIONS.length ? `<section><h3>Who decides</h3><div class="counts">${counts.map(c => `<span>${esc(c[0])}</span><b>${c[1]}</b>`).join('')}</div></section>` : ''}
-        ${SOURCE_CHECKS.length ? `<section><h3>Checked against the source documents</h3><p class="note-line" style="margin-bottom:10px">Things to fix in the client's documents before they reach the site.</p>${sourceChecks()}</section>` : ''}
-        ${CHANGES.length ? `<section><h3>What changed since the proposal</h3>${changesList()}</section>` : ''}`;
 }
 
 /* ---------- Events ---------- */
 
 document.addEventListener('click', e => {
+    if (!e.target.closest('.version')) versionMenu(false);
+    // A click on the diagram's empty space clears the selection.
+    if (state.view === 'model' && state.entity && e.target.closest('#view-model') && !e.target.closest('.ent, button, a, summary')) { clearEntity(); return; }
     const t = e.target.closest('button, [data-open-dec]');
     if (!t) return;
+    if (t.id === 'version-btn') { versionMenu($('#version-menu').hidden); return; }
     if (t.id === 'help-open') { openHelp(); return; }
+    if (t.id === 'theme-toggle') { setTheme(currentTheme() === 'dark' ? 'light' : 'dark'); return; }
     if (t.id === 'help-close' || t.id === 'help-done') { closeHelp(); return; }
     if (t.id === 'nav-toggle') { $('#sidebar').classList.contains('open') ? closeSidebar() : openSidebar(); return; }
     if (t.hasAttribute('data-journey-end')) { endJourney(); return; }
-    if (t.dataset.view) { setView(t.dataset.view); return; }
+    if (t.dataset.view) { if (t.dataset.view === 'model') state.entity = null; setView(t.dataset.view); return; }
     if (t.dataset.frames) { setFrames(t.dataset.frames); return; }
     if (t.dataset.openDec) { e.preventDefault(); e.stopPropagation(); openDecision(t.dataset.openDec); return; }
     if (t.dataset.go) { endJourney(true); navigate(t.dataset.go, t.dataset.pinAfter ? { highlight: `[data-pin="${t.dataset.pinAfter}"]` } : {}); return; }
@@ -582,8 +661,11 @@ document.addEventListener('click', e => {
         return;
     }
     if (t.dataset.entity) { state.entity = t.dataset.entity; setView('model'); return; }
-    if (t.dataset.ent) { state.entity = t.dataset.ent; save(); drawRels(); renderRail(); return; }
+    // Selecting an item again clears it.
+    if (t.dataset.ent) { state.entity = state.entity === t.dataset.ent ? null : t.dataset.ent; save(); drawRels(); renderRail(); return; }
+    if (t.hasAttribute('data-ent-clear')) { clearEntity(); return; }
     if (t.dataset.who) { state.who = t.dataset.who; renderDecisions(); return; }
+    if (t.dataset.decs) { state.decs = t.dataset.decs; save(); renderDecisions(); return; }
     if (t.dataset.side) { setSide(t.dataset.side === 'open'); return; }
     if (t.dataset.notes) { setNotes(t.dataset.notes === 'open'); return; }
     if (t.dataset.journey) {
@@ -610,11 +692,60 @@ document.addEventListener('click', e => {
 $('#scrim').addEventListener('click', closeSidebar);
 $('#help').addEventListener('click', e => { if (e.target.id === 'help') closeHelp(); });
 document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') { if (!$('#help').hidden) closeHelp(); else closeSidebar(); return; }
+    if (e.key === 'Escape') { versionMenu(false); if (!$('#help').hidden) closeHelp(); else if (state.view === 'model' && state.entity) clearEntity(); else closeSidebar(); return; }
     if (state.step < 0 || !$('#help').hidden || e.target.closest('input, select, textarea, [contenteditable]')) return;
     if (e.key === 'ArrowRight') { e.preventDefault(); const next = state.step + 1; if (next >= activeJourney().steps.length) finishJourney(); else goStep(next); }
     if (e.key === 'ArrowLeft' && state.step > 0) { e.preventDefault(); goStep(state.step - 1); }
 });
+
+/* ---------- Versions ---------- */
+
+// VERSION is this build's own, from its version.json. Served by the site, PROTOTYPE_VERSIONS lists every version
+// with its address; opened as a file or an Artifact, there is only this one.
+const VERSIONS = window.PROTOTYPE_VERSIONS || [Object.assign({ url: null }, VERSION)];
+const longDate = d => d ? new Date(`${d}T00:00:00`).toLocaleDateString('en-NZ', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
+
+function renderVersion() {
+    const menu = VERSIONS.length > 1 || VERSIONS.some(v => v.notes && v.notes.length);
+    const b = $('#version-btn');
+    b.innerHTML = `${esc(VERSION.label)}${menu ? '<span aria-hidden="true">▾</span>' : ''}`;
+    b.disabled = !menu;
+    b.title = longDate(VERSION.date);
+    $('#version-menu').innerHTML = `<p class="vm-h">Versions</p><ul>${[...VERSIONS].reverse().map(v => {
+        const on = v.id === VERSION.id;
+        const inner = `<span class="vm-t"><b>${esc(v.label)}</b>${on ? '<span class="vm-on">Viewing</span>' : ''}</span>${v.date ? `<span class="vm-d">${longDate(v.date)}</span>` : ''}${v.notes && v.notes.length ? `<ul class="vm-n">${v.notes.map(n => `<li>${esc(n)}</li>`).join('')}</ul>` : ''}`;
+        return `<li>${on || !v.url ? `<div class="vm-i${on ? ' on' : ''}">${inner}</div>` : `<a class="vm-i" href="${esc(v.url)}">${inner}</a>`}</li>`;
+    }).join('')}</ul>`;
+}
+function versionMenu(open) {
+    const m = $('#version-menu');
+    m.hidden = !open;
+    $('#version-btn').setAttribute('aria-expanded', String(open));
+}
+
+/* ---------- Light and dark ---------- */
+
+const darkMQ = matchMedia('(prefers-color-scheme: dark)');
+const THEME_ICON = {
+    dark: '<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M13.5 9.6A5.8 5.8 0 0 1 6.4 2.5a5.8 5.8 0 1 0 7.1 7.1Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>',
+    light: '<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="3" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M8 1.5v1.6M8 12.9v1.6M1.5 8h1.6M12.9 8h1.6M3.4 3.4l1.1 1.1M11.5 11.5l1.1 1.1M3.4 12.6l1.1-1.1M11.5 4.5l1.1-1.1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>'
+};
+const currentTheme = () => document.documentElement.dataset.theme || (darkMQ.matches ? 'dark' : 'light');
+
+// The button shows where a click takes you: a moon in light mode, a sun in dark mode.
+function renderThemeToggle() {
+    const next = currentTheme() === 'dark' ? 'light' : 'dark';
+    const b = $('#theme-toggle');
+    b.innerHTML = THEME_ICON[next];
+    b.setAttribute('aria-label', `Switch to ${next} mode`);
+    b.title = `Switch to ${next} mode`;
+}
+function setTheme(t) {
+    document.documentElement.dataset.theme = t;
+    try { localStorage.setItem('prototype-theme', t); } catch (e) { /* storage unavailable */ }
+    renderThemeToggle();
+}
+darkMQ.addEventListener('change', renderThemeToggle);
 
 function setFrames(f) {
     state.frames = f;
@@ -650,9 +781,17 @@ $('#brand-name').textContent = PROJECT.name;
 $('#brand-sub').textContent = PROJECT.subtitle;
 $('#prepared').textContent = PROJECT.prepared;
 if (!AGENCY.url) { $('.agency').removeAttribute('href'); $('.agency').removeAttribute('target'); }
+// Who signed in on the site's sign-in page. Opened as a file or an Artifact, there is no one.
+const viewer = window.PROTOTYPE_VIEWER;
+if (viewer && viewer.name) {
+    $('#viewer').innerHTML = `<span>Signed in as <b>${esc(viewer.name)}</b></span><a href="/prototype/sign-out">Not you?</a>`;
+    $('#viewer').hidden = false;
+}
 $('#dec-count').textContent = DECISIONS.length ? `${DECISIONS.length - agreedCount()} open` : '';
 $('#sync').checked = state.sync;
 $('#annotate').checked = state.annotate;
+renderThemeToggle();
+renderVersion();
 renderSidebar();
 makeFrames();
 setFrames(state.frames);

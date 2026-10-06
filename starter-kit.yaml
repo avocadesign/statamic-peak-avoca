@@ -4,7 +4,7 @@ export_paths:
   - .gitignore
   - app/Console/Commands/PostInstall/CollectAvailableLangLocales.php
   - app/Http/Controllers/PrototypeController.php
-  - app/Http/Middleware/PrototypePassword.php
+  - app/Http/Middleware/PrototypeEnabled.php
   - app/Listeners/PreventDeletingMounts.php
   - app/Policies/CustomUserPolicy.php
   - app/Providers/AppServiceProvider.php

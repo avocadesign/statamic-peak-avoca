@@ -166,5 +166,7 @@ This is Avoca's fork of studio1902/statamic-peak. `upstream` is the Peak remote;
   (`config/statamic/cp.php`), in form emails (`form_mail_logo` in `lang/*/strings.php`) and in the site header
   (`components/_logo`) until the client's arrives, and signs the prototype. Peak's logo is gone from the kit;
   keep it out after an upstream merge. Whoosh and Honest Design have placeholder logos until their own arrive.
-- `prototype/` is an empty discovery prototype, served at `/prototype` when `PROTOTYPE_ENABLED` is on and behind
-  `PROTOTYPE_PASSWORD` when one is set. Its README says how to fill it in.
+- `prototype/` is an empty discovery prototype, served at `/prototype` when `PROTOTYPE_ENABLED` is on. With
+  `PROTOTYPE_PASSWORD` set, a sign-in page asks for the visitor's name and the password, and the prototype shows the
+  name. Versions are snapshots in folders, starting with `1/`: `new-version.sh` starts the next, each is served at
+  `/prototype/<version>`, and the top bar lists them. Its README says how to fill it in.

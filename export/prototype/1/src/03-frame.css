@@ -318,8 +318,9 @@
         color: var(--wf-pin-ink); background: color-mix(in oklab, var(--wf-pin) 18%, var(--color-white));
     }
     body:not(.wf-annotate) :is(.wf-pin, .wf-flag) { display: none !important; }
-    .wf-pulse { outline: 3px solid var(--wf-pin) !important; outline-offset: 6px; animation: wf-pulse 1.1s ease-out 3; border-radius: 4px; }
-    @keyframes wf-pulse { 0% { outline-offset: 14px; } 100% { outline-offset: 4px; } }
+    /* A journey step or decision marks its place with a soft outline that settles in once. */
+    .wf-pulse { outline: 2px solid color-mix(in oklab, var(--wf-pin) 55%, transparent) !important; outline-offset: 4px; animation: wf-pulse .9s ease-out 1; border-radius: 4px; }
+    @keyframes wf-pulse { 0% { outline-color: var(--wf-pin); outline-offset: 10px; } 100% { outline-color: color-mix(in oklab, var(--wf-pin) 55%, transparent); outline-offset: 4px; } }
     @media (prefers-reduced-motion: reduce) { .wf-pulse { animation: none; } }
 
     /* Timeline: one ordered list. Unlinked moments are notes above the line, linked moments are cards below it,
