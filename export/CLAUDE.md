@@ -13,6 +13,8 @@ Avoca's build recipe comes from the avocadesign/statamic-tools package. Follow i
 - Reusable components for sets are in `resources/views/components/`
 - Common utility partials are in `resources/views/components/utilities`
 - Layout partials (header, footer, etc.) are in `resources/views/layout/`
+- The discovery prototype is in `prototype/`: edit `src/`, then run `./build.sh`. Its README says how to fill it in. It is served at `/prototype` when `PROTOTYPE_ENABLED` is on.
+- `AGENCY` in `.env` is the company running the project. Its logo, from `public/agencies/`, stands in on the control panel, form emails and the site header until the client's arrives.
 
 ### Statamic Patterns
 - Reference existing fieldsets in `resources/fieldsets/`

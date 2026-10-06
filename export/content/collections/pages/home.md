@@ -11,5 +11,5 @@ sitemap_change_frequency: weekly
 sitemap_priority: 0.5
 hero_type: simple
 custom_page_title: true
-page_heading: 'Welcome to the website'
+page_heading: 'Your new website is on its way'
 ---

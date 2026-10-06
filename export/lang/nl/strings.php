@@ -33,7 +33,7 @@ return [
     'form_mail_closing' => 'Vriendelijke groeten',
     'form_mail_from' => config('app.name'),
     'form_mail_greeting' => 'Beste',
-    'form_mail_logo' => config('app.url').'/visuals/statamic-peak-logo.png',
+    'form_mail_logo' => config('app.url').'/agencies/'.config('agency.handle').'/logo.png',
     'form_required' => 'Verplicht',
     'form_mail_submitted' => 'Verzonden',
     'form_mail_title' => 'Contactformulier',

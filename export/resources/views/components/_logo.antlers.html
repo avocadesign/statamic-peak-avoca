@@ -1,6 +1,6 @@
 {{#
     @name Logo
-    @desc The logo component with a `width` attribute.
+    @desc The logo component with a `width` attribute. Shows the agency's logo until the client's replaces it.
 #}}
 
 <!-- /components/_logo.antlers.html -->
@@ -8,6 +8,6 @@
     aria-label="{{ trans:strings.home }}"
     href="{{ site:url }}"
 >
-    <img src="/visuals/statamic-peak-logo.svg" class="select-none {{ class }}" width="{{ width }}" alt="" aria-hidden="true"/>
+    <img src="/agencies/{{ config:agency:handle }}/logo.svg" class="select-none {{ class }}" width="{{ width }}" alt="" aria-hidden="true"/>
 </a>
 <!-- End: /components/_logo.antlers.html -->

@@ -83,6 +83,7 @@ class StarterKitPostInstall
     protected function overwriteEnvWithPresets(): void
     {
         $this->setAppName();
+        $this->setAgency();
         $this->setAppUrl();
         $this->setAppKey();
         $this->setLicenseKey();
@@ -246,6 +247,30 @@ class StarterKitPostInstall
         $this->replaceInEnv('APP_NAME="Statamic Peak"', "APP_NAME=\"{$appName}\"");
         $this->replaceInReadme('APP_NAME="Statamic Peak"', "APP_NAME=\"{$appName}\"");
         $this->replaceInReadme('site.ext', $appName);
+    }
+
+    /**
+     * The company running the project, from the folders in public/agencies. Its logo stands in on the control
+     * panel, form emails and the site header until the client's arrives, and signs the prototype. AGENCY in
+     * .env changes it later; AVOCA_AGENCY answers for a script.
+     */
+    protected function setAgency(): void
+    {
+        $agencies = collect(app('files')->directories(public_path('agencies')))
+            ->mapWithKeys(fn ($folder) => [basename($folder) => json_decode(app('files')->get("{$folder}/agency.json"), true)['name'] ?? basename($folder)])
+            ->all();
+
+        $agency = getenv('AVOCA_AGENCY') ?: 'avoca';
+        if ($this->interactive) {
+            $agency = select(label: 'Who is running this project?', options: $agencies, default: $agency);
+        }
+
+        if (! array_key_exists($agency, $agencies)) {
+            warning("There is no agency called {$agency} in public/agencies, so Avoca it is.");
+            $agency = 'avoca';
+        }
+
+        $this->replaceInEnv('AGENCY=avoca', "AGENCY={$agency}");
     }
 
     protected function setAppUrl(): void

@@ -157,9 +157,15 @@ return [
 
     'custom_cms_name' => env('STATAMIC_CUSTOM_CMS_NAME', 'Statamic'),
 
+    // The agency's logo (config/agency.php) unless one is set here.
     'custom_logo_url' => [
-        'nav' => env('STATAMIC_CUSTOM_LOGO_NAV_URL', null),
-        'outside' => env('STATAMIC_CUSTOM_LOGO_OUTSIDE_URL', null),
+        'nav' => env('STATAMIC_CUSTOM_LOGO_NAV_URL', '/agencies/'.env('AGENCY', 'avoca').'/logo.svg'),
+        'outside' => env('STATAMIC_CUSTOM_LOGO_OUTSIDE_URL', '/agencies/'.env('AGENCY', 'avoca').'/logo.svg'),
+    ],
+
+    'custom_dark_logo_url' => [
+        'nav' => env('STATAMIC_CUSTOM_DARK_LOGO_NAV_URL', '/agencies/'.env('AGENCY', 'avoca').'/logo-dark.svg'),
+        'outside' => env('STATAMIC_CUSTOM_DARK_LOGO_OUTSIDE_URL', '/agencies/'.env('AGENCY', 'avoca').'/logo-dark.svg'),
     ],
 
     'custom_logo_text' => env('APP_NAME', 'Statamic'),

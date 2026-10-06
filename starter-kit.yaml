@@ -3,10 +3,13 @@ export_paths:
   - .env.example
   - .gitignore
   - app/Console/Commands/PostInstall/CollectAvailableLangLocales.php
+  - app/Http/Controllers/PrototypeController.php
+  - app/Http/Middleware/PrototypePassword.php
   - app/Listeners/PreventDeletingMounts.php
   - app/Policies/CustomUserPolicy.php
   - app/Providers/AppServiceProvider.php
   - content
+  - config/agency.php
   - config/auth.php
   - config/captcha.php
   - config/filesystems.php
@@ -19,14 +22,15 @@ export_paths:
   - config/statamic/live_preview.php
   - config/statamic/search.php
   - config/statamic/static_caching.php
+  - config/prototype.php
   - lang/
   - public/_build
+  - public/agencies
   - public/images
   - public/favicons/.gitkeep
   - public/files/.gitkeep
   - public/page_builder
   - public/social_images/.gitkeep
-  - public/visuals
   - resources/sites.yaml
   - resources/blueprints
   - resources/css
@@ -42,6 +46,8 @@ export_paths:
   - resources/users/roles.yaml
   - resources/views
   - routes/web.php
+  - prototype
+  - tests/Feature/PrototypeTest.php
   - AGENTS.md
   - CLAUDE.md
   - package.json
