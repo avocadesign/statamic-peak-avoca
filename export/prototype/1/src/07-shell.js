@@ -171,7 +171,7 @@ function toast(msg) {
     toastTimer = setTimeout(() => { t.hidden = true; }, 3200);
 }
 
-/* ---------- Agreed or to confirm ---------- */
+/* ---------- Decided or to confirm ---------- */
 
 // Clients see one question: is it settled? A suggestion of ours stays to confirm until the decision that settles it
 // is agreed; everything else is agreed.
@@ -440,7 +440,7 @@ function renderSitemap() {
         <div class="canvas-head">
             <div><h2>Sitemap</h2><p>The pages the site will have. Those to confirm are our suggestions, each settled by the decision numbered beside it. Select a page to open it; select a number to read the decision.</p></div>
             <div class="legend">
-                <span><i class="sw"></i>Agreed</span>
+                <span><i class="sw"></i>Decided</span>
                 <span><i class="sw s"></i>To confirm</span>
                 <span><i class="sw c"></i>Collection entries</span>
                 <span><span class="pinnum" style="min-width:16px;height:16px;font-size:9px">1</span>Decision</span>
@@ -532,7 +532,7 @@ function renderModel() {
         <div class="canvas-head">
             <div><h2>Content model</h2><p>The collections, taxonomies, forms and globals behind the site, with the fields we suggest adding. Select one to see where it appears and what it depends on.</p></div>
             <div class="legend">
-                <span><i class="sw"></i>Agreed</span>
+                <span><i class="sw"></i>Decided</span>
                 <span><i class="sw s"></i>To confirm</span>
             </div>
         </div>
@@ -613,7 +613,7 @@ function modelRail() {
             <h2>${esc(e.name)}</h2>
             <div class="ent-meta">${entMeta(e)}</div>
             <div class="badges">
-                ${isOpen(e.status === 'suggested', (e.dec || [])[0]) ? confirmBadge((e.dec || [])[0]) : '<span class="badge">Agreed</span>'}
+                ${isOpen(e.status === 'suggested', (e.dec || [])[0]) ? confirmBadge((e.dec || [])[0]) : '<span class="badge">Decided</span>'}
                 ${e.count ? `<span class="badge">${esc(e.count)}${/^[~\d]/.test(e.count) ? ({ Collection: ' entries', Taxonomy: ' terms' }[e.kind] || '') : ''}</span>` : ''}
             </div>
         </div>

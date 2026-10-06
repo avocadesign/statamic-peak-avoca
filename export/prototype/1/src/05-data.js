@@ -10,7 +10,7 @@ const PROJECT = {
     prepared: 'Prototype, [Month Year]',          // shown under "Prepared by Avoca"
     fromLabel: 'From the brief',                  // heads a decision's `from` note: what its evidence comes from
     decisionsIntro: '',                           // one or two sentences atop the Decisions panel: who decides what
-    sitemapIntro: 'Pages marked to confirm are our suggestions, each with the decision that settles it. The rest are agreed, URLs included.'
+    sitemapIntro: 'Pages marked to confirm are our suggestions, each with the decision that settles it. The rest are decided, URLs included.'
 };
 
 /* ---------- Who decides ----------
