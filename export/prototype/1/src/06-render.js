@@ -10,7 +10,7 @@ function pin(id, corner) {
     const d = DEC[id];
     if (!d) return '';
     const agreed = d.status === 'agreed';
-    return `<span class="wf-pin${agreed ? ' wf-pin--agreed' : ''}${corner ? ' wf-pin--corner' : ''}" data-pin="${id}" role="button" tabindex="0" aria-label="Decision ${decNum(id)}${agreed ? ' (agreed)' : ''}: ${esc(d.title)}">${decNum(id)}</span>`;
+    return `<span class="wf-pin${agreed ? ' wf-pin--agreed' : ''}${corner ? ' wf-pin--corner' : ''}" data-pin="${id}" role="button" tabindex="0" aria-label="Decision ${decNum(id)}${agreed ? ' (decided)' : ''}: ${esc(d.title)}">${decNum(id)}</span>`;
 }
 // "To confirm" until the decision that settles it is agreed, then nothing: pageHeader({ badge: toConfirm('D2') }).
 const toConfirm = id => DEC[id] && DEC[id].status === 'agreed' ? '' : 'To confirm';

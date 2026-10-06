@@ -32,7 +32,8 @@ const WHO = {
      rec: 0,                                                                    // index of the suggested option, or -1 for none
      why: 'Why we suggest it, or why it matters when rec is -1.',
      change: 'What changes in the sitemap or content model if this is agreed.', // optional
-     status: 'agreed', agreed: 'What was agreed, in a sentence.' }             // optional, once agreed
+     status: 'agreed', agreed: 'What was decided, in a sentence.',              // optional, once decided
+     decidedBy: ['agency'] }                                                    // optional: who decided, when not everyone in who
 */
 
 const DECISIONS = [

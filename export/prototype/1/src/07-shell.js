@@ -183,10 +183,9 @@ const confirmBadge = id => `<span class="badge sugg">To confirm${id && DEC[id] ?
 function decisionCard(d, { open = false, locate = true, pagesLinks = true, row = false, tag = '' } = {}) {
     const agreed = d.status === 'agreed';
     const cls = `dec${row ? ' row' : ''}${agreed ? ' agreed' : ''}`;
-    const head = `<span class="pinnum">${decNum(d.id)}</span><span class="t">${esc(d.title)}${agreed ? ' <span class="state">Agreed</span>' : ''}${tag ? ` <span class="dtag">${esc(tag)}</span>` : ''}</span>${row ? '' : '<span class="chev" aria-hidden="true">›</span>'}<span class="who">${agreed ? 'Decided by' : 'Decides'}: ${esc(whoLabel(d.who))}</span>`;
-    const note = agreed ? `<p class="agreed-note"><b>Agreed.</b> ${esc(d.agreed)}</p>` : '';
+    const head = `<span class="pinnum">${decNum(d.id)}</span><span class="t">${esc(d.title)}${tag ? ` <span class="dtag">${esc(tag)}</span>` : ''}</span>${row ? '' : '<span class="chev" aria-hidden="true">›</span>'}<span class="who">${agreed ? '<span class="state">Decided</span>' : ''}${agreed ? 'Decided by' : 'Decides'}: ${esc(whoLabel(agreed && d.decidedBy ? d.decidedBy : d.who))}</span>`;
     const question = `<p class="q">${esc(d.q)}</p>${d.from ? `<p class="from"><b>${esc(PROJECT.fromLabel)}.</b> ${esc(d.from)}</p>` : ''}`;
-    const options = `<p class="opts-h">Options</p><ol class="opts">${d.options.map((o, i) => `<li class="${i === d.rec ? (agreed ? 'chosen' : 'rec') : ''}"><span class="opt-l">${String.fromCharCode(65 + i)}</span><span class="opt-b"><b>${esc(o[0])}${i === d.rec ? `<em>${agreed ? 'Agreed' : 'Suggested'}</em>` : ''}</b><span>${esc(o[1])}</span></span></li>`).join('')}</ol>`;
+    const options = `<p class="opts-h">Options</p><ol class="opts">${d.options.map((o, i) => `<li class="${i === d.rec ? (agreed ? 'chosen' : 'rec') : ''}"><span class="opt-l">${String.fromCharCode(65 + i)}</span><span class="opt-b"><b>${esc(o[0])}${i === d.rec ? `<em>${agreed ? 'Decided' : 'Suggested'}</em>` : ''}</b><span>${esc(o[1])}</span></span></li>`).join('')}</ol>`;
     const why = `<p class="why"><b>${agreed ? 'Why' : d.rec === -1 ? 'Why it matters' : 'Why we suggest it'}.</b> ${esc(d.why)}</p>${d.change ? `<p class="portal"><b>If agreed:</b> ${esc(d.change)}</p>` : ''}`;
     const links = `<div class="dec-actions">
                 ${locate ? `<button type="button" class="chip-btn" data-locate="${d.id}">Show on the page</button>` : ''}
@@ -196,13 +195,13 @@ function decisionCard(d, { open = false, locate = true, pagesLinks = true, row =
     // right. Elsewhere it folds away.
     if (row) {
         return `<article class="${cls}" id="dec-${d.id}">
-            <div class="dec-l"><div class="dec-h">${head}</div>${note}${question}${links}</div>
+            <div class="dec-l"><div class="dec-h">${head}</div>${question}${links}</div>
             <div class="dec-r">${options}${why}</div>
         </article>`;
     }
     return `<details class="${cls}" id="dec-${d.id}" ${open ? 'open' : ''}>
         <summary>${head}</summary>
-        <div class="inner">${note}${question}${options}${why}${links}</div>
+        <div class="inner">${question}${options}${why}${links}</div>
     </details>`;
 }
 
@@ -640,11 +639,11 @@ function renderDecisions() {
             <div><h2>Decisions</h2><p>${DECISIONS.length ? `Every question the prototype raises, with the options and what we suggest. Numbers match the markers on the pages.${intro ? ` ${esc(intro)}` : ''}` : 'Questions to settle appear here as the prototype raises them, each with its options and what we suggest.'}</p></div>
         </div>
         ${DECISIONS.length ? `<div class="dec-filters">
-            <div class="seg" id="decs-pick">${[['open', 'Unresolved'], ['agreed', 'Agreed']].map(([k, v]) => `<button type="button" data-decs="${k}" aria-pressed="${(groups[state.decs] ? state.decs : 'open') === k}">${v}<span class="count">${groups[k].length}</span></button>`).join('')}</div>
+            <div class="seg" id="decs-pick">${[['open', 'Unresolved'], ['agreed', 'Decided']].map(([k, v]) => `<button type="button" data-decs="${k}" aria-pressed="${(groups[state.decs] ? state.decs : 'open') === k}">${v}<span class="count">${groups[k].length}</span></button>`).join('')}</div>
             <div class="seg" id="who-pick">${[['all', 'All']].concat(Object.entries(WHO)).map(([k, v]) => `<button type="button" data-who="${k}" aria-pressed="${state.who === k}">${esc(v)}</button>`).join('')}</div>
         </div>` : ''}
         ${list.length ? `<div class="dlist">${list.map(d => decisionCard(d, { locate: false, row: true, tag: before.has(d.id) && d.status !== 'agreed' ? 'Needed before design' : '' })).join('')}</div>`
-            : DECISIONS.length ? `<p class="note-line">${state.decs === 'agreed' ? 'Nothing agreed yet' : 'Nothing left to decide'}${state.who === 'all' ? '' : ` for ${esc(WHO[state.who])}`}.</p>` : ''}
+            : DECISIONS.length ? `<p class="note-line">${state.decs === 'agreed' ? 'Nothing decided yet' : 'Nothing left to decide'}${state.who === 'all' ? '' : ` for ${esc(WHO[state.who])}`}.</p>` : ''}
     </div>`;
 }
 
