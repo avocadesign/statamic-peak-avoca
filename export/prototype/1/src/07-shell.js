@@ -183,7 +183,7 @@ const confirmBadge = id => `<span class="badge sugg">To confirm${id && DEC[id] ?
 function decisionCard(d, { open = false, locate = true, pagesLinks = true, row = false, tag = '' } = {}) {
     const agreed = d.status === 'agreed';
     const cls = `dec${row ? ' row' : ''}${agreed ? ' agreed' : ''}`;
-    const head = `<span class="pinnum">${decNum(d.id)}</span><span class="t">${esc(d.title)}${agreed ? ' <span class="state">Agreed</span>' : ''}${tag ? ` <span class="dtag">${esc(tag)}</span>` : ''}</span>${row ? '' : '<span class="chev" aria-hidden="true">›</span>'}<span class="who">${agreed ? `Agreed${AGREED_ON ? ` ${AGREED_ON}` : ''}` : `Decides: ${esc(whoLabel(d.who))}`}</span>`;
+    const head = `<span class="pinnum">${decNum(d.id)}</span><span class="t">${esc(d.title)}${agreed ? ' <span class="state">Agreed</span>' : ''}${tag ? ` <span class="dtag">${esc(tag)}</span>` : ''}</span>${row ? '' : '<span class="chev" aria-hidden="true">›</span>'}<span class="who">${agreed ? 'Decided by' : 'Decides'}: ${esc(whoLabel(d.who))}</span>`;
     const note = agreed ? `<p class="agreed-note"><b>Agreed.</b> ${esc(d.agreed)}</p>` : '';
     const question = `<p class="q">${esc(d.q)}</p>${d.from ? `<p class="from"><b>${esc(PROJECT.fromLabel)}.</b> ${esc(d.from)}</p>` : ''}`;
     const options = `<p class="opts-h">Options</p><ol class="opts">${d.options.map((o, i) => `<li class="${i === d.rec ? (agreed ? 'chosen' : 'rec') : ''}"><span class="opt-l">${String.fromCharCode(65 + i)}</span><span class="opt-b"><b>${esc(o[0])}${i === d.rec ? `<em>${agreed ? 'Agreed' : 'Suggested'}</em>` : ''}</b><span>${esc(o[1])}</span></span></li>`).join('')}</ol>`;
@@ -236,63 +236,77 @@ function renderRail() {
     else body.innerHTML = '';
 }
 
+// Where each decision is marked. The header and footer are on every page, so theirs are site-wide.
+function pinPlaces(pr) {
+    const doc = new DOMParser().parseFromString((PAGES[pr.key] || PAGES[ROUTES[0].key])(pr.slug), 'text/html');
+    const places = { page: new Set(), header: new Set(), footer: new Set() };
+    doc.querySelectorAll('[data-pin]').forEach(el => {
+        const where = el.closest('[data-j="footer"]') ? 'footer' : el.closest('[data-j="header"]') ? 'header' : 'page';
+        places[where].add(el.dataset.pin);
+    });
+    return places;
+}
+
+// The decisions for this page: the ones its notes list, then any others marked on it, leaving out the site-wide ones.
+function pageDecisions(pr, places) {
+    const listed = NOTES[pr.key]?.decisions || [];
+    const siteWide = id => (places.header.has(id) || places.footer.has(id)) && !places.page.has(id);
+    const extra = [...places.page].filter(id => !listed.includes(id)).sort((a, b) => decNum(a) - decNum(b));
+    return [...listed, ...extra].filter(id => DEC[id] && !siteWide(id));
+}
+
+// Page notes: decisions and considerations open, then content to prepare, the header and footer, and technical notes
+// folded away.
 function notesRail() {
     const pr = parseRoute(state.route);
-    const n = Object.assign({ purpose: '', aud: [], content: [], decisions: [], consider: [], fed: [] }, NOTES[pr.key]);
+    const n = Object.assign({ purpose: '', aud: [], content: [], decisions: [], consider: [], tech: [], fed: [] }, NOTES[pr.key]);
     const r = pr.r;
-    const onPage = pinsOn(pr);
-    const listed = n.decisions.filter(id => DEC[id]);
-    const extra = onPage.filter(id => !listed.includes(id)).sort((a, b) => decNum(a) - decNum(b));
+    const places = pinPlaces(pr);
+    const decs = pageDecisions(pr, places);
+    const siteWide = where => [...places[where]].filter(id => DEC[id] && !places.page.has(id));
     const modeSeg = name => `<div class="seg" data-mode-for="${name}">${['pinned', 'swipe', 'vertical'].map(m => `<button type="button" data-mode="${m}" aria-pressed="${state.modes[name] === m}">${m[0].toUpperCase() + m.slice(1)}</button>`).join('')}</div>`;
+    const bullets = list => `<ul class="bullets">${list.map(c => `<li>${esc(c)}</li>`).join('')}</ul>`;
+    const fold = (title, count, body) => `<details class="fold"><summary>${title}${count ? ` <span class="fold-n">${count}</span>` : ''}</summary><div>${body}</div></details>`;
+    const aud = n.aud.filter(a => AUD[a]);
+    const fed = n.fed.map(id => { const e = MODEL.find(m => m.id === id); return e ? `<button type="button" class="chip-btn" data-entity="${id}">${esc(e.name)} <span class="muted">${esc(e.kind.toLowerCase())}</span></button>` : ''; }).join('');
+    const headerFooter = [['header', 'In the header, on every page'], ['footer', 'In the footer, on every page']]
+        .map(([where, label]) => siteWide(where).length ? `<div><p class="fold-h">${label}</p>${siteWide(where).map(id => decisionCard(DEC[id])).join('')}</div>` : '').join('');
 
     return `<div class="rail-top"><h2 class="side-h">Page notes</h2><button type="button" class="icon-btn tiny" data-notes="close" aria-label="Collapse page notes" title="Collapse page notes">${ICON.panelR}</button></div>
         <div class="rail-head">
             <h2>${esc(r.title)}</h2>
             <p class="path">${esc(r.path)}${r.sample ? `  ·  showing ${esc(pr.slug)}` : ''}</p>
-            <div class="badges">
-                ${n.aud.filter(a => AUD[a]).map(a => `<span class="badge aud" title="${esc(AUD[a][1])}">${AUD[a][0]}</span>`).join('')}
-            </div>
+            ${aud.length ? `<div class="badges">${aud.map(a => `<span class="badge aud" title="${esc(AUD[a][1])}">${AUD[a][0]}</span>`).join('')}</div>` : ''}
+            ${n.purpose ? `<p class="purpose">${esc(n.purpose)}</p>` : ''}
         </div>
-        ${n.purpose ? `<p class="purpose">${esc(n.purpose)}</p>` : ''}
         ${n.tryit ? `<div class="tryit">
-            <h3 style="margin:0">Try the interaction</h3>
-            <div class="tryit-row"><span>Desktop frame</span>${modeSeg('desktop')}</div>
-            <div class="tryit-row"><span>Mobile frame</span>${modeSeg('mobile')}</div>
-            <p class="note-line">Scroll or swipe inside either frame; with scroll sync on, the other follows to the same moment. Filters and the arrow keys work too.</p>
+            <h3 style="margin:0">Try the timeline</h3>
+            <div class="tryit-row"><span>Desktop</span>${modeSeg('desktop')}</div>
+            <div class="tryit-row"><span>Mobile</span>${modeSeg('mobile')}</div>
         </div>` : ''}
-        ${n.content.length ? `<section>
-            <h3>Content to prepare</h3>
-            <ul class="content-list">${n.content.map(c => `<li><b>${esc(c[0])}</b>${c[1] ? `<span>${esc(c[1])}</span>` : ''}</li>`).join('')}</ul>
-        </section>` : ''}
-        ${listed.length || extra.length ? `<section>
-            <h3>Decisions on this page</h3>
-            ${listed.map(id => decisionCard(DEC[id])).join('')}
-            ${extra.length ? `${listed.length ? '<p class="note-line" style="margin:14px 0 8px">Also marked on this page</p>' : ''}${extra.map(id => decisionCard(DEC[id])).join('')}` : ''}
+        ${decs.length ? `<section>
+            <h3>Decisions on this page <span class="h-n">${decs.length}</span></h3>
+            ${decs.map(id => decisionCard(DEC[id])).join('')}
         </section>` : ''}
         ${n.consider.length ? `<section>
             <h3>Considerations</h3>
-            <ul class="bullets">${n.consider.map(c => `<li>${esc(c)}</li>`).join('')}</ul>
+            ${bullets(n.consider)}
         </section>` : ''}
-        ${n.fed.length ? `<section>
-            <h3>Content comes from</h3>
-            <div class="chips">${n.fed.map(id => { const e = MODEL.find(m => m.id === id); return e ? `<button type="button" class="chip-btn" data-entity="${id}">${esc(e.name)} <span class="muted">${esc(e.kind.toLowerCase())}</span></button>` : ''; }).join('')}</div>
-        </section>` : ''}
-        ${SITEWIDE.consider.length ? `<details class="fold">
-            <summary>Site-wide: header, footer, menus</summary>
-            <div><ul class="bullets">${SITEWIDE.consider.map(c => `<li>${esc(c)}</li>`).join('')}</ul></div>
-        </details>` : ''}`;
-}
-
-// The decisions marked on a page, in its markup.
-function pinsOn(pr) {
-    const html = (PAGES[pr.key] || PAGES[ROUTES[0].key])(pr.slug);
-    return [...new Set([...html.matchAll(/data-pin="(D\d+)"/g)].map(m => m[1]))].filter(id => DEC[id]);
+        <div class="folds">
+            ${n.content.length ? fold('Content to prepare', n.content.length, `<ul class="content-list">${n.content.map(c => `<li><b>${esc(c[0])}</b>${c[1] ? `<span>${esc(c[1])}</span>` : ''}</li>`).join('')}</ul>`) : ''}
+            ${headerFooter || SITEWIDE.consider.length || SITEWIDE.tech.length ? fold('Site-wide: header and footer', '', `
+                ${headerFooter}
+                ${SITEWIDE.consider.length ? bullets(SITEWIDE.consider) : ''}
+                ${SITEWIDE.tech.length ? `<div><p class="fold-h">Technical</p>${bullets(SITEWIDE.tech)}</div>` : ''}`) : ''}
+            ${n.tech.length || fed ? fold('Technical notes', '', `
+                ${n.tech.length ? bullets(n.tech) : ''}
+                ${fed ? `<div><p class="fold-h">Content comes from</p><div class="chips">${fed}</div></div>` : ''}`) : ''}
+        </div>`;
 }
 
 function notesStrip() {
     const pr = parseRoute(state.route);
-    const ids = new Set([...(NOTES[pr.key]?.decisions || []).filter(id => DEC[id]), ...pinsOn(pr)]);
-    const open = [...ids].filter(id => DEC[id].status !== 'agreed').length;
+    const open = pageDecisions(pr, pinPlaces(pr)).filter(id => DEC[id].status !== 'agreed').length;
     return `<button type="button" class="fold-tab" data-notes="open" aria-label="Show page notes${open ? `, ${open} open decisions` : ''}" title="Show page notes">
         ${ICON.panelR}<span class="fold-tab-label">Page notes</span>${open ? `<span class="fold-tab-count" title="${open} open decisions on this page">${open}</span>` : ''}
     </button>`;
@@ -306,6 +320,7 @@ const ICON = {
     close: '<svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 3.5l9 9M12.5 3.5l-9 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>',
     chev: '<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>'
 };
+const DEVICE = { mobile: 'Mobile', desktop: 'Desktop' };
 const activeJourney = () => JOURNEYS.find(x => x.id === state.journey) || JOURNEYS[0];
 
 const narrowMQ = matchMedia('(max-width: 1000px)');
@@ -326,7 +341,7 @@ function renderSidebar() {
         return `<li>
             <button type="button" class="jbtn" data-journey="${j.id}" aria-pressed="${on}"${on ? ` aria-expanded="${open}"` : ''}>
                 <span class="jicon">${ICON[j.device]}</span>
-                <span><b>${esc(j.name)}</b><small>${on && !open ? `Step ${state.step + 1} of ${j.steps.length}: ${esc(j.steps[state.step].t)}` : esc(j.who)}</small></span>
+                <span><b>${esc(j.name)}</b><small>${on && !open ? `Step ${state.step + 1} of ${j.steps.length}: ${esc(j.steps[state.step].t)}` : `<span class="jdev">${DEVICE[j.device]}</span> · ${esc(j.who)}`}</small></span>
                 ${on ? `<span class="jchev">${ICON.chev}</span>` : ''}
             </button>
             ${open ? `<div class="jpanel">
@@ -379,6 +394,7 @@ function goStep(i) {
 function endJourney(quiet) {
     if (state.step < 0) return;
     state.step = -1;
+    if (state.framesBefore) { setFrames(state.framesBefore); state.framesBefore = null; }
     $$('.device').forEach(d => d.classList.remove('dim'));
     if (!quiet) { renderSidebar(); requestAnimationFrame(layoutFrames); }
 }
@@ -668,7 +684,10 @@ document.addEventListener('click', e => {
     if (t.dataset.journey) {
         // The active journey's row opens and closes its steps.
         if (state.step >= 0 && state.journey === t.dataset.journey) { state.jopen = state.jopen === false; renderSidebar(); return; }
-        state.journey = t.dataset.journey; state.jopen = true; save(); goStep(0); return;
+        state.journey = t.dataset.journey; state.jopen = true; save();
+        if (!state.framesBefore) state.framesBefore = state.frames;
+        setFrames(activeJourney().device);
+        goStep(0); return;
     }
     if (t.dataset.step) { goStep(Number(t.dataset.step)); return; }
     if (t.dataset.jstep) {

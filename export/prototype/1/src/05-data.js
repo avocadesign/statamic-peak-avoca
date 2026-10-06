@@ -35,7 +35,6 @@ const WHO = {
      status: 'agreed', agreed: 'What was agreed, in a sentence.' }             // optional, once agreed
 */
 
-const AGREED_ON = '';                             // date shown on agreed decisions, such as '1 October'
 const DECISIONS = [
     { id: 'D1', title: 'Approve the prototype?', who: ['client'], pages: ['home'],
       q: 'Does this prototype show the right pages, what goes on them and how people move through the site, so design can start from it?',
@@ -61,7 +60,8 @@ const AUD = {};
        aud: ['audienceKey'],
        content: [['Section', 'What it holds and where it comes from.']],
        decisions: ['D1'],                         // listed first; other markers on the page are picked up as well
-       consider: ['Something to keep in mind.'],
+       consider: ['Something the client should know.'],  // short and client-facing; three or four at most
+       tech: ['A build or performance point.'],   // folded away under Technical notes
        fed: ['modelId'],                          // MODEL ids whose content appears here
        tryit: true                                // optional: show the timeline mode switch (for a page with a timeline)
    }
@@ -74,6 +74,7 @@ const NOTES = {
         content: [],
         decisions: ['D1'],
         consider: [],
+        tech: [],
         fed: ['pages']
     },
     contact: {
@@ -85,12 +86,14 @@ const NOTES = {
         ],
         decisions: [],
         consider: [],
+        tech: [],
         fed: ['pages', 'contact_form', 'site_details']
     }
 };
 
-/* Notes that apply to every page, shown folded at the foot of Page notes. */
-const SITEWIDE = { consider: [] };
+/* Notes that apply to every page, folded at the foot of Page notes with any decisions marked in the header or
+   footer: what the client should know, and the build and performance points. */
+const SITEWIDE = { consider: [], tech: [] };
 
 /* ---------- User journeys ----------
    A visitor's path through the site, one step at a time. A step's `sel` is a CSS selector in the page,

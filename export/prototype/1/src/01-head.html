@@ -137,6 +137,7 @@ a.vm-i:hover, .vm-i.on { background: var(--surface-2); }
 .jbtn small { display: block; font-size: 12px; color: var(--muted); line-height: 1.35; }
 .jicon { width: 28px; height: 28px; border-radius: 7px; display: grid; place-items: center; background: var(--surface-2); color: var(--ink-2); }
 .jbtn[aria-pressed="true"] .jicon { background: var(--sel); color: var(--sel-ink); }
+.jdev { font-weight: 600; color: var(--ink-2); }
 .jchev { display: grid; place-items: center; width: 20px; height: 20px; color: var(--muted); }
 .jchev svg { transition: transform .2s; }
 .jbtn[aria-expanded="false"] .jchev svg { transform: rotate(-90deg); }
@@ -281,6 +282,12 @@ a.vm-i:hover, .vm-i.on { background: var(--surface-2); }
 .fold > summary::before { content: "›"; display: inline-block; transition: transform .2s; color: var(--muted); }
 .fold[open] > summary::before { transform: rotate(90deg); }
 .fold > div { margin-top: 12px; display: flex; flex-direction: column; gap: 12px; }
+/* Page notes: decisions and considerations open, the rest folded away under a line each. */
+.folds { display: flex; flex-direction: column; }
+.folds > .fold { border-top: 1px solid var(--line); padding: 12px 0; }
+.folds > .fold:last-child { border-bottom: 1px solid var(--line); }
+.fold-n, .rail h3 .h-n { font: 500 11px var(--mono); color: var(--muted); }
+.fold-h { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 8px; }
 
 
 /* Help */
