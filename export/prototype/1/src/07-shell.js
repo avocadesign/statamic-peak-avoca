@@ -176,7 +176,6 @@ function toast(msg) {
 // Clients see one question: is it settled? A suggestion of ours stays to confirm until the decision that settles it
 // is agreed; everything else is agreed.
 const isOpen = (suggested, id) => !!suggested && !(id && DEC[id] && DEC[id].status === 'agreed');
-const sitemapNode = key => { const all = []; const walk = n => { all.push(n); (n.kids || []).forEach(walk); }; SITEMAP.forEach(walk); return all.find(n => n.k === key); };
 const confirmBadge = id => `<span class="badge sugg">To confirm${id && DEC[id] ? ` · decision ${decNum(id)}` : ''}</span>`;
 
 /* ---------- Decisions ---------- */
@@ -241,7 +240,6 @@ function notesRail() {
     const pr = parseRoute(state.route);
     const n = Object.assign({ purpose: '', aud: [], content: [], decisions: [], consider: [], fed: [] }, NOTES[pr.key]);
     const r = pr.r;
-    const node = sitemapNode(pr.key);
     const onPage = pinsOn(pr);
     const listed = n.decisions.filter(id => DEC[id]);
     const extra = onPage.filter(id => !listed.includes(id)).sort((a, b) => decNum(a) - decNum(b));
@@ -252,7 +250,6 @@ function notesRail() {
             <h2>${esc(r.title)}</h2>
             <p class="path">${esc(r.path)}${r.sample ? `  ·  showing ${esc(pr.slug)}` : ''}</p>
             <div class="badges">
-                ${isOpen(node ? node.s : n.badge, node && node.d) ? confirmBadge(node && node.d) : '<span class="badge">Agreed</span>'}
                 ${n.aud.filter(a => AUD[a]).map(a => `<span class="badge aud" title="${esc(AUD[a][1])}">${AUD[a][0]}</span>`).join('')}
             </div>
         </div>

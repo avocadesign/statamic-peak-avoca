@@ -296,6 +296,9 @@
     .wf-logo {
         display: inline-flex; align-items: center; gap: .5rem; font-weight: var(--font-weight-bold); font-size: var(--text-sm); line-height: 1.1;
     }
+    /* A hamburger shows the menu and turns into a cross to close it. */
+    [data-mnav-toggle] .mnav-close, [data-mnav-toggle][aria-expanded="true"] .mnav-open { display: none; }
+    [data-mnav-toggle][aria-expanded="true"] .mnav-close { display: block; }
     .wf-logo::before { content: ""; width: 2rem; height: 2rem; border: 2px solid currentColor; border-radius: 50%; flex: none; }
     .wf-fill {
         background: var(--wf-fill); color: var(--wf-fill-text); border-radius: 2px; padding-inline: .15em;

@@ -481,10 +481,12 @@
 
         var mnav = e.target.closest('[data-mnav-toggle]');
         if (mnav) {
-            var panel = mnav.parentNode.querySelector('[data-mnav-panel]');
+            var root = mnav.closest('[data-mnav]') || mnav.parentNode;
+            var panel = root.querySelector('[data-mnav-panel]');
             panel.hidden = !panel.hidden;
-            mnav.setAttribute('aria-expanded', String(!panel.hidden));
-            mnav.textContent = panel.hidden ? 'Menu' : 'Close';
+            root.querySelectorAll('[data-mnav-toggle]').forEach(function (b) { b.setAttribute('aria-expanded', String(!panel.hidden)); });
+            // A text button says what it does next; an icon button swaps its icon in CSS.
+            if (!mnav.children.length) mnav.textContent = panel.hidden ? 'Menu' : 'Close';
             return;
         }
 
