@@ -58,12 +58,13 @@ const SITEWIDE = { consider: [], tech: [] };
 
 /* ---------- Page options ----------
    Ways a page can be shown, for reviewers to compare before choosing, keyed by route key. They show in a bar above
-   the frames on that page, and a comment records which were showing. pages.js reads the choice with option('id'), and
+   the frames on that page, and a comment records which were showing. Name options and choices in a word or two, and
+   leave the question out: reviewers say which they prefer in a comment, and the team raises the decision there. pages.js reads the choice with option('id'), and
    the frame's <html> carries data-option-<id> for CSS. frame: 'desktop' or 'mobile' limits one to that frame; mode:
    true makes its choice the timeline's layout (pinned, swipe or vertical) instead of redrawing the page.
 
    timeline: [
-       { id: 'chapters', label: 'Chapters', note: 'to decide', choices: [['shifts', 'Who decides'], ['years', 'Report years']] },
+       { id: 'chapters', label: 'Chapters', choices: [['shifts', 'Who decides'], ['years', 'Report years']] },
        { id: 'desktop-timeline', label: 'Desktop timeline', frame: 'desktop', mode: true,
          choices: [['pinned', 'Pinned'], ['swipe', 'Swipe'], ['vertical', 'Vertical']], default: 'pinned' }
    ]
