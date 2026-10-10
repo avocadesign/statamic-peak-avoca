@@ -2,8 +2,8 @@
 
 The discovery prototype for the site: every page in a desktop and a mobile frame, drawn with the site's own CSS, with
 page notes, user journeys, the sitemap and the content model. It shows what goes on each page and how people move
-through the site, not the final look. With feedback on, reviewers comment on the pages themselves, and the team raises
-the comments that need one as decisions.
+through the site, and isn't designed at all: the design comes after the prototype is approved. With feedback on,
+reviewers comment on the pages themselves, and the team raises the comments that need one as decisions.
 
 The interface, the route and the sign-in come from the Avoca Tools add-on. This folder holds only what the prototype
 says, one folder per version:
