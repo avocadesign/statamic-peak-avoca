@@ -26,8 +26,7 @@ const AUD = {};
        content: [['Section', 'What it holds and where it comes from.']],
        consider: ['Something the client should know.'],  // short and client-facing; three or four at most
        tech: ['A build or performance point.'],   // folded away under Technical notes
-       fed: ['modelId'],                          // MODEL ids whose content appears here
-       tryit: true                                // optional: show the timeline mode switch (for a page with a timeline)
+       fed: ['modelId']                           // MODEL ids whose content appears here
    }
 */
 
@@ -56,6 +55,21 @@ const NOTES = {
 /* Notes that apply to every page, folded at the foot of each page's notes: what the client should know about the
    header and footer, and the build and performance points. */
 const SITEWIDE = { consider: [], tech: [] };
+
+/* ---------- Page options ----------
+   Ways a page can be shown, for reviewers to compare before choosing, keyed by route key. They show in a bar above
+   the frames on that page, and a comment records which were showing. pages.js reads the choice with option('id'), and
+   the frame's <html> carries data-option-<id> for CSS. frame: 'desktop' or 'mobile' limits one to that frame; mode:
+   true makes its choice the timeline's layout (pinned, swipe or vertical) instead of redrawing the page.
+
+   timeline: [
+       { id: 'chapters', label: 'Chapters', note: 'to decide', choices: [['shifts', 'Who decides'], ['years', 'Report years']] },
+       { id: 'desktop-timeline', label: 'Desktop timeline', frame: 'desktop', mode: true,
+         choices: [['pinned', 'Pinned'], ['swipe', 'Swipe'], ['vertical', 'Vertical']], default: 'pinned' }
+   ]
+*/
+
+const OPTIONS = {};
 
 /* ---------- User journeys ----------
    A visitor's path through the site, one step at a time. A step's `sel` is a CSS selector in the page,
