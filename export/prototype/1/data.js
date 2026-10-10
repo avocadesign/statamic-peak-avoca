@@ -18,7 +18,8 @@ const PROJECT = {
 const AUD = {};
 
 /* ---------- Page notes ----------
-   Keyed by the route keys in ROUTES. A page with no notes still renders, with an empty notes panel.
+   Keyed by the route keys in ROUTES. A page with no notes still renders, with an empty notes panel. Keep notes clean
+   and short: they say what is settled. Questions and choices still to agree are comments, raised as decisions.
 
    home: {
        purpose: 'What the page is for, in a short plain sentence: no system names or where content comes from.',
