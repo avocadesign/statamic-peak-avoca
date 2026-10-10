@@ -9,7 +9,7 @@ const PROJECT = {
     name: '',                                     // shown top left and in the tab title; empty uses APP_NAME from .env
     subtitle: 'Prototype for approval',
     prepared: 'Prototype, [Month Year]',          // shown under "Prepared by Avoca"
-    sitemapIntro: 'Pages with a dashed outline are our suggestions: say what you think in the feedback on the page. The rest are agreed, URLs included.'
+    sitemapIntro: 'Pages with a dashed outline are our suggestions: say what you think in the comments on the page. The rest are agreed, URLs included.'
 };
 
 /* ---------- Audiences ----------
@@ -18,16 +18,16 @@ const PROJECT = {
 const AUD = {};
 
 /* ---------- Page notes ----------
-   Keyed by the route keys in ROUTES. A page with no notes still renders, with an empty notes panel. Keep notes clean
-   and short: they say what is settled. Questions and choices still to agree are comments, raised as decisions.
+   Keyed by the route keys in ROUTES. Notes are only a high-level description of the page and of its content as
+   displayed. Anything still to agree is a comment raised as a decision; anything decided lives in that decision's
+   outcome; advice and reminders are left out. A page with no notes still renders.
 
    home: {
-       purpose: 'What the page is for, in a short plain sentence: no system names or where content comes from.',
+       purpose: 'What the page is for, in one line.',
        aud: ['audienceKey'],
-       content: [['Section', 'What it holds.']],          // what the client needs to prepare
-       consider: ['Something the client should know.'],  // short and client-facing; three or four at most
-       tech: ['How it is built, in a sentence or two.'],  // plain sentences; don't repeat what fed shows
-       fed: ['modelId']                           // MODEL ids whose content appears here: the notes link to them
+       content: [['Section', 'What it shows, in a few words.']],  // in the order displayed, collections included
+       tech: ['How it is built, where the page does not show it.'], // a control panel switch, anchors, above the fold
+       fed: ['modelId']                                            // MODEL ids whose content appears here
    }
 */
 
@@ -36,7 +36,6 @@ const NOTES = {
         purpose: '',
         aud: [],
         content: [],
-        consider: [],
         tech: [],
         fed: ['pages']
     },
@@ -44,20 +43,18 @@ const NOTES = {
         purpose: 'How to get in touch, with contact form and contact details',
         aud: [],
         content: [
-            ['Contact details', ''],
-            ['Email to send the form to', ''],
-            ['Any extra questions you’d like to ask in the form', '']
+            ['Contact form', ''],
+            ['Contact details', '']
         ],
-        consider: [],
         tech: ['Form submissions go to the email address in Site Details.'],
         fed: ['pages', 'contact_form', 'site_details']
     }
 };
 
-/* Anything for every page that the pages themselves can't show, in a sentence or two: shown once, in the Sitemap's
-   panel beside the menus, never on each page. Most sites leave it empty. Don't describe the header, menus or footer,
-   which every page draws and the Sitemap lists; anything to agree about them is a comment pinned on them. */
-const SITEWIDE = { consider: [], tech: [] };
+/* The header and footer as displayed, like a page's content: each part in order, with a few words on what it
+   shows. Shown once, on the Sitemap tab below the tree, beside the menus, never on each page. tech is how they're
+   built, where the pages don't show it. */
+const SITEWIDE = { content: [], tech: [] };
 
 /* ---------- Page options ----------
    Ways a page can be shown, for reviewers to compare before choosing, keyed by route key. They show in a bar above
