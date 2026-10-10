@@ -11,8 +11,8 @@
     hand-written CSS and the /site/style page can rely on var(--color-*).
 */
 @theme static {
-    /* Brand */
-    --color-primary: oklch(53.24% 0.301 290.86);
+    /* Brand: Avoca's blue, #019ac6, until the client's colours replace it */
+    --color-primary: oklch(64.01% 0.124 227.1);
 
     /* Semantic */
     --color-light: var(--color-gray-100);
