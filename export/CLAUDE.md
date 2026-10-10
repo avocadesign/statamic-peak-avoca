@@ -13,7 +13,7 @@ Avoca's build recipe comes from the avocadesign/statamic-tools package. Follow i
 - Reusable components for sets are in `resources/views/components/`
 - Common utility partials are in `resources/views/components/utilities`
 - Layout partials (header, footer, etc.) are in `resources/views/layout/`
-- The discovery prototype is in `prototype/`, one folder per version, starting with `1/`: edit a version's `src/`, then run `./build.sh`, and start the next with `./new-version.sh`. Its README says how. It is served at `/prototype` when `PROTOTYPE_ENABLED` is on.
+- The discovery prototype is in `prototype/`, one folder per version, starting with `1/`: each holds `data.js` (what the prototype says) and `pages.js` (its pages), and `php please avoca:prototype:version 2` starts the next. Avoca Tools serves it at `/prototype`, on for local and staging, and draws the pages with the site's own CSS. Its README, and the add-on's, say how.
 - `AGENCY` in `.env` is the company running the project. Its logo, from `public/agencies/`, stands in on the control panel, form emails and the site header until the client's arrives.
 
 ### Statamic Patterns

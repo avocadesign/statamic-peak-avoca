@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # Kit install check. Installs this starter kit into a brand new Statamic site in a temporary folder, builds the
-# front end, loads the home page, /site/style and /site/content, and runs the Avoca site check.
+# front end, loads the home page, /site/style, /site/content and /prototype, and runs the Avoca site check.
 #
 # Run it after an upstream Peak merge, or after changing starter-kit.yaml, StarterKitPostInstall.php or the kit's
 # dependencies. The sandbox can't catch these problems: it was installed long ago and has been edited since.
@@ -110,7 +110,7 @@ for _ in $(seq 1 30); do
     curl -fsS -o /dev/null "http://127.0.0.1:$port/" 2>/dev/null && break
     sleep 1
 done
-for path in / /site/style /site/content; do
+for path in / /site/style /site/content /prototype; do
     curl -fsS -o /dev/null -w "HTTP %{http_code}  $path\n" "http://127.0.0.1:$port$path"
 done
 
