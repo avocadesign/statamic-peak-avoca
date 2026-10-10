@@ -72,6 +72,15 @@ const SITEWIDE = { consider: [], tech: [] };
 
 const OPTIONS = {};
 
+/* ---------- Other devices ----------
+   The prototype shows each page on a desktop and a phone. A site that needs another size, such as a tablet, adds it
+   here: it becomes a choice in Display options, shown on its own, and comments made on it are kept for it.
+
+   { id: 'tablet', label: 'Tablet', width: 820, height: 1180 }
+*/
+
+const DEVICES = [];
+
 /* ---------- User journeys ----------
    A visitor's path through the site, one step at a time. A step's `sel` is a CSS selector in the page,
    usually a data-j attribute, that is highlighted when the step opens.
