@@ -1,7 +1,11 @@
 /* ---------- This site's pages ----------
    Its header and footer as the prototype draws them, its pages and its routes. The helpers they use, such as
    pageHeader(), img(), btn() and coming(), come from the add-on: a function of the same name defined here
-   replaces the add-on's. Placeholder copy goes in [square brackets]. */
+   replaces the add-on's. Placeholder copy goes in [square brackets].
+
+   Backgrounds: white, light and medium greys, and darkish greys down to about gray-700. Nothing darker, the Dark
+   scheme included: the interface around the frames is near-black, and a dark band there makes the page seem to end.
+   The recipe's prototype section says more. */
 
 /* ---------- Header and footer ----------
    NAV: { t: 'Menu item', r: '/url', keys: [route keys it is current for], kids: [['Child', '/url']] }
