@@ -54,8 +54,9 @@ const NOTES = {
     }
 };
 
-/* Notes that apply to every page, folded at the foot of each page's notes: what the client should know about the
-   header and footer, and the build and performance points. */
+/* Anything for every page that the pages themselves can't show, in a sentence or two: shown once, in the Sitemap's
+   panel beside the menus, never on each page. Most sites leave it empty. Don't describe the header, menus or footer,
+   which every page draws and the Sitemap lists; anything to agree about them is a comment pinned on them. */
 const SITEWIDE = { consider: [], tech: [] };
 
 /* ---------- Page options ----------
