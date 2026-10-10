@@ -25,8 +25,8 @@ const AUD = {};
        aud: ['audienceKey'],
        content: [['Section', 'What it holds.']],          // what the client needs to prepare
        consider: ['Something the client should know.'],  // short and client-facing; three or four at most
-       tech: ['Where content comes from, such as Site Details, and build points.'],
-       fed: ['modelId']                           // MODEL ids whose content appears here
+       tech: ['How it is built, in a sentence or two.'],  // plain sentences; don't repeat what fed shows
+       fed: ['modelId']                           // MODEL ids whose content appears here: the notes link to them
    }
 */
 
@@ -48,7 +48,7 @@ const NOTES = {
             ['Any extra questions you’d like to ask in the form', '']
         ],
         consider: [],
-        tech: ['The contact details come from Site Details, and form submissions go to its email address.'],
+        tech: ['Form submissions go to the email address in Site Details.'],
         fed: ['pages', 'contact_form', 'site_details']
     }
 };
