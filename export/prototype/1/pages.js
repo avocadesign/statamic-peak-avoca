@@ -1,6 +1,6 @@
 /* ---------- This site's pages ----------
    Its header and footer as the prototype draws them, its pages and its routes. The helpers they use, such as
-   pageHeader(), img(), btn(), pin() and coming(), come from the add-on: a function of the same name defined here
+   pageHeader(), img(), btn() and coming(), come from the add-on: a function of the same name defined here
    replaces the add-on's. Placeholder copy goes in [square brackets]. */
 
 /* ---------- Header and footer ----------

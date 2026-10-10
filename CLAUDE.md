@@ -167,7 +167,8 @@ This is Avoca's fork of studio1902/statamic-peak. `upstream` is the Peak remote;
   (`components/_logo`) until the client's arrives, and signs the prototype. Peak's logo is gone from the kit;
   keep it out after an upstream merge. Whoosh and Honest Design have placeholder logos until their own arrive.
 - `prototype/` is an empty discovery prototype: version 1 as content only, `data.js`, `pages.js` and `version.json`.
-  Avoca Tools (v0.1.21 on) serves it at `/prototype`, on for local and staging unless `PROTOTYPE_ENABLED` says
-  otherwise, with its interface, sign-in and helpers, and draws the pages with the site's real CSS. The kit no longer
+  Avoca Tools (v0.1.22 on) serves it at `/prototype`, on for local and staging unless `PROTOTYPE_ENABLED` says
+  otherwise, with its interface, sign-in and helpers, and draws the pages with the site's real CSS. Decisions aren't
+  written into `data.js`: with feedback on, the team raises them from reviewers' comments on the pages. The kit no longer
   ships a controller, middleware, config, routes, sign-in view or test for it: don't bring them back after an upstream
   merge, because a site with its own `PrototypeController` keeps serving that copy instead of the add-on's.
