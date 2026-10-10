@@ -21,11 +21,11 @@ const AUD = {};
    Keyed by the route keys in ROUTES. A page with no notes still renders, with an empty notes panel.
 
    home: {
-       purpose: 'What the page is for, in a sentence or two.',
+       purpose: 'What the page is for, in a short plain sentence: no system names or where content comes from.',
        aud: ['audienceKey'],
-       content: [['Section', 'What it holds and where it comes from.']],
+       content: [['Section', 'What it holds.']],          // what the client needs to prepare
        consider: ['Something the client should know.'],  // short and client-facing; three or four at most
-       tech: ['A build or performance point.'],   // folded away under Technical notes
+       tech: ['Where content comes from, such as Site Details, and build points.'],
        fed: ['modelId']                           // MODEL ids whose content appears here
    }
 */
@@ -40,14 +40,15 @@ const NOTES = {
         fed: ['pages']
     },
     contact: {
-        purpose: 'How to get in touch, with the contact form and the contact details from Site Details.',
+        purpose: 'How to get in touch, with contact form and contact details',
         aud: [],
         content: [
-            ['Contact form', 'Name, email, message and consent. Submissions go to the Site Details email.'],
-            ['Contact details', 'Phone, email and address, from Site Details.']
+            ['Contact details', ''],
+            ['Email to send the form to', ''],
+            ['Any extra questions you’d like to ask in the form', '']
         ],
         consider: [],
-        tech: [],
+        tech: ['The contact details come from Site Details, and form submissions go to its email address.'],
         fed: ['pages', 'contact_form', 'site_details']
     }
 };
