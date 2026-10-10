@@ -9,7 +9,6 @@ const PROJECT = {
     name: '',                                     // shown top left and in the tab title; empty uses APP_NAME from .env
     subtitle: 'Prototype for approval',
     prepared: 'Prototype, [Month Year]',          // shown under "Prepared by Avoca"
-    sitemapIntro: 'Pages with a dashed outline are our suggestions: say what you think in the comments on the page. The rest are agreed, URLs included.'
 };
 
 /* ---------- Audiences ----------
