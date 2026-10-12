@@ -1,5 +1,6 @@
 *.log
 /node_modules
+/public/build/
 /public/hot
 /public/storage
 /public/vendor/statamic
@@ -17,10 +18,3 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-
-/.phpunit.cache
-
-/public/build/
-/storage/forms
-/public/build/
-/public/build/
