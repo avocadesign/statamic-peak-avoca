@@ -13,6 +13,8 @@
 #           what it would render.
 # sample    How many pages to add for that coverage, on top of the ones above. Enough to reach the
 #           blocks a site actually uses, not enough to render a thousand pages that are all alike.
+# launched  The date the site went live, such as 2026-10-14, left out until then. A launched site
+#           holds the add-on to the release line it launched on: see Launch in the add-on's recipe.
 enrolled: true
 group: fleet
 branch: main
