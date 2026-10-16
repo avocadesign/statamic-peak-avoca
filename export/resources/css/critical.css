@@ -1,0 +1,47 @@
+/*
+ * Critical CSS: what the top of a page needs to paint, inlined into <head> by layout.antlers.html
+ * with {{ vite:content }}. site.css then loads without blocking the render.
+ *
+ * The same Tailwind pipeline as site.css, scanning only the templates that render above the fold.
+ * Nothing measures what is above the fold and nothing needs to: the recipe keeps the header, the
+ * navigation and the page header in these partials, and forbids putting above-fold design anywhere
+ * else. Tailwind reads them and generates the utilities they use, so every npm run build brings
+ * this file up to date with no step to remember.
+ *
+ * TWO THINGS TO KEEP IN STEP, both in this file:
+ *
+ * 1. The @source list. A partial added to the header or the page header and not added here has its
+ *    utilities missing at first paint, arriving when the full sheet lands: the page jumps. Add the
+ *    line in the same pull request as the partial.
+ * 2. The shared imports below. They are in site.css as well, on purpose. The heading's size and the
+ *    button's shape have to be right at first paint or the page reflows when the full sheet lands.
+ *    Adding a component the header or page header uses means importing it here too.
+ *
+ * Check it by loading a page with the network throttled: the header, the page header and its
+ * buttons should arrive in their final shape, and nothing above the fold should move afterwards.
+ */
+
+@import "tailwindcss" source(none);
+
+/* Shared with site.css: the tokens, the type scale and the components above the fold. */
+@import "./peak.css";
+@import "./theme.css";
+@import "./colours.css";
+@import "./typography.css";
+@import "./components/buttons.css" layer(components);
+
+/* The templates that paint above the fold. */
+@source "../views/layout.antlers.html";
+@source "../views/default.antlers.html";
+@source "../views/layout/_header.antlers.html";
+@source "../views/layout/navigation";
+@source "../views/layout/_page_header.antlers.html";
+@source "../views/components/_logo.antlers.html";
+@source "../views/components/_button.antlers.html";
+@source "../views/components/_buttons.antlers.html";
+@source "../views/page_builder/_block.antlers.html";
+
+/* Rendered by the layout before anything of the site's own. */
+@source "../../vendor/studio1902/statamic-peak-tools/resources/views/navigation/_skip_links.antlers.html";
+@source "../../vendor/studio1902/statamic-peak-tools/resources/views/snippets/_noscript.antlers.html";
+@source "../../vendor/studio1902/statamic-peak-tools/resources/views/components/_toolbar.antlers.html";

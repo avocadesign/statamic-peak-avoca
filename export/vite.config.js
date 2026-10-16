@@ -22,6 +22,7 @@ export default defineConfig(({ command, mode }) => {
                 buildDirectory: '_build',
                 input: [
                     'resources/css/site.css',
+                    'resources/css/critical.css',
                     'resources/js/site.js',
                     'resources/js/forms.js',
                     'resources/js/cp.js',
