@@ -9,8 +9,10 @@ export default defineConfig(({ command, mode }) => {
             buildDirectory: '_build',
             rollupOptions: {
                 output: {
+                    // Alpine's core in a chunk of its own, which every page loads and caches. Any other package goes
+                    // with the entry that imports it, so a plugin only some pages need isn't in a chunk every page loads.
                     manualChunks: (id) => {
-                        if (id.includes('node_modules')) return id.toString().split('node_modules/')[1].split('/')[0].toString();
+                        if (id.includes('/node_modules/alpinejs/')) return 'alpinejs';
                     }
                 }
             }
@@ -26,6 +28,7 @@ export default defineConfig(({ command, mode }) => {
                     'resources/css/critical-forms.css',
                     'resources/js/site.js',
                     'resources/js/forms.js',
+                    'resources/js/persist.js',
                     'resources/js/cp.js',
                 ]
             })

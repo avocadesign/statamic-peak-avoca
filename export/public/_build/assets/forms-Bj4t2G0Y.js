@@ -1,1 +1,0 @@
-import{t as e}from"./laravel-precognition-alpine-DdbXv0rw.js";document.addEventListener(`alpine:init`,()=>{window.Alpine.plugin(e)});

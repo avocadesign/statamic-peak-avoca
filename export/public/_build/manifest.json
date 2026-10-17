@@ -1,30 +1,7 @@
 {
-  "_@alpinejs-BdiCSv_c.js": {
-    "file": "assets/@alpinejs-BdiCSv_c.js",
-    "name": "@alpinejs"
-  },
   "_alpinejs-CHZQYZeV.js": {
     "file": "assets/alpinejs-CHZQYZeV.js",
     "name": "alpinejs"
-  },
-  "_es-toolkit-CaAMjed2.js": {
-    "file": "assets/es-toolkit-CaAMjed2.js",
-    "name": "es-toolkit"
-  },
-  "_laravel-precognition-N-ZHrM81.js": {
-    "file": "assets/laravel-precognition-N-ZHrM81.js",
-    "name": "laravel-precognition",
-    "imports": [
-      "_es-toolkit-CaAMjed2.js"
-    ]
-  },
-  "_laravel-precognition-alpine-DdbXv0rw.js": {
-    "file": "assets/laravel-precognition-alpine-DdbXv0rw.js",
-    "name": "laravel-precognition-alpine",
-    "imports": [
-      "_es-toolkit-CaAMjed2.js",
-      "_laravel-precognition-N-ZHrM81.js"
-    ]
   },
   "resources/css/critical-forms.css": {
     "file": "assets/critical-forms-Dpf5m-Kj.css",
@@ -60,22 +37,27 @@
     "isEntry": true
   },
   "resources/js/forms.js": {
-    "file": "assets/forms-Bj4t2G0Y.js",
+    "file": "assets/forms-a6kk1_tZ.js",
     "name": "forms",
     "src": "resources/js/forms.js",
+    "isEntry": true
+  },
+  "resources/js/persist.js": {
+    "file": "assets/persist-DqdnoeOa.js",
+    "name": "persist",
+    "src": "resources/js/persist.js",
     "isEntry": true,
     "imports": [
-      "_laravel-precognition-alpine-DdbXv0rw.js"
+      "_alpinejs-CHZQYZeV.js"
     ]
   },
   "resources/js/site.js": {
-    "file": "assets/site-CqT2VStT.js",
+    "file": "assets/site-6UwZJ6mh.js",
     "name": "site",
     "src": "resources/js/site.js",
     "isEntry": true,
     "imports": [
-      "_alpinejs-CHZQYZeV.js",
-      "_@alpinejs-BdiCSv_c.js"
+      "_alpinejs-CHZQYZeV.js"
     ]
   }
 }

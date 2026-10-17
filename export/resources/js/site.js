@@ -1,10 +1,9 @@
 import Alpine from 'alpinejs'
 import collapse from '@alpinejs/collapse'
 import focus from '@alpinejs/focus'
-import morph from '@alpinejs/morph'
-import persist from '@alpinejs/persist'
 
-// Call Alpine. Precognition, for the forms, is loaded by resources/js/forms.js on pages with a form.
+// Call Alpine. Focus is here for the mobile navigation's x-trap, on every page. Precognition, for the forms, loads
+// with resources/js/forms.js on pages with a form, and persist with resources/js/persist.js where something uses it.
 window.Alpine = Alpine
-Alpine.plugin([collapse, focus, morph, persist])
+Alpine.plugin([collapse, focus])
 Alpine.start()

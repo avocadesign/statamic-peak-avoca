@@ -36,6 +36,7 @@ export_paths:
   - resources/forms
   - resources/js/cp.js
   - resources/js/forms.js
+  - resources/js/persist.js
   - resources/js/site.js
   - resources/js/tailwind.peak.js
   - resources/preferences.yaml

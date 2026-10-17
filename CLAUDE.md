@@ -122,6 +122,20 @@ This is Avoca's fork of studio1902/statamic-peak. `upstream` is the Peak remote;
   on Primary (where the brand colour vanishes) and 60% brand colour mixed with white on Dark (the brand
   colour alone measured 2.79:1 there).
 
+## Scripts
+
+- `site.js` registers Alpine's collapse and focus plugins and starts Alpine. Focus stays in `site.js`, unlike on
+  sites whose header has no focus trap: the mobile navigation uses `x-trap` on every page. Upstream also registers
+  morph, which nothing uses; it is uninstalled here, so leave it out after an upstream merge.
+- Persist is `resources/js/persist.js`, which the layout loads ahead of `site.js` only where something uses it:
+  Peak's toolbar (local only) and Peak SEO's consent banner (`seo:use_consent_banner`). It imports Alpine's core
+  and registers the plugin as the module runs, not on `alpine:init`: the banner's inline `alpine:init` listener
+  calls `Alpine.$persist` and is registered first, so a plugin registered on `alpine:init` arrives too late.
+- Precognition loads with `forms.js`, which the Form block pushes, together with the captcha's script.
+- `manualChunks` in `vite.config.js` gives only Alpine's core a chunk of its own, shared by `site.js` and
+  `persist.js`. Every other package goes with the entry that imports it, so a plugin only some pages need isn't
+  in a chunk every page loads. Upstream splits every package into its own chunk; keep ours on merge.
+
 ## Bard sets
 
 - The Buttons set uses `span-lg` inside an article, the width of the text around it. Upstream uses

@@ -14,6 +14,7 @@
 - The forms plugin's base styles left the shared critical sheet. A page with a Form block inlines `critical-forms.css` in its place, which adds the plugin and the Form's own templates, so the form now paints in its final shape before `site.css` lands. The layout yields a `critical_css` section with `critical.css` as its default, which any template can fill the same way. Every other page's critical CSS is 7.13 KB compressed, from 8.13 KB.
 - Peak's toolbar, which renders only on a local environment, renders last in `<body>` and is out of `critical.css`'s `@source` list, so production pages don't inline its styles: 6.82 KB compressed.
 - The captcha's script (Cloudflare Turnstile by default) is pushed by the Form block with the forms script, rather than printed by the layout, so only pages with a form load it.
+- Alpine's persist plugin loads only where Peak's local toolbar or Peak SEO's consent banner renders, from a `persist.js` entry of its own, and morph, which nothing used, is uninstalled. Vite gives only Alpine's core a chunk of its own, so Precognition goes with `forms.js` rather than in three chunks. Every page loads 27.8 KB of JavaScript compressed in two files, from 30.1 KB in three, and a page with a form 36.1 KB in three, from 39.4 KB in seven.
 
 ## v22.2.0 (2026-09-23)
 
