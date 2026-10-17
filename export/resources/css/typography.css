@@ -43,8 +43,8 @@
     --typography-h5: var(--text-base);
     --typography-h6: var(--text-sm);
     /* Line height: body copy, then anything set at a heading size. */
-    --typography-line-height: 1.5;
-    --typography-headings-line-height: 1.2;
+    --typography-line-height: var(--leading-normal);
+    --typography-headings-line-height: var(--leading-tight);
 
     --prose-sm-modifier: .875;
     --prose-lg-modifier: 1.125;

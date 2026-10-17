@@ -10,6 +10,7 @@
 
 ### What's improved
 - `colours.css` is plain `@theme`. `site.css` imports it with `theme(static)`, so every colour is still there for hand-written CSS and `/site/style`, and `critical.css` imports it plain, so the inlined sheet carries only the colours it reads.
+- The line heights are on Tailwind's leading scale: body copy reads `--leading-normal` (1.5) and headings `--leading-tight`, which `theme.css` sets to 1.2. A site tunes them there rather than giving `typography.css` a number.
 
 ## v22.2.0 (2026-09-23)
 

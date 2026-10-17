@@ -88,13 +88,16 @@ This is Avoca's fork of studio1902/statamic-peak. `upstream` is the Peak remote;
   `typography.css`: the h4 size. Restyle card titles there, not in the partial.
 - `--font-weight-medium: 500` is enabled in `theme.css` (upstream leaves it commented out). A custom font needs a
   500 file in `fonts.css`, or medium falls back to the regular face.
-- Heading line height is `--typography-headings-line-height` in `typography.css`, set to 1.2.
-  Upstream uses Tailwind's `--leading-tight` (1.25) directly. The `.heading-size-*` classes take it too.
+- Heading line height is `--typography-headings-line-height` in `typography.css`, which reads Tailwind's
+  `--leading-tight`, set to 1.2 in `theme.css` (Tailwind's own is 1.25). Upstream uses `--leading-tight`
+  directly. The `.heading-size-*` classes take it too.
   Size a heading with `heading-size-*`, never `text-*` or `leading-*`: Tailwind's text utilities carry
   their own line height and would override the token.
-- Line height is tokens in `typography.css`: `--typography-line-height` (1.5) on `body` for body copy, and
-  `--typography-headings-line-height` (1.2) for headings and anything set at a heading size. Before that,
-  body copy took Tailwind's preflight 1.5 on `html` and nothing in the kit set it.
+- Line height is Peak's wiring onto Tailwind's leading scale, in `typography.css`: `--typography-line-height`
+  (`--leading-normal`, 1.5) on `body` for body copy, and `--typography-headings-line-height` (`--leading-tight`)
+  for headings and anything set at a heading size. A site tunes the line heights by setting `--leading-*` in
+  `theme.css`, never by giving these two a number. Before that, body copy took Tailwind's preflight 1.5 on
+  `html` and nothing in the kit set it.
 - Prose spacing is tokens in `typography.css`, in a `:root` block rather than `@theme`, because the
   `--prose-*` tokens in there are the prose colours that `/site/style` lists as swatches. `--prose-space`
   is the gap between paragraphs and the text around them, and `--prose-list-space`,
