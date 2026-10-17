@@ -188,6 +188,12 @@
         --stack-item-space: calc(var(--stack-space, 4rem) / 2);
     }
 
+    /* Avoca: the half margin is the block's own, not inherited by every stack-* inside it. :where() keeps this at
+       zero specificity, so a stack-space-* class inside still wins. Re-apply after an upstream merge. */
+    :where(.half-space-t) > * {
+        --stack-item-space: initial;
+    }
+
     .stack-space-inherit {
         --stack-item-space: initial;
         &:is([class*="stack-"][class*="stack-space-"] > *) {

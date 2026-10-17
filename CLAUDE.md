@@ -20,6 +20,9 @@ This is Avoca's fork of studio1902/statamic-peak. `upstream` is the Peak remote;
   imports `peak.css`, so Peak's list there scanned every view for the critical CSS too. When an upstream
   merge brings the list back into `peak.css`, take it out again; keep `critical.css`'s shared imports free
   of `@source` lines.
+- `peak.css` adds `:where(.half-space-t) > * { --stack-item-space: initial; }` after `.half-space-t`: Peak's half
+  top margin sets `--stack-item-space` on the block, and every `stack-*` inside inherited it. Re-apply after an
+  upstream merge.
 - The forms plugin (`@plugin "@tailwindcss/forms"`) is in `site.css`, just above the `peak.css` import, and
   in `critical-forms.css`, not in `peak.css`, so `critical.css` doesn't inline its base styles for inputs on
   every page. When an upstream merge brings it back into `peak.css`, take it out again.
