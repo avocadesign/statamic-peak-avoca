@@ -136,6 +136,15 @@ This is Avoca's fork of studio1902/statamic-peak. `upstream` is the Peak remote;
   `persist.js`. Every other package goes with the entry that imports it, so a plugin only some pages need isn't
   in a chunk every page loads. Upstream splits every package into its own chunk; keep ours on merge.
 
+## Images
+
+- `config/statamic-peak-tools.php` makes WebP the Picture tag's only format, so a picture has one `<source>`,
+  not a JPEG one beside it that no browser the build targets picks. `default_widths` repeats Peak Tools' own
+  nine, because Laravel replaces the whole `picture` key; when Peak Tools changes its defaults, copy them again.
+- No kit block shows an image at a fixed size or knows it leads the page, so the kit passes no `:widths` and
+  every picture is lazy. A site that has either follows the recipe's Images section, overriding Peak's picture
+  partial to pass `widths` through.
+
 ## Bard sets
 
 - The Buttons set uses `span-lg` inside an article, the width of the text around it. Upstream uses
