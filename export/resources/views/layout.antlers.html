@@ -10,8 +10,8 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-        {{# the forms script, pushed only by the templates that render a form, ahead of site.js so it can register
-            Precognition before Alpine starts #}}
+        {{# the forms script and the captcha's, pushed only by the templates that render a form, ahead of site.js so
+            Precognition registers before Alpine starts #}}
         {{ stack:forms }}
         {{# CSS in two parts: what the top of the page needs is inlined, so the first paint never waits on a
             stylesheet, and the full sheet loads without blocking the render and takes over once it lands.
@@ -24,7 +24,6 @@
         {{ vite src="resources/js/site.js" directory="_build" }}
         {{ partial:statamic-peak-seo::snippets/seo }}
         {{ partial:statamic-peak-tools::snippets/browser_appearance }}
-        {{ captcha:head }}
         {{ stack:head }}
     </head>
     <body class="flex flex-col min-h-screen bg-white">
