@@ -3,6 +3,7 @@
 ## Avoca (2026-10-17)
 
 ### What's fixed
+- Smooth scrolling is `motion-safe:scroll-smooth` on `<html>`, so anchor links no longer glide for someone who has asked for reduced motion.
 - `site.css` imports Tailwind with `source(none)`, so Tailwind no longer scans the whole site, the prototype and docs such as `AGENTS.md` among it, and builds CSS for class names written there. Peak's four `@source` lines move from `peak.css` to the end of `site.css`, followed by a line for the Columns fieldset, whose Vertical Align Content option is printed into a class.
 - `critical.css` no longer carries every utility on the site. It imports `peak.css`, and Peak's `@source` list there made it scan every view. It now imports `fonts.css` and `utilities.css` as well, so the first paint is in the site's typefaces and the page builder's `stack-block` spacing is there from the start.
 - On a new site, `site.css` is 3% smaller and `critical.css` 30% smaller: 8.25 KB compressed, from 11.08 KB.
