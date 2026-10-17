@@ -149,6 +149,17 @@ This is Avoca's fork of studio1902/statamic-peak. `upstream` is the Peak remote;
   every picture is lazy. A site that has either follows the recipe's Images section, overriding Peak's picture
   partial to pass `widths` through.
 
+## Vendor overrides
+
+- To change what an add-on renders, copy its view into `resources/views/vendor/<package>/` at the same path, which
+  Laravel uses in place of the package's, and change only what has to change. Never rebuild it as a view of our own.
+  The copy's header names the package version it came from and says how to repeat the changes, and each change is
+  marked `{{# Avoca #}}` (or described in the header when it is one line).
+- The kit's copies: Peak SEO's `snippets/_seo` (the JSON-ld field through the antlers modifier) and
+  `components/_consent_banner` (Peak's `neutral` as `gray-800`, and a revoke date check that no longer breaks the
+  script when no date is set); Peak Tools' `snippets/_form_handler` (see Page builder blocks); Statamic's form field
+  views (per-form IDs). After updating one of those packages, compare its view with the copy and repeat the changes.
+
 ## Bard sets
 
 - The Buttons set uses `span-lg` inside an article, the width of the text around it. Upstream uses

@@ -1,0 +1,215 @@
+{{#
+    Avoca's copy of Peak SEO's consent banner (from v11.9.3). Each change is marked {{# Avoca #}}. To update, copy
+    Peak's partial over this file, then make them again:
+    - neutral becomes gray-800, the same slate, as the kit has no neutral scale: the panel's border, the explanation,
+      both checkboxes and the two grey buttons.
+    - In the script, `seo:consent_revoke_before | bool_string` becomes `seo:consent_revoke_before ? 'true' : 'false'`:
+      Peak's printed nothing when no date is set, and the script failed to parse.
+#}}
+
+{{#
+    @name Consent banner
+    @desc The consent banner component defined in `statamic-peak-seo::snippets/_seo.antlers.html` and yielded in `resources/views/layout.antlers.html`.
+#}}
+
+<!-- statamic-peak-seo::components/_consent_banner.antlers.html -->
+{{# Avoca: border-gray-800/10, was border-neutral/10 #}}
+<div
+    x-data="consentBanner"
+    x-show="!$store.consentBanner.getConsent()"
+    x-transition
+    class="
+        fixed z-50 inset-x-[1rem] bottom-[1rem] md:bottom-[2rem] max-h-[calc(100vh-2rem)] md:max-h-[calc(100vh-4rem)] md:w-[23rem] flex flex-col stack-2 p-6 bg-white border border-gray-800/10 rounded-lg shadow-xl overflow-auto overscroll-contain
+        {{ seo:display_style == 'left' ?= 'md:right-auto md:left-[2rem]' }}
+        {{ seo:display_style == 'right' ?= 'md:left-auto md:right-[2rem]' }}
+    "
+    x-cloak
+>
+    <h2 class="text-2xl font-bold">{{ trans:strings.consent_title }}</h2>
+    {{# Avoca: text-gray-800, was text-neutral #}}
+    <p class="font-bold text-gray-800">
+        {{ trans:strings.consent_explanation }}
+        {{ if configuration:cookie_notice_type == 'entry' }}
+            <a class="underline rounded hover:text-primary" href="{{ configuration:cookie_notice_entry:url }}">{{ trans:strings.consent_learn_more }}</a>
+        {{ elseif configuration:cookie_notice_type == 'pdf' }}
+            <a class="underline rounded hover:text-primary" href="{{ configuration:cookie_notice_asset }}" target="_blank">{{ trans:strings.consent_learn_more }}</a>
+        {{ /if }}
+    </p>
+
+    <div class="stack-space-4 flex flex-col gap-3">
+        <template x-for="type in $store.consentBanner.getConsentTypes()">
+            <div class="stack-1">
+                {{# Avoca: both checkboxes border-gray-800, was border-neutral #}}
+                <label class="inline-flex">
+                    <template x-if="type.disabled">
+                        <input class="mr-2 w-4 h-4 rounded border-gray-800 text-primary focus:border-primary opacity-50" type="checkbox" :name="type.handle" checked disabled>
+                    </template>
+
+                    <template x-if="!type.disabled">
+                        <input class="mr-2 w-4 h-4 rounded border-gray-800 text-primary focus:border-primary" type="checkbox" :name="type.handle" x-model="type.value">
+                    </template>
+
+                    <span class="flex flex-col gap-0.5">
+                        <span class="font-bold text-sm" x-html="type.title"></span>
+                        <span class="text-sm" x-html="type.explanation"></span>
+                    </span>
+                </label>
+
+                <template x-if="type.services">
+                    <div x-data="{ expanded: false }" class="stack-1 ml-6 text-xs">
+                        <button @click="expanded = !expanded" class="inline underline text-primary">{{ trans:strings.consent_more_info }}</button>
+                        <ul x-show="expanded" x-collapse class="list-disc list-inside">
+                            <template x-for="service in type.services">
+                                <li x-text="service"></li>
+                            </template>
+                        </ul>
+                    </div>
+                </template>
+            </div>
+        </template>
+    </div>
+
+    {{# Avoca: the two grey buttons bg-gray-800/10 text-gray-800, was bg-neutral/10 text-neutral #}}
+    <div class="stack-space-4 flex flex-wrap md:justify-between gap-2">
+        <button @click="$store.consentBanner.acceptAll()" type="button" class="px-2 py-2 rounded text-sm font-bold bg-primary text-white outline-primary">
+            {{ trans:strings.consent_accept_all }}
+        </button>
+
+        <button @click="$store.consentBanner.saveConsent()" type="button" class="px-2 py-2 rounded text-sm font-bold bg-gray-800/10 text-gray-800">
+            {{ trans:strings.consent_accept_selected }}
+        </button>
+
+        <button @click="$store.consentBanner.rejectAll()" type="button" class="px-2 py-2 rounded text-sm font-bold bg-gray-800/10 text-gray-800">
+            {{ trans:strings.consent_reject_all }}
+        </button>
+    </div>
+
+    {{# Yield this section in `resources/layouts/_footer.antlers.html` so users can reset their consent. #}}
+    {{ section:reset_consent }}
+        <!-- statamic-peak-seo::components/_consent_Banner.antlers.html -->
+        {{ if seo:use_consent_banner }}
+            {{# Read out global store consent status and display a reset consent link by saving the initial state. #}}
+            <span x-data x-cloak>
+                <span x-show="$store.consentBanner.getConsent()">
+                    <a @click.prevent="$store.consentBanner.revokeConsent()" class="{{ reset_consent_class ?? 'underline hover:text-primary motion-safe:transition-colors' }}" href="#">{{ trans:strings.consent_change_preferences }}</a>
+                </span>
+            </span>
+        {{ /if }}
+        <!-- End: statamic-peak-seo::components/_consent_Banner.antlers.html -->
+    {{ /section:reset_consent }}
+
+    {{ partial:statamic-peak-seo::snippets/consent_types }}
+
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.store('consentBanner', {
+                data: Alpine.$persist(consentData).as('consentBanner{{ site:handle | title }}'),
+                acceptAll() {
+                    this.data.types.forEach((type) => type.value = true)
+                    this.saveConsent()
+                },
+                accept(handle) {
+                    this.data.types.filter((type) => {
+                        return type['handle'] === handle
+                    }).forEach((type) => type.value = true)
+                    this.saveConsent()
+                },
+                getConsent() {
+                    return this.data.consent
+                },
+                getConsentAPIValues() {
+                    return this.data.types.filter((type) => {
+                        return type['consent_api'] === true
+                    }).reduce((acc, type) => {
+                        acc[type.consent_api_handle] = type.value ? 'granted' : 'denied';
+                        return acc;
+                    }, {});
+                },
+                getCustomScripts() {
+                    return this.data.types.filter((type) => type.hasOwnProperty('script_fragments') && type.value);
+                },
+                getConsentDate() {
+                    return this.data.date
+                },
+                getConsentTypes() {
+                    return this.data.types
+                },
+                getConsentValue(handle) {
+                    return this.data.types.filter((type) => {
+                        return type['handle'] === handle
+                    })[0]['value']
+                },
+                invalidate() {
+                    this.data = consentData
+                },
+                rejectAll() {
+                    this.data.types.forEach((type) => type.value = false)
+                    this.saveConsent()
+                },
+                revokeConsent() {
+                    this.data.consent = false
+                    this.data.date = null
+                },
+                saveConsent() {
+                    this.data.consent = true
+                    this.data.date = Math.floor(Date.now() / 1000)
+                },
+                useConsentAPI()  {
+                    return this.data.consent_api
+                },
+                useCustomScripts()  {
+                    return this.data.custom_scripts
+                },
+                useEmbeds()  {
+                    return this.data.embeds
+                }
+            })
+
+            Alpine.data('consentBanner', () => {
+                return {
+                    data: Alpine.store('consentBanner').data,
+                    init() {
+                        {{# Avoca: ? 'true' : 'false', was | bool_string #}}
+                        if ({{ seo:consent_revoke_before ? 'true' : 'false' }} && Alpine.store('consentBanner').getConsentDate() < '{{ seo:consent_revoke_before format="U" }}') {
+                            Alpine.store('consentBanner').invalidate()
+                        }
+                        if (Alpine.store('consentBanner').useConsentAPI() && Alpine.store('consentBanner').getConsent()) {
+                            gtag('consent', 'update', Alpine.store('consentBanner').getConsentAPIValues())
+                        }
+                        if (Alpine.store('consentBanner').useConsentAPI()) {
+                            this.$watch('data.consent', value => value && gtag('consent', 'update', Alpine.store('consentBanner').getConsentAPIValues()))
+                        }
+                        if (Alpine.store('consentBanner').useCustomScripts() && Alpine.store('consentBanner').getConsent()) {
+                            this.runCustomScripts()
+                        }
+                        if (Alpine.store('consentBanner').useCustomScripts()) {
+                            this.$watch('data.consent', value => value ? this.runCustomScripts() : this.removeCustomScripts())
+                        }
+                    },
+                    runCustomScripts() {
+                        Alpine.store('consentBanner')
+                            .getCustomScripts()
+                            .flatMap(script => script.script_fragments)
+                            .forEach(script => {
+                                const tag = document.createElement('script')
+                                script.type === 'script_tag'
+                                    ? tag.src = script.source
+                                    : tag.text = script.inline_script
+                                tag.defer = script.defer
+                                tag.async = script.async
+                                script.attributes.forEach(attribute => tag.setAttribute(attribute.key, attribute.value))
+                                document.head.appendChild(tag)
+                                this.$el.addEventListener(`remove-custom-scripts-${script.category}`, () => tag.remove(), {once: true})
+                            })
+                    },
+                    removeCustomScripts() {
+                        Alpine.store('consentBanner')
+                            .getCustomScripts()
+                            .forEach(script => this.$dispatch(`remove-custom-scripts-${script.handle}`))
+                    }
+                }
+            })
+        })
+    </script>
+</div>
+<!-- End: statamic-peak-seo::components/_consent_banner.antlers.html -->

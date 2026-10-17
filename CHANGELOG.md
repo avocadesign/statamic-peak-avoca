@@ -3,6 +3,7 @@
 ## Avoca (2026-10-17)
 
 ### What's fixed
+- Peak SEO's consent banner works when it's switched on. The kit overrides it in `resources/views/vendor/statamic-peak-seo/components/`: Peak's `neutral` colour, which the kit doesn't have, is `gray-800`, the same slate, so its border, text, checkboxes and grey buttons are styled again; and with no Revoke consent before date, its script printed `if ( && …` and failed to parse, so the banner never worked. Alpine's persist plugin, which the banner needs, loads wherever the banner is on.
 - Smooth scrolling is `motion-safe:scroll-smooth` on `<html>`, so anchor links no longer glide for someone who has asked for reduced motion.
 - A block set to Half top margin no longer passes its half margin to every `stack-*` inside it: a Form block's heading and form stayed 32px apart only without it. Re-apply the rule in `peak.css` after an upstream merge.
 - `site.css` imports Tailwind with `source(none)`, so Tailwind no longer scans the whole site, the prototype and docs such as `AGENTS.md` among it, and builds CSS for class names written there. Peak's four `@source` lines move from `peak.css` to the end of `site.css`, followed by a line for the Columns fieldset, whose Vertical Align Content option is printed into a class.
