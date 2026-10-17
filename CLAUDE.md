@@ -11,8 +11,9 @@ This is Avoca's fork of studio1902/statamic-peak. `upstream` is the Peak remote;
 - Text component uses `span-lg` class (not upstream's `span-md`).
 - `resources/css/site.css` differs from upstream by two imports: `components/clickable-parent.css`
   (in the components layer, beside upstream's buttons and caption) and `colours.css` at the end.
-  `.lede` is a typography token and rule in `typography.css`; the `.btn` scheme is appended to
-  `components/buttons.css` after upstream's `.button`. There is no `avoca.css`.
+  `.lede` is a typography token and rule in `typography.css`; `components/buttons.css` holds the `.btn` scheme
+  only: upstream's `.button` and `.button-inline`, which nothing in the kit, Peak Tools or Peak SEO uses, are
+  removed, so remove them again after an upstream merge. There is no `avoca.css`.
 - What Tailwind scans is named in `site.css` alone. It imports Tailwind with `source(none)`, so the
   prototype, docs such as `AGENTS.md`, and the fieldsets and config aren't scanned, and Peak's four
   `@source` lines are moved from the top of `peak.css` to the end of `site.css`, followed by a line for

@@ -19,6 +19,7 @@
 - Alpine's persist plugin loads only where Peak's local toolbar or Peak SEO's consent banner renders, from a `persist.js` entry of its own, and morph, which nothing used, is uninstalled. Vite gives only Alpine's core a chunk of its own, so Precognition goes with `forms.js` rather than in three chunks. Every page loads 27.8 KB of JavaScript compressed in two files, from 30.1 KB in three, and a page with a form 36.1 KB in three, from 39.4 KB in seven.
 - The page loses its bottom padding when its last block is set to no margin below through a `:has()` utility on `<main>`, rather than a script that found the block by its class and removed the padding classes once Alpine started. It is right from the first paint now.
 - Pictures offer WebP only, through a published `config/statamic-peak-tools.php`, so each has one `<source>` rather than a JPEG one beside it that no browser the build targets picks.
+- Peak's `.button` and `.button-inline`, which nothing in the kit, Peak Tools or Peak SEO uses, are out of `buttons.css`, so neither sheet carries them: critical CSS is 6.74 KB compressed.
 
 ## v22.2.0 (2026-09-23)
 
