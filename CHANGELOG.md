@@ -20,6 +20,7 @@
 - The page loses its bottom padding when its last block is set to no margin below through a `:has()` utility on `<main>`, rather than a script that found the block by its class and removed the padding classes once Alpine started. It is right from the first paint now.
 - Pictures offer WebP only, through a published `config/statamic-peak-tools.php`, so each has one `<source>` rather than a JPEG one beside it that no browser the build targets picks.
 - Peak's `.button` and `.button-inline`, which nothing in the kit, Peak Tools or Peak SEO uses, are out of `buttons.css`, so neither sheet carries them: critical CSS is 6.74 KB compressed.
+- The kit's own comments say what the code can't, in a line, as the Media and text block's do: what a structural element is, or why it isn't done the obvious way. Peak's comments, and the instructions for whoever builds a site, are as they were.
 
 ## v22.2.0 (2026-09-23)
 

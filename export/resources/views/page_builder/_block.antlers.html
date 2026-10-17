@@ -1,15 +1,12 @@
 {{#
 	@name Page builder block
-	@desc The page builder block wrapper. Resolves block_margins and colour_scheme
-	      into wrapper classes here so individual block partials don't have to
-	      repeat the mapping.
+	@desc The page builder block wrapper, which turns block_margins and colour_scheme into its classes.
 	@param colour_scheme The block's colour scheme. Blocks pass :colour_scheme="block:colour_scheme".
 	@param block_margins The block's margins. Blocks pass :block_margins="block:block_margins".
 	@param data_attrs Optional data attributes to add to the section element
 #}}
 
-{{# Blocks pass both values in, so a block without these fields never takes a page or global value of the same name.
-    A caller that passes neither reads them from its own scope. The option keys are in fieldsets/colour_scheme.yaml. #}}
+{{# Blocks pass both in, so a block without these fields never takes a page or global value of the same name #}}
 {{ _margins = switch(
     (block_margins == 'no-top')        => 'no-space-t',
     (block_margins == 'no-bottom')     => 'no-space-b',

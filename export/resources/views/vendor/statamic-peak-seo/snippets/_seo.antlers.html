@@ -1,15 +1,7 @@
 {{#
-    Avoca's copy of the Peak SEO snippet (statamic-peak-seo::snippets/_seo, copied from Peak SEO v11.9.3).
-    Laravel uses this file instead of the package's because it sits in resources/views/vendor/statamic-peak-seo.
-
-    What changed and why: one line, the per-entry JSON-ld field. The field's own instructions say you can use
-    Antlers in it, but Peak prints the value raw, so tags like {{ permalink }} come out as text and the schema
-    on the page is wrong. This copy pipes it through the antlers modifier. That is what lets a page's Service
-    node point at the site's business entity with the same variables the global graph uses, so the two @ids
-    always match. Peak's own field config can't fix this: turning its antlers flag on makes an empty field
-    print an empty script tag on every page.
-
-    If Peak SEO changes this snippet, copy the new version over this file and make the same change again.
+    Avoca's copy of Peak SEO's snippet (from v11.9.3), changed in one line: the entry's JSON-ld field goes through
+    the antlers modifier, so tags such as {{ permalink }} resolve (Peak's own antlers flag would print an empty
+    script tag on every page). When Peak SEO changes this snippet, copy it again and repeat the change.
 #}}
 {{#
 	@name SEO

@@ -14,8 +14,7 @@
 
     /* The gap between paragraphs, and between them and the other text around them, inside prose. */
     --prose-space: 1em;
-    /* Lists: the space above and below a list, between its items, the indent that holds the markers, and the gap
-       between a marker and its text. A nested list sits its item space away from the item above it. */
+    /* Lists: the space around a list and between its items, the indent for the markers, and marker to text */
     --prose-list-space: var(--prose-space);
     --prose-list-item-space: .5em;
     --prose-list-indent: 1.625em;
@@ -123,9 +122,8 @@
     }
 
     .prose {
-        /* Text straight inside a prose container, rather than in a wrapper, keeps the prose rhythm: a paragraph is not
-           a block, so it takes the smaller of the container's stack spacing and --prose-space. A tighter container,
-           such as the contact details, keeps its own spacing, and an explicit stack-space-* on the element still wins. */
+        /* Text straight inside prose, not in a wrapper, keeps the prose rhythm: the smaller of the stack's space and
+           --prose-space, so a tighter container keeps its own. */
         > :is(p, ul, ol, dl, blockquote, figure, table, pre, h1, h2, h3, h4, h5, h6) {
             --stack-item-space: min(var(--stack-space, 4rem), var(--prose-space));
         }

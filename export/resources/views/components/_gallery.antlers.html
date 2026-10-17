@@ -5,11 +5,7 @@
 #}}
 
 <!-- /components/_gallery.antlers.html -->
-{{#
-    CSS-only masonry gallery with an Alpine.js lightbox.
-    Each thumbnail button carries its image's URL and alt text in entity-escaped data attributes, and init()
-    reads them into the lightbox, so an apostrophe, quote or backslash in alt text can't break the JavaScript.
-#}}
+{{# Masonry in CSS, lightbox in Alpine. URLs and alt text pass through data attributes, so a quote in alt text can't break the script. #}}
 {{ total_images = gallery_images | count }}
 
 <div class="not-prose span-content" x-data="{
@@ -70,13 +66,7 @@
         {{ /gallery_images }}
     </div>
 
-    {{#
-        Lightbox dialog. While it's open, x-trap keeps focus inside it, hides the rest of the page from screen
-        readers and locks page scrolling. Focus moves to the close button once the dialog shows, and back to the
-        thumbnail that opened it on close. The key handlers sit on the dialog, not the window, so they only act
-        while it's open, and tabindex="-1" keeps focus on the dialog when someone clicks the image. The fade only
-        runs for people who haven't asked for reduced motion.
-    #}}
+    {{# Lightbox dialog. x-trap keeps focus in it and hides the page from screen readers; tabindex="-1" keeps focus on it when the image is clicked. #}}
     <div x-cloak
          x-show="lightboxOpen"
          x-trap.inert.noscroll.noautofocus.noreturn="lightboxOpen"

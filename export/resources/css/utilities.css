@@ -1,7 +1,5 @@
-/* The page builder's own stack: the space between blocks, from the --block-space tokens, so the rhythm of a
-   site is set in CSS rather than in a class attribute in a template. Everything derived from the gap, such as
-   .half-space-t, reads --stack-space and follows these without knowing about them. The margin rule is Peak's
-   stack-* rule, repeated here because that utility only matches numbered classes such as stack-16. */
+/* The page builder's stack, spaced by the --block-space tokens; anything derived from the gap reads --stack-space.
+   The margin rule is Peak's stack-*, repeated, as that matches only numbered classes. */
 @utility stack-block {
     > * {
         --stack-space: var(--block-space);

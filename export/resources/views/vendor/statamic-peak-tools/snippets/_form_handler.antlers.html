@@ -1,13 +1,7 @@
 {{#
-    Avoca's copy of the Peak Tools form handler (statamic-peak-tools::snippets/_form_handler, copied from Peak Tools v9.2.1).
-    Laravel uses this file instead of the package's because it sits in resources/views/vendor/statamic-peak-tools.
-
-    What changed and why: only the error summary lookup in submit(). Peak Tools searches the whole page for #summary, so on a
-    page with two forms, focus after a failed submit could land in the other form's summary. This copy searches inside its
-    own form (this.$refs.form) for the summary, whose ID carries the form handle and ends in -form-summary
-    (see page_builder/_form.antlers.html).
-
-    If Peak Tools changes its form handler, copy the new version over this file and make the same change again.
+    Avoca's copy of Peak Tools' form handler (from v9.2.1), changed in one place: submit() looks for the error summary
+    inside its own form, so with two forms on a page focus can't land in the other's. When Peak Tools changes its
+    handler, copy it again and repeat the change.
 #}}
 {{#
     @name Form handler

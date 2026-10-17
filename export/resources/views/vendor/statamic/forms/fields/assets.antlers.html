@@ -1,4 +1,4 @@
-{{# id is Statamic's ID for this field, unique to its form: the Form block's label points at it and the instructions ID builds on it. Upstream Peak gives this input no id. #}}
+{{# id: Statamic's ID for the field, which the Form block's label points at; upstream Peak gives none #}}
 <!-- /vendor/statamic/forms/fields/assets.antlers.html -->
 <input
     @change="form.{{ handle }} = Object.values($event.target.files)"

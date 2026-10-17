@@ -1,9 +1,5 @@
-/*
-    Avoca button scheme. components/_button.antlers.html emits `btn btn-{colour}{-outline}` or
-    `btn-inline`; the colour and style options come from fieldsets/button.yaml. Every colour here is
-    a --btn-* token from colours.css, where each .scheme-* class overrides them, so a variant can
-    look different on each colour scheme without any rule in this file changing.
-*/
+/* Avoca's buttons, as components/_button.antlers.html writes them: btn btn-{colour}{-outline}, or btn-inline.
+   Every colour is a --btn-* token from colours.css, which each colour scheme overrides. */
 .btn {
     @apply inline-flex items-baseline gap-0.5 font-bold max-w-full rounded-sm leading-none no-underline select-none motion-safe:transition;
     padding-block: calc(var(--spacing) * 3 - 2px);

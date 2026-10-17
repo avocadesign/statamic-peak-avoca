@@ -10,11 +10,10 @@
 {{# Precognition and the captcha's script, into the layout's head ahead of site.js, so only pages with a form load them #}}
 {{ once }}{{ push:forms }}{{ vite src="resources/js/forms.js" directory="_build" }}{{ captcha:head }}{{ /push:forms }}{{ /once }}
 {{ partial:page_builder/block :colour_scheme="block:colour_scheme" :block_margins="block:block_margins" :custom_class="block:custom_class" }}
-    {{# Outer wrapper spans the full content row when contact details are alongside, otherwise the original centered 8 cols. #}}
+    {{# outer wrapper #}}
     <div class="span-content {{ if block:include_contact_details }}md:col-start-[col-1] md:col-span-12 grid md:grid-cols-3 gap-8{{ else }}md:col-start-[col-3] md:col-span-8{{ /if }}">
 
-        {{# Form column, two thirds wide when contact details sit alongside.
-            The heading and text sit close together, and stack-8 puts the standard step between them and the form. #}}
+        {{# form column #}}
         <div class="stack-8 {{ if block:include_contact_details }}md:col-span-2{{ /if }}">
         {{ if block:heading || block:text }}
             <header class="flex flex-col gap-2">
@@ -28,8 +27,7 @@
             {{ form:create :in="block:form:handle" js="alpine:form" attr:x-ref="form" }}
                 {{# Use Laravel Precognition for live validation and submission. #}}
                 <div x-data="formHandler()" class="flex flex-col gap-8" x-cloak>
-                    {{# Error notifications. The summary's ID carries the form handle, so each form on a page has its own.
-                        Avoca's copy of the Peak Tools form handler finds it by the -form-summary ending, inside its own form. #}}
+                    {{# Error summary. Its ID carries the form handle, and the form handler looks for it inside its own form. #}}
                     <template x-if="form.hasErrors && submitted">
                         {{ partial:components/notification type="error" }}
                             {{ slot:attributes }}id="{{ block:form:handle }}-form-summary" role="group"{{ /slot:attributes }}
@@ -37,9 +35,7 @@
                             <ul class="list-disc list-inside marker:text-red-700">
                                 <template x-for="(error, index) in form.errors">
                                     <li>
-                                        {{# Each link builds the field's ID the way Statamic does ({form}-form-{handle}-field, with dots and underscores as hyphens,
-                                            see RendersForms::generateFieldId()) and focuses that field inside this form. Radio and checkbox groups carry
-                                            the ID on the group, so focus moves to the group's first input. #}}
+                                        {{# Rebuilds Statamic's field ID (RendersForms::generateFieldId()) and focuses that field, or a group's first input #}}
                                         <a :href="`#{{ block:form:handle }}-form-${index}-field`.replace(/[._]/g, '-')" @click.prevent="$focus.focus($refs.form.querySelector(`${$el.hash} input`) ?? $refs.form.querySelector($el.hash))" x-text="error" class="underline text-red-700 focus:outline-red-700"></a>
                                     </li>
                                 </template>
@@ -64,7 +60,7 @@
                         </template>
                     </ul>
 
-                    {{# Honeypot spam protection. The ID shared by the label and input carries the form handle, so each form on a page has its own. #}}
+                    {{# Honeypot. Its ID carries the form handle, so each form on a page has its own. #}}
                     <div class="hidden">
                         <label class="font-bold" for="{{ block:form:handle }}-form-{{ honeypot }}">{{ trans:strings.form_honeypot }} <sup class="text-(--form-error)">*</sup></label>
                         <input class="form-input w-full" id="{{ block:form:handle }}-form-{{ honeypot }}" type="text" name="{{ honeypot }}" x-model="form.{{ honeypot }}" tabindex="-1" autocomplete="off"/>
@@ -80,9 +76,8 @@
                                 </span>
                             {{ /if }}
 
-                            {{# Render the default-styled fields. Required markers and inline errors use --form-error, which each colour scheme sets in colours.css so they stay readable. #}}
-                            {{# field:id is the ID Statamic gives each field, unique to its form ({form}-form-{handle}-field). The label, the instructions
-                                and the field views use it rather than the handle, which another form on the same page may share. #}}
+                            {{# Fields. Required markers and errors use --form-error, which each colour scheme sets. #}}
+                            {{# field:id is unique to its form, where a handle may repeat in another form on the page #}}
                             {{ %form:fields scope="field" }}
                                 <template x-if="{{ show_field }}">
                                     <div class="
@@ -98,7 +93,7 @@
                                         )}}
                                     ">
                                         {{ unless type == 'spacer' }}
-                                            {{# Consent fields hide the display label visually: the inline_label on the checkbox is the actual statement. Screen readers still see this label via sr-only. #}}
+                                            {{# A consent field's statement is its inline label, so this one is for screen readers only #}}
                                             <label class="{{ handle == 'consent' ? 'sr-only' : 'font-bold' }}" for="{{ field:id }}">
                                                 {{ trans :key="field:display" }}
                                                 {{ if validate | contains('required') || validate | contains('accepted') }}

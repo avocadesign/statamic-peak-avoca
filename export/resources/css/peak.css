@@ -1,10 +1,9 @@
-/* Avoca: Peak's @source list is in site.css. critical.css imports this file too, so a list here makes the
-   critical CSS scan every view. Leave it out when an upstream merge brings it back. */
+/* Avoca: Peak's @source list is in site.css, as critical.css imports this file too. Leave it out after an upstream merge. */
 
 @config '../js/tailwind.peak.js';
 
-/* Avoca: the forms plugin is in site.css and critical-forms.css, so critical.css doesn't inline it. Leave it out when
-   an upstream merge brings it back. */
+/* Avoca: the forms plugin is in site.css and critical-forms.css, so critical.css doesn't inline it. Leave it out
+   after an upstream merge. */
 
 @theme {
     /* Spacing */
@@ -188,8 +187,8 @@
         --stack-item-space: calc(var(--stack-space, 4rem) / 2);
     }
 
-    /* Avoca: the half margin is the block's own, not inherited by every stack-* inside it. :where() keeps this at
-       zero specificity, so a stack-space-* class inside still wins. Re-apply after an upstream merge. */
+    /* Avoca: the half margin is the block's own, not every stack-* inside it's; :where(), so a stack-space-*
+       inside still wins. Re-apply after an upstream merge. */
     :where(.half-space-t) > * {
         --stack-item-space: initial;
     }

@@ -17,12 +17,7 @@
             {{ partial:components/button as="a" button_type="inline" link_type="email" label="{{ site_details:email }}" email="{{ site_details:email }}" hide_arrow="true" }}
         {{ /if }}
         {{ if value == "address" && (site_details:address || site_details:street_address) }}
-            {{#
-                The address is built from the separate parts in Site Details, the same ones the site's
-                structured data reads, so both say the same thing. The country is left out here because
-                it is held as a two letter code for search engines. Filling in the address field in
-                Site Details overrides all of this, for an address that needs to read differently.
-            #}}
+            {{# From the address parts, which the structured data reads too, without the country, a code for search engines. Site Details' address field overrides it. #}}
             <div class="prose max-w-none stack-2 overflow-visible">
                 {{ if site_details:address }}
                     {{ site_details:address }}

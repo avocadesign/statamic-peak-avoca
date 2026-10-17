@@ -1,14 +1,7 @@
 /*
-    Colours: the one place every colour token is declared.
-
-    theme.css (upstream Peak) keeps the fonts and the type scale; its palette block has been
-    removed on purpose. peak.css (upstream) keeps spacing and transitions; its black, white and
-    grey lines have moved here. Re-apply both removals after an upstream merge.
-
-    One grey scale, `gray`, mapped to Tailwind's slate. There is no `neutral` scale and no alias:
-    text takes --body-color and --headings-color, which are set here and read by typography.css.
-    site.css imports this file with theme(static), so every colour exists there for hand-written CSS
-    and the /site/style page; critical.css imports it plain, so it carries only the colours it reads.
+    Colours: every colour token, and the colour schemes. Peak's palette (theme.css) and its black, white and
+    grey (peak.css) are here instead: remove them again after an upstream merge. One grey scale, `gray`,
+    Tailwind's slate, and no `neutral`. site.css imports this with theme(static), critical.css plain.
 */
 @theme {
     /* Brand: Avoca's blue, #019ac6, until the client's colours replace it */
@@ -39,7 +32,7 @@
     --body-color: var(--color-gray-800);
     --headings-color: var(--color-gray-900);
 
-    /* Vertical padding applied to non-default colour scheme blocks (spacing(12) → 3rem) */
+    /* Vertical padding on a block with any colour scheme but Default */
     --scheme-block-padding: calc(var(--spacing) * 12);
 
     /* Buttons on the default (white) scheme. Each .scheme-* class below overrides these. */
@@ -66,11 +59,10 @@
     --btn-inline-decoration: var(--color-primary);
     --btn-inline-hover-text: var(--color-primary);
 
-    /* Forms: required markers and inline error messages. The Primary and Dark schemes override it, because red does not read on them. */
+    /* Forms: required markers and inline errors. Primary and Dark override it, as red doesn't read on them. */
     --form-error: var(--color-red-700);
 
-    /* Lines and borders. The divider line, and a generic border for cards and any other bordered element.
-       Each .scheme-* class below overrides what would not read on its background. */
+    /* Lines and borders: the divider line, and the border for cards and anything else bordered */
     --divider-colour: var(--color-gray-200);
     --border-colour: color-mix(in oklab, var(--color-gray-800) 10%, transparent);
 
