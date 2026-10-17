@@ -16,8 +16,9 @@
         {{# CSS in two parts: what the top of the page needs is inlined, so the first paint never waits on a
             stylesheet, and the full sheet loads without blocking the render and takes over once it lands.
             resources/css/critical.css says what goes in the inline part and what to keep in step with it.
-            The noscript copy matters: with JavaScript off, onload never fires and the swap never happens. #}}
-        <style>{{ vite:content src="resources/css/critical.css" directory="_build" }}</style>
+            The noscript copy matters: with JavaScript off, onload never fires and the swap never happens.
+            A template can replace the critical sheet with a critical_css section, as the Form block does. #}}
+        {{ yield:critical_css }}<style>{{ vite:content src="resources/css/critical.css" directory="_build" }}</style>{{ /yield:critical_css }}
         <link rel="stylesheet" href="{{ vite:asset src='resources/css/site.css' directory='_build' }}" media="print" onload="this.media='all'">
         <noscript><link rel="stylesheet" href="{{ vite:asset src='resources/css/site.css' directory='_build' }}"></noscript>
         {{ vite src="resources/js/site.js" directory="_build" }}

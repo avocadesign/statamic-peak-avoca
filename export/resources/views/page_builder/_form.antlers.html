@@ -5,6 +5,8 @@
 #}}
 
 <!-- /page_builder/_form.antlers.html -->
+{{# critical.css with the forms plugin and this block, inlined by the layout in critical.css's place #}}
+{{ section:critical_css }}<style>{{ vite:content src="resources/css/critical-forms.css" directory="_build" }}</style>{{ /section:critical_css }}
 {{# Precognition for the form handler, into the layout's head ahead of site.js, so only pages with a form load it #}}
 {{ once }}{{ push:forms }}{{ vite src="resources/js/forms.js" directory="_build" }}{{ /push:forms }}{{ /once }}
 {{ partial:page_builder/block :colour_scheme="block:colour_scheme" :block_margins="block:block_margins" :custom_class="block:custom_class" }}

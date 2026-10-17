@@ -22,6 +22,9 @@
  * file, so one in peak.css, where Peak keeps its list, would scan every view for this file too and
  * put every utility on the site in it. Peak's list is in site.css for that reason.
  *
+ * A page with a form inlines critical-forms.css in this sheet's place: this sheet with the forms plugin and the Form
+ * block added. Keep a block that only some pages lead with out of this list, and in a sheet like that one.
+ *
  * Check it by loading a page with the network throttled: the header, the page header and its
  * buttons should arrive in their final shape, and nothing above the fold should move afterwards.
  */

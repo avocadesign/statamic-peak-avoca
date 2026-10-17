@@ -3,7 +3,8 @@
 
 @config '../js/tailwind.peak.js';
 
-@plugin "@tailwindcss/forms";
+/* Avoca: the forms plugin is in site.css and critical-forms.css, so critical.css doesn't inline it. Leave it out when
+   an upstream merge brings it back. */
 
 @theme {
     /* Spacing */

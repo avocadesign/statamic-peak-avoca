@@ -6,6 +6,7 @@
 @import "./components/buttons.css" layer(components);
 @import "./components/caption.css" layer(components);
 @import "./components/clickable-parent.css" layer(components);
+@plugin "@tailwindcss/forms";
 @import "./peak.css" ;
 @import "./theme.css";
 @import "./typography.css";

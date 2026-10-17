@@ -1,0 +1,13 @@
+/* The critical CSS for a page with a form: critical.css with the forms plugin and the Form block added. The Form
+   block asks for it with a critical_css section, which layout.antlers.html inlines in critical.css's place. One
+   sheet rather than a second beside critical.css, which would beat its responsive utilities. */
+
+@import "./critical.css";
+
+/* The forms plugin's base styles for inputs, selects and textareas. */
+@plugin "@tailwindcss/forms";
+
+@source "../views/page_builder/_form.antlers.html";
+@source "../views/vendor/statamic/forms";
+@source "../views/components/_notification.antlers.html";
+@source "../views/components/_contact_details.antlers.html";

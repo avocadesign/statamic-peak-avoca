@@ -26,8 +26,17 @@
       "_laravel-precognition-N-ZHrM81.js"
     ]
   },
+  "resources/css/critical-forms.css": {
+    "file": "assets/critical-forms-CBmq0oh1.css",
+    "name": "critical-forms",
+    "names": [
+      "critical-forms.css"
+    ],
+    "src": "resources/css/critical-forms.css",
+    "isEntry": true
+  },
   "resources/css/critical.css": {
-    "file": "assets/critical-BHJ9oBF-.css",
+    "file": "assets/critical-DS7UCus1.css",
     "name": "critical",
     "names": [
       "critical.css"
