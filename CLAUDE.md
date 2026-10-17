@@ -13,6 +13,13 @@ This is Avoca's fork of studio1902/statamic-peak. `upstream` is the Peak remote;
   (in the components layer, beside upstream's buttons and caption) and `colours.css` at the end.
   `.lede` is a typography token and rule in `typography.css`; the `.btn` scheme is appended to
   `components/buttons.css` after upstream's `.button`. There is no `avoca.css`.
+- What Tailwind scans is named in `site.css` alone. It imports Tailwind with `source(none)`, so the
+  prototype, docs such as `AGENTS.md`, and the fieldsets and config aren't scanned, and Peak's four
+  `@source` lines are moved from the top of `peak.css` to the end of `site.css`, followed by a line for
+  `fieldsets/columns.yaml`, whose Vertical Align Content option is printed into a class. `critical.css`
+  imports `peak.css`, so Peak's list there scanned every view for the critical CSS too. When an upstream
+  merge brings the list back into `peak.css`, take it out again; keep `critical.css`'s shared imports free
+  of `@source` lines.
 - Robots: Peak SEO serves `/robots.txt` from the SEO global. The `bots` global only holds `llms.txt`.
 
 ## Typography (since Peak v22, "Modern typography")

@@ -1,7 +1,5 @@
-@source "../../resources/views/**/*";
-@source "../../resources/js/**/*";
-@source "../../content/**/*.md";
-@source "../../vendor/studio1902/**/*";
+/* Avoca: Peak's @source list is in site.css. critical.css imports this file too, so a list here makes the
+   critical CSS scan every view. Leave it out when an upstream merge brings it back. */
 
 @config '../js/tailwind.peak.js';
 

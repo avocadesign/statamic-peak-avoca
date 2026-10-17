@@ -1,4 +1,7 @@
-@import "tailwindcss";
+/* Avoca: source(none) turns off Tailwind's automatic detection, which scans the whole repository, the
+   prototype, documentation and public/ among it, and builds CSS for every class name written there. The
+   @source list at the end names what is scanned instead. */
+@import "tailwindcss" source(none);
 @import "./fonts.css";
 @import "./components/buttons.css" layer(components);
 @import "./components/caption.css" layer(components);
@@ -10,3 +13,15 @@
 
 /* Avoca: every colour token and the colour schemes. */
 @import "./colours.css";
+
+/* Avoca: Peak's @source list, moved here from peak.css. An @source line scans for every entry that imports
+   its file, and critical.css imports peak.css too, so there it made the critical CSS scan every view. Keep
+   it in this file, never in one critical.css imports. */
+@source "../../resources/views/**/*";
+@source "../../resources/js/**/*";
+@source "../../content/**/*.md";
+@source "../../vendor/studio1902/**/*";
+
+/* Avoca: the Columns block prints its Vertical Align Content option into a class, so items-end is written
+   only in the fieldset. A fieldset option or a global that holds a class name needs a line like this. */
+@source "../../resources/fieldsets/columns.yaml";
