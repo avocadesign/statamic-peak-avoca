@@ -31,11 +31,13 @@
         {{ stack:seo_body }}
         {{ partial:statamic-peak-tools::snippets/noscript }}
         {{ partial:statamic-peak-tools::navigation/skip_links }}
-        {{ partial:statamic-peak-tools::components/toolbar }}
 
         {{ partial:layout/header }}
         {{ template_content }}
         {{ partial:layout/footer }}
+
+        {{# Peak's toolbar, local only: critical.css leaves its styles to site.css, so production pages don't inline them #}}
+        {{ partial:statamic-peak-tools::components/toolbar }}
     </body>
 </html>
 <!-- End: /layout.antlers.html -->

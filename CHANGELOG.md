@@ -12,6 +12,7 @@
 - `colours.css` is plain `@theme`. `site.css` imports it with `theme(static)`, so every colour is still there for hand-written CSS and `/site/style`, and `critical.css` imports it plain, so the inlined sheet carries only the colours it reads.
 - The line heights are on Tailwind's leading scale: body copy reads `--leading-normal` (1.5) and headings `--leading-tight`, which `theme.css` sets to 1.2. A site tunes them there rather than giving `typography.css` a number.
 - The forms plugin's base styles left the shared critical sheet. A page with a Form block inlines `critical-forms.css` in its place, which adds the plugin and the Form's own templates, so the form now paints in its final shape before `site.css` lands. The layout yields a `critical_css` section with `critical.css` as its default, which any template can fill the same way. Every other page's critical CSS is 7.13 KB compressed, from 8.13 KB.
+- Peak's toolbar, which renders only on a local environment, renders last in `<body>` and is out of `critical.css`'s `@source` list, so production pages don't inline its styles: 6.82 KB compressed.
 
 ## v22.2.0 (2026-09-23)
 

@@ -54,7 +54,6 @@
 @source "../views/components/_buttons.antlers.html";
 @source "../views/page_builder/_block.antlers.html";
 
-/* Rendered by the layout before anything of the site's own. */
+/* Rendered by the layout before anything of the site's own. Not Peak's toolbar, which renders only locally. */
 @source "../../vendor/studio1902/statamic-peak-tools/resources/views/navigation/_skip_links.antlers.html";
 @source "../../vendor/studio1902/statamic-peak-tools/resources/views/snippets/_noscript.antlers.html";
-@source "../../vendor/studio1902/statamic-peak-tools/resources/views/components/_toolbar.antlers.html";
