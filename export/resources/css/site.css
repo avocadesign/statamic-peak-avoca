@@ -11,8 +11,8 @@
 @import "./typography.css";
 @import "./utilities.css";
 
-/* Avoca: every colour token and the colour schemes. */
-@import "./colours.css";
+/* Avoca: every colour token and the colour schemes. theme(static), so every colour exists in this sheet. */
+@import "./colours.css" theme(static);
 
 /* Avoca: Peak's @source list, moved here from peak.css. An @source line scans for every entry that imports
    its file, and critical.css imports peak.css too, so there it made the critical CSS scan every view. Keep

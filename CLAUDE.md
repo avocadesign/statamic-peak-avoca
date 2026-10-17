@@ -66,9 +66,12 @@ This is Avoca's fork of studio1902/statamic-peak. `upstream` is the Peak remote;
 
 ## Colours (decided 14 Sept 2026)
 
-- Every colour token lives in `resources/css/colours.css` (`@theme static`). The palette block in
+- Every colour token lives in `resources/css/colours.css`. The palette block in
   upstream `theme.css` and the black/white/grey lines in upstream `peak.css` are removed on purpose;
   re-remove them after an upstream merge.
+- `colours.css` is plain `@theme`. `site.css` imports it with `theme(static)`, so every colour exists in the
+  full sheet for hand-written CSS and `/site/style`; `critical.css` imports it plain, so the inlined sheet
+  carries only the colours its templates and CSS read.
 - One grey scale, spelt `gray` (Peak's and Tailwind's spelling), mapped to Tailwind's slate. There
   is no `neutral` scale and no alias. Never write `neutral` in Avoca views, CSS or content.
 - Text colour is `--body-color` (gray-800) and `--headings-color` (gray-900), declared in

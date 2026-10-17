@@ -7,10 +7,10 @@
 
     One grey scale, `gray`, mapped to Tailwind's slate. There is no `neutral` scale and no alias:
     text takes --body-color and --headings-color, which are set here and read by typography.css.
-    `@theme static` makes every token exist in the built CSS even when nothing uses it, so
-    hand-written CSS and the /site/style page can rely on var(--color-*).
+    site.css imports this file with theme(static), so every colour exists there for hand-written CSS
+    and the /site/style page; critical.css imports it plain, so it carries only the colours it reads.
 */
-@theme static {
+@theme {
     /* Brand: Avoca's blue, #019ac6, until the client's colours replace it */
     --color-primary: oklch(64.01% 0.124 227.1);
 

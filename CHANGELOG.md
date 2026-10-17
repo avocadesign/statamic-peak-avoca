@@ -8,6 +8,9 @@
 - On a new site, `site.css` is 3% smaller and `critical.css` 30% smaller: 8.25 KB compressed, from 11.08 KB.
 - The shipped CSS is rebuilt with Peak Tools and Peak SEO in `vendor/studio1902`, so it has the consent banner's and the toolbar's classes.
 
+### What's improved
+- `colours.css` is plain `@theme`. `site.css` imports it with `theme(static)`, so every colour is still there for hand-written CSS and `/site/style`, and `critical.css` imports it plain, so the inlined sheet carries only the colours it reads.
+
 ## v22.2.0 (2026-09-23)
 
 ### What's new
