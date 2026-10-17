@@ -15,6 +15,7 @@
 - Peak's toolbar, which renders only on a local environment, renders last in `<body>` and is out of `critical.css`'s `@source` list, so production pages don't inline its styles: 6.82 KB compressed.
 - The captcha's script (Cloudflare Turnstile by default) is pushed by the Form block with the forms script, rather than printed by the layout, so only pages with a form load it.
 - Alpine's persist plugin loads only where Peak's local toolbar or Peak SEO's consent banner renders, from a `persist.js` entry of its own, and morph, which nothing used, is uninstalled. Vite gives only Alpine's core a chunk of its own, so Precognition goes with `forms.js` rather than in three chunks. Every page loads 27.8 KB of JavaScript compressed in two files, from 30.1 KB in three, and a page with a form 36.1 KB in three, from 39.4 KB in seven.
+- The page loses its bottom padding when its last block is set to no margin below through a `:has()` utility on `<main>`, rather than a script that found the block by its class and removed the padding classes once Alpine started. It is right from the first paint now.
 
 ## v22.2.0 (2026-09-23)
 

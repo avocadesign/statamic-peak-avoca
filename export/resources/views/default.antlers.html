@@ -4,16 +4,8 @@
 #}}
 
 <!-- /default.antlers.html -->
-<main
-        x-data
-        x-init="
-            const lastSection = document.querySelector('main section:last-of-type');
-            if (lastSection?.classList.contains('no-space-b')) {
-                $el.classList.remove('pb-12', 'md:pb-16', 'lg:pb-24');
-            }
-        "
-        class="pb-12 md:pb-16 lg:pb-24 stack-block"
-        id="content">
+{{# No bottom padding when the last block is set to no margin below #}}
+<main class="pb-12 md:pb-16 lg:pb-24 has-[>section:last-of-type.no-space-b]:pb-0 stack-block" id="content">
     {{ partial src="layout/page_header" }}
     {{ if blueprint == "simple_page" }}
         <!-- /page_builder/_article.antlers.html -->
